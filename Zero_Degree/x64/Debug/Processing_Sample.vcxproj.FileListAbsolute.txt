@@ -1,0 +1,2 @@
+D:\CSD 1400\Project\Zero_Degree\x64\Debug\Processing_Sample.exe
+D:\CSD 1400\Project\Zero_Degree\x64\Debug\Processing_Sample.pdb
