@@ -17,22 +17,29 @@
 #include <cprocessing.h>
 #include "menu.h"
 #include "Mgame.h"
+#include "HowToPlay.h"
 
 CP_Font snowcaps;
 CP_Image digipenLogo;
-CP_Image Main;
+CP_Image main;
 struct button Play;
 //struct button Quit;
 //struct button Credits;
-//struct button How;
+struct button How;
 
+
+//ONCLICKS
 void play_onclick(void)
 {
 	CP_Engine_SetNextGameState(Mgame_init, Mgame_update, Mgame_exit);
 }
+void how_onclick(void)
+{
+	CP_Engine_SetNextGameState(How_init, How_update, How_exit);
+}
 
 
-
+//INIT
 void menu_init(void)
 {
 	CP_Settings_Background(CP_Color_Create(141, 200, 232, 255));
@@ -58,6 +65,19 @@ void menu_init(void)
 	};
 	Play = p;
 
+	struct button h =
+	{
+		.text = "How to Play",
+		.x = (float)WINDOW_WIDTH / (float)1.8,
+		.y = (float)WINDOW_HEIGHT / (float)2.5,
+		.width = 300,
+		.height = 100,
+		.colorFont = CP_Color_Create(255,255,255,255),
+		.colorHover = CP_Color_Create(0,0,0,255),
+		.onClick = &how_onclick,
+		.colorDefault = CP_Color_Create(119 , 136, 153, 255),
+	};
+	How = h;
 	
 }
 
@@ -72,14 +92,17 @@ void menu_update(void)
 
 	if (time < 3) 
 	{
+		//SPLASHSCREEN
 		alpha *= 2;
 		CP_Image_Draw(digipenLogo, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 800, 400, alpha);
 	}
 	else
 	{
-		Main = CP_Image_Load("./Assets/WORDS/HEADER.png");
-		CP_Image_Draw(Main, 1000, 200, 800, 200, 255);
+		//HEADER
+		main = CP_Image_Load("./Assets/WORDS/HEADER.png");
+		CP_Image_Draw(main, 1000, 200, 800, 200, 255);
 
+		//BUTTONS
 		if (Play.x - Play.width / 2 < mouseX && mouseX < Play.x + Play.width / 2 && Play.y - Play.height / 2 < mouseY && mouseY < Play.y + Play.height / 2)
 		{
 			CP_Settings_Fill(Play.colorHover);
@@ -98,6 +121,26 @@ void menu_update(void)
 		CP_Settings_TextSize(25);
 		CP_Settings_Fill(Play.colorFont);
 		CP_Font_DrawText(Play.text, Play.x, Play.y);
+
+
+		if (How.x - How.width / 2 < mouseX && mouseX < How.x + How.width / 2 && How.y - How.height / 2 < mouseY && mouseY < How.y + How.height / 2)
+		{
+			CP_Settings_Fill(Play.colorHover);
+			if (CP_Input_MouseClicked())
+			{
+				How.onClick();
+			}
+
+		}
+		else
+		{
+			CP_Settings_Fill(How.colorDefault);
+		}
+
+		CP_Graphics_DrawRect(How.x - How.width / (float)2, How.y - How.height / (float)2, How.width, How.height);
+		CP_Settings_TextSize(25);
+		CP_Settings_Fill(How.colorFont);
+		CP_Font_DrawText(How.text, How.x, How.y);
 	}
 }
 
