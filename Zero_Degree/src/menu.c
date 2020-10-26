@@ -73,7 +73,7 @@ void menu_update(void)
 	if (time < 3) 
 	{
 		alpha *= 2;
-		CP_Image_Draw(digipenLogo, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 1600, 800, alpha);
+		CP_Image_Draw(digipenLogo, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 800, 400, alpha);
 	}
 	else
 	{
