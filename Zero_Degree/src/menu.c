@@ -21,7 +21,7 @@
 
 CP_Font snowcaps;
 CP_Image digipenLogo;
-CP_Image main;
+CP_Image Main;
 struct button Play;
 //struct button Quit;
 //struct button Credits;
@@ -68,8 +68,8 @@ void menu_init(void)
 	struct button h =
 	{
 		.text = "How to Play",
-		.x = (float)WINDOW_WIDTH / (float)1.8,
-		.y = (float)WINDOW_HEIGHT / (float)2.5,
+		.x = (float)WINDOW_WIDTH / (float)2,
+		.y = (float)WINDOW_HEIGHT / (float)2,
 		.width = 300,
 		.height = 100,
 		.colorFont = CP_Color_Create(255,255,255,255),
@@ -99,8 +99,8 @@ void menu_update(void)
 	else
 	{
 		//HEADER
-		main = CP_Image_Load("./Assets/WORDS/HEADER.png");
-		CP_Image_Draw(main, 1000, 200, 800, 200, 255);
+		Main = CP_Image_Load("./Assets/WORDS/HEADER.png");
+		CP_Image_Draw(Main, 1000, 200, 800, 200, 255);
 
 		//BUTTONS
 		if (Play.x - Play.width / 2 < mouseX && mouseX < Play.x + Play.width / 2 && Play.y - Play.height / 2 < mouseY && mouseY < Play.y + Play.height / 2)

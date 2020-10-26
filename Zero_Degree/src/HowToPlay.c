@@ -15,7 +15,7 @@ void How_init(void)
 void How_update(void)
 {
 	CP_Settings_Background(CP_Color_Create(141, 200, 232, 255));
-	CP_Image_Draw(how, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 1920, 1080, 255);
+	CP_Image_Draw(how, WINDOW_WIDTH/2, WINDOW_HEIGHT/2, 1920, 1080, 255);
 }
 
 
