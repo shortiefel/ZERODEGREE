@@ -118,7 +118,7 @@ void menu_update(void)
 		}
 
 		CP_Graphics_DrawRect(Play.x - Play.width / (float)2, Play.y - Play.height / (float)2, Play.width, Play.height);
-		CP_Settings_TextSize(25);
+		CP_Settings_TextSize(30);
 		CP_Settings_Fill(Play.colorFont);
 		CP_Font_DrawText(Play.text, Play.x, Play.y);
 
@@ -138,7 +138,7 @@ void menu_update(void)
 		}
 
 		CP_Graphics_DrawRect(How.x - How.width / (float)2, How.y - How.height / (float)2, How.width, How.height);
-		CP_Settings_TextSize(25);
+		CP_Settings_TextSize(30);
 		CP_Settings_Fill(How.colorFont);
 		CP_Font_DrawText(How.text, How.x, How.y);
 	}
