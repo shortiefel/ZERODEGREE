@@ -69,7 +69,7 @@ void menu_init(void)
 		.x = (float)WINDOW_WIDTH / (float)2,
 		.y = (float)WINDOW_HEIGHT / (float)2.3,
 		.width = 300,
-		.height = 100,
+		.height = 80,
 		.colorFont = CP_Color_Create(255,255,255,255),
 		.colorHover = CP_Color_Create(0,0,0,255),
 		.onClick = &play_onclick,
@@ -83,7 +83,7 @@ void menu_init(void)
 		.x = (float)WINDOW_WIDTH / (float)2,
 		.y = (float)WINDOW_HEIGHT / (float)1.85,
 		.width = 300,
-		.height = 100,
+		.height = 80,
 		.colorFont = CP_Color_Create(255,255,255,255),
 		.colorHover = CP_Color_Create(0,0,0,255),
 		.onClick = &how_onclick,
@@ -97,7 +97,7 @@ void menu_init(void)
 		.x = (float)WINDOW_WIDTH / (float)2,
 		.y = (float)WINDOW_HEIGHT / (float)1.55,
 		.width = 300,
-		.height = 100,
+		.height = 80,
 		.colorFont = CP_Color_Create(255,255,255,255),
 		.colorHover = CP_Color_Create(0,0,0,255),
 		.onClick = &credit_onclick,
@@ -111,7 +111,7 @@ void menu_init(void)
 		.x = (float)WINDOW_WIDTH / (float)2,
 		.y = (float)WINDOW_HEIGHT / (float)1.32,
 		.width = 300,
-		.height = 100,
+		.height = 80,
 		.colorFont = CP_Color_Create(255,255,255,255),
 		.colorHover = CP_Color_Create(0,0,0,255),
 		.onClick = &quit_onclick,
@@ -135,13 +135,13 @@ void menu_update(void)
 	{
 		//SPLASHSCREEN
 		alpha *= 2;
-		CP_Image_Draw(digipenLogo, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 800, 400, alpha);
+		CP_Image_Draw(digipenLogo, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 1026, 248, alpha);
 	}
 	else
 	{
 		//HEADER
 		Main = CP_Image_Load("./Assets/WORDS/HEADER.png");
-		CP_Image_Draw(Main, 1000, 200, 800, 200, 255);
+		CP_Image_Draw(Main, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4, 800, 200, 255);
 
 		//BUTTONS
 		// --------------------------------------------PLAY-------------------------------------------------

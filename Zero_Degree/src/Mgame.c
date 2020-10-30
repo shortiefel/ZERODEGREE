@@ -3,9 +3,14 @@
 #include "menu.h"
 #include "Mgame.h"
 
+GRID_MAP grid_array[GRID_WIDTH][GRID_HEIGHT];
+CP_Image ice_grid;
+
 void Mgame_init(void)
 {
 	// initialize variables and CProcessing settings for this gamestate
+
+	InitObjects();
 }
 
 // use CP_Engine_SetNextGameState to specify this function as the update function
@@ -13,6 +18,7 @@ void Mgame_init(void)
 void Mgame_update(void)
 {
 	// check input, update simulation, render etc.
+	DrawGrids();
 }
 
 // use CP_Engine_SetNextGameState to specify this function as the exit function
@@ -20,4 +26,40 @@ void Mgame_update(void)
 void Mgame_exit(void)
 {
 	// shut down the gamestate and cleanup any dynamic memory
+}
+
+void DrawGrids(void)
+{
+	float grid_size = GRID_SIZE / 2;
+
+	CP_Settings_Background(CP_Color_Create(141, 200, 232, 255));
+
+	//draws the map
+	for (int x = 0; x < GRID_WIDTH; x++)
+		for (int y = 0; y < GRID_HEIGHT; y++)
+			if(grid_array[x][y] == MAPAREA)
+				CP_Image_Draw(ice_grid, (float)x * GRID_SIZE - grid_size, (float)y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);
+}
+
+void InitObjects(void)
+{
+	ice_grid = CP_Image_Load("./Assets/CUBE.png");
+
+	// initialises the grids
+	for (int x = 0; x < GRID_WIDTH; x++)
+		for (int y = 0; y < GRID_HEIGHT; y++)
+		{
+			if (y == 1)
+			{
+				grid_array[x][y] = HEADER;
+			}
+			else if (y == GRID_HEIGHT - 1)
+			{
+				grid_array[x][y] = FOOTER;
+			}
+			else
+			{
+				grid_array[x][y] = MAPAREA;
+			}
+		}
 }
