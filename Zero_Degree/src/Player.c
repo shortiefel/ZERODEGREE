@@ -7,7 +7,7 @@
 
 //Declaring Variables
 int velocityX, velocityY;
-int PenguinX = 1, PenguinY = 1;
+int PenguinX = 1, PenguinY = 2;
 int PHealth;
 float time = 0;
 float speed = 0.1f;
