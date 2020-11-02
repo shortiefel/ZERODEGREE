@@ -14,7 +14,7 @@
     <ClCompile Include="src\Credit.c">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="Player.c">
+    <ClCompile Include="src\Player.c">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -37,6 +37,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Player.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

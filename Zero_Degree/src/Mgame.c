@@ -12,6 +12,7 @@ void Mgame_init(void)
 	// initialize variables and CProcessing settings for this gamestate
 
 	InitObjects();
+	Penguin_init();
 }
 
 // use CP_Engine_SetNextGameState to specify this function as the update function
@@ -20,6 +21,8 @@ void Mgame_update(void)
 {
 	// check input, update simulation, render etc.
 	DrawGrids();
+	PlayerMovement();
+	MovePenguin();
 }
 
 // use CP_Engine_SetNextGameState to specify this function as the exit function
