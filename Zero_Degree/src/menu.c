@@ -19,6 +19,7 @@
 #include "Mgame.h"
 #include "HowToPlay.h"
 #include "Credit.h"
+#include "Player.h"
 
 CP_Font snowcaps;
 CP_Image digipenLogo;
@@ -34,6 +35,7 @@ struct button How;
 void play_onclick(void)
 {
 	CP_Engine_SetNextGameState(Mgame_init, Mgame_update, Mgame_exit);
+	//CP_Engine_SetNextGameState(Penguin_init, Penguin_update, Penguin_exit);
 }
 void how_onclick(void)
 {

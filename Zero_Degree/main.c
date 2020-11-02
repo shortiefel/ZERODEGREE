@@ -21,6 +21,7 @@
 #include "cprocessing.h"
 #include "src/Mgame.h"
 #include "src/menu.h"
+#include "src/Player.h"
 
 void game_init(void)
 {
