@@ -2,6 +2,7 @@
 #include <cprocessing.h>
 #include "menu.h"
 #include "Mgame.h"
+#include "Player.h"
 
 GRID_MAP grid_array[GRID_WIDTH][GRID_HEIGHT];
 CP_Image ice_grid;
@@ -11,6 +12,7 @@ void Mgame_init(void)
 	// initialize variables and CProcessing settings for this gamestate
 
 	InitObjects();
+	Penguin_init();
 }
 
 // use CP_Engine_SetNextGameState to specify this function as the update function
@@ -19,6 +21,8 @@ void Mgame_update(void)
 {
 	// check input, update simulation, render etc.
 	DrawGrids();
+	PlayerMovement();
+	MovePenguin();
 }
 
 // use CP_Engine_SetNextGameState to specify this function as the exit function
@@ -49,11 +53,11 @@ void InitObjects(void)
 	for (int x = 0; x < GRID_WIDTH; x++)
 		for (int y = 0; y < GRID_HEIGHT; y++)
 		{
-			if (y == 1)
+			/*if (y == 1)
 			{
 				grid_array[x][y] = HEADER;
-			}
-			else if (y == GRID_HEIGHT - 1)
+			}*/
+			if (y == GRID_HEIGHT - 1)
 			{
 				grid_array[x][y] = FOOTER;
 			}
