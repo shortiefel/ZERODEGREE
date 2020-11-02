@@ -1,5 +1,11 @@
-﻿  Player.c
-  Processing_Sample.vcxproj -> C:\Users\User\Documents\GitHub\ZERODEGREE\Zero_Degree\x64\Debug\Processing_Sample.exe
+﻿  main.c
+  Credit.c
+  HowToPlay.c
+  Mgame.c
+  menu.c
+  Player.c
+  LINK : D:\CSD 1400\ZERODEGREE\Zero_Degree\x64\Debug\Processing_Sample.exe not found or not built by the last incremental link; performing full link
+  Processing_Sample.vcxproj -> D:\CSD 1400\ZERODEGREE\Zero_Degree\x64\Debug\Processing_Sample.exe
   1 File(s) copied
   1 File(s) copied
   46 File(s) copied
