@@ -2,6 +2,7 @@
 #include <cprocessing.h>
 #include "menu.h"
 #include "Mgame.h"
+#include "Player.h"
 
 GRID_MAP grid_array[GRID_WIDTH][GRID_HEIGHT];
 CP_Image ice_grid;

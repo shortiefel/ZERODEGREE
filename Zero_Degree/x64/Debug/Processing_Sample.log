@@ -1,5 +1,2 @@
-﻿  Mgame.c
-  Processing_Sample.vcxproj -> D:\SIT\Y1S1\CSD1400\Group_Projects\ZERODEGREE\Zero_Degree\x64\Debug\Processing_Sample.exe
-  1 File(s) copied
-  1 File(s) copied
-  43 File(s) copied
+﻿  Player.c
+c1 : fatal error C1083: Cannot open source file: 'Player.c': No such file or directory
