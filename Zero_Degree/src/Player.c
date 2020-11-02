@@ -47,7 +47,7 @@ void Init(void)
 	velocityX = 0;
 	velocityY = 0;
 	//Drawing of Penguin
-	Penguin = CP_Image_Load("./Assets/CHARACTERS/FRONT.png");
+	Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FRONT.png");
 	DrawPenguin();
 
 	//Penguin Health
@@ -61,25 +61,25 @@ void PlayerMovement(void)
 	{
 		velocityX = 0;
 		velocityY = -2;
-		Penguin = CP_Image_Load("./Assets/CHARACTERS/BACK.png");
+		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/BACK.png");
 	}
 	else if (CP_Input_KeyDown(KEY_DOWN))
 	{
 		velocityX = 0;
 		velocityY = 2;
-		Penguin = CP_Image_Load("./Assets/CHARACTERS/FRONT.png");
+		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FRONT.png");
 	}
 	else if (CP_Input_KeyDown(KEY_LEFT))
 	{
 		velocityX = -2;
 		velocityY = 0;
-		Penguin = CP_Image_Load("./Assets/CHARACTERS/FRONT.png");
+		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FRONT.png");
 	}
 	else if (CP_Input_KeyDown(KEY_RIGHT))
 	{
 		velocityX = 2;
 		velocityY = 0;
-		Penguin = CP_Image_Load("./Assets/CHARACTERS/FRONT.png");
+		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FRONT.png");
 	}
 	else
 	{
@@ -107,7 +107,7 @@ void PlayerAttack(void)
 {
 	if (CP_Input_KeyTriggered(KEY_Z)) //Bow
 	{
-		Penguin = CP_Image_Load("./Assets/CHARACTERS/HOLDING.png");
+		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/HOLDING.png");
 
 	}
 	if (CP_Input_KeyTriggered(KEY_X)) //Headbutt
@@ -121,7 +121,7 @@ void PenguinDead(void)
 {
 	if (PHealth <= 0)
 	{
-		Penguin = CP_Image_Load("./Assets/CHARACTERS/LOSE.png");
+		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/LOSE.png");
 	}
 }
 //Penguin Wins
