@@ -102,3 +102,5 @@ ipch/
 *.user
 *.userosscache
 *.sln.docstates
+*.db
+Zero_Degree/.vs/Processing_Sample/v16/.suo
