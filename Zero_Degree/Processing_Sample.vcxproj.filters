@@ -14,6 +14,9 @@
     <ClCompile Include="src\Credit.c">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Whale.c">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -31,6 +34,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\Credit.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Whale.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

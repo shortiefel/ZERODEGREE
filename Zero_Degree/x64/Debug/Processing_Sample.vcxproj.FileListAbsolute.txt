@@ -4,3 +4,5 @@ D:\CSD 1400\ZERODEGREE\Zero_Degree\x64\Debug\Processing_Sample.exe
 D:\CSD 1400\ZERODEGREE\Zero_Degree\x64\Debug\Processing_Sample.pdb
 D:\SIT\Y1S1\CSD1400\Group_Projects\ZERODEGREE\Zero_Degree\x64\Debug\Processing_Sample.exe
 D:\SIT\Y1S1\CSD1400\Group_Projects\ZERODEGREE\Zero_Degree\x64\Debug\Processing_Sample.pdb
+C:\Users\Tingl\Desktop\CSD1400\Game Project\ZERODEGREE\Zero_Degree\x64\Debug\Processing_Sample.exe
+C:\Users\Tingl\Desktop\CSD1400\Game Project\ZERODEGREE\Zero_Degree\x64\Debug\Processing_Sample.pdb
