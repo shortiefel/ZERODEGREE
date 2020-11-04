@@ -19,4 +19,5 @@ void Mgame_update(void);
 void Mgame_exit(void);
 
 void DrawGrids(void);
+void DrawPause(void);
 void InitObjects(void);
