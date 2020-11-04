@@ -7,11 +7,10 @@
 
 //Declaring Variables
 int velocityX, velocityY;
-int PenguinX = 1, PenguinY = 2;
+int PenguinX, PenguinY;
 int PHealth;
 float time = 0;
 float speed = 0.1f;
-int Map[GRID_WIDTH][GRID_HEIGHT];
 CP_Image Penguin;
 
 void Penguin_init(void)
@@ -41,7 +40,7 @@ void Init(void)
 {
 	//Set Penguin starting location
 	PenguinX = 1;
-	PenguinY = 1;
+	PenguinY = 3;
 
 	//Set Velocity
 	velocityX = 0;
