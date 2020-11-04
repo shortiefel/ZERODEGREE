@@ -7,19 +7,21 @@
 CP_Image how;
 struct button Back;
 CP_Font font2;
+CP_Font font3;
 
 
 void How_init(void)
 {
 	CP_Settings_Background(CP_Color_Create(48, 77, 109, 255));
-	font2 = CP_Font_Load("./Assets/Iceberg.ttf");
-	CP_Font_Set(font2);
-	CP_Settings_TextSize(100);
+	button_back_struct();
+	
 	
 }
 
 void How_update(void)
 {
+	header1();
+	back();
 	instructions();
 }
 
@@ -34,8 +36,11 @@ void back_onclick(void)
 }
 
 
-void instructions(void)
+void header1(void)
 {
+	font2 = CP_Font_Load("./Assets/Iceberg.ttf");
+	CP_Font_Set(font2);
+	CP_Settings_TextSize(150);
 	CP_Font_DrawText("How To Play", WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4);
 }
 
@@ -62,7 +67,7 @@ void back(void)
 {
 	float mouseX = CP_Input_GetMouseX();
 	float mouseY = CP_Input_GetMouseY();
-	CP_Settings_Background(CP_Color_Create(141, 200, 232, 255));
+	CP_Settings_Background(CP_Color_Create(48, 77, 109, 255));
 	CP_Image_Draw(how, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 1920, 1080, 255);
 
 
@@ -81,8 +86,18 @@ void back(void)
 	}
 
 	CP_Graphics_DrawRect(Back.x - Back.width / (float)2, Back.y - Back.height / (float)2, Back.width, Back.height);
-	CP_Settings_TextSize(30);
+	CP_Settings_TextSize(40);
 	CP_Settings_Fill(Back.colorFont);
 	CP_Font_DrawText(Back.text, Back.x, Back.y);
 
+}
+
+void instructions(void)
+{
+	font2 = CP_Font_Load("./Assets/olivier_demo.ttf");
+	CP_Font_Set(font2);
+	CP_Settings_TextSize(50);
+	CP_Font_DrawText("1. Clear stages without dying.", WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+	CP_Font_DrawText("2. Use arrow keys to move.", WINDOW_WIDTH / 2, WINDOW_HEIGHT / (float)1.7);
+	CP_Font_DrawText("3. Use Z and X to attack.", WINDOW_WIDTH / 2, WINDOW_HEIGHT / (float)1.5);
 }
