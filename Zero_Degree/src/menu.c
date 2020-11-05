@@ -19,8 +19,9 @@
 #include "Mgame.h"
 #include "HowToPlay.h"
 #include "Credit.h"
+#include "Player.h"
 
-CP_Font snowcaps;
+CP_Font font1;
 CP_Image digipenLogo;
 CP_Image Main;
 CP_Image pMain;
@@ -30,10 +31,54 @@ struct button Credits;
 struct button How;
 
 
-//ONCLICKS
+//INIT
+void menu_init(void)
+{
+	CP_Settings_Background(CP_Color_Create(48, 77, 109, 255));
+
+	//SETTINGS ------WINDOW SIZE, FONTS, IMAGES ------------------------------
+	CP_System_SetWindowTitle("ZERO DEGREE");
+	font1 = CP_Font_Load("./Assets/Iceberg.ttf");
+	CP_Font_Set(font1);
+	digipenLogo = CP_Image_Load("./Assets/Digipen_WHITE.png");
+
+	//ALIGNMENTS -------TEXT---------
+	CP_Settings_TextAlignment(CP_TEXT_ALIGN_H_CENTER, CP_TEXT_ALIGN_V_MIDDLE);
+
+	//FUNCTIONS
+	buttons_struct();
+	
+	
+}
+
+
+void menu_update(void)
+{
+	//header();
+	full_menu();
+	
+}
+
+
+void menu_exit(void)
+{
+	
+}
+
+//void header(void)
+//{
+//	font1 = CP_Font_Load("./Assets/Iceberg.tff");
+//	CP_Font_Set(font1);
+//	CP_Settings_TextSize(150);
+//	CP_Font_DrawText("ZERO DEGREE", WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4);
+//}
+
+
+//onclicks
 void play_onclick(void)
 {
 	CP_Engine_SetNextGameState(Mgame_init, Mgame_update, Mgame_exit);
+	//cp_engine_setnextgamestate(penguin_init, penguin_update, penguin_exit);
 }
 void how_onclick(void)
 {
@@ -48,24 +93,11 @@ void quit_onclick(void)
 	CP_Engine_Terminate();
 }
 
-
-//INIT
-void menu_init(void)
+void buttons_struct(void)
 {
-	CP_Settings_Background(CP_Color_Create(141, 200, 232, 255));
-
-	//SETTINGS ------WINDOW SIZE, FONTS, IMAGES ------------------------------
-	CP_System_SetWindowTitle("ZERO DEGREE");
-	snowcaps = CP_Font_Load("./Assets/snowcaps.otf");
-	CP_Font_Set(snowcaps);
-	digipenLogo = CP_Image_Load("./Assets/Digipen_BLACK.png");
-
-	//ALIGNMENTS -------TEXT---------
-	CP_Settings_TextAlignment(CP_TEXT_ALIGN_H_CENTER, CP_TEXT_ALIGN_V_MIDDLE);
-
 	struct button p =
 	{
-		.text = "Play",
+		.text = "play",
 		.x = (float)WINDOW_WIDTH / (float)2,
 		.y = (float)WINDOW_HEIGHT / (float)2.3,
 		.width = 300,
@@ -79,7 +111,7 @@ void menu_init(void)
 
 	struct button h =
 	{
-		.text = "How to Play",
+		.text = "how to play",
 		.x = (float)WINDOW_WIDTH / (float)2,
 		.y = (float)WINDOW_HEIGHT / (float)1.85,
 		.width = 300,
@@ -93,7 +125,7 @@ void menu_init(void)
 
 	struct button c =
 	{
-		.text = "Credits",
+		.text = "credits",
 		.x = (float)WINDOW_WIDTH / (float)2,
 		.y = (float)WINDOW_HEIGHT / (float)1.55,
 		.width = 300,
@@ -107,7 +139,7 @@ void menu_init(void)
 
 	struct button q =
 	{
-		.text = "Quit",
+		.text = "quit",
 		.x = (float)WINDOW_WIDTH / (float)2,
 		.y = (float)WINDOW_HEIGHT / (float)1.32,
 		.width = 300,
@@ -118,20 +150,20 @@ void menu_init(void)
 		.colorDefault = CP_Color_Create(119 , 136, 153, 255),
 	};
 	Quit = q;
-
-	
 }
 
-//UPDATES
-void menu_update(void)
+void full_menu(void)
 {
-	CP_Settings_Background(CP_Color_Create(141, 200, 232, 255));
+	CP_Settings_Background(CP_Color_Create(48, 77, 109, 255));
 	float mouseX = CP_Input_GetMouseX();
 	float mouseY = CP_Input_GetMouseY();
 	int time = (int)CP_System_GetSeconds();
 	int alpha = CP_System_GetFrameCount();
+	font1 = CP_Font_Load("./Assets/Iceberg.ttf");
+	CP_Font_Set(font1);
+	CP_Settings_TextSize(150);
 
-	if (time < 3) 
+	if (time < 3)
 	{
 		//SPLASHSCREEN
 		alpha *= 2;
@@ -140,8 +172,7 @@ void menu_update(void)
 	else
 	{
 		//HEADER
-		Main = CP_Image_Load("./Assets/WORDS/HEADER.png");
-		CP_Image_Draw(Main, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4, 800, 200, 255);
+		CP_Font_DrawText("ZERO DEGREE", WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4);
 
 		//BUTTONS
 		// --------------------------------------------PLAY-------------------------------------------------
@@ -160,7 +191,7 @@ void menu_update(void)
 		}
 
 		CP_Graphics_DrawRect(Play.x - Play.width / (float)2, Play.y - Play.height / (float)2, Play.width, Play.height);
-		CP_Settings_TextSize(30);
+		CP_Settings_TextSize(40);
 		CP_Settings_Fill(Play.colorFont);
 		CP_Font_DrawText(Play.text, Play.x, Play.y);
 
@@ -180,7 +211,7 @@ void menu_update(void)
 		}
 
 		CP_Graphics_DrawRect(How.x - How.width / (float)2, How.y - How.height / (float)2, How.width, How.height);
-		CP_Settings_TextSize(30);
+		CP_Settings_TextSize(40);
 		CP_Settings_Fill(How.colorFont);
 		CP_Font_DrawText(How.text, How.x, How.y);
 
@@ -200,7 +231,7 @@ void menu_update(void)
 		}
 
 		CP_Graphics_DrawRect(Credits.x - Credits.width / (float)2, Credits.y - Credits.height / (float)2, Credits.width, Credits.height);
-		CP_Settings_TextSize(30);
+		CP_Settings_TextSize(40);
 		CP_Settings_Fill(Credits.colorFont);
 		CP_Font_DrawText(Credits.text, Credits.x, Credits.y);
 
@@ -220,16 +251,12 @@ void menu_update(void)
 		}
 
 		CP_Graphics_DrawRect(Quit.x - Quit.width / (float)2, Quit.y - Quit.height / (float)2, Quit.width, Quit.height);
-		CP_Settings_TextSize(30);
+		CP_Settings_TextSize(40);
 		CP_Settings_Fill(Quit.colorFont);
 		CP_Font_DrawText(Quit.text, Quit.x, Quit.y);
 	}
 }
 
 
-void menu_exit(void)
-{
-	
-}
 
 

@@ -14,7 +14,10 @@
     <ClCompile Include="src\Credit.c">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Whale.c">
+    <ClCompile Include="src\Player.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Pause.c">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -36,7 +39,13 @@
     <ClInclude Include="src\Credit.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Whale.h">
+    <ClInclude Include="Player.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Player.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Pause.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
