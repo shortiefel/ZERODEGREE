@@ -3,11 +3,13 @@
 #include "Whale.h"
 #include "Mgame.h"
 
-struct Whale_Attack Projectile[MAX_PROJECTILES];
+Whale whale1, whale2, whale3;
 
 void Whale_init(void)
 {
-
+	whale1.Whale_Pos = CP_Vector_Set(5.0, 5.0);
+	whale2.Whale_Pos = CP_Vector_Set(8.0, 2.0);
+	whale3.Whale_Pos = CP_Vector_Set(2.0, 6.0);
 }
 
 void Whale_update(void)
@@ -21,25 +23,17 @@ void Whale_exit(void)
 }
 
 // Get the distance between the whale and player
-CP_Vector Distance_From_Player(float whaleX, float whaleY, float playerX, float playerY)
+float Distance_From_Player(float startPos, float targetPos)
 {
-	float distanceX = whaleX - playerX;
-	float distanceY = whaleY - playerY;
-
-	CP_Vector distance = CP_Vector_Set(distanceX, distanceY);
+	float distance = startPos - targetPos;
 	return distance;
 }
 
 // Moving the projectile
-void Move_Projectile(CP_Vector distance, CP_Vector projectile)
+void Move_Projectile(float distance, CP_Vector projectile)
 {
-	if (projectile.x <= WINDOW_WIDTH && projectile.y <= WINDOW_HEIGHT) {
-		/*if (distance.x < 0) {
-			distance.x *= -1;
-		}
-		if (distance.y < 0) {
-			distance.y *= -1;
-		}*/
+	if (projectile.x < WINDOW_WIDTH && projectile.y < WINDOW_HEIGHT) {
+		
 
 		projectile.x += (distance.x * 0.05f);
 		projectile.y += (distance.y * 0.05f);
