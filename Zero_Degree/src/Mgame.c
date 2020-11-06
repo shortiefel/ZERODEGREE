@@ -5,6 +5,7 @@
 #include "Mgame.h"
 #include "Player.h"
 #include "Pause.h"
+#include "Whale.h"
 
 GRID_MAP grid_array[GRID_WIDTH][GRID_HEIGHT];
 CP_Image ice_grid;
@@ -16,6 +17,7 @@ void Mgame_init(void)
 
 	InitObjects();
 	Penguin_init();
+	Whale_init();
 }
 
 // use CP_Engine_SetNextGameState to specify this function as the update function
@@ -27,6 +29,9 @@ void Mgame_update(void)
 	DrawPause();
 	PlayerMovement();
 	MovePenguin();
+	Whale_update();
+	drawWhale();
+	drawProjectile();
 }
 
 // use CP_Engine_SetNextGameState to specify this function as the exit function

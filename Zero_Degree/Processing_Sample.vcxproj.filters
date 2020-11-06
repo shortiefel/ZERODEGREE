@@ -20,6 +20,9 @@
     <ClCompile Include="src\Pause.c">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Whale.c">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -46,6 +49,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\Pause.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Whale.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

@@ -19,3 +19,6 @@ void PlayerAttack(void);
 void MovePenguin(void);
 void DrawPenguin(void);
 void PenguinDead(void);
+
+int getPenguinX(void);
+int getPenguinY(void);

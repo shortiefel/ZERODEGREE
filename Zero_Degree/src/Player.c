@@ -101,6 +101,16 @@ void MovePenguin(void)
 		//Draw the penguin
 		DrawPenguin();
 }
+
+// Get penguin x and y position
+int getPenguinX(void) {
+	return PenguinX;
+}
+int getPenguinY(void) {
+	return PenguinY;
+}
+
+
 //Bow and HeadButt
 void PlayerAttack(void)
 {

@@ -6,3 +6,5 @@ C:\Users\User\Documents\GitHub\ZERODEGREE\Zero_Degree\x64\Debug\Processing_Sampl
 C:\Users\User\Documents\GitHub\ZERODEGREE\Zero_Degree\x64\Debug\Processing_Sample.pdb
 D:\CSD 1400\ZERODEGREE\Zero_Degree\x64\Debug\Processing_Sample.exe
 D:\CSD 1400\ZERODEGREE\Zero_Degree\x64\Debug\Processing_Sample.pdb
+C:\Users\Tingl\Desktop\CSD1400\Game Project\ZERODEGREE\Zero_Degree\x64\Debug\Processing_Sample.exe
+C:\Users\Tingl\Desktop\CSD1400\Game Project\ZERODEGREE\Zero_Degree\x64\Debug\Processing_Sample.pdb
