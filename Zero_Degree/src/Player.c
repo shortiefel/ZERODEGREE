@@ -4,6 +4,9 @@
 #include "Mgame.h"
 #include "Player.h"
 
+//Task:
+//Set boundary 
+
 
 //Declaring Variables
 int velocityX, velocityY;
@@ -40,7 +43,7 @@ void Init(void)
 {
 	//Set Penguin starting location
 	PenguinX = 1;
-	PenguinY = 3;
+	PenguinY = 1;
 
 	//Set Velocity
 	velocityX = 0;
@@ -78,12 +81,12 @@ void PlayerMovement(void)
 	{
 		velocityX = 2;
 		velocityY = 0;
-		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FRONT.png");
 	}
 	else
 	{
 		velocityX = 0;
 		velocityY = 0;
+		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FRONT.png");
 	}
 }
 void MovePenguin(void)
@@ -93,10 +96,26 @@ void MovePenguin(void)
 	{
 		time -= speed;
 
+
 		//Move the penguin
 		PenguinX += velocityX;
 		PenguinY += velocityY;
-
+		if (PenguinX < 1 )
+		{
+			PenguinX = 1;
+		}
+		else if (PenguinX > 39)
+		{
+			PenguinX = 39;
+		}
+		if (PenguinY < 1)
+		{
+			PenguinY = 1;
+		}
+		else if (PenguinY > 19)
+		{
+			PenguinY = 19;
+		}
 	}
 		//Draw the penguin
 		DrawPenguin();
