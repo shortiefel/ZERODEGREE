@@ -38,6 +38,20 @@ void DrawPenguin(void)
 {
 	CP_Image_Draw(Penguin, (float)PenguinX * (GRID_SIZE/2), (float)PenguinY * (GRID_SIZE/2), GRID_SIZE, GRID_SIZE, 255);
 }
+//Drawing of HP bar
+void DrawHP(void)
+{
+	CP_Settings_Fill(CP_Color_Create(255,0, 0, 255));	
+	CP_Graphics_DrawRect((GRID_SIZE/2) * 2, (GRID_SIZE/2) * 21, (float)PHealth * 5, (GRID_SIZE/2));
+}
+/*void HPAdjust(void)
+{
+	if(PenguinX == SealX || PenguinX = =WhaleX)
+	{
+		PHealth --;
+	}
+
+}*/
 
 void Init(void) 
 {
@@ -54,6 +68,7 @@ void Init(void)
 
 	//Penguin Health
 	PHealth = 100;
+	DrawHP();
 
 }
 //Penguin moves
@@ -96,7 +111,6 @@ void MovePenguin(void)
 	{
 		time -= speed;
 
-
 		//Move the penguin
 		PenguinX += velocityX;
 		PenguinY += velocityY;
@@ -116,9 +130,11 @@ void MovePenguin(void)
 		{
 			PenguinY = 19;
 		}
+		//HPAdjust();
 	}
 		//Draw the penguin
 		DrawPenguin();
+		DrawHP();
 }
 //Bow and HeadButt
 void PlayerAttack(void)

@@ -1,4 +1,7 @@
-﻿  Player.c
+﻿  main.c
+  Mgame.c
+  Player.c
+  menu.c
   Processing_Sample.vcxproj -> C:\Users\User\Documents\GitHub\ZERODEGREE\Zero_Degree\x64\Debug\Processing_Sample.exe
   1 File(s) copied
   1 File(s) copied
