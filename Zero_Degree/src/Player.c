@@ -11,6 +11,7 @@
 //Declaring Variables
 int velocityX, velocityY;
 int PenguinX, PenguinY;
+int ArrowX, ArrowY;
 int PHealth;
 float time = 0;
 float speed = 0.1f;
@@ -43,6 +44,12 @@ void DrawHP(void)
 {
 	CP_Settings_Fill(CP_Color_Create(255,0, 0, 255));	
 	CP_Graphics_DrawRect((GRID_SIZE/2) * 2, (GRID_SIZE/2) * 21, (float)PHealth * 5, (GRID_SIZE/2));
+}
+
+void DrawArrow(void)
+{
+	CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
+	CP_Graphics_DrawRect((float)PenguinX, (float)PenguinY,  10, 2);
 }
 /*void HPAdjust(void)
 {
@@ -143,11 +150,12 @@ void PlayerAttack(void)
 	{
 		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/HOLDING.png");
 
-	}
-	if (CP_Input_KeyTriggered(KEY_X)) //Headbutt
-	{
 
 	}
+	/*if (CP_Input_KeyTriggered(KEY_X)) //Headbutt
+	{
+
+	}*/
 }
 
 //Penguin Dies
@@ -164,3 +172,18 @@ void PenguinDead(void)
 	if (grid[PenguinX][PenguinY] == )
 }
 */
+
+/*void ArrowMove(void)
+{
+	ArrowX = PenguinX;
+	ArrowY = PenguinY;
+	DrawArrow();
+	if ((ArrowX != SealX || ArrowX != WhaleX) && ((ArrowY != SealY || ArrowY != WhaleY)
+	{
+		ArrowX++;
+	}
+	else
+	{
+		CP_Graphics_EndShape();
+	}
+}*/

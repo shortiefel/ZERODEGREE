@@ -23,4 +23,7 @@ void PlayerAttack(void);
 void MovePenguin(void);
 void PenguinDead(void);
 
-void HPAdjust(void);
+//void HPAdjust(void);
+
+void DrawArrow(void);
+void ArrowMove(void);
