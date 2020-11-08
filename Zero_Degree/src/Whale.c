@@ -26,8 +26,8 @@ void drawWhale(void) {
 
 // Set projectile's initial position to whale's initial position
 void setProjectilePos(void) {
-	whale.projectile.projX = whale.posX;
-	whale.projectile.projY = whale.posY;
+	whale.projectile.projX = whale.posX * 2;
+	whale.projectile.projY = whale.posY * 2;
 }
 
 // Get the distance between the whale and player
@@ -65,8 +65,8 @@ void Whale_update(void)
 					lastPosX = (getPenguinX() + 1 / 2);
 					lastPosY = (getPenguinY() + 1 / 2);
 
-					moveX = findDistance(lastPosX, whale.posX);
-					moveY = findDistance(lastPosY, whale.posY);
+					moveX = findDistance(lastPosX, (whale.posX * 2 - 1));
+					moveY = findDistance(lastPosY, (whale.posY * 2 - 1));
 
 					spawnProj = 0;
 				}
@@ -74,7 +74,7 @@ void Whale_update(void)
 				whale.projectile.projX += moveX * whaleSpeed;
 				whale.projectile.projY += moveY * whaleSpeed;
 
-				if ((int)whale.projectile.projX == getPenguinX() && (int)whale.projectile.projY == getPenguinY()) {
+				if ((int)(whale.projectile.projX * 2 - 1) == (getPenguinX() + 1 / 2) && (int)(whale.projectile.projY * 2 - 1) == (getPenguinY() + 1 / 2)) {
 					CP_Engine_SetNextGameState(credit_init, credit_update, credit_exit);
 				}
 			}
