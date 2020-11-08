@@ -3,9 +3,13 @@
 #include "menu.h"
 #include "Mgame.h"
 #include "Player.h"
+#include "seal.h"
 
 //Task:
-//Set boundary 
+//Add HP bar word
+//Add HP bar Adjustment
+//Add Weapon changing animation
+//Add Weapon Movement
 
 
 //Declaring Variables
@@ -37,7 +41,7 @@ void Penguin_exit(void)
 //Drawing of Penguin
 void DrawPenguin(void)
 {
-	CP_Image_Draw(Penguin, (float)PenguinX * (GRID_SIZE/2), (float)PenguinY * (GRID_SIZE/2), GRID_SIZE, GRID_SIZE, 255);
+	CP_Image_Draw(Penguin, (float)PenguinX * GRID_SIZE - (GRID_SIZE / 2), (float)PenguinY * GRID_SIZE - (GRID_SIZE / 2), GRID_SIZE, GRID_SIZE, 255);
 }
 //Drawing of HP bar
 void DrawHP(void)
@@ -84,24 +88,24 @@ void PlayerMovement(void)
 	if (CP_Input_KeyDown(KEY_UP))
 	{
 		velocityX = 0;
-		velocityY = -2;
+		velocityY = -1;
 		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/BACK.png");
 	}
 	else if (CP_Input_KeyDown(KEY_DOWN))
 	{
 		velocityX = 0;
-		velocityY = 2;
+		velocityY = 1;
 		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FRONT.png");
 	}
 	else if (CP_Input_KeyDown(KEY_LEFT))
 	{
-		velocityX = -2;
+		velocityX = -1;
 		velocityY = 0;
 		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FRONT.png");
 	}
 	else if (CP_Input_KeyDown(KEY_RIGHT))
 	{
-		velocityX = 2;
+		velocityX = 1;
 		velocityY = 0;
 	}
 	else
@@ -117,7 +121,7 @@ void MovePenguin(void)
 	if (time >= speed)		// slows down the speed of the game
 	{
 		time -= speed;
-
+		
 		//Move the penguin
 		PenguinX += velocityX;
 		PenguinY += velocityY;
@@ -139,9 +143,10 @@ void MovePenguin(void)
 		}
 		//HPAdjust();
 	}
-		//Draw the penguin
-		DrawPenguin();
-		DrawHP();
+	GetPlayerPosition(PenguinX, PenguinY);
+	//Draw the penguin
+	DrawPenguin();
+	DrawHP();
 }
 //Bow and HeadButt
 void PlayerAttack(void)
