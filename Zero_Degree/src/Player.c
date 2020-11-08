@@ -5,7 +5,10 @@
 #include "Player.h"
 
 //Task:
-//Set boundary 
+//Add HP bar word
+//Add HP bar Adjustment
+//Add Weapon changing animation
+//Add Weapon Movement
 
 
 //Declaring Variables
@@ -42,7 +45,7 @@ void DrawPenguin(void)
 void DrawHP(void)
 {
 	CP_Settings_Fill(CP_Color_Create(255,0, 0, 255));	
-	CP_Graphics_DrawRect((GRID_SIZE/2) * 2, (GRID_SIZE/2) * 21, (float)PHealth * 5, (GRID_SIZE/2));
+	CP_Graphics_DrawRect((GRID_SIZE/2) * 2, (GRID_SIZE/2) * 21, (float)(PHealth *0.25), (GRID_SIZE/2));
 }
 /*void HPAdjust(void)
 {
@@ -67,7 +70,7 @@ void Init(void)
 	DrawPenguin();
 
 	//Penguin Health
-	PHealth = 100;
+	PHealth = 1500;
 	DrawHP();
 
 }
