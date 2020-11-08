@@ -3,8 +3,8 @@
 #include "menu.h"
 #include "Mgame.h"
 #include "Player.h"
+#include "seal.h"
 
-GRID_MAP grid_array[GRID_WIDTH][GRID_HEIGHT];
 CP_Image ice_grid;
 
 void Mgame_init(void)
@@ -13,16 +13,20 @@ void Mgame_init(void)
 
 	InitObjects();
 	Penguin_init();
+	DrawEnemies();
 }
 
 // use CP_Engine_SetNextGameState to specify this function as the update function
 // this function will be called repeatedly every frame
 void Mgame_update(void)
 {
+	ElaspedTime += CP_System_GetDt();
 	// check input, update simulation, render etc.
 	DrawGrids();
 	PlayerMovement();
 	MovePenguin();
+	/*DrawEnemiesUpdate();*/
+	EnemiesUpdate();
 }
 
 // use CP_Engine_SetNextGameState to specify this function as the exit function
