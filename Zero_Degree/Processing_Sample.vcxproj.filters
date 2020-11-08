@@ -2,59 +2,24 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.c" />
-    <ClCompile Include="src\menu.c">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Mgame.c">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\HowToPlay.c">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Credit.c">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Player.c">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\seal.c">
-    <ClCompile Include="src\Pause.c">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Whale.c">
-      <Filter>src</Filter>
-    </ClCompile>
+    <ClCompile Include="src\Credit.c" />
+    <ClCompile Include="src\HowToPlay.c" />
+    <ClCompile Include="src\Mgame.c" />
+    <ClCompile Include="src\menu.c" />
+    <ClCompile Include="src\Pause.c" />
+    <ClCompile Include="src\Player.c" />
+    <ClCompile Include="src\seal.c" />
+    <ClCompile Include="src\Whale.c" />
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="src">
-      <UniqueIdentifier>{36942af0-5b3e-442f-83f0-3b761b097899}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\menu.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Mgame.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\HowToPlay.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Credit.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Player.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\seal.h">
-    <ClInclude Include="src\Pause.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Whale.h">
-      <Filter>src</Filter>
-    </ClInclude>
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="src\Credit.h" />
+    <ClInclude Include="src\HowToPlay.h" />
+    <ClInclude Include="src\Mgame.h" />
+    <ClInclude Include="src\menu.h" />
+    <ClInclude Include="src\Pause.h" />
+    <ClInclude Include="src\Player.h" />
+    <ClInclude Include="src\seal.h" />
+    <ClInclude Include="src\Whale.h" />
   </ItemGroup>
 </Project>
