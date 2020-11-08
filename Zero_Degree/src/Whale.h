@@ -9,6 +9,7 @@ typedef struct Projectile
 typedef struct Whale
 {
 	int alive;
+	int health;
 	int posX;
 	int posY;
 	struct Projectile projectile;
