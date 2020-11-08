@@ -14,8 +14,13 @@ void Penguin_init(void);
 void Penguin_update(void);
 void Penguin_exit(void);
 void Init(void);
+
+void DrawPenguin(void);
+void DrawHP(void);
+
 void PlayerMovement(void);
 void PlayerAttack(void);
 void MovePenguin(void);
-void DrawPenguin(void);
 void PenguinDead(void);
+
+void HPAdjust(void);

@@ -4,6 +4,9 @@
 #include "Mgame.h"
 #include "Player.h"
 
+//Task:
+//Set boundary 
+
 
 //Declaring Variables
 int velocityX, velocityY;
@@ -35,12 +38,26 @@ void DrawPenguin(void)
 {
 	CP_Image_Draw(Penguin, (float)PenguinX * (GRID_SIZE/2), (float)PenguinY * (GRID_SIZE/2), GRID_SIZE, GRID_SIZE, 255);
 }
+//Drawing of HP bar
+void DrawHP(void)
+{
+	CP_Settings_Fill(CP_Color_Create(255,0, 0, 255));	
+	CP_Graphics_DrawRect((GRID_SIZE/2) * 2, (GRID_SIZE/2) * 21, (float)PHealth * 5, (GRID_SIZE/2));
+}
+/*void HPAdjust(void)
+{
+	if(PenguinX == SealX || PenguinX = =WhaleX)
+	{
+		PHealth --;
+	}
+
+}*/
 
 void Init(void) 
 {
 	//Set Penguin starting location
 	PenguinX = 1;
-	PenguinY = 3;
+	PenguinY = 1;
 
 	//Set Velocity
 	velocityX = 0;
@@ -51,6 +68,7 @@ void Init(void)
 
 	//Penguin Health
 	PHealth = 100;
+	DrawHP();
 
 }
 //Penguin moves
@@ -78,12 +96,12 @@ void PlayerMovement(void)
 	{
 		velocityX = 2;
 		velocityY = 0;
-		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FRONT.png");
 	}
 	else
 	{
 		velocityX = 0;
 		velocityY = 0;
+		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FRONT.png");
 	}
 }
 void MovePenguin(void)
@@ -96,10 +114,27 @@ void MovePenguin(void)
 		//Move the penguin
 		PenguinX += velocityX;
 		PenguinY += velocityY;
-
+		if (PenguinX < 1 )
+		{
+			PenguinX = 1;
+		}
+		else if (PenguinX > 39)
+		{
+			PenguinX = 39;
+		}
+		if (PenguinY < 1)
+		{
+			PenguinY = 1;
+		}
+		else if (PenguinY > 19)
+		{
+			PenguinY = 19;
+		}
+		//HPAdjust();
 	}
 		//Draw the penguin
 		DrawPenguin();
+		DrawHP();
 }
 //Bow and HeadButt
 void PlayerAttack(void)
