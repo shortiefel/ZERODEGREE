@@ -38,3 +38,4 @@ void DrawGrids(void);
 void InitObjects(void);
 
 void DrawEnemies(void);
+void DrawPause(void);

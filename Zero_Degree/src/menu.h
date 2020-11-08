@@ -17,3 +17,8 @@ struct button
 void menu_init(void);
 void menu_update(void);
 void menu_exit(void);
+
+void header(void);
+void buttons_struct(void);
+void full_menu(void);
+

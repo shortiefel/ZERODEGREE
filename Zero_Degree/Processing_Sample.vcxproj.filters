@@ -18,6 +18,7 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\seal.c">
+    <ClCompile Include="src\Pause.c">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -46,6 +47,7 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\seal.h">
+    <ClInclude Include="src\Pause.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
