@@ -13,7 +13,7 @@ struct button pause;
 void Mgame_init(void)
 {
 	// initialize variables and CProcessing settings for this gamestate
-
+	CP_Settings_TextAlignment(CP_TEXT_ALIGN_H_CENTER, CP_TEXT_ALIGN_V_MIDDLE);
 	InitObjects();
 	Penguin_init();
 }
@@ -109,14 +109,16 @@ void InitObjects(void)
 			}
 		}
 
+
+
 	//pause button
 	struct button p2 =
 	{
 		.text = "Pause",
-		.x = 900,
-		.y = 400,
-		.width = 300,
-		.height = 80,
+		.x = 1600 - 100,
+		.y = ((GRID_HEIGHT - (float)1.3) * GRID_SIZE) ,
+		.width = 150,
+		.height = 60,
 		.colorFont = CP_Color_Create(255,255,255,255),
 		.colorHover = CP_Color_Create(0,0,0,255),
 		.onClick = &pause_onclick,
