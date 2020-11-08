@@ -14,7 +14,6 @@ typedef struct ENTITY
 
 entity seal[MAXENTITY];	//seals
 
-
 CP_Vector GetRandomPosition(void);
 void EnemiesUpdate(void);
 void InitSealsObjects(void);
