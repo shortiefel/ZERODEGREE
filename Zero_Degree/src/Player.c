@@ -3,12 +3,18 @@
 #include "menu.h"
 #include "Mgame.h"
 #include "Player.h"
+#include "seal.h"
+
+//Task:
+//Add HP bar word
+//Add HP bar Adjustment
+//Add Weapon changing animation
+//Add Weapon Movement
 
 
 //Declaring Variables
 int velocityX, velocityY;
 int PenguinX, PenguinY;
-int PHealth;
 float time = 0;
 float speed = 0.1f;
 CP_Image Penguin;
@@ -33,14 +39,28 @@ void Penguin_exit(void)
 //Drawing of Penguin
 void DrawPenguin(void)
 {
-	CP_Image_Draw(Penguin, (float)PenguinX * (GRID_SIZE/2), (float)PenguinY * (GRID_SIZE/2), GRID_SIZE, GRID_SIZE, 255);
+	CP_Image_Draw(Penguin, (float)PenguinX * GRID_SIZE - (GRID_SIZE / 2), (float)PenguinY * GRID_SIZE - (GRID_SIZE / 2), GRID_SIZE, GRID_SIZE, 255);
 }
+//Drawing of HP bar
+void DrawHP(void)
+{
+	CP_Settings_Fill(CP_Color_Create(255,0, 0, 255));	
+	CP_Graphics_DrawRect((GRID_SIZE/2) * 2, (GRID_SIZE/2) * 21, (float)(PHealth *0.25), (GRID_SIZE/2));
+}
+/*void HPAdjust(void)
+{
+	if(PenguinX == SealX || PenguinX = =WhaleX)
+	{
+		PHealth --;
+	}
+
+}*/
 
 void Init(void) 
 {
 	//Set Penguin starting location
 	PenguinX = 1;
-	PenguinY = 3;
+	PenguinY = 1;
 
 	//Set Velocity
 	velocityX = 0;
@@ -50,7 +70,8 @@ void Init(void)
 	DrawPenguin();
 
 	//Penguin Health
-	PHealth = 100;
+	PHealth = 1500;
+	DrawHP();
 
 }
 //Penguin moves
@@ -59,31 +80,31 @@ void PlayerMovement(void)
 	if (CP_Input_KeyDown(KEY_UP))
 	{
 		velocityX = 0;
-		velocityY = -2;
+		velocityY = -1;
 		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/BACK.png");
 	}
 	else if (CP_Input_KeyDown(KEY_DOWN))
 	{
 		velocityX = 0;
-		velocityY = 2;
+		velocityY = 1;
 		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FRONT.png");
 	}
 	else if (CP_Input_KeyDown(KEY_LEFT))
 	{
-		velocityX = -2;
+		velocityX = -1;
 		velocityY = 0;
 		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FRONT.png");
 	}
 	else if (CP_Input_KeyDown(KEY_RIGHT))
 	{
-		velocityX = 2;
+		velocityX = 1;
 		velocityY = 0;
-		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FRONT.png");
 	}
 	else
 	{
 		velocityX = 0;
 		velocityY = 0;
+		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FRONT.png");
 	}
 }
 void MovePenguin(void)
@@ -92,14 +113,32 @@ void MovePenguin(void)
 	if (time >= speed)		// slows down the speed of the game
 	{
 		time -= speed;
-
+		
 		//Move the penguin
 		PenguinX += velocityX;
 		PenguinY += velocityY;
-
+		if (PenguinX < 1 )
+		{
+			PenguinX = 1;
+		}
+		else if (PenguinX > 39)
+		{
+			PenguinX = 39;
+		}
+		if (PenguinY < 1)
+		{
+			PenguinY = 1;
+		}
+		else if (PenguinY > 19)
+		{
+			PenguinY = 19;
+		}
+		//HPAdjust();
 	}
-		//Draw the penguin
-		DrawPenguin();
+	GetPlayerPosition(PenguinX, PenguinY);
+	//Draw the penguin
+	DrawPenguin();
+	DrawHP();
 }
 
 // Get penguin x and y position

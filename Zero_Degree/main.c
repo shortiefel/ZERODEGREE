@@ -52,9 +52,6 @@ int main(void)
 	//Setting Window Size
 	CP_System_SetWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 
-	
-
-
 	/*console output. current console output function from Cprocessing is being fixed */
 	CP_System_ShowConsole();
 	freopen_s((FILE**)stdout, "CONOUT$", "w", stdout);

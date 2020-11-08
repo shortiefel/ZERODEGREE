@@ -17,6 +17,7 @@
     <ClCompile Include="src\Player.c">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\seal.c">
     <ClCompile Include="src\Pause.c">
       <Filter>src</Filter>
     </ClCompile>
@@ -48,6 +49,7 @@
     <ClInclude Include="src\Player.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\seal.h">
     <ClInclude Include="src\Pause.h">
       <Filter>src</Filter>
     </ClInclude>
