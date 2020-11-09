@@ -29,8 +29,7 @@ void Mgame_update(void)
 	// check input, update simulation, render etc.
 	DrawGrids();
 	DrawPause();
-	PlayerMovement();
-	MovePenguin();
+	Penguin_update();
 	Whale_update();
 	drawWhale();
 	drawProjectile();

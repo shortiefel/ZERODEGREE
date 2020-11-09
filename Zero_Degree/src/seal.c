@@ -15,12 +15,13 @@ int sprite_to_draw[MAXENTITY] = {0};
 int index = 0;
 
 CP_Vector playerPosition;
-CP_Vector arrowPosition;
+int arrowX, arrowY;
 
 float distanceToPlayerX;
 float distanceToPlayerY;
 
 bool attack = false;
+bool death = false;
 
 void DrawEnemies(void)
 {
@@ -80,6 +81,7 @@ void EnemiesUpdate(void)
 		MoveSeal(w);
 		AttackPlayer(w);
 		TakeDamage();
+		CheckSealHealth();
 	}
 }
 
@@ -155,10 +157,10 @@ void InitSealsObjects(void)
 		seal[i].health = 500;
 		seal[i].id = i;
 		seal[i].attack = 200;
+		death = false;
 	}
 }
 
-bool death = false;
 
 void KillSeal(int seal_id)
 {
@@ -195,7 +197,7 @@ void CheckSealHealth(void)
 {
 	for (int i = 0; i < entityManager.NumSeal; i++)
 	{
-		if (seal[i].health >= 0)
+		if (seal[i].health <= 0)
 		{
 			death = true;
 			KillSeal(i);
@@ -211,11 +213,13 @@ void TakeDamage(void)
 {
 	for (int i = 0; i < entityManager.NumSeal; i++)
 	{
-		if ((arrowPosition.x == seal[i].position.x) && (arrowPosition.y == seal[i].position.y))
+		if ((arrowX == seal[i].position.x) && (arrowY == seal[i].position.y))
 		{
 			seal[i].health = seal[i].health - 100;
 			printf("%d", seal[i].health);
 		}
+		else
+			printf("%d", seal[i].health);
 	}
 }
 
@@ -227,8 +231,8 @@ void GetPlayerPosition(int x, int y)
 
 void GetArrowPosition(int x, int y)
 {
-	arrowPosition.x = (float)x;
-	arrowPosition.y = (float)y;
+	arrowX = x;
+	arrowY = y;
 }
 
 
