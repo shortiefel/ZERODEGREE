@@ -108,5 +108,5 @@ ipch/
 *.db-shm
 *.ilk
 
-Zero_Degree/.vs
-Zero_Degree/x64
+Zero_Degree/.vs/
+Zero_Degree/x64/
