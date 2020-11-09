@@ -1,13 +1,21 @@
 #pragma once
 
-#define GRID_WIDTH 21	// size of the length of the game map
-#define GRID_HEIGHT 12	// size of the height of the game map
-#define GRID_SIZE 80
+typedef struct Shoot
+{
+	double ArrowX;
+	double ArrowY;
+	int DirX;
+	int DirY;
+} Shoot;
+typedef struct Player
+{
+	int alive;
+	int health;
+	int X;
+	int Y;
+	struct Shoot arrow;
+} Player;
 
-#define EMPTY 0
-#define PENGUIN 1
-#define ENEMY 2
-#define HOLE 3
 
 
 void Penguin_init(void);
@@ -25,7 +33,6 @@ void MovePenguin(void);
 
 int getPenguinX(void);
 int getPenguinY(void);
-void HPAdjust(void);
 void DrawArrow(void);
 void GetSealPosition(int x, int y);
 void ArrowMove(void);
