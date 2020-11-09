@@ -15,9 +15,13 @@
 //Declaring Variables
 int velocityX, velocityY;
 int PenguinX, PenguinY;
+int SealX, SealY;
+int ArrowX, ArrowY;
+int LR = 1, ShowA = 0; //To determine Left or Right 
+int PHealth;
 float time = 0;
 float speed = 0.1f;
-CP_Image Penguin;
+CP_Image Penguin, Arrow, Clear;
 
 void Penguin_init(void)
 {
@@ -26,7 +30,10 @@ void Penguin_init(void)
 void Penguin_update(void)
 {
 	PlayerMovement();
+	//PlayerAttack();
 	MovePenguin();
+	
+	//ArrowMove();
 }
 
 // use CP_Engine_SetNextGameState to specify this function as the exit function
@@ -45,16 +52,21 @@ void DrawPenguin(void)
 void DrawHP(void)
 {
 	CP_Settings_Fill(CP_Color_Create(255,0, 0, 255));	
-	CP_Graphics_DrawRect((GRID_SIZE/2) * 2, (GRID_SIZE/2) * 21, (float)(PHealth *0.25), (GRID_SIZE/2));
+	CP_Graphics_DrawRect((GRID_SIZE/2) * 2, (GRID_SIZE/2) * 21, (float)(PHealth * 0.25), (GRID_SIZE/2));
 }
-/*void HPAdjust(void)
-{
-	if(PenguinX == SealX || PenguinX = =WhaleX)
-	{
-		PHealth --;
-	}
 
-}*/
+void DrawArrow(void)
+{
+	Arrow = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/ARROW.png");
+	CP_Image_Draw(Arrow, (float)ArrowX * GRID_SIZE - (GRID_SIZE / 2), (float)ArrowY * GRID_SIZE - (GRID_SIZE / 2), GRID_SIZE/2, GRID_SIZE/2, 255);
+}
+void ClearArrow(void)
+{
+
+	Clear = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/");
+	CP_Image_Draw(Clear, (float)(ArrowX - 1) * GRID_SIZE - (GRID_SIZE / 2), (float)ArrowY * GRID_SIZE - (GRID_SIZE / 2), GRID_SIZE, GRID_SIZE, 255);
+}
+
 
 void Init(void) 
 {
@@ -76,39 +88,66 @@ void Init(void)
 }
 //Penguin moves
 void PlayerMovement(void)
-{
-	if (CP_Input_KeyDown(KEY_UP))
+{	//Penguin Dies
+	if (PHealth <= 0)
+	{
+		velocityX = 0;
+		velocityY = 0;
+		PHealth = 0;
+		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/DEATH.png");
+	}
+	//Penguin Move Up
+	else if (CP_Input_KeyDown(KEY_UP))
 	{
 		velocityX = 0;
 		velocityY = -1;
 		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/BACK.png");
 	}
+	//Penguin Move Down
 	else if (CP_Input_KeyDown(KEY_DOWN))
 	{
 		velocityX = 0;
 		velocityY = 1;
 		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FRONT.png");
 	}
+	//Penguin Move Left
 	else if (CP_Input_KeyDown(KEY_LEFT))
 	{
 		velocityX = -1;
 		velocityY = 0;
+		LR = 0;
 		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FRONT.png");
 	}
+	//Penguin Move Right
 	else if (CP_Input_KeyDown(KEY_RIGHT))
 	{
 		velocityX = 1;
 		velocityY = 0;
+		LR = 1;
+		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FRONT.png");
 	}
+	//Penguin Stay Still
 	else
 	{
 		velocityX = 0;
 		velocityY = 0;
-		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FRONT.png");
+	}
+	//Penguin Attack
+	//Penguin Use Bow 
+	if (CP_Input_KeyDown(KEY_Z)) //Bow
+	{
+		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/BOWANDARROW.png");
+	}
+	else if (CP_Input_KeyReleased(KEY_Z))
+	{
+		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/HOLDBOW.png");
+		ShowA = 1;
 	}
 }
 void MovePenguin(void)
 {
+	ArrowX = PenguinX;
+	ArrowY = PenguinY;
 	time += CP_System_GetDt();
 	if (time >= speed)		// slows down the speed of the game
 	{
@@ -121,24 +160,30 @@ void MovePenguin(void)
 		{
 			PenguinX = 1;
 		}
-		else if (PenguinX > 39)
+		else if (PenguinX > 20)
 		{
-			PenguinX = 39;
+			PenguinX = 20;
 		}
 		if (PenguinY < 1)
 		{
 			PenguinY = 1;
 		}
-		else if (PenguinY > 19)
+		else if (PenguinY > 10)
 		{
-			PenguinY = 19;
+			PenguinY = 10;
 		}
-		//HPAdjust();
 	}
+		if (ShowA == 1)
+		{
+			ArrowMove();
+			ShowA = 0;
+		}
+
 	GetPlayerPosition(PenguinX, PenguinY);
 	//Draw the penguin
 	DrawPenguin();
 	DrawHP();
+
 }
 
 // Get penguin x and y position
@@ -151,30 +196,45 @@ int getPenguinY(void) {
 
 
 //Bow and HeadButt
-void PlayerAttack(void)
+/*void PlayerAttack(void)
 {
-	if (CP_Input_KeyTriggered(KEY_Z)) //Bow
+	if (CP_Input_KeyDown(KEY_Z)) //Bow
 	{
-		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/HOLDING.png");
+		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/HOLDBOW.png");
+		Charge = Charge + 0.1f;
+		DrawPenguin();
+		if (Charge == 1)
+		{
+			Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/BOWANDARROW.png");
+			DrawPenguin();
+		}
+	}*/
+	/*if (CP_Input_KeyTriggered(KEY_X)) //Headbutt
+	{
 
 	}
-	if (CP_Input_KeyTriggered(KEY_X)) //Headbutt
-	{
+}*/
 
-	}
-}
-
-//Penguin Dies
-void PenguinDead(void)
-{
-	if (PHealth <= 0)
-	{
-		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/LOSE.png");
-	}
-}
 //Penguin Wins
 /*void PenguinWins(void)
 {
 	if (grid[PenguinX][PenguinY] == )
 }
 */
+
+void ArrowMove(void)
+{
+	while (ArrowX != SealX  && ArrowY != SealY )
+	{
+		ArrowX++;
+		DrawArrow();
+		ClearArrow();
+	}
+
+}
+
+void GetSealPosition(int x, int y)
+{
+	SealX = x;
+	SealY = y;
+}
