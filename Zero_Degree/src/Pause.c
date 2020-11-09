@@ -28,7 +28,7 @@ void pause_exit(void)
 
 void backonclick(void)
 {
-	CP_Engine_SetNextGameState(Mgame_init, Mgame_update, Mgame_exit);
+	CP_Engine_SetNextGameState(NULL, Mgame_update, Mgame_exit);
 }
 
 void quitonclick(void)
