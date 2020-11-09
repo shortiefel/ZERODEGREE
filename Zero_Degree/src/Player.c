@@ -30,8 +30,6 @@ void Penguin_update(void)
 	MovePenguin();
 	ArrowMove();
 	DrawArrow();
-	//ClearArrow();
-
 }
 
 // use CP_Engine_SetNextGameState to specify this function as the exit function
@@ -55,17 +53,12 @@ void DrawHP(void)
 //Drawing of Arrow
 void DrawArrow(void)
 {
-	Arrow = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/ARROW.png");
+	if (penguin.arrow.DirX == 1)
+		Arrow = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/ARROW.png");
+	else if (penguin.arrow.DirX == -1)
+		Arrow = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FLIPARROW.png");
 	CP_Image_Draw(Arrow, (float)penguin.arrow.ArrowX * GRID_SIZE - (GRID_SIZE / 2), (float)penguin.arrow.ArrowY * GRID_SIZE - (GRID_SIZE / 2), GRID_SIZE/2, GRID_SIZE/2, 255);
 }
-
-void ClearArrow(void)
-{
-
-	Clear = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/");
-	CP_Image_Draw(Clear, (float)(penguin.arrow.ArrowX - 1) * GRID_SIZE - (GRID_SIZE / 2), (float)penguin.arrow.ArrowY * GRID_SIZE - (GRID_SIZE / 2), GRID_SIZE, GRID_SIZE, 255);
-}
-
 
 void Init(void) 
 {
@@ -83,6 +76,9 @@ void Init(void)
 	//Penguin Health
 	PHealth = 1500;
 	DrawHP();
+
+	//Init Arrow Direction
+	penguin.arrow.DirX = 1;
 
 }
 //Penguin moves
@@ -136,11 +132,22 @@ void PlayerMovement(void)
 	//Penguin Use Bow 
 	else if (CP_Input_KeyDown(KEY_Z)) //Bow
 	{
-		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/BOWANDARROW.png");
+		if (penguin.arrow.DirX == 1)
+			Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/BOWANDARROW.png");
+		else if(penguin.arrow.DirX == -1)
+			Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FLIPPEDBOWARROW.png");
 	}
 	else if (CP_Input_KeyReleased(KEY_Z))
 	{
-		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/HOLDBOW.png");
+		if (penguin.arrow.DirX == 1 )
+		{
+			Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/HOLDBOW.png");
+		}
+		else if (penguin.arrow.DirX == -1)
+		{
+			Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FLIPPEDBOW.png");
+
+		}
 		penguin.arrow.ArrowX = penguin.X;
 		penguin.arrow.ArrowY = penguin.Y;
 	}
@@ -180,9 +187,11 @@ void MovePenguin(void)
 		{
 			penguin.Y = 10;
 		}
+
 	}
 
 	GetPlayerPosition(penguin.X, penguin.Y);
+	GetArrowPosition((int)penguin.arrow.ArrowX, (int)penguin.arrow.ArrowY);
 	//Draw the penguin
 	DrawPenguin();
 	DrawHP();
@@ -208,7 +217,29 @@ void ArrowMove(void)
 {
 	if (penguin.arrow.ArrowX != SealX  && penguin.arrow.ArrowY != SealY )
 	{
+		if (penguin.arrow.ArrowX < 1)
+		{
+			penguin.arrow.ArrowX = 1;
+			penguin.arrow.DirX = 0;
+		}
+		else if (penguin.arrow.ArrowX > 20)
+		{
+			penguin.arrow.ArrowX = 20;
+			penguin.arrow.DirX = 0;
+		}
+		else
 		penguin.arrow.ArrowX += penguin.arrow.DirX;
+		if (penguin.arrow.ArrowY < 1)
+		{
+			penguin.arrow.ArrowX = 1;
+			penguin.arrow.DirY = 0;
+		}
+		else if (penguin.arrow.ArrowY > 10)
+		{
+			penguin.arrow.ArrowY = 10;
+			penguin.arrow.DirY = 0;
+		}
+		else
 		penguin.arrow.ArrowY += penguin.arrow.DirY;
 	}
 }

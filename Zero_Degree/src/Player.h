@@ -6,6 +6,7 @@ typedef struct Shoot
 	double ArrowY;
 	int DirX;
 	int DirY;
+	float Acounter;
 } Shoot;
 typedef struct Player
 {
@@ -25,10 +26,8 @@ void Init(void);
 
 void DrawPenguin(void);
 void DrawHP(void);
-void ClearArrow(void);
 
 void PlayerMovement(void);
-//void PlayerAttack(void);
 void MovePenguin(void);
 
 int getPenguinX(void);
