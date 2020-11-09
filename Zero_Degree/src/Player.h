@@ -17,13 +17,12 @@ void Init(void);
 
 void DrawPenguin(void);
 void DrawHP(void);
+void ClearArrow(void);
 
 void PlayerMovement(void);
-void PlayerAttack(void);
+//void PlayerAttack(void);
 void MovePenguin(void);
-void PenguinDead(void);
-
-//void HPAdjust(void);
 
 void DrawArrow(void);
+void GetSealPosition(int x, int y);
 void ArrowMove(void);

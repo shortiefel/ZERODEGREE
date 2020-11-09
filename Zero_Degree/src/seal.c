@@ -15,6 +15,7 @@ int sprite_to_draw[MAXENTITY] = {0};
 int index = 0;
 
 CP_Vector playerPosition;
+CP_Vector arrowPosition;
 
 float distanceToPlayerX;
 float distanceToPlayerY;
@@ -78,6 +79,7 @@ void EnemiesUpdate(void)
 	{
 		MoveSeal(w);
 		AttackPlayer(w);
+		TakeDamage();
 	}
 }
 
@@ -110,7 +112,7 @@ void MoveSeal(int id)
 		// move down
 		seal[id].position.y += 1;
 	}
-
+	GetSealPosition((int)seal[id].position.x, (int)seal[id].position.y);
 	/*CP_Image_Draw(seal[id].sprites[0], (float)seal[id].position.x * GRID_SIZE - grid_size, (float)seal[id].position.y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);*/
 }
 
@@ -130,8 +132,8 @@ void AttackPlayer(int id)
 		if (((int)ElaspedTime % 4) == 0 && attack == true)
 		{
 			/*CP_Image_Draw(seal[id].sprites[2], (float)seal[id].position.x * GRID_SIZE - grid_size, (float)seal[id].position.y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);*/
-			PHealth -= seal[id].attack;
-			printf("health: %d\n", PHealth);
+			PHealth = PHealth - seal[id].attack;
+			//printf("health: %d\n", PHealth);
 			attack = false;
 		}
 	}
@@ -205,11 +207,28 @@ void CheckSealHealth(void)
 			
 	}
 }
+void TakeDamage(void)
+{
+	for (int i = 0; i < entityManager.NumSeal; i++)
+	{
+		if ((arrowPosition.x == seal[i].position.x) && (arrowPosition.y == seal[i].position.y))
+		{
+			seal[i].health = seal[i].health - 100;
+			printf("%d", seal[i].health);
+		}
+	}
+}
 
 void GetPlayerPosition(int x, int y)
 {
 	playerPosition.x = (float)x;
 	playerPosition.y = (float)y;
+}
+
+void GetArrowPosition(int x, int y)
+{
+	arrowPosition.x = (float)x;
+	arrowPosition.y = (float)y;
 }
 
 
