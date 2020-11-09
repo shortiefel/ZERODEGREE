@@ -1,5 +1,7 @@
 #pragma once
 
+#define PROJECTILE_TRAVEL 40 
+
 typedef struct Projectile
 {
 	double projX;
@@ -19,7 +21,8 @@ void Whale_init(void);
 void Whale_update(void);
 void Whale_exit(void);
 
+int getWhalePosX(void);
+int getWhalePosY(void);
 void drawWhale(void);
 void drawProjectile(void);
 void setProjectilePos(void);
-int findDistance(int startPos, int targetPos);
