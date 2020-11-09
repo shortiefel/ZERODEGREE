@@ -34,4 +34,5 @@ int getPenguinX(void);
 int getPenguinY(void);
 void DrawArrow(void);
 void GetSealPosition(int x, int y);
+void PHurt(bool a);
 void ArrowMove(void);

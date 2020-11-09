@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <cprocessing.h>
+#include <stdbool.h>
 #include "menu.h"
 #include "Mgame.h"
 #include "Player.h"
@@ -14,6 +15,7 @@
 //Declaring Variables
 int velocityX, velocityY;
 int SealX, SealY;
+bool Hurt;
 float time = 0;
 float speed = 0.1f;
 CP_Image Penguin, Arrow, Clear;
@@ -79,6 +81,7 @@ void Init(void)
 
 	//Init Arrow Direction
 	penguin.arrow.DirX = 1;
+	Hurt = false;
 
 }
 //Penguin moves
@@ -146,7 +149,6 @@ void PlayerMovement(void)
 		else if (penguin.arrow.DirX == -1)
 		{
 			Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FLIPPEDBOW.png");
-
 		}
 		penguin.arrow.ArrowX = penguin.X;
 		penguin.arrow.ArrowY = penguin.Y;
@@ -187,7 +189,15 @@ void MovePenguin(void)
 		{
 			penguin.Y = 10;
 		}
-
+		/*if (Hurt == true)
+		{
+			Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/STUN.png");
+		}
+		else
+		{
+			Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FRONT.png");
+		}
+		Hurt = false;*/
 	}
 
 	GetPlayerPosition(penguin.X, penguin.Y);
@@ -196,14 +206,6 @@ void MovePenguin(void)
 	DrawPenguin();
 	DrawHP();
 
-}
-
-// Get penguin x and y position
-int getPenguinX(void) {
-	return penguin.X;
-}
-int getPenguinY(void) {
-	return penguin.Y;
 }
 
 //Penguin Wins
@@ -248,4 +250,16 @@ void GetSealPosition(int x, int y)
 {
 	SealX = x;
 	SealY = y;
+}
+void PHurt(bool a)
+{
+	Hurt = a;
+}
+
+// Get penguin x and y position
+int getPenguinX(void) {
+	return penguin.X;
+}
+int getPenguinY(void) {
+	return penguin.Y;
 }

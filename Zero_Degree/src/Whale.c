@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>
 #include "cprocessing.h"
 #include "Whale.h"
 #include "Mgame.h"
