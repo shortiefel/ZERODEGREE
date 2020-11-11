@@ -4,6 +4,8 @@
 #include "Mgame.h"
 #include "Player.h"
 #include "seal.h"
+#include "Level1.h"
+#include "GameOver.h"
 
 //Task:
 //Add HP bar word
@@ -32,8 +34,7 @@ void Penguin_update(void)
 	DrawArrow();
 }
 
-// use CP_Engine_SetNextGameState to specify this function as the exit function
-// this function will be called once just before leaving the current gamestate
+
 void Penguin_exit(void)
 {
 	// shut down the gamestate and cleanup any dynamic memory
@@ -90,6 +91,7 @@ void PlayerMovement(void)
 		velocityY = 0;
 		PHealth = 0;
 		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/DEATH.png");
+		CP_Engine_SetNextGameState(gameover_init, gameover_update, gameover_exit);
 	}
 	//Penguin Move Up
 	else if (CP_Input_KeyDown(KEY_UP))

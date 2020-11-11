@@ -4,6 +4,7 @@
 #include "Mgame.h"
 #include "Player.h"
 #include "Credit.h"
+#include "Level1.h"
 
 Whale whale;
 CP_Image whaleSprite;
@@ -75,6 +76,8 @@ void Whale_update(void)
 				whale.projectile.projY += moveY * whaleSpeed;
 
 				if ((int)whale.projectile.projX == getPenguinX() && (int)whale.projectile.projY == getPenguinY()) {
+					//Game Over Screen
+
 					CP_Engine_SetNextGameState(credit_init, credit_update, credit_exit);
 				}
 			}

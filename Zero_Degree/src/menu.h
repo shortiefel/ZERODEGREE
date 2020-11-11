@@ -1,4 +1,5 @@
 #pragma once
+#include <stdio.h>
 
 struct button 
 {
@@ -13,6 +14,8 @@ struct button
 	CP_Font size;
 	void(*onClick)(void);
 };
+
+int counter;
 
 void menu_init(void);
 void menu_update(void);

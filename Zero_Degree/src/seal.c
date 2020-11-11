@@ -5,6 +5,7 @@
 #include "Mgame.h"
 #include "Player.h"
 #include "seal.h"
+#include "Level1.h"
 
 //entity player;
 entity_manager entityManager;

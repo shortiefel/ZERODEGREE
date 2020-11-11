@@ -10,9 +10,11 @@
     <ClCompile Include="src\Player.c" />
     <ClCompile Include="src\seal.c" />
     <ClCompile Include="src\Whale.c" />
+    <ClCompile Include="src\Level1.c" />
+    <ClCompile Include="src\Level2.c" />
+    <ClCompile Include="src\GameOver.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Player.h" />
     <ClInclude Include="src\Credit.h" />
     <ClInclude Include="src\HowToPlay.h" />
     <ClInclude Include="src\Mgame.h" />
@@ -21,5 +23,8 @@
     <ClInclude Include="src\Player.h" />
     <ClInclude Include="src\seal.h" />
     <ClInclude Include="src\Whale.h" />
+    <ClInclude Include="src\Level1.h" />
+    <ClInclude Include="src\Level2.h" />
+    <ClInclude Include="src\GameOver.h" />
   </ItemGroup>
 </Project>
