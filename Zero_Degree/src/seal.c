@@ -15,11 +15,13 @@ int sprite_to_draw[MAXENTITY] = {0};
 int index = 0;
 
 CP_Vector playerPosition;
+int arrowX, arrowY;
 
 float distanceToPlayerX;
 float distanceToPlayerY;
 
 bool attack = false;
+bool death = false;
 
 void DrawEnemies(void)
 {
@@ -78,6 +80,8 @@ void EnemiesUpdate(void)
 	{
 		MoveSeal(w);
 		AttackPlayer(w);
+		TakeDamage();
+		CheckSealHealth();
 	}
 }
 
@@ -110,7 +114,7 @@ void MoveSeal(int id)
 		// move down
 		seal[id].position.y += 1;
 	}
-
+	GetSealPosition((int)seal[id].position.x, (int)seal[id].position.y);
 	/*CP_Image_Draw(seal[id].sprites[0], (float)seal[id].position.x * GRID_SIZE - grid_size, (float)seal[id].position.y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);*/
 }
 
@@ -130,8 +134,8 @@ void AttackPlayer(int id)
 		if (((int)ElaspedTime % 4) == 0 && attack == true)
 		{
 			/*CP_Image_Draw(seal[id].sprites[2], (float)seal[id].position.x * GRID_SIZE - grid_size, (float)seal[id].position.y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);*/
-			PHealth -= seal[id].attack;
-			printf("health: %d\n", PHealth);
+			PHealth = PHealth - seal[id].attack;
+			//printf("health: %d\n", PHealth);
 			attack = false;
 		}
 	}
@@ -153,10 +157,10 @@ void InitSealsObjects(void)
 		seal[i].health = 500;
 		seal[i].id = i;
 		seal[i].attack = 200;
+		death = false;
 	}
 }
 
-bool death = false;
 
 void KillSeal(int seal_id)
 {
@@ -193,7 +197,7 @@ void CheckSealHealth(void)
 {
 	for (int i = 0; i < entityManager.NumSeal; i++)
 	{
-		if (seal[i].health >= 0)
+		if (seal[i].health <= 0)
 		{
 			death = true;
 			KillSeal(i);
@@ -205,11 +209,30 @@ void CheckSealHealth(void)
 			
 	}
 }
+void TakeDamage(void)
+{
+	for (int i = 0; i < entityManager.NumSeal; i++)
+	{
+		if ((arrowX == seal[i].position.x) && (arrowY == seal[i].position.y))
+		{
+			seal[i].health = seal[i].health - 100;
+			printf("%d", seal[i].health);
+		}
+		else
+			printf("%d", seal[i].health);
+	}
+}
 
 void GetPlayerPosition(int x, int y)
 {
 	playerPosition.x = (float)x;
 	playerPosition.y = (float)y;
+}
+
+void GetArrowPosition(int x, int y)
+{
+	arrowX = x;
+	arrowY = y;
 }
 
 

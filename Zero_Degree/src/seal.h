@@ -19,5 +19,9 @@ void EnemiesUpdate(void);
 void InitSealsObjects(void);
 void MoveSeal(int id);
 void AttackPlayer(int id);
+void KillSeal(int id);
+void CheckSealHealth(void);
+void TakeDamage(void);
 
 void GetPlayerPosition(int x, int y);
+void GetArrowPosition(int x, int y);
