@@ -60,7 +60,7 @@ void back_struct(void)
 {
 	struct button b2 =
 	{
-		.text = "Back",
+		.text = "Resume",
 		.x = (float)WINDOW_WIDTH / (float)2,
 		.y = (float)WINDOW_HEIGHT / (float)2.3,
 		.width = 300,

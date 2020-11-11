@@ -5,6 +5,7 @@
 #include "Mgame.h"
 #include "Player.h"
 #include "seal.h"
+#include "Level1.h"
 
 //entity player;
 entity_manager entityManager;
@@ -143,6 +144,7 @@ void AttackPlayer(int id)
 	{
 		CP_Image_Draw(seal[id].sprites[0], (float)seal[id].position.x * GRID_SIZE - grid_size, (float)seal[id].position.y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);
 	}
+	PHurt(attack);
 }
 
 

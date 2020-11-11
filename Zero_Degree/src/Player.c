@@ -1,9 +1,12 @@
 #include <stdio.h>
 #include <cprocessing.h>
+#include <stdbool.h>
 #include "menu.h"
 #include "Mgame.h"
 #include "Player.h"
 #include "seal.h"
+#include "Level1.h"
+#include "GameOver.h"
 
 //Task:
 //Add HP bar word
@@ -14,6 +17,7 @@
 //Declaring Variables
 int velocityX, velocityY;
 int SealX, SealY;
+bool Hurt;
 float time = 0;
 float speed = 0.1f;
 CP_Image Penguin, Arrow, Clear;
@@ -32,8 +36,7 @@ void Penguin_update(void)
 	DrawArrow();
 }
 
-// use CP_Engine_SetNextGameState to specify this function as the exit function
-// this function will be called once just before leaving the current gamestate
+
 void Penguin_exit(void)
 {
 	// shut down the gamestate and cleanup any dynamic memory
@@ -79,6 +82,7 @@ void Init(void)
 
 	//Init Arrow Direction
 	penguin.arrow.DirX = 1;
+	Hurt = false;
 
 }
 //Penguin moves
@@ -90,6 +94,7 @@ void PlayerMovement(void)
 		velocityY = 0;
 		PHealth = 0;
 		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/DEATH.png");
+		CP_Engine_SetNextGameState(gameover_init, gameover_update, gameover_exit);
 	}
 	//Penguin Move Up
 	else if (CP_Input_KeyDown(KEY_UP))
@@ -146,7 +151,6 @@ void PlayerMovement(void)
 		else if (penguin.arrow.DirX == -1)
 		{
 			Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FLIPPEDBOW.png");
-
 		}
 		penguin.arrow.ArrowX = penguin.X;
 		penguin.arrow.ArrowY = penguin.Y;
@@ -187,7 +191,15 @@ void MovePenguin(void)
 		{
 			penguin.Y = 10;
 		}
-
+		/*if (Hurt == true)
+		{
+			Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/STUN.png");
+		}
+		else
+		{
+			Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FRONT.png");
+		}
+		Hurt = false;*/
 	}
 
 	GetPlayerPosition(penguin.X, penguin.Y);
@@ -196,14 +208,6 @@ void MovePenguin(void)
 	DrawPenguin();
 	DrawHP();
 
-}
-
-// Get penguin x and y position
-int getPenguinX(void) {
-	return penguin.X;
-}
-int getPenguinY(void) {
-	return penguin.Y;
 }
 
 //Penguin Wins
@@ -248,4 +252,16 @@ void GetSealPosition(int x, int y)
 {
 	SealX = x;
 	SealY = y;
+}
+void PHurt(bool a)
+{
+	Hurt = a;
+}
+
+// Get penguin x and y position
+int getPenguinX(void) {
+	return penguin.X;
+}
+int getPenguinY(void) {
+	return penguin.Y;
 }

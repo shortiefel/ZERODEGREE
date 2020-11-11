@@ -1,9 +1,11 @@
 #include <stdio.h>
+#include <stdbool.h>
 #include "cprocessing.h"
 #include "Whale.h"
 #include "Mgame.h"
 #include "Player.h"
 #include "Credit.h"
+#include "Level1.h"
 
 Whale whale;
 CP_Image whaleSprite;
@@ -103,6 +105,9 @@ void Whale_update(void)
 					}
 
 					spawnProj = 1;
+					//Game Over Screen
+
+					CP_Engine_SetNextGameState(credit_init, credit_update, credit_exit);
 				}
 			}
 			if (whale.projectile.projX > GRID_WIDTH || whale.projectile.projY > ((double)GRID_HEIGHT - 1.5f) || whale.projectile.projX < 0 || whale.projectile.projY < 0) {

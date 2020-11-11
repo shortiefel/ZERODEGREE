@@ -1,15 +1,18 @@
 #include <stdio.h>
 #include <intrin.h>
 #include <cprocessing.h>
+#include <stdbool.h>
 #include "menu.h"
 #include "Mgame.h"
 #include "Player.h"
 #include "seal.h"
 #include "Pause.h"
 #include "Whale.h"
+#include "Level1.h"
 
 CP_Image ice_grid;
 struct button pause;
+//int counter;
 
 void Mgame_init(void)
 {
@@ -17,38 +20,50 @@ void Mgame_init(void)
 	CP_Settings_TextAlignment(CP_TEXT_ALIGN_H_CENTER, CP_TEXT_ALIGN_V_MIDDLE);
 	InitObjects();
 	Penguin_init();
-	Whale_init();
 	DrawEnemies();
+	//Whale_init();
+	
+
+	
 }
 
 // use CP_Engine_SetNextGameState to specify this function as the update function
 // this function will be called repeatedly every frame
 void Mgame_update(void)
 {
+	//counter = 1; 
+	
+	/*if (counter == 1)
+	{
+		CP_Engine_SetNextGameState(lvl1_init, lvl1_update, lvl1_exit);
+	}*/
+
 	ElaspedTime += CP_System_GetDt();
 	// check input, update simulation, render etc.
 	DrawGrids();
 	DrawPause();
 	Penguin_update();
+	PlayerMovement();
+	MovePenguin();
+
 	Whale_update();
 	drawWhale();
 	drawProjectile();
 	/*DrawEnemiesUpdate();*/
 	EnemiesUpdate();
+	
 }
 
-// use CP_Engine_SetNextGameState to specify this function as the exit function
-// this function will be called once just before leaving the current gamestate
+
 void Mgame_exit(void)
 {
 	// shut down the gamestate and cleanup any dynamic memory
 }
 
-void pause_onclick(void)
-{
-	CP_Engine_SetNextGameState(pause_init, pause_update, pause_exit);
-}
 
+
+
+//------GRIDS--------
 void DrawGrids(void)
 {
 	float grid_size = GRID_SIZE / 2;
@@ -60,6 +75,12 @@ void DrawGrids(void)
 		for (int y = 0; y < GRID_HEIGHT; y++)
 			if(grid_array[x][y] == MAPAREA)
 				CP_Image_Draw(ice_grid, (float)x * GRID_SIZE - grid_size, (float)y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);
+}
+
+//------PAUSE--------
+void pause_onclick(void)
+{
+	CP_Engine_SetNextGameState(pause_init, pause_update, pause_exit);
 }
 
 void DrawPause(void)
@@ -94,6 +115,8 @@ void DrawPause(void)
 			}
 }
 
+
+//-----INIT Objects--------
 void InitObjects(void)
 {
 	//float grid_size = GRID_SIZE / 2;

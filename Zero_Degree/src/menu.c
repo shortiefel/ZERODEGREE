@@ -15,6 +15,7 @@
 
 #include <stdio.h>
 #include <cprocessing.h>
+#include <stdbool.h>
 #include "menu.h"
 #include "Mgame.h"
 #include "HowToPlay.h"
@@ -30,10 +31,11 @@ struct button Quit;
 struct button Credits;
 struct button How;
 
-
 //INIT
 void menu_init(void)
 {
+
+	counter = 0;
 	CP_Settings_Background(CP_Color_Create(48, 77, 109, 255));
 
 	//SETTINGS ------WINDOW SIZE, FONTS, IMAGES ------------------------------
@@ -78,6 +80,7 @@ void menu_exit(void)
 void play_onclick(void)
 {
 	CP_Engine_SetNextGameState(Mgame_init, Mgame_update, Mgame_exit);
+	
 	//cp_engine_setnextgamestate(penguin_init, penguin_update, penguin_exit);
 }
 void how_onclick(void)
@@ -182,6 +185,7 @@ void full_menu(void)
 			if (CP_Input_MouseClicked())
 			{
 				Play.onClick();
+				counter = counter++;
 			}
 
 		}
