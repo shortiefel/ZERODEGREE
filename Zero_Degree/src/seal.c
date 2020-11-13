@@ -115,7 +115,11 @@ void MoveSeal(int id)
 		// move down
 		seal[id].position.y += 1;
 	}
-	GetSealPosition((int)seal[id].position.x, (int)seal[id].position.y);
+	GetSeal1Position((int)seal[1].position.x, (int)seal[1].position.y);
+	GetSeal2Position((int)seal[2].position.x, (int)seal[2].position.y);
+	GetSeal3Position((int)seal[3].position.x, (int)seal[3].position.y);
+	GetSeal4Position((int)seal[4].position.x, (int)seal[4].position.y);
+	GetSeal5Position((int)seal[5].position.x, (int)seal[5].position.y);
 	/*CP_Image_Draw(seal[id].sprites[0], (float)seal[id].position.x * GRID_SIZE - grid_size, (float)seal[id].position.y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);*/
 }
 

@@ -29,10 +29,15 @@ void DrawHP(void);
 
 void PlayerMovement(void);
 void MovePenguin(void);
-
+void PenguinAttack(void);
 int getPenguinX(void);
 int getPenguinY(void);
 void DrawArrow(void);
-void GetSealPosition(int x, int y);
+//Get all seal position seperately
+void GetSeal1Position(int x, int y);
+void GetSeal2Position(int x, int y);
+void GetSeal3Position(int x, int y);
+void GetSeal4Position(int x, int y);
+void GetSeal5Position(int x, int y);
 void PHurt(bool a);
 void ArrowMove(void);
