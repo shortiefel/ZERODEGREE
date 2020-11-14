@@ -16,7 +16,8 @@
 
 //Declaring Variables
 int velocityX, velocityY;
-int SealX, SealY;
+int SealX[5], SealY[5];
+int id = 0;
 bool Hurt;
 float time = 0;
 float speed = 0.1f;
@@ -32,6 +33,8 @@ void Penguin_update(void)
 {
 	PlayerMovement();
 	MovePenguin();
+	PenguinAttack();
+	for (id = 0; id <= 5; id++);
 	ArrowMove();
 	DrawArrow();
 }
@@ -132,34 +135,12 @@ void PlayerMovement(void)
 		penguin.arrow.DirY = 0;
 		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FRONT.png");
 	}
-
-	//Penguin Attack
-	//Penguin Use Bow 
-	else if (CP_Input_KeyDown(KEY_Z)) //Bow
-	{
-		if (penguin.arrow.DirX == 1)
-			Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/BOWANDARROW.png");
-		else if(penguin.arrow.DirX == -1)
-			Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FLIPPEDBOWARROW.png");
-	}
-	else if (CP_Input_KeyReleased(KEY_Z))
-	{
-		if (penguin.arrow.DirX == 1 )
-		{
-			Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/HOLDBOW.png");
-		}
-		else if (penguin.arrow.DirX == -1)
-		{
-			Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FLIPPEDBOW.png");
-		}
-		penguin.arrow.ArrowX = penguin.X;
-		penguin.arrow.ArrowY = penguin.Y;
-	}
 	//Penguin Stay Still
 	else
 	{
 		velocityX = 0;
 		velocityY = 0;
+		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FRONT.png");
 	}
 
 	
@@ -200,14 +181,43 @@ void MovePenguin(void)
 			Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FRONT.png");
 		}
 		Hurt = false;*/
+		DrawPenguin();
 	}
 
 	GetPlayerPosition(penguin.X, penguin.Y);
 	GetArrowPosition((int)penguin.arrow.ArrowX, (int)penguin.arrow.ArrowY);
 	//Draw the penguin
-	DrawPenguin();
 	DrawHP();
 
+}
+void PenguinAttack(void)
+{
+	//Penguin Attack
+	//Penguin Use Bow 
+	if (CP_Input_KeyDown(KEY_Z)) //Bow
+	{
+		if (penguin.arrow.DirX == 1)
+			Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/BOWANDARROW.png");
+		else if (penguin.arrow.DirX == -1)
+			Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FLIPPEDBOWARROW.png");
+	}
+	else if (CP_Input_KeyReleased(KEY_Z))
+	{
+		if (penguin.arrow.DirX == 1)
+		{
+			Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/HOLDBOW.png");
+		}
+		else if (penguin.arrow.DirX == -1)
+		{
+			Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FLIPPEDBOW.png");
+		}
+		penguin.arrow.ArrowX = penguin.X;
+		penguin.arrow.ArrowY = penguin.Y;
+	}
+	else
+	{
+		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FRONT.png");
+	}
 }
 
 //Penguin Wins
@@ -219,39 +229,70 @@ void MovePenguin(void)
 
 void ArrowMove(void)
 {
-	if (penguin.arrow.ArrowX != SealX  && penguin.arrow.ArrowY != SealY )
-	{
-		if (penguin.arrow.ArrowX < 1)
-		{
-			penguin.arrow.ArrowX = 1;
-			penguin.arrow.DirX = 0;
+		if (penguin.arrow.ArrowX != SealX[id] && penguin.arrow.ArrowY != SealY[id])
+		{	//X border (Left Border)
+			if (penguin.arrow.ArrowX < 0)
+			{
+				penguin.arrow.ArrowX = -1;
+				penguin.arrow.DirX = 0;
+			}
+			//X border (Right Border)
+			else if (penguin.arrow.ArrowX > 21)
+			{
+				penguin.arrow.ArrowX = 22;
+				penguin.arrow.DirX = 0;
+			}
+			//Arrow move by 1 grid along X axis
+			else
+				penguin.arrow.ArrowX += penguin.arrow.DirX;
+			//Y border (Top Border)
+			if (penguin.arrow.ArrowY < 0)
+			{
+				penguin.arrow.ArrowX = -1;
+				penguin.arrow.DirY = 0;
+			}
+			//Y border (Bottom Border)
+			else if (penguin.arrow.ArrowY > 11)
+			{
+				penguin.arrow.ArrowY = 12;
+				penguin.arrow.DirY = 0;
+			}
+			//Arrow move by 1 grid along Y axis
+			else
+				penguin.arrow.ArrowY += penguin.arrow.DirY;
 		}
-		else if (penguin.arrow.ArrowX > 20)
+		else if (penguin.arrow.ArrowX == SealX[id] && penguin.arrow.ArrowY == SealY[id])
 		{
-			penguin.arrow.ArrowX = 20;
-			penguin.arrow.DirX = 0;
+			penguin.arrow.ArrowX = 22;
+			penguin.arrow.ArrowY = 22;
 		}
-		else
-		penguin.arrow.ArrowX += penguin.arrow.DirX;
-		if (penguin.arrow.ArrowY < 1)
-		{
-			penguin.arrow.ArrowX = 1;
-			penguin.arrow.DirY = 0;
-		}
-		else if (penguin.arrow.ArrowY > 10)
-		{
-			penguin.arrow.ArrowY = 10;
-			penguin.arrow.DirY = 0;
-		}
-		else
-		penguin.arrow.ArrowY += penguin.arrow.DirY;
-	}
+		id = 0;
 }
 
-void GetSealPosition(int x, int y)
+void GetSeal1Position(int x, int y)
 {
-	SealX = x;
-	SealY = y;
+		SealX[0] = x;
+		SealY[0] = y;
+}
+void GetSeal2Position(int x, int y)
+{
+	SealX[1] = x;
+	SealY[1] = y;
+}
+void GetSeal3Position(int x, int y)
+{
+	SealX[2] = x;
+	SealY[2] = y;
+}
+void GetSeal4Position(int x, int y)
+{
+	SealX[3] = x;
+	SealY[3] = y;
+}
+void GetSeal5Position(int x, int y)
+{
+	SealX[4] = x;
+	SealY[4] = y;
 }
 void PHurt(bool a)
 {
