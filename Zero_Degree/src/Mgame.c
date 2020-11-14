@@ -21,7 +21,7 @@ void Mgame_init(void)
 	InitObjects();
 	Penguin_init();
 	DrawEnemies();
-	//Whale_init();
+	Whale_init();
 	
 
 	
@@ -35,7 +35,7 @@ void Mgame_update(void)
 	
 	/*if (counter == 1)
 	{
-		CP_Engine_SetNextGameState(lvl1_init, lvl1_update, lvl1_exit);
+		CP_Engine_SetNextGameState(lvl1_init, lvl1_update, NULL);
 	}*/
 
 	ElaspedTime += CP_System_GetDt();

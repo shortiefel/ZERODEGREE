@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "Credit.h"
 #include "Level1.h"
+#include "GameOver.h"
 
 Whale whale;
 CP_Image whaleSprite;
@@ -79,7 +80,7 @@ void Whale_update(void)
 				if ((int)whale.projectile.projX == getPenguinX() && (int)whale.projectile.projY == getPenguinY()) {
 					//Game Over Screen
 
-					CP_Engine_SetNextGameState(credit_init, credit_update, credit_exit);
+					CP_Engine_SetNextGameState(gameover_init, gameover_update, gameover_exit);
 				}
 			}
 			if (whale.projectile.projX > GRID_WIDTH || whale.projectile.projY > ((double)GRID_HEIGHT - 1.5f) || whale.projectile.projX < 0 || whale.projectile.projY < 0) {

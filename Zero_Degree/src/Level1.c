@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <intrin.h>
+#include <stdbool.h>
 #include <cprocessing.h>
 #include <stdbool.h>
 #include "menu.h"
@@ -14,13 +15,20 @@
 
 void lvl1_init(void)
 {
-	CP_Settings_Background(CP_Color_Create(48, 77, 109, 255));
-
+	/*CP_Settings_Background(CP_Color_Create(48, 77, 109, 255));*/
+	InitObjects();
+	Penguin_init();
+	DrawEnemies();
+	DrawPause();
 }
 void lvl1_update(void)
 {
+
+	
+
 	ElaspedTime += CP_System_GetDt();
 	// check input, update simulation, render etc.
+	
 	DrawGrids();
 	DrawPause();
 	Penguin_update();
