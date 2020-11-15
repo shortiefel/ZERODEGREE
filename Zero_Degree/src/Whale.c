@@ -99,8 +99,8 @@ void Whale_update(void)
 					spawnProj = 0;
 				}
 				
-				whale.projectile.pPos.x += moveProj.x * 0.5f;
-				whale.projectile.pPos.y += moveProj.y * 0.5f;
+				whale.projectile.pPos.x += moveProj.x * 0.3f;
+				whale.projectile.pPos.y += moveProj.y * 0.3f;
 
 				if ((int)whale.projectile.pPos.x == getPenguinX() && (int)whale.projectile.pPos.y == getPenguinY()) {
 					setProjectilePos();
