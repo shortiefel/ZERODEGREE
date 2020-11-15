@@ -47,8 +47,8 @@ void Mgame_update(void)
 	MovePenguin();
 
 	Whale_update();
-	drawWhale();
-	drawProjectile();
+	//drawWhale();
+	//drawProjectile();
 	/*DrawEnemiesUpdate();*/
 	EnemiesUpdate();
 	

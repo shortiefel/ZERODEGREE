@@ -11,6 +11,7 @@
 #define MAXENTITY 10
 
 int PHealth;	// player health so that the other scripts can access it
+int WHealth;	// whale health;
 float ElaspedTime;
 
 typedef enum GRID_STATE
