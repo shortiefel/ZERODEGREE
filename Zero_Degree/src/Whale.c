@@ -75,7 +75,7 @@ void Whale_init(void)
 	whale.wPos.x = 13.0f;
 	whale.wPos.y = 8.0f;
 	whale.alive = 1;
-	whale.health = 100;
+	whale.health = 700;
 
 	// Set projectile starting position at whale position
 	setProjectilePos();
