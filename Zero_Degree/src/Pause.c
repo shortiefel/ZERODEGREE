@@ -4,6 +4,8 @@
 #include "Mgame.h"
 #include "Credit.h"
 #include "Pause.h"
+#include "Level1.h"
+#include "Level2.h"
 
 struct button Back2;
 struct button Quit2;
@@ -102,7 +104,14 @@ void draw_button(void)
 
 		if (CP_Input_MouseClicked())
 		{
-			Back2.onClick();
+			if (currentLevel == 1)
+			{
+				CP_Engine_SetNextGameStateForced(NULL, lvl1_update, lvl1_exit);
+			}
+			else if (currentLevel == 2)
+			{
+				CP_Engine_SetNextGameStateForced(NULL, lvl2_update, lvl2_exit);
+			}
 		}
 
 	}

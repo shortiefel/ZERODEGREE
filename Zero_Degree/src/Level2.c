@@ -14,8 +14,10 @@
 #include "wingame.h"
 
 
+
 void lvl2_init(void)
 {
+	currentLevel = 2;
 	level2enemies.seals_count = 7;
 	level2enemies.whale_count = 0;
 
@@ -23,6 +25,7 @@ void lvl2_init(void)
 	Penguin_init();
 	DrawEnemies();
 	Whale_init();
+	DrawPause();
 
 }
 void lvl2_update(void)

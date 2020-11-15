@@ -35,6 +35,10 @@ void Mgame_update(void)
 	{
 		CP_Engine_SetNextGameState(lvl1_init, lvl1_update, NULL);
 	}
+	else if (currentLevel == 2)
+	{
+		CP_Engine_SetNextGameState(lvl2_init, lvl2_update, NULL);
+	}
 
 
 	//ElaspedTime += CP_System_GetDt();
@@ -116,12 +120,23 @@ void DrawPause(void)
 				CP_Settings_TextSize(45);
 				CP_Font_DrawText("HP", 1600 - 1550, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE));
 
-				if (counter == 1)
+			
+				if (currentLevel == 1)
 				{
+					CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
 					CP_Font_DrawText("Level 1", 1600 - 300, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE));
 				}
+				else if (currentLevel == 2)
+				{
+					CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
+					CP_Font_DrawText("Level 2", 1600 - 300, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE));
+				}
+				
+
+				
 			}
 }
+
 
 
 //-----INIT Objects--------

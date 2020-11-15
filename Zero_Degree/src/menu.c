@@ -35,7 +35,7 @@ struct button How;
 void menu_init(void)
 {
 
-	counter = 0;
+	currentLevel = 0;
 	CP_Settings_Background(CP_Color_Create(48, 77, 109, 255));
 
 	//SETTINGS ------WINDOW SIZE, FONTS, IMAGES ------------------------------
@@ -185,7 +185,7 @@ void full_menu(void)
 			if (CP_Input_MouseClicked())
 			{
 				Play.onClick();
-				counter = counter++;
+				currentLevel = currentLevel++;
 			}
 
 		}

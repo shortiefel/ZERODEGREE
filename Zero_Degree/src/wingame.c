@@ -8,12 +8,15 @@
 #include "Level1.h"
 #include "wingame.h"
 #include "Level2.h"
+#include "Player.h"
+#include "seal.h"
 
 CP_Font font1, font2;
 struct button newlevel;
 
 void win_init(void)
 {
+	countdeath = 0;
 	DrawWinPopOut();
 	button_newlevel();
 }
@@ -23,6 +26,7 @@ void win_update(void)
 	DrawWinPopOut();
 	message();
 	nextlevel();
+	
 }
 
 void win_exit(void)
@@ -58,7 +62,7 @@ void message(void)
 
 void lvl2_onclick(void)
 {
-	CP_Engine_SetNextGameState(lvl2_init, lvl2_update, NULL);
+	CP_Engine_SetNextGameState(lvl2_init, lvl2_update, lvl2_exit);
 }
 
 void button_newlevel(void)
