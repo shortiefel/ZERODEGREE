@@ -15,6 +15,7 @@
 
 
 Whale whale;
+Player penguin;
 CP_Image whaleSprite;
 int spawnProj;
 int lastPosX, lastPosY;
@@ -25,10 +26,10 @@ int arrowX, arrowY;
 
 // Load and draw image of whale
 void drawWhale(void) {
-	if (getPenguinX() < whale.wPos.x) {
+	if (penguin.X < whale.wPos.x) {
 		whaleSprite = CP_Image_Load("./Assets/CHARACTERS/WHALE/RIGHT.png");
 	}
-	else if (getPenguinX() > whale.wPos.x) {
+	else if (penguin.X > whale.wPos.x) {
 		whaleSprite = CP_Image_Load("./Assets/CHARACTERS/WHALE/LEFT.png");
 	}
 	CP_Image_Draw(whaleSprite, (float)((whale.wPos.x * GRID_SIZE) - GRID_SIZE / 2), (float)((whale.wPos.y * GRID_SIZE) - GRID_SIZE / 2), GRID_SIZE, GRID_SIZE, 255);
@@ -90,8 +91,8 @@ void Whale_update(void)
 			drawProjectile();
 			if (whale.projectile.pPos.x < GRID_WIDTH && whale.projectile.pPos.y < GRID_HEIGHT) {
 				if (spawnProj == 1) {
-					lastPosX = getPenguinX();
-					lastPosY = getPenguinY();
+					lastPosX = penguin.X;
+					lastPosY = penguin.Y;
 
 					moveProj.x = findDistance((float)lastPosX, whale.wPos.x);
 					moveProj.y = findDistance((float)lastPosY, whale.wPos.y);
@@ -104,9 +105,9 @@ void Whale_update(void)
 				whale.projectile.pPos.x += moveProj.x * 0.3f;
 				whale.projectile.pPos.y += moveProj.y * 0.3f;
 
-				if ((int)whale.projectile.pPos.x == getPenguinX() && (int)whale.projectile.pPos.y == getPenguinY()) {
+				if ((int)whale.projectile.pPos.x == penguin.X && (int)whale.projectile.pPos.y == penguin.Y) {
 					setProjectilePos();
-					PHealth -= 200;
+					penguin.health -= 200;
 				}
 			}
 			if (whale.projectile.pPos.x > GRID_WIDTH || whale.projectile.pPos.y > ((double)GRID_HEIGHT - 1.5f) || whale.projectile.pPos.x < 0 || whale.projectile.pPos.y < 0) {
@@ -123,18 +124,13 @@ void Whale_exit(void)
 {
 
 }
-void wTakeDamage(void)
+ void wTakeDamage(void)
 {
-	if ((arrowX == whale.wPos.x) && (arrowY == whale.wPos.y))
+	if ((penguin.arrow.ArrowX == whale.wPos.x) && (penguin.arrow.ArrowY == whale.wPos.y))
 	{
 		whale.health = whale.health - 100;
 			printf("%d", whale.health);
 	}
 	else
 		printf("%d",whale.health);
-}
-void wGetArrowPosition(int x, int y)
-{
-	arrowX = x;
-	arrowY = y;
 }

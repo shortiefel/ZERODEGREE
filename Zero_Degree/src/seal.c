@@ -9,14 +9,12 @@
 
 //entity player;
 entity_manager entityManager;
+Player penguin;
 float grid_size = GRID_SIZE / 2;
 
 int totalEnemies = 5;
 int sprite_to_draw[MAXENTITY] = {0};
 int index = 0;
-
-CP_Vector playerPosition;
-int arrowX, arrowY;
 
 float distanceToPlayerX;
 float distanceToPlayerY;
@@ -88,8 +86,8 @@ void EnemiesUpdate(void)
 
 void MoveSeal(int id)
 {
-	distanceToPlayerX = seal[id].position.x - playerPosition.x;
-	distanceToPlayerY = seal[id].position.y - playerPosition.y;
+	distanceToPlayerX = seal[id].position.x - penguin.X;
+	distanceToPlayerY = seal[id].position.y - penguin.Y;
 
 	//printf("SealX[%d]:%d \n", i,(int)distanceToPlayerX);
 	//printf("SealY[%d]:%d \n", i, (int)distanceToPlayerY);
@@ -115,11 +113,6 @@ void MoveSeal(int id)
 		// move down
 		seal[id].position.y += 1;
 	}
-	GetSeal1Position((int)seal[1].position.x, (int)seal[1].position.y);
-	GetSeal2Position((int)seal[2].position.x, (int)seal[2].position.y);
-	GetSeal3Position((int)seal[3].position.x, (int)seal[3].position.y);
-	GetSeal4Position((int)seal[4].position.x, (int)seal[4].position.y);
-	GetSeal5Position((int)seal[5].position.x, (int)seal[5].position.y);
 	/*CP_Image_Draw(seal[id].sprites[0], (float)seal[id].position.x * GRID_SIZE - grid_size, (float)seal[id].position.y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);*/
 }
 
@@ -139,7 +132,7 @@ void AttackPlayer(int id)
 		if (((int)ElaspedTime % 4) == 0 && attack == true)
 		{
 			/*CP_Image_Draw(seal[id].sprites[2], (float)seal[id].position.x * GRID_SIZE - grid_size, (float)seal[id].position.y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);*/
-			PHealth = PHealth - seal[id].attack;
+			penguin.health -= seal[id].attack;
 			//printf("health: %d\n", PHealth);
 			attack = false;
 		}
@@ -219,7 +212,7 @@ void TakeDamage(void)
 {
 	for (int i = 0; i < entityManager.NumSeal; i++)
 	{
-		if ((arrowX == seal[i].position.x) && (arrowY == seal[i].position.y))
+		if ((penguin.arrow.ArrowX == seal[i].position.x) && (penguin.arrow.ArrowY == seal[i].position.y))
 		{
 			seal[i].health = seal[i].health - 100;
 			printf("%d", seal[i].health);
@@ -227,18 +220,6 @@ void TakeDamage(void)
 		else
 			printf("%d", seal[i].health);
 	}
-}
-
-void GetPlayerPosition(int x, int y)
-{
-	playerPosition.x = (float)x;
-	playerPosition.y = (float)y;
-}
-
-void GetArrowPosition(int x, int y)
-{
-	arrowX = x;
-	arrowY = y;
 }
 
 

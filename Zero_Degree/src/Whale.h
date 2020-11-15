@@ -24,5 +24,4 @@ void drawWhale(void);
 void drawProjectile(void);
 void setProjectilePos(void);
 
-void wGetArrowPosition(int x, int y);
 void wTakeDamage(void);

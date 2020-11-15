@@ -45,11 +45,11 @@ void Mgame_update(void)
 	////PlayerMovement();
 	////MovePenguin();
 
-	////Whale_update();
-	////drawWhale();
-	////drawProjectile();
-	/////*DrawEnemiesUpdate();*/
-	////EnemiesUpdate();
+	Whale_update();
+	drawWhale();
+	drawProjectile();
+	//DrawEnemiesUpdate();
+	EnemiesUpdate();
 
 }
 

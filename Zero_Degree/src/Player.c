@@ -5,24 +5,32 @@
 #include "Mgame.h"
 #include "Player.h"
 #include "seal.h"
+#include "Whale.h"
 #include "Level1.h"
 #include "GameOver.h"
 
 //Task:
 //Add HP bar word
 //Add Weapon Movement
-//Add Weapon Damage
+//Add Weapon Damage (added)
+//Penguin Hp bar not functioning (fixed)
+//Penguin unable to kill whale.
+//Penguin collision
+//Remove arrow from screen (refer to whale.c file)
+//Arrow setting needs to be fixed (refer to whale.c file)
+//Penguin animation bugged again. (Hold Z and release Z)
+
 
 
 //Declaring Variables
 int velocityX, velocityY;
-int SealX[5], SealY[5];
-int id = 0;
 bool Hurt;
 float time = 0;
 float speed = 0.1f;
 CP_Image Penguin, Arrow, Clear;
 Player penguin;
+Whale whale;
+entity_manager entityManager;
 //CP_Vector Arrow;
 
 void Penguin_init(void)
@@ -34,8 +42,8 @@ void Penguin_update(void)
 	PlayerMovement();
 	MovePenguin();
 	PenguinAttack();
-	for (id = 0; id <= 5; id++);
-	ArrowMove();
+	for (int id = 0; id < entityManager.NumSeal; id++)
+	ArrowMove(id);
 	DrawArrow();
 }
 
@@ -45,19 +53,20 @@ void Penguin_exit(void)
 	// shut down the gamestate and cleanup any dynamic memory
 }
 
-//Drawing of Penguin
+
+//----DRAW PENGUIN-----
 void DrawPenguin(void)
 {
 	CP_Image_Draw(Penguin, (float)penguin.X * GRID_SIZE - (GRID_SIZE / 2), (float)penguin.Y * GRID_SIZE - (GRID_SIZE / 2), GRID_SIZE, GRID_SIZE, 255);
 }
-//Drawing of HP bar
+//----DRAW HP BAR-----
 void DrawHP(void)
 {
 	CP_Settings_Fill(CP_Color_Create(255,0, 0, 255));	
 	
-	CP_Graphics_DrawRect((GRID_SIZE/2) * 2, (GRID_SIZE/2) * 21, (float)(PHealth * 0.25), (GRID_SIZE/2));
+	CP_Graphics_DrawRect((GRID_SIZE/2) * 2, (GRID_SIZE/2) * 21, (float)(penguin.health * 0.25), (GRID_SIZE/2));
 }
-//Drawing of Arrow
+//----DRAW ARROW-----
 void DrawArrow(void)
 {
 	if (penguin.arrow.DirX == 1)
@@ -66,7 +75,7 @@ void DrawArrow(void)
 		Arrow = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FLIPARROW.png");
 	CP_Image_Draw(Arrow, (float)penguin.arrow.ArrowX * GRID_SIZE - (GRID_SIZE / 2), (float)penguin.arrow.ArrowY * GRID_SIZE - (GRID_SIZE / 2), GRID_SIZE/2, GRID_SIZE/2, 255);
 }
-
+//----INITIALZATION OF VARIABLE AND DRAWINGS-----
 void Init(void) 
 {
 	//Set Penguin starting location
@@ -91,14 +100,14 @@ void Init(void)
 }
 
 
-//----PLAYER MOVMENT-----
+//----PLAYER CONTROLLER MOVMENT-----
 void PlayerMovement(void)
 {	//Penguin Dies
 	if (penguin.health <= 0)
 	{
 		velocityX = 0;
 		velocityY = 0;
-		PHealth = 0;
+		penguin.health = 0;
 		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/DEATH.png");
 		CP_Engine_SetNextGameState(gameover_init, gameover_update, gameover_exit);
 	}
@@ -145,11 +154,9 @@ void PlayerMovement(void)
 		velocityY = 0;
 		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FRONT.png");
 	}
-
-	
 }
 
-//----PLAYER MOVMENT-----
+//----PENGUIN MOVMENT-----
 void MovePenguin(void)
 {
 
@@ -187,11 +194,9 @@ void MovePenguin(void)
 		}
 		Hurt = false;*/
 		
-	}DrawPenguin();
+	}
 
-	GetPlayerPosition(penguin.X, penguin.Y);
-	GetArrowPosition((int)penguin.arrow.ArrowX, (int)penguin.arrow.ArrowY);
-	//Draw the penguin
+	DrawPenguin();
 	DrawHP();
 
 }
@@ -235,9 +240,9 @@ void PenguinAttack(void)
 */
 
 
-void ArrowMove(void)
+void ArrowMove(int id)
 {
-		if (penguin.arrow.ArrowX != SealX[id] && penguin.arrow.ArrowY != SealY[id])
+		if (penguin.arrow.ArrowX != seal[id].position.x && penguin.arrow.ArrowY != seal[id].position.y)
 		{	//X border (Left Border)
 			if (penguin.arrow.ArrowX < 0)
 			{
@@ -269,50 +274,14 @@ void ArrowMove(void)
 			else
 				penguin.arrow.ArrowY += penguin.arrow.DirY;
 		}
-		else if (penguin.arrow.ArrowX == SealX[id] && penguin.arrow.ArrowY == SealY[id])
+		else if (penguin.arrow.ArrowX == seal[id].position.x && penguin.arrow.ArrowY == seal[id].position.y)
 		{
 			penguin.arrow.ArrowX = 22;
 			penguin.arrow.ArrowY = 22;
 		}
-		id = 0;
 }
 
-
-//---- SEAL POSITION -----
-void GetSeal1Position(int x, int y)
-{
-		SealX[0] = x;
-		SealY[0] = y;
-}
-void GetSeal2Position(int x, int y)
-{
-	SealX[1] = x;
-	SealY[1] = y;
-}
-void GetSeal3Position(int x, int y)
-{
-	SealX[2] = x;
-	SealY[2] = y;
-}
-void GetSeal4Position(int x, int y)
-{
-	SealX[3] = x;
-	SealY[3] = y;
-}
-void GetSeal5Position(int x, int y)
-{
-	SealX[4] = x;
-	SealY[4] = y;
-}
 void PHurt(bool a)
 {
 	Hurt = a;
-}
-
-//----Get penguin x and y position -----
-int getPenguinX(void) {
-	return penguin.X;
-}
-int getPenguinY(void) {
-	return penguin.Y;
 }
