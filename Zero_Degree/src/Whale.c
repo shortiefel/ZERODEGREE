@@ -12,14 +12,16 @@
 
 // Do tests on CP_Vector_Normalise
 
-
 Whale whale;
 CP_Image whaleSprite;
 int spawnProj;
 int lastPosX, lastPosY;
 CP_Vector moveProj;
-float whaleTime, whaleSpeed = 0.02f;
+float projSpeed = 0.1f;
+float whaleTime, whaleSpeed = 0.01f;
 float spawnTime;
+
+/* Whale funtions declaration */
 
 // Load and draw image of whale
 void drawWhale(void) {
@@ -47,7 +49,7 @@ float findDistance(float startPos, float targetPos)
 
 // Drawing projectile image
 void drawProjectile() {
-	CP_Graphics_DrawCircle((float)((whale.projectile.pPos.x * GRID_SIZE) - GRID_SIZE/2), (float)((whale.projectile.pPos.y * GRID_SIZE) - GRID_SIZE/2), GRID_SIZE/4);
+	CP_Graphics_DrawCircle((float)((whale.projectile.pPos.x * GRID_SIZE) - GRID_SIZE / 2), (float)((whale.projectile.pPos.y * GRID_SIZE) - GRID_SIZE / 2), GRID_SIZE / 4);
 	CP_Settings_Background(CP_Color_Create(48, 77, 109, 255));
 }
 
@@ -56,6 +58,26 @@ CP_Vector getWhalePos(void) {
 	return whale.wPos;
 }
 
+void wTakeDamage(void)
+{
+	if ((arrowX == whale.wPos.x) && (arrowY == whale.wPos.y))
+	{
+		whale.hurt = true;
+		WHealth = WHealth - 100;
+		printf("%d", whale.health);
+		CP_Image_Draw(whaleSprite, (float)((whale.wPos.x * GRID_SIZE) - GRID_SIZE / 2), (float)((whale.wPos.y * GRID_SIZE) - GRID_SIZE / 2), GRID_SIZE, GRID_SIZE, 178);
+	}
+	else
+		printf("%d", whale.health);
+}
+void wGetArrowPosition(int x, int y)
+{
+	arrowX = x;
+	arrowY = y;
+}
+
+
+// will create another function
 void Whale_init(void)
 {
 	WHealth = 700;
@@ -63,6 +85,7 @@ void Whale_init(void)
 	whale.wPos.x = 13.0f;
 	whale.wPos.y = 8.0f;
 	whale.alive = 1;
+	whale.hurt = false;
 
 	// Set projectile starting position at whale position
 	setProjectilePos();
@@ -71,10 +94,9 @@ void Whale_init(void)
 
 void Whale_update(void)
 {
-	//grid_array[(int)whale.wPos.x][(int)whale.wPos.y] = HOLE;
 	whaleTime += CP_System_GetDt();
 	spawnTime += CP_System_GetDt();
-
+	
 	whale.health = WHealth;
 	if (whale.health <= 0) {
 		whale.alive = 0;
@@ -84,8 +106,13 @@ void Whale_update(void)
 		whaleTime -= whaleSpeed;
 
 		if (whale.alive == 1) {	
+
+			// spawn whale and projectile
 			drawWhale();
 			drawProjectile();
+			wTakeDamage();
+
+			// projectile check
 			if (whale.projectile.pPos.x < GRID_WIDTH && whale.projectile.pPos.y < GRID_HEIGHT) {
 				if (spawnProj == 1) {
 					lastPosX = getPenguinX();
@@ -99,10 +126,11 @@ void Whale_update(void)
 					spawnProj = 0;
 				}
 				
-				whale.projectile.pPos.x += moveProj.x * 0.3f;
-				whale.projectile.pPos.y += moveProj.y * 0.3f;
+				whale.projectile.pPos.x += moveProj.x * projSpeed;
+				whale.projectile.pPos.y += moveProj.y * projSpeed;
 
-				if ((int)whale.projectile.pPos.x == getPenguinX() && (int)whale.projectile.pPos.y == getPenguinY()) {
+				// collision with penguin
+				if ((int)(whale.projectile.pPos.x - 0.5f) == getPenguinX() && (int)whale.projectile.pPos.y == getPenguinY()) {
 					setProjectilePos();
 					PHealth -= 200;
 				}
@@ -113,11 +141,16 @@ void Whale_update(void)
 				spawnProj = 1;
 			}
 		}
-		//printf("Penguin: %d %d | Projectile: %d %d | Time: %f\n", getPenguinX(), getPenguinY(), (int)whale.projectile.projX, (int)whale.projectile.projY, spawnTime);
+		printf("Penguin: %d %d | Projectile: %d %d\n", getPenguinX(), getPenguinY(), (int)whale.projectile.pPos.x, (int)whale.projectile.pPos.y);
 	}
 }
 
 void Whale_exit(void)
 {
 
+<<<<<<< Updated upstream
 }
+=======
+}
+
+>>>>>>> Stashed changes

@@ -14,8 +14,15 @@
 
 void lvl1_init(void)
 {
+<<<<<<< Updated upstream
 	CP_Settings_Background(CP_Color_Create(48, 77, 109, 255));
 
+=======
+	InitObjects();
+	Penguin_init();
+	DrawEnemies();
+	Whale_init();
+>>>>>>> Stashed changes
 }
 void lvl1_update(void)
 {
@@ -26,6 +33,7 @@ void lvl1_update(void)
 	Penguin_update();
 	PlayerMovement();
 	MovePenguin();
+<<<<<<< Updated upstream
 	Whale_update();
 	/*DrawEnemiesUpdate();*/
 	EnemiesUpdate();
@@ -38,6 +46,10 @@ void lvl1_update(void)
 
 	//if (counter ==2 
 	
+=======
+	SealEnemiesUpdate();
+	Whale_update();
+>>>>>>> Stashed changes
 }
 
 

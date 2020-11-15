@@ -222,7 +222,11 @@ void TakeDamage(void)
 		if ((arrowX == seal[i].position.x) && (arrowY == seal[i].position.y))
 		{
 			seal[i].health = seal[i].health - 100;
+<<<<<<< Updated upstream
 			printf("%d", seal[i].health);
+=======
+			//printf("%d\n", seal[i].health);
+>>>>>>> Stashed changes
 		}
 		else
 			printf("%d", seal[i].health);
