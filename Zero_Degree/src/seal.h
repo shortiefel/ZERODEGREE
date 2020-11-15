@@ -20,6 +20,8 @@ typedef struct ENTITY
 entity seal[MAXENTITY];	//seals
 entity_manager entityManager;
 
+int countdeath;
+
 CP_Vector GetRandomPosition(void);
 void SealEnemiesUpdate(void);
 void InitSealsObjects(void);

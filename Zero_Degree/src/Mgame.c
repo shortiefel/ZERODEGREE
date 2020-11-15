@@ -20,8 +20,8 @@ void Mgame_init(void)
 	CP_Settings_TextAlignment(CP_TEXT_ALIGN_H_CENTER, CP_TEXT_ALIGN_V_MIDDLE);
 	InitObjects();
 	Penguin_init();
-	DrawEnemies();
-	Whale_init();
+	/*DrawEnemies();
+	Whale_init();*/
 	
 
 	

@@ -6,3 +6,5 @@ void win_exit(void);
 
 void DrawWinPopOut(void);
 void message(void);
+void button_newlevel(void);
+void nextlevel(void);

@@ -32,6 +32,8 @@ float hitSprite = 0;
 float deathDelay = 5;
 float triggerDeath = 0;
 
+int countdeath = 0;
+
 void DrawEnemies(void)
 {
 	InitSealsObjects();
@@ -245,7 +247,13 @@ void InitSealsObjects(void)
 
 void KillSeal(int seal_id)
 {
+	
 	seal[seal_id].dead = true;
+	
+	countdeath++;
+	
+	
+
 }
 
 void CheckSealHealth(int id)
@@ -253,7 +261,8 @@ void CheckSealHealth(int id)
 	if (seal[id].health <= 0)
 	{
 		KillSeal(id);
-	}	
+	}
+
 }
 
 void TakeDamage(void)
