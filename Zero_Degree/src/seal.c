@@ -6,12 +6,13 @@
 #include "Player.h"
 #include "seal.h"
 #include "Level1.h"
+#include "Level2.h"
+#include "Whale.h"
 
 //entity player;
-entity_manager entityManager;
 float grid_size = GRID_SIZE / 2;
 
-int totalEnemies = 5;
+int totalEnemies = 0;
 int sprite_to_draw[MAXENTITY] = {0};
 int index = 0;
 
@@ -22,7 +23,14 @@ float distanceToPlayerX;
 float distanceToPlayerY;
 
 bool attack = false;
-bool death = false;
+bool drawHitSprite = false;
+
+float hitDelay = 3;
+float nextHit = 0;
+float hitSprite = 0;
+
+float deathDelay = 5;
+float triggerDeath = 0;
 
 void DrawEnemies(void)
 {
@@ -32,22 +40,21 @@ void DrawEnemies(void)
 
 	newPosition.x = 1;
 	newPosition.y = 1;
-	//CP_Vector previousPosition;
+
 	while (entityManager.NumSeal < totalEnemies)
 	{
 		newPosition = GetRandomPosition();
 
-		// check if the position is the same, if same, get new position
-		if((entityManager.NumSeal - 1) >= 0)
-			while (seal[entityManager.NumSeal - 1].position.x == newPosition.x && seal[entityManager.NumSeal - 1].position.y == newPosition.y)
+		for (int i = 0; i < entityManager.NumSeal; i++)
+		{
+			if ((seal[i].position.x == newPosition.x && seal[i].position.y == newPosition.y) 
+				|| (whale.wPos.x == newPosition.x && whale.wPos.y == newPosition.y))
 			{
 				newPosition = GetRandomPosition();
 			}
+		}
 
 		seal[entityManager.NumSeal].position = newPosition;
-		
-
-		//grid_array[(int)newPosition.x][(int)newPosition.y] = SEAL;
 
 		CP_Image_Draw(seal[entityManager.NumSeal].sprites[0], (float)seal[entityManager.NumSeal].position.x * GRID_SIZE - grid_size, (float)seal[entityManager.NumSeal].position.y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);
 		entityManager.NumSeal++;
@@ -75,15 +82,46 @@ CP_Vector GetRandomPosition(void)
 	return randomPosition;
 }
 
-void EnemiesUpdate(void)
+void SealEnemiesUpdate(void)
 {
 	for (int w = 0; w < entityManager.NumSeal; w++)
 	{
-		MoveSeal(w);
-		AttackPlayer(w);
-		TakeDamage();
-		CheckSealHealth();
+		if (seal[w].dead == false)
+		{
+			MoveSeal(w);
+			AttackPlayer(w);
+			TakeDamage();
+			CheckSealHealth(w);
+		}
+		else
+		{
+			DrawDeath(w);
+		}
 	}
+}
+
+void DrawDeath(int seal_id)
+{
+	if(seal[seal_id].dead == true && seal[seal_id].death == false)
+		CP_Image_Draw(seal[seal_id].sprites[1], (float)seal[seal_id].position.x * GRID_SIZE - grid_size, (float)seal[seal_id].position.y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);
+	
+	if (((int)ElaspedTime % (int)deathDelay) == 0)
+	{
+		triggerDeath = ElaspedTime;
+	}
+
+	//printf("time: %d, death: %d\n", (int)ElaspedTime, (int)triggerDeath);
+	if ((int)ElaspedTime == (int)triggerDeath)
+	{
+		//printf("seal[%d]\n", seal_id);
+		seal[seal_id].death = true;
+	}
+
+	if (seal[seal_id].death == true)
+	{
+		CP_Image_Draw(seal[seal_id].sprites[6], (float)seal[seal_id].position.x * GRID_SIZE - grid_size, (float)seal[seal_id].position.y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);
+	}
+
 }
 
 void MoveSeal(int id)
@@ -128,20 +166,45 @@ void AttackPlayer(int id)
 	//if the player is 1 block away, attack them
 	if ((distanceToPlayerX == 1 || distanceToPlayerY == 1 || distanceToPlayerX == -1  ||distanceToPlayerY == -1) && (distanceToPlayerX == 0|| distanceToPlayerY == 0))
 	{
-		/*if((int)ElaspedTime % 3 != 0)
-			CP_Image_Draw(seal[id].sprites[0], (float)seal[id].position.x * GRID_SIZE - grid_size, (float)seal[id].position.y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);*/
-
-		CP_Image_Draw(seal[id].sprites[2], (float)seal[id].position.x * GRID_SIZE - grid_size, (float)seal[id].position.y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);
-
-		if (((int)ElaspedTime % 3) == 0 && attack == false)
-			attack = true;
-
-		if (((int)ElaspedTime % 4) == 0 && attack == true)
+		if ((int)ElaspedTime == (int)nextHit)
 		{
-			/*CP_Image_Draw(seal[id].sprites[2], (float)seal[id].position.x * GRID_SIZE - grid_size, (float)seal[id].position.y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);*/
-			PHealth = PHealth - seal[id].attack;
-			//printf("health: %d\n", PHealth);
-			attack = false;
+			drawHitSprite = true;
+			penguin.health = penguin.health - seal[id].attack;
+			//printf("health: %d\n", penguin.health);
+		}
+
+		if (drawHitSprite == true)
+		{
+			if (distanceToPlayerX == -1)
+				CP_Image_Draw(seal[id].sprites[2], (float)seal[id].position.x * GRID_SIZE - grid_size, (float)seal[id].position.y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);
+			else 
+				CP_Image_Draw(seal[id].sprites[3], (float)seal[id].position.x * GRID_SIZE - grid_size, (float)seal[id].position.y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);
+			// wait for a few seconds then set it to false
+			if ((int)ElaspedTime == (int)hitSprite)
+			{
+				drawHitSprite = false;
+			}
+		}
+		else
+		{
+			if (distanceToPlayerX == -1)
+			{
+				CP_Image_Draw(seal[id].sprites[4], (float)seal[id].position.x * GRID_SIZE - grid_size, (float)seal[id].position.y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);
+			}
+			else {
+				CP_Image_Draw(seal[id].sprites[0], (float)seal[id].position.x * GRID_SIZE - grid_size, (float)seal[id].position.y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);
+
+			}
+		}
+
+		if (((int)ElaspedTime % (int)hitDelay) == 0)
+		{
+			nextHit = ElaspedTime + hitDelay;
+		}
+
+		if (((int)ElaspedTime % ((int)hitDelay + 1)) == 0)
+		{
+			hitSprite = ElaspedTime + hitDelay + 1;
 		}
 	}
 	else 
@@ -151,85 +214,64 @@ void AttackPlayer(int id)
 	PHurt(attack);
 }
 
-
 void InitSealsObjects(void)
 {
+	if (currentLevel == 1)
+	{
+		totalEnemies = level1enemies.seals_count;
+	}
+	else if (currentLevel == 2)
+	{
+		totalEnemies = level2enemies.seals_count;
+	}
+
 	entityManager.NumSeal = 0;
 	for (int i = 0; i < totalEnemies; i++)
 	{
-		seal[i].sprites[0] = CP_Image_Load("./Assets/CHARACTERS/SEAL/SEAL_FRONT.png");
-		seal[i].sprites[1] = CP_Image_Load("./Assets/CHARACTERS/SEAL/SEAL_DEATH.png");
-		seal[i].sprites[2] = CP_Image_Load("./Assets/CHARACTERS/SEAL/SEAL_ATTACK.png");
+		seal[i].sprites[0] = CP_Image_Load("./Assets/CHARACTERS/SEAL/SEAL_LEFT.png"); // left
+		seal[i].sprites[1] = CP_Image_Load("./Assets/CHARACTERS/SEAL/SEAL_DEATH.png"); // death left
+		seal[i].sprites[2] = CP_Image_Load("./Assets/CHARACTERS/SEAL/SEAL_ATK_RIGHT.png"); // attack right
+		seal[i].sprites[3] = CP_Image_Load("./Assets/CHARACTERS/SEAL/SEAL_ATK_LEFT.png"); // attack left
+		seal[i].sprites[4] = CP_Image_Load("./Assets/CHARACTERS/SEAL/SEAL_RIGHT.png"); // right
+
 		seal[i].health = 500;
 		seal[i].id = i;
 		seal[i].attack = 200;
-		death = false;
+		seal[i].dead = false;
+		seal[i].death = false;
+		
 	}
 }
-
 
 void KillSeal(int seal_id)
 {
-	if (death == true)
-	{
-		CP_Image_Draw(seal[seal_id].sprites[1], (float)seal[seal_id].position.x * GRID_SIZE - grid_size, (float)seal[seal_id].position.y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);
-	}
-		
-	if (ElaspedTime == (ElaspedTime + 5)) // wait for 5 seconds before calling the functions to remove the seal
-	{
-		for (int i = seal_id; i < entityManager.NumSeal; i++)
-		{
-			if (i + 1 == entityManager.NumSeal)	// last seal
-			{
-				break;
-			}
-			else {	// if not last seal, shift element positions 
-				seal[i].id = seal[i + 1].id;
-				seal[i].health = seal[i + 1].health;
-				seal[i].position = seal[i + 1].position;
-			}
-		}
-		entityManager.NumSeal--;
-
-		death = false;
-		//sprite_to_draw[seal_id] = 1;
-
-		// TODO: get killSeal to only be called once in the update function
-	}
-	
+	seal[seal_id].dead = true;
 }
 
-void CheckSealHealth(void)
+void CheckSealHealth(int id)
 {
-	for (int i = 0; i < entityManager.NumSeal; i++)
+	if (seal[id].health <= 0)
 	{
-		if (seal[i].health <= 0)
-		{
-			death = true;
-			KillSeal(i);
-		}
-		else
-		{
-			death = false;
-		}
-			
-	}
+		KillSeal(id);
+	}	
 }
+
 void TakeDamage(void)
 {
 	for (int i = 0; i < entityManager.NumSeal; i++)
 	{
+
 		if ((arrowX == seal[i].position.x) && (arrowY == seal[i].position.y))
 		{
 			seal[i].health = seal[i].health - 100;
-<<<<<<< Updated upstream
-			printf("%d", seal[i].health);
-=======
-			//printf("%d\n", seal[i].health);
->>>>>>> Stashed changes
+			//printf("seal: %d\n", seal[i].health);
+			break;
 		}
-		else
-			printf("%d", seal[i].health);
+		//else
+		//{
+		//	//printf("%d", seal[i].health);
+		//}
+			
 	}
 }
 
@@ -254,4 +296,4 @@ void GetArrowPosition(int x, int y)
 //seal movement
 // -> stop seals from collasping onto the same spot
 //seal attack
-// -> display the attacking sprite only when the seal is hitting the player.
+// -> display the attacking sprite only when the seal is hitting the player. // DONE

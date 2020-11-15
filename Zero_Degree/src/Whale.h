@@ -14,6 +14,8 @@ typedef struct Whale
 	struct Projectile projectile;
 } Whale;
 
+Whale whale;
+
 void Whale_init(void);
 void Whale_update(void);
 void Whale_exit(void);
@@ -22,3 +24,6 @@ CP_Vector getWhalePos(void);
 void drawWhale(void);
 void drawProjectile(void);
 void setProjectilePos(void);
+
+void wGetArrowPosition(int x, int y);
+void wTakeDamage(void);

@@ -1,5 +1,11 @@
+/*
+* LEVEL 1 ONLY CONTAINS SEALS ( AT LEAST 5 OF THEM )
+*/
+
+
 #include <stdio.h>
 #include <intrin.h>
+#include <stdbool.h>
 #include <cprocessing.h>
 #include <stdbool.h>
 #include "menu.h"
@@ -14,15 +20,13 @@
 
 void lvl1_init(void)
 {
-<<<<<<< Updated upstream
-	CP_Settings_Background(CP_Color_Create(48, 77, 109, 255));
+	level1enemies.seals_count = 5;
+	level1enemies.whale_count = 0;
 
-=======
 	InitObjects();
 	Penguin_init();
 	DrawEnemies();
 	Whale_init();
->>>>>>> Stashed changes
 }
 void lvl1_update(void)
 {
@@ -33,29 +37,13 @@ void lvl1_update(void)
 	Penguin_update();
 	PlayerMovement();
 	MovePenguin();
-<<<<<<< Updated upstream
-	Whale_update();
-	/*DrawEnemiesUpdate();*/
-	EnemiesUpdate();
-
-	counter = counter++;
-	if (counter == 2)
-	{
-		CP_Engine_SetNextGameState(lvl2_init, lvl2_update, NULL);
-	}
-
-	//if (counter ==2 
-	
-=======
 	SealEnemiesUpdate();
-	Whale_update();
->>>>>>> Stashed changes
+	//drawWhale();
 }
-
 
 void lvl1_exit(void)
 {
-	// shut down the gamestate and cleanup any dynamic memory
+
 }
 
 

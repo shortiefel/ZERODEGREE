@@ -1,4 +1,5 @@
 #pragma once
+#include <stdbool.h>
 
 typedef struct Shoot
 {
@@ -17,7 +18,7 @@ typedef struct Player
 	struct Shoot arrow;
 } Player;
 
-
+Player penguin;
 
 void Penguin_init(void);
 void Penguin_update(void);

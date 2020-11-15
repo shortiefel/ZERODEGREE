@@ -11,6 +11,7 @@
 #include "Level1.h"
 #include "Level2.h"
 #include "GameOver.h"
+#include <stdbool.h>
 
 struct button retry;
 struct button Quit3;
@@ -38,8 +39,8 @@ void gameover_exit(void)
 
 void DrawGameOver(void)
 {
-	CP_Settings_Fill(CP_Color_Create(48, 77, 109, 255));
-	CP_Graphics_DrawRect(400, 200, 800, 500);
+	CP_Settings_Fill(CP_Color_Create(48, 75, 109, 255));
+	CP_Graphics_DrawRect(400, 200, 780, 400);
 
 
 

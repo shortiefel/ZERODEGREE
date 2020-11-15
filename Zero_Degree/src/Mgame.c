@@ -9,10 +9,10 @@
 #include "Pause.h"
 #include "Whale.h"
 #include "Level1.h"
+#include "Level2.h"
 
 CP_Image ice_grid;
 struct button pause;
-//int counter;
 
 void Mgame_init(void)
 {
@@ -27,31 +27,30 @@ void Mgame_init(void)
 	
 }
 
-// use CP_Engine_SetNextGameState to specify this function as the update function
-// this function will be called repeatedly every frame
 void Mgame_update(void)
 {
-	//counter = 1; 
+	currentLevel = 1; 
 	
-	/*if (counter == 1)
+	if (currentLevel == 1)
 	{
-		CP_Engine_SetNextGameState(lvl1_init, lvl1_update, lvl1_exit);
-	}*/
+		CP_Engine_SetNextGameState(lvl1_init, lvl1_update, NULL);
+	}
 
-	ElaspedTime += CP_System_GetDt();
+
+	//ElaspedTime += CP_System_GetDt();
 	// check input, update simulation, render etc.
-	DrawGrids();
-	DrawPause();
-	Penguin_update();
-	PlayerMovement();
-	MovePenguin();
+	//DrawGrids();
+	//DrawPause();
+	//Penguin_update();
+	//PlayerMovement();
+	//MovePenguin();
 
-	Whale_update();
+	//Whale_update();
 	//drawWhale();
 	//drawProjectile();
-	/*DrawEnemiesUpdate();*/
-	EnemiesUpdate();
-	
+	//SealEnemiesUpdate();
+
+
 }
 
 
@@ -112,6 +111,15 @@ void DrawPause(void)
 				CP_Settings_TextSize(30);
 				CP_Settings_Fill(pause.colorFont);
 				CP_Font_DrawText(pause.text, pause.x, pause.y);
+
+				CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
+				CP_Settings_TextSize(45);
+				CP_Font_DrawText("HP", 1600 - 1550, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE));
+
+				if (counter == 1)
+				{
+					CP_Font_DrawText("Level 1", 1600 - 300, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE));
+				}
 			}
 }
 
@@ -158,3 +166,5 @@ void InitObjects(void)
 	pause = p2;
 
 }
+
+
