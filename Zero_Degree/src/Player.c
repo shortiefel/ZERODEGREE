@@ -149,6 +149,7 @@ void PlayerMovement(void)
 		velocityX = 0;
 		velocityY = 0;
 		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/WIN.png");
+		counter++;
 		CP_Engine_SetNextGameState(win_init, win_update, win_exit);
 	}
 	//Penguin Stay Still

@@ -10,6 +10,8 @@
 #include "Whale.h"
 #include "Level1.h"
 #include "Level2.h"
+#include "GameOver.h"
+#include "wingame.h"
 
 
 void lvl2_init(void)

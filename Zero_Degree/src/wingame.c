@@ -56,6 +56,10 @@ void message(void)
 
 //----Buttons----
 
+void lvl2_onclick(void)
+{
+	CP_Engine_SetNextGameState(lvl2_init, lvl2_update, NULL);
+}
 
 void button_newlevel(void)
 {
@@ -69,6 +73,8 @@ void button_newlevel(void)
 		.colorFont = CP_Color_Create(255,255,255,255),
 		.colorHover = CP_Color_Create(0,0,0,255),
 		.colorDefault = CP_Color_Create(119 , 136, 153, 255),
+		.onClick = &lvl2_onclick
+		
 	};
 	newlevel= n;
 }
@@ -84,10 +90,7 @@ void nextlevel(void)
 		CP_Settings_Fill(newlevel.colorHover);
 		if (CP_Input_MouseClicked())
 		{
-			if (counter == 2)
-			{
-				CP_Engine_SetNextGameState(lvl2_init, lvl2_update, NULL);
-			}
+			newlevel.onClick();
 		}
 
 	}
