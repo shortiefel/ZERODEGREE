@@ -12,7 +12,7 @@
 
 CP_Image ice_grid;
 struct button pause;
-//int counter;
+int counter;
 
 void Mgame_init(void)
 {
@@ -27,14 +27,13 @@ void Mgame_init(void)
 	
 }
 
-// use CP_Engine_SetNextGameState to specify this function as the update function
-// this function will be called repeatedly every frame
 void Mgame_update(void)
 {
-	//counter = 1; 
+	counter = 1; 
 	
-	/*if (counter == 1)
+	if (counter == 1)
 	{
+<<<<<<< Updated upstream
 		CP_Engine_SetNextGameState(lvl1_init, lvl1_update, NULL);
 	}*/
 
@@ -49,6 +48,24 @@ void Mgame_update(void)
 	//drawProjectile();
 	/*DrawEnemiesUpdate();*/
 	EnemiesUpdate();
+=======
+		CP_Engine_SetNextGameState(lvl1_init, lvl1_update, lvl1_exit);
+	}
+
+	////ElaspedTime += CP_System_GetDt();
+	//// check input, update simulation, render etc.
+	////DrawGrids();
+	////DrawPause();
+	////Penguin_update();
+	////PlayerMovement();
+	////MovePenguin();
+
+	////Whale_update();
+	////drawWhale();
+	////drawProjectile();
+	/////*DrawEnemiesUpdate();*/
+	////EnemiesUpdate();
+>>>>>>> Stashed changes
 	
 }
 

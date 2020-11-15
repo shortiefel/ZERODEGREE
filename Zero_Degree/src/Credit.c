@@ -49,7 +49,7 @@ void creditwords(void)
 
 void names(void)
 {
-	font2 = CP_Font_Load("./Assets/olivier_demo.ttf");
+	font2 = CP_Font_Load("./Assets/Antipasto-REG.ttf");
 	CP_Font_Set(font2);
 	CP_Settings_TextSize(50);
 	CP_Font_DrawText("Teo Boon See Margaret", WINDOW_WIDTH / 2, WINDOW_HEIGHT /2);
