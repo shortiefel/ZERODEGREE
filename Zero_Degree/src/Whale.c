@@ -13,6 +13,9 @@
 
 // Do tests on CP_Vector_Normalise
 
+
+Whale whale;
+Player penguin;
 CP_Image whaleSprite;
 int spawnProj;
 int lastPosX, lastPosY;
@@ -26,11 +29,11 @@ int arrowX, arrowY;
 
 // Load and draw image of whale
 void drawWhale(void) {
-	if (getPenguinX() < whale.wPos.x) {
-		whaleSprite = CP_Image_Load("./Assets/CHARACTERS/WHALE/LEFT.png");
-	}
-	else if (getPenguinX() > whale.wPos.x) {
+	if (penguin.X < whale.wPos.x) {
 		whaleSprite = CP_Image_Load("./Assets/CHARACTERS/WHALE/RIGHT.png");
+	}
+	else if (penguin.X > whale.wPos.x) {
+		whaleSprite = CP_Image_Load("./Assets/CHARACTERS/WHALE/LEFT.png");
 	}
 	CP_Image_Draw(whaleSprite, (float)((whale.wPos.x * GRID_SIZE) - GRID_SIZE / 2), (float)((whale.wPos.y * GRID_SIZE) - GRID_SIZE / 2), GRID_SIZE, GRID_SIZE*0.7f, 255);
 }
@@ -103,8 +106,8 @@ void Whale_update(void)
 
 			if (whale.projectile.pPos.x < GRID_WIDTH && whale.projectile.pPos.y < GRID_HEIGHT) {
 				if (spawnProj == 1) {
-					lastPosX = getPenguinX();
-					lastPosY = getPenguinY();
+					lastPosX = penguin.X;
+					lastPosY = penguin.Y;
 
 					moveProj.x = findDistance((float)lastPosX, whale.wPos.x);
 					moveProj.y = findDistance((float)lastPosY, whale.wPos.y);
@@ -117,7 +120,7 @@ void Whale_update(void)
 				whale.projectile.pPos.x += moveProj.x * projSpeed;
 				whale.projectile.pPos.y += moveProj.y * projSpeed;
 
-				if ((int)whale.projectile.pPos.x == getPenguinX() && (int)whale.projectile.pPos.y == getPenguinY()) {
+				if ((int)whale.projectile.pPos.x == penguin.X && (int)whale.projectile.pPos.y == penguin.Y) {
 					setProjectilePos();
 					penguin.health -= 200;
 				}
@@ -152,19 +155,4 @@ void Whale_update(void)
 void Whale_exit(void)
 {
 
-}
-void wTakeDamage(void)
-{
-	if ((arrowX == whale.wPos.x) && (arrowY == whale.wPos.y))
-	{
-		whale.health = whale.health - 100;
-			printf("%d", whale.health);
-	}
-	else
-		printf("%d",whale.health);
-}
-void wGetArrowPosition(int x, int y)
-{
-	arrowX = x;
-	arrowY = y;
 }
