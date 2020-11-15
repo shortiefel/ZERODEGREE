@@ -38,7 +38,7 @@ void lvl1_update(void)
 	PlayerMovement();
 	MovePenguin();
 	SealEnemiesUpdate();
-	//drawWhale();
+	Whale_update();
 }
 
 void lvl1_exit(void)

@@ -19,7 +19,8 @@ CP_Image whaleSprite;
 int spawnProj;
 int lastPosX, lastPosY;
 CP_Vector moveProj;
-float whaleTime, whaleSpeed = 0.02f;
+float projSpeed = 0.2f;
+float whaleTime, whaleSpeed = 0.03f;
 float spawnTime;
 int arrowX, arrowY;
 
@@ -60,11 +61,11 @@ CP_Vector getWhalePos(void) {
 
 void Whale_init(void)
 {
-	WHealth = 700;
 	// Set whale1, whale2, whale3 initial position
 	whale.wPos.x = 13.0f;
 	whale.wPos.y = 8.0f;
 	whale.alive = 1;
+	whale.health = 700;
 
 	// Set projectile starting position at whale position
 	setProjectilePos();
@@ -77,7 +78,6 @@ void Whale_update(void)
 	whaleTime += CP_System_GetDt();
 	spawnTime += CP_System_GetDt();
 
-	whale.health = WHealth;
 	if (whale.health <= 0) {
 		whale.alive = 0;
 	}
@@ -88,6 +88,8 @@ void Whale_update(void)
 		if (whale.alive == 1) {	
 			drawWhale();
 			drawProjectile();
+			wTakeDamage();
+
 			if (whale.projectile.pPos.x < GRID_WIDTH && whale.projectile.pPos.y < GRID_HEIGHT) {
 				if (spawnProj == 1) {
 					lastPosX = getPenguinX();
@@ -101,12 +103,12 @@ void Whale_update(void)
 					spawnProj = 0;
 				}
 				
-				whale.projectile.pPos.x += moveProj.x * 0.3f;
-				whale.projectile.pPos.y += moveProj.y * 0.3f;
+				whale.projectile.pPos.x += moveProj.x * projSpeed;
+				whale.projectile.pPos.y += moveProj.y * projSpeed;
 
 				if ((int)whale.projectile.pPos.x == getPenguinX() && (int)whale.projectile.pPos.y == getPenguinY()) {
 					setProjectilePos();
-					PHealth -= 200;
+					penguin.health -= 200;
 				}
 			}
 			if (whale.projectile.pPos.x > GRID_WIDTH || whale.projectile.pPos.y > ((double)GRID_HEIGHT - 1.5f) || whale.projectile.pPos.x < 0 || whale.projectile.pPos.y < 0) {
