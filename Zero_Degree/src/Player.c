@@ -181,8 +181,8 @@ void MovePenguin(void)
 			Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FRONT.png");
 		}
 		Hurt = false;*/
-		DrawPenguin();
-	}
+		
+	}DrawPenguin();
 
 	GetPlayerPosition(penguin.X, penguin.Y);
 	GetArrowPosition((int)penguin.arrow.ArrowX, (int)penguin.arrow.ArrowY);

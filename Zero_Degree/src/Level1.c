@@ -32,8 +32,6 @@ void lvl1_update(void)
 	DrawGrids();
 	DrawPause();
 	Penguin_update();
-	PlayerMovement();
-	MovePenguin();
 	Whale_update();
 	/*DrawEnemiesUpdate();*/
 	EnemiesUpdate();

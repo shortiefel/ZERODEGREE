@@ -21,6 +21,7 @@ int lastPosX, lastPosY;
 CP_Vector moveProj;
 float whaleTime, whaleSpeed = 0.02f;
 float spawnTime;
+int arrowX, arrowY;
 
 // Load and draw image of whale
 void drawWhale(void) {
@@ -121,4 +122,19 @@ void Whale_update(void)
 void Whale_exit(void)
 {
 
+}
+void wTakeDamage(void)
+{
+	if ((arrowX == whale.wPos.x) && (arrowY == whale.wPos.y))
+	{
+		whale.health = whale.health - 100;
+			printf("%d", whale.health);
+	}
+	else
+		printf("%d",whale.health);
+}
+void wGetArrowPosition(int x, int y)
+{
+	arrowX = x;
+	arrowY = y;
 }

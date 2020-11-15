@@ -43,8 +43,6 @@ void Mgame_update(void)
 	DrawGrids();
 	DrawPause();
 	Penguin_update();
-	PlayerMovement();
-	MovePenguin();
 
 	Whale_update();
 	//drawWhale();
