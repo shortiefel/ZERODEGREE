@@ -19,12 +19,15 @@
 //Remove arrow from screen (refer to whale.c file)
 //Arrow setting needs to be fixed (refer to whale.c file)
 //Penguin animation bugged again. (Hold Z and release Z)
+//CP_Image_Free to get rid of arrow
 
 
 
 //Declaring Variables
 int velocityX, velocityY;
 bool Hurt;
+bool spawnArrow;
+int directionX, directionY;
 float time = 0;
 float speed = 0.1f;
 CP_Image Penguin, Arrow, Clear;
@@ -42,8 +45,7 @@ void Penguin_update(void)
 	PlayerMovement();
 	MovePenguin();
 	PenguinAttack();
-	for (int id = 0; id < entityManager.NumSeal; id++)
-	ArrowMove(id);
+	ArrowMove();
 	DrawArrow();
 }
 
@@ -95,10 +97,10 @@ void Init(void)
 
 	//Init Arrow Direction
 	penguin.arrow.DirX = 1;
+	spawnArrow = 0;
 	Hurt = false;
 
 }
-
 
 //----PLAYER CONTROLLER MOVMENT-----
 void PlayerMovement(void)
@@ -152,7 +154,6 @@ void PlayerMovement(void)
 	{
 		velocityX = 0;
 		velocityY = 0;
-		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FRONT.png");
 	}
 }
 
@@ -223,8 +224,13 @@ void PenguinAttack(void)
 		{
 			Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FLIPPEDBOW.png");
 		}
+		else if (penguin.arrow.DirY == 1)
+		{
+			Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/HOLDBOW.png");
+		}
 		penguin.arrow.ArrowX = penguin.X;
 		penguin.arrow.ArrowY = penguin.Y;
+		spawnArrow = 1;
 	}
 	else
 	{
@@ -240,45 +246,40 @@ void PenguinAttack(void)
 */
 
 
-void ArrowMove(int id)
+void ArrowMove(void)
 {
-		if (penguin.arrow.ArrowX != seal[id].position.x && penguin.arrow.ArrowY != seal[id].position.y)
-		{	//X border (Left Border)
-			if (penguin.arrow.ArrowX < 0)
-			{
-				penguin.arrow.ArrowX = -1;
-				penguin.arrow.DirX = 0;
-			}
-			//X border (Right Border)
-			else if (penguin.arrow.ArrowX > 21)
-			{
-				penguin.arrow.ArrowX = 22;
-				penguin.arrow.DirX = 0;
-			}
-			//Arrow move by 1 grid along X axis
-			else
-				penguin.arrow.ArrowX += penguin.arrow.DirX;
-			//Y border (Top Border)
-			if (penguin.arrow.ArrowY < 0)
-			{
-				penguin.arrow.ArrowX = -1;
-				penguin.arrow.DirY = 0;
-			}
-			//Y border (Bottom Border)
-			else if (penguin.arrow.ArrowY > 11)
-			{
-				penguin.arrow.ArrowY = 12;
-				penguin.arrow.DirY = 0;
-			}
-			//Arrow move by 1 grid along Y axis
-			else
-				penguin.arrow.ArrowY += penguin.arrow.DirY;
-		}
-		else if (penguin.arrow.ArrowX == seal[id].position.x && penguin.arrow.ArrowY == seal[id].position.y)
+	if (penguin.arrow.ArrowX < GRID_WIDTH && penguin.arrow.ArrowY < GRID_HEIGHT)
+	{
+		if (spawnArrow == 1)
 		{
-			penguin.arrow.ArrowX = 22;
-			penguin.arrow.ArrowY = 22;
+			directionX = penguin.arrow.DirX;
+			directionY = penguin.arrow.DirY;
+			spawnArrow = 0;
 		}
+
+		penguin.arrow.ArrowX += directionX;
+		penguin.arrow.ArrowY += directionY;
+
+		if (penguin.arrow.ArrowX == whale.wPos.x && penguin.arrow.ArrowY == whale.wPos.y)
+		{
+			ClearArrow();
+			whale.health -= 100;
+		}
+		for (int id = 0; id < entityManager.NumSeal; id++)
+		{
+			if (penguin.arrow.ArrowX == seal[id].position.x && penguin.arrow.ArrowY == seal[id].position.y)
+			{
+				ClearArrow();
+				seal[id].health -= 100;
+			}
+		}
+	}
+}
+void ClearArrow(void)
+{
+	//Arrow = CP_Image_Load("./Assets");
+	penguin.arrow.ArrowX = -1;
+	penguin.arrow.ArrowY = -1;
 }
 
 void PHurt(bool a)

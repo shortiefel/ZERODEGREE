@@ -124,13 +124,3 @@ void Whale_exit(void)
 {
 
 }
- void wTakeDamage(void)
-{
-	if ((penguin.arrow.ArrowX == whale.wPos.x) && (penguin.arrow.ArrowY == whale.wPos.y))
-	{
-		whale.health = whale.health - 100;
-			printf("%d", whale.health);
-	}
-	else
-		printf("%d",whale.health);
-}

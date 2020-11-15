@@ -18,8 +18,6 @@ typedef struct Player
 	struct Shoot arrow;
 } Player;
 
-
-
 void Penguin_init(void);
 void Penguin_update(void);
 void Penguin_exit(void);
@@ -34,4 +32,5 @@ void PenguinAttack(void);
 void DrawArrow(void);
 //Get all seal position seperately
 void PHurt(bool a);
-void ArrowMove(int w);
+void ArrowMove(void);
+void ClearArrow(void);
