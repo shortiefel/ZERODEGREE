@@ -10,6 +10,7 @@
 #include "Level2.h"
 #include "Player.h"
 #include "seal.h"
+#include "Level3.h"
 
 CP_Font font1, font2;
 struct button newlevel;
@@ -19,6 +20,9 @@ void win_init(void)
 	countdeath = 0;
 	DrawWinPopOut();
 	button_newlevel();
+	
+
+	
 }
 
 void win_update(void)
@@ -26,6 +30,8 @@ void win_update(void)
 	DrawWinPopOut();
 	message();
 	nextlevel();
+
+	
 	
 }
 
@@ -77,7 +83,7 @@ void button_newlevel(void)
 		.colorFont = CP_Color_Create(255,255,255,255),
 		.colorHover = CP_Color_Create(0,0,0,255),
 		.colorDefault = CP_Color_Create(119 , 136, 153, 255),
-		.onClick = &lvl2_onclick
+		//.onClick = &lvl2_onclick
 		
 	};
 	newlevel= n;
@@ -92,9 +98,13 @@ void nextlevel(void)
 	if (newlevel.x - newlevel.width / 2 < mouseX && mouseX < newlevel.x + newlevel.width / 2 && newlevel.y - newlevel.height / 2 < mouseY && mouseY < newlevel.y + newlevel.height / 2)
 	{
 		CP_Settings_Fill(newlevel.colorHover);
-		if (CP_Input_MouseClicked())
+		if (CP_Input_MouseClicked() && currentLevel == 1)
 		{
-			newlevel.onClick();
+			CP_Engine_SetNextGameState(lvl2_init, lvl2_update, lvl2_exit);
+		}
+		else if ((CP_Input_MouseClicked() && currentLevel == 2))
+		{
+			CP_Engine_SetNextGameState(lvl3_init, lvl3_update, lvl3_exit);
 		}
 
 	}

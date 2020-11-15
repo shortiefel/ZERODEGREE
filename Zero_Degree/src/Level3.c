@@ -1,11 +1,5 @@
-/*
-* LEVEL 1 ONLY CONTAINS SEALS ( AT LEAST 5 OF THEM )
-*/
-
-
 #include <stdio.h>
 #include <intrin.h>
-#include <stdbool.h>
 #include <cprocessing.h>
 #include <stdbool.h>
 #include "menu.h"
@@ -16,21 +10,25 @@
 #include "Whale.h"
 #include "Level1.h"
 #include "Level2.h"
+#include "GameOver.h"
+#include "wingame.h"
 
 
-void lvl1_init(void)
+
+void lvl3_init(void)
 {
-	currentLevel = 1;
-	level1enemies.seals_count = 5;
-	level1enemies.whale_count = 0;
-
+	currentLevel = 3;
+	level3enemies.seals_count = 4;
+	level3enemies.whale_count = 2;
 
 	InitObjects();
 	Penguin_init();
 	DrawEnemies();
-	//Whale_init();
+	Whale_init();
+	DrawPause();
+
 }
-void lvl1_update(void)
+void lvl3_update(void)
 {
 	ElaspedTime += CP_System_GetDt();
 	// check input, update simulation, render etc.
@@ -40,14 +38,11 @@ void lvl1_update(void)
 	PlayerMovement();
 	MovePenguin();
 	SealEnemiesUpdate();
-
-	//Whale_update();
-	currentLevel++;
+	drawWhale();
+	drawProjectile();
 }
 
-void lvl1_exit(void)
+
+void lvl3_exit(void)
 {
-
 }
-
-
