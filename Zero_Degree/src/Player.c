@@ -261,7 +261,7 @@ void PenguinAttack(void)
 
 void ArrowMove(void)
 {
-	if (penguin.arrow.ArrowX < GRID_WIDTH && penguin.arrow.ArrowY < (GRID_HEIGHT -2))
+	if (penguin.arrow.ArrowX < 21 && penguin.arrow.ArrowY < 11)
 	{
 		if (spawnArrow == 1)
 		{

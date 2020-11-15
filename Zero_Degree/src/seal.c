@@ -92,7 +92,6 @@ void SealEnemiesUpdate(void)
 		{
 			MoveSeal(w);
 			AttackPlayer(w);
-			TakeDamage();
 			CheckSealHealth(w);
 		}
 		else
@@ -122,6 +121,8 @@ void DrawDeath(int seal_id)
 	if (seal[seal_id].death == true)
 	{
 		CP_Image_Draw(seal[seal_id].sprites[6], (float)seal[seal_id].position.x * GRID_SIZE - grid_size, (float)seal[seal_id].position.y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);
+		seal[seal_id].position.x = -1;
+		seal[seal_id].position.y = -1;
 	}
 
 }
@@ -262,24 +263,6 @@ void CheckSealHealth(int id)
 		KillSeal(id);
 	}
 
-}
-
-void TakeDamage(void)
-{
-	for (int i = 0; i < entityManager.NumSeal; i++)
-	{
-		if ((penguin.arrow.ArrowX == seal[i].position.x) && (penguin.arrow.ArrowY == seal[i].position.y))
-		{
-			seal[i].health = seal[i].health - 100;
-			//printf("seal: %d\n", seal[i].health);
-			break;
-		}
-		//else
-		//{
-		//	//printf("%d", seal[i].health);
-		//}
-			
-	}
 }
 
 

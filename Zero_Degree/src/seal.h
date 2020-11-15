@@ -29,8 +29,5 @@ void MoveSeal(int id);
 void AttackPlayer(int id);
 void KillSeal(int id);
 void CheckSealHealth(int id);
-void TakeDamage(void);
 
-void GetPlayerPosition(int x, int y);
-void GetArrowPosition(int x, int y);
 void DrawDeath(int seal_id);

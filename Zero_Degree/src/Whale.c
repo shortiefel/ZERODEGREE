@@ -63,10 +63,10 @@ CP_Vector getWhalePos(void) {
 }
 
 void whaleDeath(void) {
-	if (getPenguinX() < whale.wPos.x) {
+	if (penguin.X < whale.wPos.x) {
 		whaleSprite = CP_Image_Load("./Assets/CHARACTERS/WHALE/WHALE_DEATH_LEFT.png");
 	}
-	else if (getPenguinX() > whale.wPos.x) {
+	else if (penguin.X > whale.wPos.x) {
 		whaleSprite = CP_Image_Load("./Assets/CHARACTERS/WHALE/WHALE_DEATH_RIGHT.png");
 	}
 	CP_Image_Draw(whaleSprite, (float)((whale.wPos.x * GRID_SIZE) - GRID_SIZE / 2), (float)((whale.wPos.y * GRID_SIZE) - GRID_SIZE / 2), GRID_SIZE, GRID_SIZE*0.7f, 255);
@@ -97,7 +97,6 @@ void Whale_update(void)
 		if (whale.alive == 1) {	
 			drawWhale();
 			drawProjectile();
-			wTakeDamage();
 
 			if (whale.health <= 0) {
 				whale.alive = 0;
@@ -147,6 +146,10 @@ void Whale_update(void)
 			}
 			if (death == 0) {
 				CP_Settings_Background(CP_Color_Create(48, 77, 109, 255));
+				whale.wPos.x = -1;
+				whale.wPos.y = -1;
+				whale.projectile.pPos.x = -1;
+				whale.projectile.pPos.y = -1;
 			}
 		}
 	}
