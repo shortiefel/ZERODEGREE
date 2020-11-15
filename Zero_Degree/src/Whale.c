@@ -13,26 +13,26 @@
 
 // Do tests on CP_Vector_Normalise
 
-
-
 CP_Image whaleSprite;
 int spawnProj;
 int lastPosX, lastPosY;
 CP_Vector moveProj;
-float projSpeed = 0.2f;
+float projSpeed = 0.1f;
 float whaleTime, whaleSpeed = 0.03f;
-float spawnTime;
+float timePassed;
+int deathTimer = 5;
+float deathTime = 0; int death = 0;
 int arrowX, arrowY;
 
 // Load and draw image of whale
 void drawWhale(void) {
 	if (getPenguinX() < whale.wPos.x) {
-		whaleSprite = CP_Image_Load("./Assets/CHARACTERS/WHALE/RIGHT.png");
-	}
-	else if (getPenguinX() > whale.wPos.x) {
 		whaleSprite = CP_Image_Load("./Assets/CHARACTERS/WHALE/LEFT.png");
 	}
-	CP_Image_Draw(whaleSprite, (float)((whale.wPos.x * GRID_SIZE) - GRID_SIZE / 2), (float)((whale.wPos.y * GRID_SIZE) - GRID_SIZE / 2), GRID_SIZE, GRID_SIZE, 255);
+	else if (getPenguinX() > whale.wPos.x) {
+		whaleSprite = CP_Image_Load("./Assets/CHARACTERS/WHALE/RIGHT.png");
+	}
+	CP_Image_Draw(whaleSprite, (float)((whale.wPos.x * GRID_SIZE) - GRID_SIZE / 2), (float)((whale.wPos.y * GRID_SIZE) - GRID_SIZE / 2), GRID_SIZE, GRID_SIZE*0.7f, 255);
 }
 
 // Set projectile's initial position to whale's initial position
@@ -59,13 +59,23 @@ CP_Vector getWhalePos(void) {
 	return whale.wPos;
 }
 
+void whaleDeath(void) {
+	if (getPenguinX() < whale.wPos.x) {
+		whaleSprite = CP_Image_Load("./Assets/CHARACTERS/WHALE/WHALE_DEATH_LEFT.png");
+	}
+	else if (getPenguinX() > whale.wPos.x) {
+		whaleSprite = CP_Image_Load("./Assets/CHARACTERS/WHALE/WHALE_DEATH_RIGHT.png");
+	}
+	CP_Image_Draw(whaleSprite, (float)((whale.wPos.x * GRID_SIZE) - GRID_SIZE / 2), (float)((whale.wPos.y * GRID_SIZE) - GRID_SIZE / 2), GRID_SIZE, GRID_SIZE*0.7f, 255);
+}
+
 void Whale_init(void)
 {
 	// Set whale1, whale2, whale3 initial position
 	whale.wPos.x = 13.0f;
 	whale.wPos.y = 8.0f;
 	whale.alive = 1;
-	whale.health = 700;
+	whale.health = 100;
 
 	// Set projectile starting position at whale position
 	setProjectilePos();
@@ -76,11 +86,7 @@ void Whale_update(void)
 {
 	//grid_array[(int)whale.wPos.x][(int)whale.wPos.y] = HOLE;
 	whaleTime += CP_System_GetDt();
-	spawnTime += CP_System_GetDt();
-
-	if (whale.health <= 0) {
-		whale.alive = 0;
-	}
+	timePassed += CP_System_GetDt();
 
 	if (whaleTime >= whaleSpeed) {
 		whaleTime -= whaleSpeed;
@@ -89,6 +95,11 @@ void Whale_update(void)
 			drawWhale();
 			drawProjectile();
 			wTakeDamage();
+
+			if (whale.health <= 0) {
+				whale.alive = 0;
+				death = 1;
+			}
 
 			if (whale.projectile.pPos.x < GRID_WIDTH && whale.projectile.pPos.y < GRID_HEIGHT) {
 				if (spawnProj == 1) {
@@ -118,6 +129,23 @@ void Whale_update(void)
 			}
 		}
 		//printf("Penguin: %d %d | Projectile: %d %d | Time: %f\n", getPenguinX(), getPenguinY(), (int)whale.projectile.projX, (int)whale.projectile.projY, spawnTime);
+		//printf("Time: %f | Death: %f\n", spawnTime, deathTime);
+		else {
+			if (whale.alive == 0 && death == 1) {
+				whaleDeath();
+			}
+			if (((int)ElaspedTime % (int)deathTimer) == 0)
+			{
+				deathTime = ElaspedTime;
+			}
+			if ((int)ElaspedTime == (int)deathTime)
+			{
+				death = 0;
+			}
+			if (death == 0) {
+				CP_Settings_Background(CP_Color_Create(48, 77, 109, 255));
+			}
+		}
 	}
 }
 
