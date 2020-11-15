@@ -50,6 +50,7 @@ void Mgame_update(void)
 	//drawProjectile();
 	//SealEnemiesUpdate();
 
+
 }
 
 

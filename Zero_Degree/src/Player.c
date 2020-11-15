@@ -7,6 +7,7 @@
 #include "seal.h"
 #include "Level1.h"
 #include "GameOver.h"
+#include "Whale.h"
 
 //Task:
 //Add HP bar word
@@ -138,6 +139,12 @@ void PlayerMovement(void)
 		penguin.arrow.DirY = 0;
 		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FRONT.png");
 	}
+	/*else if (penguin.health > 0 && seal->health = 0)
+	{
+		velocityX = 0;
+		velocityY = 0;
+		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/WIN.png");
+	}*/
 	//Penguin Stay Still
 	else
 	{

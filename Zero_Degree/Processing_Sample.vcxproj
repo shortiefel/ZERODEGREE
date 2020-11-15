@@ -202,6 +202,7 @@ xcopy "$(ProjectDir)Assets\*" "$(OutDir)Assets\" /s /r /y /q</Command>
     <ClCompile Include="src\Player.c" />
     <ClCompile Include="src\seal.c" />
     <ClCompile Include="src\Whale.c" />
+    <ClCompile Include="src\wingame.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Credit.h" />
@@ -215,6 +216,7 @@ xcopy "$(ProjectDir)Assets\*" "$(OutDir)Assets\" /s /r /y /q</Command>
     <ClInclude Include="src\Player.h" />
     <ClInclude Include="src\seal.h" />
     <ClInclude Include="src\Whale.h" />
+    <ClInclude Include="src\wingame.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
