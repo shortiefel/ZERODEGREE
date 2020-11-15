@@ -80,7 +80,7 @@ void Init(void)
 	DrawPenguin();
 
 	//Penguin Health
-	PHealth = 1500;
+	penguin.health = 1500;
 	DrawHP();
 
 	//Init Arrow Direction
@@ -91,7 +91,7 @@ void Init(void)
 //Penguin moves
 void PlayerMovement(void)
 {	//Penguin Dies
-	if (PHealth <= 0)
+	if (penguin.health <= 0)
 	{
 		velocityX = 0;
 		velocityY = 0;
