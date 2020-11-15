@@ -7,6 +7,7 @@
 #include "seal.h"
 #include "Level1.h"
 #include "GameOver.h"
+#include "Whale.h"
 
 //Task:
 //Add HP bar word
@@ -24,6 +25,7 @@ float speed = 0.1f;
 CP_Image Penguin, Arrow, Clear;
 
 //CP_Vector Arrow;
+CP_Font font4;
 
 void Penguin_init(void)
 {
@@ -45,19 +47,19 @@ void Penguin_exit(void)
 	// shut down the gamestate and cleanup any dynamic memory
 }
 
-//Drawing of Penguin
+//---Drawing of Penguin---
 void DrawPenguin(void)
 {
 	CP_Image_Draw(Penguin, (float)penguin.X * GRID_SIZE - (GRID_SIZE / 2), (float)penguin.Y * GRID_SIZE - (GRID_SIZE / 2), GRID_SIZE, GRID_SIZE, 255);
 }
-//Drawing of HP bar
+//--Drawing of HP bar----
 void DrawHP(void)
 {
 	CP_Settings_Fill(CP_Color_Create(255,0, 0, 255));	
 	
 	CP_Graphics_DrawRect((GRID_SIZE/2) * 2, (GRID_SIZE/2) * 21, (float)(penguin.health * 0.25), (GRID_SIZE/2));
 }
-//Drawing of Arrow
+//--Drawing of Arrow--
 void DrawArrow(void)
 {
 	if (penguin.arrow.DirX == 1)
@@ -87,6 +89,9 @@ void Init(void)
 	//Init Arrow Direction
 	penguin.arrow.DirX = 1;
 	Hurt = false;
+
+
+	
 
 }
 
@@ -138,6 +143,12 @@ void PlayerMovement(void)
 		penguin.arrow.DirY = 0;
 		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FRONT.png");
 	}
+	/*else if (penguin.health > 0 && seal->health = 0)
+	{
+		velocityX = 0;
+		velocityY = 0;
+		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/WIN.png");
+	}*/
 	//Penguin Stay Still
 	else
 	{

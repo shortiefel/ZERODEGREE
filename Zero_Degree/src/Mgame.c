@@ -50,6 +50,7 @@ void Mgame_update(void)
 	//drawProjectile();
 	//SealEnemiesUpdate();
 
+
 }
 
 
@@ -110,6 +111,15 @@ void DrawPause(void)
 				CP_Settings_TextSize(30);
 				CP_Settings_Fill(pause.colorFont);
 				CP_Font_DrawText(pause.text, pause.x, pause.y);
+
+				CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
+				CP_Settings_TextSize(45);
+				CP_Font_DrawText("HP", 1600 - 1550, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE));
+
+				if (counter == 1)
+				{
+					CP_Font_DrawText("Level 1", 1600 - 300, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE));
+				}
 			}
 }
 
@@ -156,3 +166,5 @@ void InitObjects(void)
 	pause = p2;
 
 }
+
+
