@@ -23,7 +23,7 @@ void lvl1_init(void)
 	InitObjects();
 	Penguin_init();
 	DrawEnemies();
-	
+	Whale_init();
 }
 void lvl1_update(void)
 {
@@ -35,6 +35,7 @@ void lvl1_update(void)
 	PlayerMovement();
 	MovePenguin();
 	SealEnemiesUpdate();
+	//drawWhale();
 }
 
 void lvl1_exit(void)

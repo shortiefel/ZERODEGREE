@@ -22,7 +22,7 @@ bool Hurt;
 float time = 0;
 float speed = 0.1f;
 CP_Image Penguin, Arrow, Clear;
-Player penguin;
+
 //CP_Vector Arrow;
 
 void Penguin_init(void)
@@ -55,7 +55,7 @@ void DrawHP(void)
 {
 	CP_Settings_Fill(CP_Color_Create(255,0, 0, 255));	
 	
-	CP_Graphics_DrawRect((GRID_SIZE/2) * 2, (GRID_SIZE/2) * 21, (float)(PHealth * 0.25), (GRID_SIZE/2));
+	CP_Graphics_DrawRect((GRID_SIZE/2) * 2, (GRID_SIZE/2) * 21, (float)(penguin.health * 0.25), (GRID_SIZE/2));
 }
 //Drawing of Arrow
 void DrawArrow(void)
@@ -187,8 +187,8 @@ void MovePenguin(void)
 		}
 		Hurt = false;*/
 		
-	}DrawPenguin();
-
+	}
+	DrawPenguin();
 	GetPlayerPosition(penguin.X, penguin.Y);
 	GetArrowPosition((int)penguin.arrow.ArrowX, (int)penguin.arrow.ArrowY);
 	//Draw the penguin

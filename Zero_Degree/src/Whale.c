@@ -14,7 +14,7 @@
 // Do tests on CP_Vector_Normalise
 
 
-Whale whale;
+
 CP_Image whaleSprite;
 int spawnProj;
 int lastPosX, lastPosY;

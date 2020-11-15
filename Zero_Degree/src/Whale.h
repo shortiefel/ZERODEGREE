@@ -15,6 +15,8 @@ typedef struct Whale
 	struct Projectile projectile;
 } Whale;
 
+Whale whale;
+
 void Whale_init(void);
 void Whale_update(void);
 void Whale_exit(void);

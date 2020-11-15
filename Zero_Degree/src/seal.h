@@ -1,4 +1,6 @@
 #pragma once
+#include <stdbool.h>
+
 
 typedef struct ENTITY
 {
@@ -7,6 +9,9 @@ typedef struct ENTITY
 	CP_Vector position;
 	//int speedX, speedY;
 	int attack;
+
+	bool dead; 
+	bool death; 
 
 	//animation variables
 	CP_Image sprites[10];
@@ -21,8 +26,9 @@ void InitSealsObjects(void);
 void MoveSeal(int id);
 void AttackPlayer(int id);
 void KillSeal(int id);
-void CheckSealHealth(void);
+void CheckSealHealth(int id);
 void TakeDamage(void);
 
 void GetPlayerPosition(int x, int y);
 void GetArrowPosition(int x, int y);
+void DrawDeath(int seal_id);
