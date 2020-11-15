@@ -32,13 +32,8 @@ void lvl1_update(void)
 	DrawGrids();
 	DrawPause();
 	Penguin_update();
-<<<<<<< Updated upstream
-=======
 	PlayerMovement();
 	MovePenguin();
-
->>>>>>> Stashed changes
-	Whale_update();
 	/*DrawEnemiesUpdate();*/
 	EnemiesUpdate();
 }

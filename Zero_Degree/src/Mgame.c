@@ -33,24 +33,9 @@ void Mgame_update(void)
 	
 	if (counter == 1)
 	{
-<<<<<<< Updated upstream
 		CP_Engine_SetNextGameState(lvl1_init, lvl1_update, NULL);
-	}*/
-
-	ElaspedTime += CP_System_GetDt();
-	// check input, update simulation, render etc.
-	DrawGrids();
-	DrawPause();
-	Penguin_update();
-
-	Whale_update();
-	//drawWhale();
-	//drawProjectile();
-	/*DrawEnemiesUpdate();*/
-	EnemiesUpdate();
-=======
-		CP_Engine_SetNextGameState(lvl1_init, lvl1_update, lvl1_exit);
 	}
+
 
 	////ElaspedTime += CP_System_GetDt();
 	//// check input, update simulation, render etc.
@@ -65,8 +50,7 @@ void Mgame_update(void)
 	////drawProjectile();
 	/////*DrawEnemiesUpdate();*/
 	////EnemiesUpdate();
->>>>>>> Stashed changes
-	
+
 }
 
 
