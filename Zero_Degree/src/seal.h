@@ -9,13 +9,14 @@ typedef struct ENTITY
 	int attack;
 
 	//animation variables
-	CP_Image sprites[5];
+	CP_Image sprites[10];
 }	entity;
 
 entity seal[MAXENTITY];	//seals
+entity_manager entityManager;
 
 CP_Vector GetRandomPosition(void);
-void EnemiesUpdate(void);
+void SealEnemiesUpdate(void);
 void InitSealsObjects(void);
 void MoveSeal(int id);
 void AttackPlayer(int id);

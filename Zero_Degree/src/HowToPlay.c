@@ -94,10 +94,10 @@ void back(void)
 
 void instructions(void)
 {
-	font2 = CP_Font_Load("./Assets/olivier_demo.ttf");
+	font2 = CP_Font_Load("./Assets/Antipasto-REG.ttf");
 	CP_Font_Set(font2);
-	CP_Settings_TextSize(50);
-	CP_Font_DrawText("1. Clear stages without dying.", WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
-	CP_Font_DrawText("2. Use arrow keys to move.", WINDOW_WIDTH / 2, WINDOW_HEIGHT / (float)1.7);
-	CP_Font_DrawText("3. Use Z and X to attack.", WINDOW_WIDTH / 2, WINDOW_HEIGHT / (float)1.5);
+	CP_Settings_TextSize(30);
+	CP_Font_DrawText("Clear stages without dying\n to do so kill all the seals and whales.", WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+	CP_Font_DrawText("Use arrow keys to move.", WINDOW_WIDTH / 2, WINDOW_HEIGHT / (float)1.7);
+	CP_Font_DrawText("Press Z to activate your weapon\n and to release it by releasing button Z", WINDOW_WIDTH / 2, WINDOW_HEIGHT / (float)1.5);
 }

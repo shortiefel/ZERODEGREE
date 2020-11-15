@@ -54,6 +54,7 @@ void DrawPenguin(void)
 void DrawHP(void)
 {
 	CP_Settings_Fill(CP_Color_Create(255,0, 0, 255));	
+	
 	CP_Graphics_DrawRect((GRID_SIZE/2) * 2, (GRID_SIZE/2) * 21, (float)(PHealth * 0.25), (GRID_SIZE/2));
 }
 //Drawing of Arrow
@@ -88,7 +89,9 @@ void Init(void)
 	Hurt = false;
 
 }
-//Penguin moves
+
+
+//----PLAYER MOVMENT-----
 void PlayerMovement(void)
 {	//Penguin Dies
 	if (PHealth <= 0)
@@ -145,6 +148,8 @@ void PlayerMovement(void)
 
 	
 }
+
+//----PLAYER MOVMENT-----
 void MovePenguin(void)
 {
 
@@ -181,8 +186,8 @@ void MovePenguin(void)
 			Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FRONT.png");
 		}
 		Hurt = false;*/
-		DrawPenguin();
-	}
+		
+	}DrawPenguin();
 
 	GetPlayerPosition(penguin.X, penguin.Y);
 	GetArrowPosition((int)penguin.arrow.ArrowX, (int)penguin.arrow.ArrowY);
@@ -190,6 +195,8 @@ void MovePenguin(void)
 	DrawHP();
 
 }
+
+//---- ATTACK -----
 void PenguinAttack(void)
 {
 	//Penguin Attack
@@ -226,6 +233,7 @@ void PenguinAttack(void)
 	if (grid[PenguinX][PenguinY] == )
 }
 */
+
 
 void ArrowMove(void)
 {
@@ -269,6 +277,8 @@ void ArrowMove(void)
 		id = 0;
 }
 
+
+//---- SEAL POSITION -----
 void GetSeal1Position(int x, int y)
 {
 		SealX[0] = x;
@@ -299,7 +309,7 @@ void PHurt(bool a)
 	Hurt = a;
 }
 
-// Get penguin x and y position
+//----Get penguin x and y position -----
 int getPenguinX(void) {
 	return penguin.X;
 }

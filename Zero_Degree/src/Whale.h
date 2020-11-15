@@ -1,17 +1,17 @@
 #pragma once
 
+#define PROJECTILE_TRAVEL 40 
+
 typedef struct Projectile
 {
-	double projX;
-	double projY;
+	CP_Vector pPos;
 } Projectile;
 
 typedef struct Whale
 {
 	int alive;
 	int health;
-	int posX;
-	int posY;
+	CP_Vector wPos;
 	struct Projectile projectile;
 } Whale;
 
@@ -19,7 +19,10 @@ void Whale_init(void);
 void Whale_update(void);
 void Whale_exit(void);
 
+CP_Vector getWhalePos(void);
 void drawWhale(void);
 void drawProjectile(void);
 void setProjectilePos(void);
-int findDistance(int startPos, int targetPos);
+
+void wGetArrowPosition(int x, int y);
+void wTakeDamage(void);
