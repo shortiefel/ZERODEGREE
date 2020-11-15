@@ -248,7 +248,7 @@ void PenguinAttack(void)
 
 void ArrowMove(void)
 {
-	if (penguin.arrow.ArrowX < GRID_WIDTH && penguin.arrow.ArrowY < GRID_HEIGHT)
+	if (penguin.arrow.ArrowX < GRID_WIDTH && penguin.arrow.ArrowY < (GRID_HEIGHT -2))
 	{
 		if (spawnArrow == 1)
 		{
@@ -274,6 +274,8 @@ void ArrowMove(void)
 			}
 		}
 	}
+	else
+		ClearArrow();
 }
 void ClearArrow(void)
 {
