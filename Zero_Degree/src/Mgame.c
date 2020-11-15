@@ -21,7 +21,7 @@ void Mgame_init(void)
 	InitObjects();
 	Penguin_init();
 	DrawEnemies();
-	//Whale_init();
+	Whale_init();
 	
 
 	
@@ -47,8 +47,8 @@ void Mgame_update(void)
 	MovePenguin();
 
 	Whale_update();
-	drawWhale();
-	drawProjectile();
+	//drawWhale();
+	//drawProjectile();
 	/*DrawEnemiesUpdate();*/
 	EnemiesUpdate();
 	
