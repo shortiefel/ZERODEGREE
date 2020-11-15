@@ -1,7 +1,5 @@
 #pragma once
 
-#define PROJECTILE_TRAVEL 40 
-
 typedef struct Projectile
 {
 	CP_Vector pPos;
@@ -10,6 +8,7 @@ typedef struct Projectile
 typedef struct Whale
 {
 	int alive;
+	bool hurt;
 	int health;
 	CP_Vector wPos;
 	struct Projectile projectile;

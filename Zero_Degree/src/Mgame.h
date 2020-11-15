@@ -31,6 +31,14 @@ typedef struct entity_manager
 	int NumWhale;
 } entity_manager;
 
+typedef struct levelEnemies
+{
+	int seals_count;
+	int whale_count;
+} ENEMIESINLEVEL;
+
+int currentLevel;
+
 void Mgame_init(void);
 void Mgame_update(void);
 void Mgame_exit(void);
