@@ -21,8 +21,6 @@ void win_init(void)
 	DrawWinPopOut();
 	button_newlevel();
 	
-
-	
 }
 
 void win_update(void)
@@ -30,8 +28,6 @@ void win_update(void)
 	DrawWinPopOut();
 	message();
 	nextlevel();
-
-	
 	
 }
 

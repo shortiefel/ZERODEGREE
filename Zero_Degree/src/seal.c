@@ -7,6 +7,7 @@
 #include "seal.h"
 #include "Level1.h"
 #include "Level2.h"
+#include "Level3.h"
 #include "Whale.h"
 
 //entity player;
@@ -225,6 +226,10 @@ void InitSealsObjects(void)
 	else if (currentLevel == 2)
 	{
 		totalEnemies = level2enemies.seals_count;
+	}
+	else if (currentLevel == 3)
+	{
+		totalEnemies = level3enemies.seals_count;
 	}
 
 	entityManager.NumSeal = 0;

@@ -1,3 +1,7 @@
+/*
+* LEVEL 2 ONLY CONTAINS SEALS ( AT LEAST 7 OF THEM )
+*/
+
 #include <stdio.h>
 #include <intrin.h>
 #include <cprocessing.h>

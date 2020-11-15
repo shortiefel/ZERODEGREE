@@ -1,3 +1,8 @@
+/*
+* LEVEL 3  CONTAINS SEALS - 4 , 2 Whales
+*/
+
+
 #include <stdio.h>
 #include <intrin.h>
 #include <cprocessing.h>
@@ -10,6 +15,7 @@
 #include "Whale.h"
 #include "Level1.h"
 #include "Level2.h"
+#include "Level3.h"
 #include "GameOver.h"
 #include "wingame.h"
 
@@ -40,6 +46,7 @@ void lvl3_update(void)
 	SealEnemiesUpdate();
 	drawWhale();
 	drawProjectile();
+	Whale_update();
 }
 
 

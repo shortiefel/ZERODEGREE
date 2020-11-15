@@ -42,7 +42,7 @@ void lvl1_update(void)
 	SealEnemiesUpdate();
 
 	//Whale_update();
-	currentLevel++;
+	
 }
 
 void lvl1_exit(void)
