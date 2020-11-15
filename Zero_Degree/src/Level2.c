@@ -14,13 +14,26 @@
 
 void lvl2_init(void)
 {
-	
+	level2enemies.seals_count = 7;
+	level2enemies.whale_count = 0;
+
+	InitObjects();
+	Penguin_init();
+	DrawEnemies();
+	Whale_init();
 
 }
 void lvl2_update(void)
 {
-	
-	
+	ElaspedTime += CP_System_GetDt();
+	// check input, update simulation, render etc.
+	DrawGrids();
+	DrawPause();
+	Penguin_update();
+	PlayerMovement();
+	MovePenguin();
+	SealEnemiesUpdate();
+	//drawWhale();
 }
 
 

@@ -9,10 +9,10 @@
 #include "Pause.h"
 #include "Whale.h"
 #include "Level1.h"
+#include "Level2.h"
 
 CP_Image ice_grid;
 struct button pause;
-int counter;
 
 void Mgame_init(void)
 {
@@ -29,9 +29,9 @@ void Mgame_init(void)
 
 void Mgame_update(void)
 {
-	counter = 1; 
+	currentLevel = 1; 
 	
-	if (counter == 1)
+	if (currentLevel == 1)
 	{
 		CP_Engine_SetNextGameState(lvl1_init, lvl1_update, NULL);
 	}

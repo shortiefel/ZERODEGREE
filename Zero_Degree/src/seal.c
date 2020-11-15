@@ -6,12 +6,13 @@
 #include "Player.h"
 #include "seal.h"
 #include "Level1.h"
+#include "Level2.h"
 #include "Whale.h"
 
 //entity player;
 float grid_size = GRID_SIZE / 2;
 
-int totalEnemies = 5;
+int totalEnemies = 0;
 int sprite_to_draw[MAXENTITY] = {0};
 int index = 0;
 
@@ -215,6 +216,15 @@ void AttackPlayer(int id)
 
 void InitSealsObjects(void)
 {
+	if (currentLevel == 1)
+	{
+		totalEnemies = level1enemies.seals_count;
+	}
+	else if (currentLevel == 2)
+	{
+		totalEnemies = level2enemies.seals_count;
+	}
+
 	entityManager.NumSeal = 0;
 	for (int i = 0; i < totalEnemies; i++)
 	{

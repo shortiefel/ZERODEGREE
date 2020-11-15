@@ -20,6 +20,9 @@
 
 void lvl1_init(void)
 {
+	level1enemies.seals_count = 5;
+	level1enemies.whale_count = 0;
+
 	InitObjects();
 	Penguin_init();
 	DrawEnemies();
