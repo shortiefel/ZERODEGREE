@@ -19,6 +19,7 @@ Player penguin;
 CP_Image whaleSprite;
 int spawnProj;
 int lastPosX, lastPosY;
+CP_Vector penguinLastPos;
 CP_Vector moveProj;
 float projSpeed = 0.1f;
 float whaleTime, whaleSpeed = 0.03f;
@@ -30,10 +31,10 @@ int arrowX, arrowY;
 // Load and draw image of whale
 void drawWhale(void) {
 	if (penguin.X < whale.wPos.x) {
-		whaleSprite = CP_Image_Load("./Assets/CHARACTERS/WHALE/RIGHT.png");
+		whaleSprite = CP_Image_Load("./Assets/CHARACTERS/WHALE/LEFT.png");
 	}
 	else if (penguin.X > whale.wPos.x) {
-		whaleSprite = CP_Image_Load("./Assets/CHARACTERS/WHALE/LEFT.png");
+		whaleSprite = CP_Image_Load("./Assets/CHARACTERS/WHALE/RIGHT.png");
 	}
 	CP_Image_Draw(whaleSprite, (float)((whale.wPos.x * GRID_SIZE) - GRID_SIZE / 2), (float)((whale.wPos.y * GRID_SIZE) - GRID_SIZE / 2), GRID_SIZE, GRID_SIZE*0.7f, 255);
 }
@@ -108,6 +109,8 @@ void Whale_update(void)
 					lastPosX = penguin.X;
 					lastPosY = penguin.Y;
 
+					penguinLastPos = CP_Vector_Set((float)lastPosX, (float)lastPosY);
+
 					moveProj.x = findDistance((float)lastPosX, whale.wPos.x);
 					moveProj.y = findDistance((float)lastPosY, whale.wPos.y);
 
@@ -119,10 +122,16 @@ void Whale_update(void)
 				whale.projectile.pPos.x += moveProj.x * projSpeed;
 				whale.projectile.pPos.y += moveProj.y * projSpeed;
 
+				//printf("%f\n", (CP_Vector_Distance(penguinLastPos, whale.projectile.pPos)));
+
 				if ((int)whale.projectile.pPos.x == penguin.X && (int)whale.projectile.pPos.y == penguin.Y) {
 					setProjectilePos();
 					penguin.health -= 200;
 				}
+				/*if ((CP_Vector_Distance(penguinLastPos, whale.projectile.pPos)) <= 1.0f) {
+					setProjectilePos();
+					penguin.health -= 200;
+				}*/
 			}
 			if (whale.projectile.pPos.x > GRID_WIDTH || whale.projectile.pPos.y > ((double)GRID_HEIGHT - 1.5f) || whale.projectile.pPos.x < 0 || whale.projectile.pPos.y < 0) {
 				setProjectilePos();
