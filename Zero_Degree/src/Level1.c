@@ -26,6 +26,7 @@ void lvl1_init(void)
 
 
 	InitObjects();
+	drawlevels();
 	Penguin_init();
 	DrawEnemies();
 	//Whale_init();

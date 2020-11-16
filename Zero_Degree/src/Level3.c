@@ -28,6 +28,7 @@ void lvl3_init(void)
 	level3enemies.whale_count = 2;
 
 	InitObjects();
+	drawlevels();
 	Penguin_init();
 	DrawEnemies();
 	Whale_init();
