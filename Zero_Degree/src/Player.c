@@ -69,7 +69,7 @@ void DrawHP(void)
 {
 	CP_Settings_Fill(CP_Color_Create(240, 108, 155, 255));	
 	
-	CP_Graphics_DrawRect((GRID_SIZE/2) * 2, (GRID_SIZE/2) * 21, (float)(penguin.health * 0.25), (GRID_SIZE/2));
+	CP_Graphics_DrawRect((GRID_SIZE/2) * 2.5, (GRID_SIZE/2) * 20.75, (float)(penguin.health * 0.25), (GRID_SIZE/2));
 }
 //----DRAW ARROW-----
 void DrawArrow(void)
