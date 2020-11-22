@@ -8,7 +8,7 @@
 #define GRID_HEIGHT 12	// size of the height of the game map
 #define GRID_SIZE 80
 
-#define MAXENTITY 10
+#define MAXENTITY 30
 
 int PHealth;	// player health so that the other scripts can access it
 int WHealth;	// whale health;

@@ -27,7 +27,7 @@ void lvl3_init(void)
 	currentLevel = 3;
 	level3enemies.seals_count = 6;
 	level3enemies.whale_count = 3;
-	level1enemies.trap_count = 12;
+	level3enemies.trap_count = 12;
 
 	InitObjects();
 	//drawlevels();

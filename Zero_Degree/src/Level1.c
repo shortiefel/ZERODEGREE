@@ -48,6 +48,7 @@ void lvl1_update(void)
 	PlayerMovement();
 	MovePenguin();
 	SealEnemiesUpdate();
+	
 
 	//Whale_update();
 	
