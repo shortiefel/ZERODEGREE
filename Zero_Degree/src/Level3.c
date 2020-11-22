@@ -18,14 +18,16 @@
 #include "Level3.h"
 #include "GameOver.h"
 #include "wingame.h"
+#include "Trap.h"
 
 
 
 void lvl3_init(void)
 {
 	currentLevel = 3;
-	level3enemies.seals_count = 4;
-	level3enemies.whale_count = 2;
+	level3enemies.seals_count = 6;
+	level3enemies.whale_count = 3;
+	level1enemies.trap_count = 12;
 
 	InitObjects();
 	//drawlevels();
@@ -45,6 +47,7 @@ void lvl3_update(void)
 	PlayerMovement();
 	MovePenguin();
 	SealEnemiesUpdate();
+	DrawWaterTrapUpdate();
 	drawWhale();
 	drawProjectile();
 	Whale_update();

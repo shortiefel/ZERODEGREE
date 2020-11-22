@@ -16,3 +16,4 @@ CP_Vector GetRandomWaterPosition(void);
 void InitWaterObjects(void);
 void DrawWaterTrap(void);
 void DrawWaterTrapUpdate(void);
+void WaterTrapAttack(int id);

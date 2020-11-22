@@ -24,8 +24,8 @@
 void lvl1_init(void)
 {
 	currentLevel = 1;
-	level1enemies.seals_count = 5;
-	level1enemies.trap_count = 4;
+	level1enemies.seals_count = 7;
+	level1enemies.trap_count = 6;
 	level1enemies.whale_count = 0;
 
 

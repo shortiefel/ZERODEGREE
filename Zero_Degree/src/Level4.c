@@ -1,7 +1,3 @@
-/*
-* LEVEL 2 ONLY CONTAINS SEALS ( AT LEAST 7 OF THEM )
-*/
-
 #include <stdio.h>
 #include <intrin.h>
 #include <cprocessing.h>
@@ -20,12 +16,12 @@
 
 
 
-void lvl2_init(void)
+void lvl4_init(void)
 {
-	currentLevel = 2;
-	level2enemies.seals_count = 12;
+	currentLevel = 4;
+	level2enemies.seals_count = 14;
 	level1enemies.trap_count = 10;
-	level2enemies.whale_count = 0;
+	level2enemies.whale_count = 5;
 
 	InitObjects();
 	//drawlevels();
@@ -36,7 +32,7 @@ void lvl2_init(void)
 	level2();
 
 }
-void lvl2_update(void)
+void lvl4_update(void)
 {
 	ElaspedTime += CP_System_GetDt();
 	// check input, update simulation, render etc.
@@ -51,23 +47,6 @@ void lvl2_update(void)
 }
 
 
-void lvl2_exit(void)
+void lvl4_exit(void)
 {
-}
-
-void level2(void)
-{
-
-	footerlevels = CP_Font_Load("./Assets/Iceberg.ttf");
-
-	for (int x = 0; x < GRID_WIDTH; x++)
-		for (int y = 0; y < GRID_HEIGHT; y++)
-			if (grid_array[x][y] == FOOTER)
-			{
-				if (currentLevel == 2)
-				{
-					CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
-					CP_Font_DrawText("Level 2", 1600 - 300, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE));
-				}
-			}
 }

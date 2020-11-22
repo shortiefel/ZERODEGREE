@@ -14,7 +14,9 @@
 
 int totalTraps = 0;
 float grid_size1 = GRID_SIZE / 2;
+Player penguin2;
 
+bool WaterTrap = false;
 
 
 void InitWaterObjects(void)
@@ -22,6 +24,14 @@ void InitWaterObjects(void)
 	if (currentLevel == 1)
 	{
 		totalTraps = level1enemies.trap_count;
+	}
+	else if (currentLevel == 2)
+	{
+		totalTraps = level2enemies.trap_count;
+	}
+	else if (currentLevel == 3)
+	{
+		totalTraps = level3enemies.trap_count;
 	}
 
 	entityManager.NumTrap = 0;
@@ -73,6 +83,8 @@ void DrawWaterTrapUpdate(void)
 			(float)water[i].Wposition.x * GRID_SIZE - grid_size1,
 			(float)water[i].Wposition.y * GRID_SIZE - grid_size1, GRID_SIZE,
 			GRID_SIZE, 255);
+
+		WaterTrapAttack(i);
 	}
 }
 
@@ -94,6 +106,15 @@ CP_Vector GetRandomWaterPosition(void)
 	randpos.y = (float)randY;
 
 	return randpos;
+}
+
+void WaterTrapAttack(int id)
+{
+	if (penguin2.X == water->Wposition.x && penguin2.Y == water->Wposition.y)
+	{
+		penguin2.health = penguin2.health - water[id].attack;
+	}
+	PHurt(WaterTrap);
 }
 
 
