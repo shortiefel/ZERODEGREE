@@ -33,7 +33,6 @@ int directionX, directionY;
 float time = 0;
 float speed = 0.1f;
 CP_Image Penguin, Arrow, Clear;
-Player penguin;
 Whale whale;
 entity_manager entityManager;
 //CP_Vector Arrow;
@@ -103,7 +102,7 @@ void Init(void)
 	spawnArrow = 0;
 	Hurt = false;
 
-
+	penguin.alive = true;
 	
 
 }
@@ -113,6 +112,7 @@ void PlayerMovement(void)
 {	//Penguin Dies
 	if (penguin.health <= 0)
 	{
+		penguin.alive = false;
 		velocityX = 0;
 		velocityY = 0;
 		penguin.health = 0;

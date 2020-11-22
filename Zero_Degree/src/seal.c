@@ -14,7 +14,7 @@
 
 //entity player;
 entity_manager entityManager;
-Player penguin;
+//Player penguin;
 float grid_size = GRID_SIZE / 2;
 
 int totalEnemies = 0;

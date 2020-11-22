@@ -11,12 +11,14 @@ typedef struct Shoot
 } Shoot;
 typedef struct Player
 {
-	int alive;
+	bool alive;
 	int health;
 	int X;
 	int Y;
 	struct Shoot arrow;
 } Player;
+
+Player penguin;
 
 void Penguin_init(void);
 void Penguin_update(void);

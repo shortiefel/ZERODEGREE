@@ -23,7 +23,7 @@ typedef enum GRID_STATE
 	PLAYER,
 	SEAL,
 	TRAP,
-	WHALE
+	WHALE,
 	HOLE
 }GRID_MAP;
 

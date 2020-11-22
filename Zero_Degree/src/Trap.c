@@ -15,7 +15,7 @@
 
 int totalTraps = 0;
 float grid_size1 = GRID_SIZE / 2;
-Player penguin2;
+//Player penguin2;
 
 
 bool WaterTrap = false;
@@ -87,10 +87,10 @@ void DrawWaterTrap(void)
 
 void WaterTrapAttack(int id)
 {
-	if (penguin2.X == water[id].Wposition.x && penguin2.Y == water[id].Wposition.y)
+	if (penguin.X == water[id].Wposition.x && penguin.Y == water[id].Wposition.y)
 	{
-		penguin2.health = penguin2.health - water[id].attack;
-		printf("health: %d\n", penguin2.health);
+		penguin.health = penguin.health - water[id].attack;
+		printf("health: %d\n", penguin.health);
 	}
 	PHurt(WaterTrap);
 }
@@ -104,12 +104,12 @@ void DrawWaterTrapUpdate(void)
 			(float)water[i].Wposition.y * GRID_SIZE - grid_size1, GRID_SIZE,
 			GRID_SIZE, 255);
 
-		if (penguin2.alive == true)
+		if (penguin.alive == true)
 		{
 			WaterTrapAttack(i);
 		}
-		
 	}
+	
 }
 
 CP_Vector GetRandomWaterPosition(void)
