@@ -16,19 +16,25 @@
 #include "Whale.h"
 #include "Level1.h"
 #include "Level2.h"
+#include "Trap.h"
+
+
 
 
 void lvl1_init(void)
 {
 	currentLevel = 1;
 	level1enemies.seals_count = 5;
+	level1enemies.trap_count = 4;
 	level1enemies.whale_count = 0;
 
 
 	InitObjects();
-	drawlevels();
+	level1();
+	//drawlevels();
 	Penguin_init();
 	DrawEnemies();
+	
 	//Whale_init();
 }
 void lvl1_update(void)
@@ -37,6 +43,7 @@ void lvl1_update(void)
 	// check input, update simulation, render etc.
 	DrawGrids();
 	DrawPause();
+	DrawWaterTrap();
 	Penguin_update();
 	PlayerMovement();
 	MovePenguin();
@@ -50,5 +57,23 @@ void lvl1_exit(void)
 {
 
 }
+
+void level1(void)
+{
+
+	footerlevels = CP_Font_Load("./Assets/Iceberg.ttf");
+
+	for (int x = 0; x < GRID_WIDTH; x++)
+		for (int y = 0; y < GRID_HEIGHT; y++)
+			if (grid_array[x][y] == FOOTER)
+			{
+				if (currentLevel == 1)
+				{
+					CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
+					CP_Font_DrawText("Level 1", 1600 - 300, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE));
+				}
+			}
+}
+
 
 
