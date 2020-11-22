@@ -9,6 +9,7 @@
 #include "Level2.h"
 #include "Level3.h"
 #include "Whale.h"
+#include "Trap.h"
 
 //entity player;
 entity_manager entityManager;
@@ -50,7 +51,8 @@ void DrawEnemies(void)
 		for (int i = 0; i < entityManager.NumSeal; i++)
 		{
 			if ((seal[i].position.x == newPosition.x && seal[i].position.y == newPosition.y) 
-				|| (whale.wPos.x == newPosition.x && whale.wPos.y == newPosition.y))
+				|| (whale.wPos.x == newPosition.x && whale.wPos.y == newPosition.y) 
+				|| (water[i].Wposition.x == newPosition.x && water[i].Wposition.y == newPosition.y))
 			{
 				newPosition = GetRandomPosition();
 			}
@@ -58,7 +60,9 @@ void DrawEnemies(void)
 
 		seal[entityManager.NumSeal].position = newPosition;
 
-		CP_Image_Draw(seal[entityManager.NumSeal].sprites[0], (float)seal[entityManager.NumSeal].position.x * GRID_SIZE - grid_size, (float)seal[entityManager.NumSeal].position.y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);
+		CP_Image_Draw(seal[entityManager.NumSeal].sprites[0], 
+			(float)seal[entityManager.NumSeal].position.x * GRID_SIZE - grid_size, 
+			(float)seal[entityManager.NumSeal].position.y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);
 		entityManager.NumSeal++;
 	}
 }

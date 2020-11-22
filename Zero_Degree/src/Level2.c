@@ -26,11 +26,12 @@ void lvl2_init(void)
 	level2enemies.whale_count = 0;
 
 	InitObjects();
-	drawlevels();
+	//drawlevels();
 	Penguin_init();
 	DrawEnemies();
 	Whale_init();
 	DrawPause();
+	level2();
 
 }
 void lvl2_update(void)
@@ -49,4 +50,21 @@ void lvl2_update(void)
 
 void lvl2_exit(void)
 {
+}
+
+void level2(void)
+{
+
+	footerlevels = CP_Font_Load("./Assets/Iceberg.ttf");
+
+	for (int x = 0; x < GRID_WIDTH; x++)
+		for (int y = 0; y < GRID_HEIGHT; y++)
+			if (grid_array[x][y] == FOOTER)
+			{
+				if (currentLevel == 2)
+				{
+					CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
+					CP_Font_DrawText("Level 2", 1600 - 300, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE));
+				}
+			}
 }
