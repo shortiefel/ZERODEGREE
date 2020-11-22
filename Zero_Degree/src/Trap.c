@@ -17,7 +17,7 @@ int totalTraps = 0;
 float grid_size1 = GRID_SIZE / 2;
 //Player penguin2;
 
-
+float atkDelay = 2, nxtAtk = 0, atkPlayer = 0;
 bool WaterTrap = false;
 
 
@@ -67,7 +67,7 @@ void DrawWaterTrap(void)
 		for (int i = 0; i < entityManager.NumTrap; i++)
 		{
 			if ((seal[i].position.x == newPos.x && seal[i].position.y == newPos.y)
-				|| (whale.wPos.x == newPos.x && whale.wPos.y == newPos.y) 
+				|| (whale.wPos.x == newPos.x && whale.wPos.y == newPos.y)
 				|| (water[i].Wposition.x == newPos.x && water[i].Wposition.y == newPos.y))
 			{
 				newPos = GetRandomPosition();
@@ -90,7 +90,7 @@ void WaterTrapAttack(int id)
 	if (penguin.X == water[id].Wposition.x && penguin.Y == water[id].Wposition.y)
 	{
 		penguin.health = penguin.health - water[id].attack;
-		printf("health: %d\n", penguin.health);
+		//printf("health: %d\n", penguin.health);
 	}
 	PHurt(WaterTrap);
 }
@@ -107,6 +107,15 @@ void DrawWaterTrapUpdate(void)
 		if (penguin.alive == true)
 		{
 			WaterTrapAttack(i);
+		}
+
+		if (((int)ElaspedTime % (int)atkDelay) == 0)
+		{
+			nxtAtk = ElaspedTime + atkDelay;
+		}
+		else if (((int)ElaspedTime % ((int)atkDelay + 1)) == 0)
+		{
+			atkPlayer = ElaspedTime + atkDelay + 1;
 		}
 	}
 	
