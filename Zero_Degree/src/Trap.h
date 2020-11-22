@@ -1,9 +1,5 @@
 #pragma once
 
-void trap_init(void);
-void trap_update(void);
-void trap_exit(void);
-
 typedef struct WATERENTITY
 {
 	CP_Vector Wposition;

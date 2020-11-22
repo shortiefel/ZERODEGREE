@@ -16,6 +16,7 @@
 #include "Whale.h"
 #include "Level1.h"
 #include "Level2.h"
+#include "Trap.h"
 
 
 
@@ -33,6 +34,7 @@ void lvl1_init(void)
 	//drawlevels();
 	Penguin_init();
 	DrawEnemies();
+	
 	//Whale_init();
 }
 void lvl1_update(void)
@@ -41,6 +43,7 @@ void lvl1_update(void)
 	// check input, update simulation, render etc.
 	DrawGrids();
 	DrawPause();
+	DrawWaterTrap();
 	Penguin_update();
 	PlayerMovement();
 	MovePenguin();

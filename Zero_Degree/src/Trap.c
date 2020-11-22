@@ -16,23 +16,6 @@ int totalTraps = 0;
 float grid_size1 = GRID_SIZE / 2;
 
 
-void trap_init(void)
-{
-
-
-}
-void trap_update(void)
-{
-
-}
-
-
-void trap_exit(void)
-{
-	// shut down the gamestate and cleanup any dynamic memory
-}
-
-
 
 void InitWaterObjects(void)
 {
@@ -41,9 +24,12 @@ void InitWaterObjects(void)
 		totalTraps = level1enemies.trap_count;
 	}
 
+	entityManager.NumTrap = 0;
 	for (int i = 0; i < totalTraps; i++)
 	{
 		water[i].waterTrap = CP_Image_Load("./Assets/WATER.png");
+
+		water[i].attack = 150;
 	}
 }
 
@@ -75,6 +61,7 @@ void DrawWaterTrap(void)
 			(float)water[entityManager.NumTrap].Wposition.x * GRID_SIZE - grid_size1,
 			(float)water[entityManager.NumTrap].Wposition.y * GRID_SIZE - grid_size1, GRID_SIZE,
 			GRID_SIZE, 255);
+		entityManager.NumTrap++;
 	}
 }
 
@@ -97,3 +84,9 @@ CP_Vector GetRandomWaterPosition(void)
 
 	return randpos;
 }
+
+
+/*TODO:
+
+2. attacking
+*/
