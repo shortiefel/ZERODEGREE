@@ -34,10 +34,11 @@ float triggerDeath = 0;
 
 int countdeath = 0;
 
+int sealMaxHealth = 0;
+
 void DrawEnemies(void)
 {
 	InitSealsObjects();
-
 	CP_Vector newPosition;
 
 	newPosition.x = 1;
@@ -70,12 +71,12 @@ CP_Vector GetRandomPosition(void)
 	int randomYposition;
 
 	randomXposition = CP_Random_RangeInt(2, GRID_WIDTH - 2);
-	randomYposition = CP_Random_RangeInt(2, GRID_HEIGHT - 2);
+	randomYposition = CP_Random_RangeInt(2, GRID_HEIGHT - 3);
 
 	if (randomXposition == 1 && randomYposition == 1)
 	{
 		randomXposition = CP_Random_RangeInt(2, GRID_WIDTH - 2);
-		randomYposition = CP_Random_RangeInt(2, GRID_HEIGHT - 2);
+		randomYposition = CP_Random_RangeInt(2, GRID_HEIGHT - 3);
 	}
 
 	randomPosition.x = (float)randomXposition;
@@ -93,6 +94,7 @@ void SealEnemiesUpdate(void)
 			MoveSeal(w);
 			AttackPlayer(w);
 			CheckSealHealth(w);
+			DisplaySealHP(w);
 		}
 		else
 		{
@@ -139,31 +141,51 @@ void MoveSeal(int id)
 	{
 		// move to the left
 		seal[id].position.x -= 1;
+		seal[id].follow = true;
 	}
 	else if (distanceToPlayerX < -1 && distanceToPlayerX > -3 && distanceToPlayerY == 0)	// player to the right
 	{
 		// move to the right
 		seal[id].position.x += 1;
+		seal[id].follow = true;
 	}
 
 	if (distanceToPlayerY > 1 && distanceToPlayerY < 3 && distanceToPlayerX == 0)	// player up
 	{
 		// move up
 		seal[id].position.y -= 1;
+		seal[id].follow = true;
 	}
 	else if (distanceToPlayerY < -1 && distanceToPlayerY > -3 && distanceToPlayerX == 0)	// player down
 	{
 		// move down
 		seal[id].position.y += 1;
+		seal[id].follow = true;
 	}
+
+	if (distanceToPlayerY != 0 && distanceToPlayerX != 0)
+	{
+		seal[id].follow = false;
+	}
+
 	/*CP_Image_Draw(seal[id].sprites[0], (float)seal[id].position.x * GRID_SIZE - grid_size, (float)seal[id].position.y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);*/
+	//if (distanceToPlayerX == 0 || distanceToPlayerY == 0) 
+	//	//|| (distanceToPlayerY == 0 && distanceToPlayerX != 0))
+	//{
+	//	seal[id].follow = true;
+	//}
+	//else
+	//{
+	//	seal[id].follow = false;
+	//}
 }
 
 void AttackPlayer(int id)
 {
 	//if the player is 1 block away, attack them
-	if ((distanceToPlayerX == 1 || distanceToPlayerY == 1 || distanceToPlayerX == -1  ||distanceToPlayerY == -1) && (distanceToPlayerX == 0|| distanceToPlayerY == 0))
+	if ((distanceToPlayerX == 1 || distanceToPlayerY == 1 || distanceToPlayerX == -1  ||distanceToPlayerY == -1) && (distanceToPlayerX == 0 || distanceToPlayerY == 0))
 	{
+		seal[id].follow = true;
 		if ((int)ElaspedTime == (int)nextHit)
 		{
 			drawHitSprite = true;
@@ -208,6 +230,7 @@ void AttackPlayer(int id)
 	else 
 	{
 		CP_Image_Draw(seal[id].sprites[0], (float)seal[id].position.x * GRID_SIZE - grid_size, (float)seal[id].position.y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);
+		seal[id].follow = false;
 	}
 	PHurt(attack);
 }
@@ -241,19 +264,27 @@ void InitSealsObjects(void)
 		seal[i].attack = 200;
 		seal[i].dead = false;
 		seal[i].death = false;
-		
+		seal[i].follow = false;
 	}
+	sealMaxHealth = seal[0].health;
+}
+
+void DisplaySealHP(int id)
+{
+	float sealPositionX = ((seal[id].position.x * GRID_SIZE) - (GRID_SIZE + GRID_SIZE / 3));
+	float sealPositionY = ((seal[id].position.y * GRID_SIZE) - (GRID_SIZE + GRID_SIZE / 4));
+	CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
+	CP_Graphics_DrawRect(sealPositionX, sealPositionY, (float)(sealMaxHealth * 0.25), (GRID_SIZE / 5));
+	CP_Settings_Fill(CP_Color_Create(240, 34, 34, 255));
+	//float sealPositionY = seal[id].position.y;
+	//printf("%d, %d\n", (int)seal[id].position.x, (int)seal[id].position.y);
+	CP_Graphics_DrawRect(sealPositionX, sealPositionY, (float)(seal[id].health * 0.25), (GRID_SIZE / 5));
 }
 
 void KillSeal(int seal_id)
-{
-	
+{	
 	seal[seal_id].dead = true;
-	
 	countdeath++;
-	
-	
-
 }
 
 void CheckSealHealth(int id)
@@ -265,7 +296,6 @@ void CheckSealHealth(int id)
 
 }
 
-
 //NOTES - TODO:
 //seal death
 // -> get player position // DONE
@@ -275,3 +305,6 @@ void CheckSealHealth(int id)
 // -> stop seals from collasping onto the same spot
 //seal attack
 // -> display the attacking sprite only when the seal is hitting the player. // DONE
+//
+// seal health bar // DONE
+// seal patrolling

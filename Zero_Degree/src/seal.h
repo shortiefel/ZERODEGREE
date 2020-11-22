@@ -12,7 +12,7 @@ typedef struct ENTITY
 
 	bool dead; 
 	bool death; 
-
+	bool follow;
 	//animation variables
 	CP_Image sprites[10];
 }	entity;
@@ -29,5 +29,5 @@ void MoveSeal(int id);
 void AttackPlayer(int id);
 void KillSeal(int id);
 void CheckSealHealth(int id);
-
 void DrawDeath(int seal_id);
+void DisplaySealHP(int id);

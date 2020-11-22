@@ -94,6 +94,7 @@ void nextlevel(void)
 	if (newlevel.x - newlevel.width / 2 < mouseX && mouseX < newlevel.x + newlevel.width / 2 && newlevel.y - newlevel.height / 2 < mouseY && mouseY < newlevel.y + newlevel.height / 2)
 	{
 		CP_Settings_Fill(newlevel.colorHover);
+		//printf("currentLevel: %d\n", currentLevel);
 		if (CP_Input_MouseClicked() && currentLevel == 1)
 		{
 			CP_Engine_SetNextGameState(lvl2_init, lvl2_update, lvl2_exit);
