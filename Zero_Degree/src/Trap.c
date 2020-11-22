@@ -65,6 +65,17 @@ void DrawWaterTrap(void)
 	}
 }
 
+void DrawWaterTrapUpdate(void)
+{
+	for (int i = 0; i < entityManager.NumTrap; i++)
+	{
+		CP_Image_Draw(water[i].waterTrap,
+			(float)water[i].Wposition.x * GRID_SIZE - grid_size1,
+			(float)water[i].Wposition.y * GRID_SIZE - grid_size1, GRID_SIZE,
+			GRID_SIZE, 255);
+	}
+}
+
 CP_Vector GetRandomWaterPosition(void)
 {
 	CP_Vector randpos;
