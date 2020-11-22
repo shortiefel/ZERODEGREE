@@ -33,8 +33,9 @@ void lvl1_init(void)
 	level1();
 	//drawlevels();
 	Penguin_init();
-	DrawEnemies();
 	DrawWaterTrap();
+	DrawEnemies();
+	
 	//Whale_init();
 }
 void lvl1_update(void)

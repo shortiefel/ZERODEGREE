@@ -170,6 +170,9 @@ void PlayerMovement(void)
 	}
 }
 
+int tempGridX = 0;
+int tempGridY = 0;
+
 //----PENGUIN MOVMENT-----
 void MovePenguin(void)
 {
@@ -180,8 +183,16 @@ void MovePenguin(void)
 		time -= speed;
 		
 		//Move the penguin
-		penguin.X += velocityX;
-		penguin.Y += velocityY;
+
+		tempGridX = penguin.X + velocityX;
+		tempGridY = penguin.Y + velocityY;
+
+		if (grid_array[tempGridX][tempGridY] != SEAL && grid_array[tempGridX][tempGridY] != WHALE)
+		{
+			penguin.X += velocityX;
+			penguin.Y += velocityY;
+		}
+
 		if (penguin.X < 1 )
 		{
 			penguin.X = 1;

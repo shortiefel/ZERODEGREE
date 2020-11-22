@@ -81,6 +81,8 @@ void Whale_init(void)
 	whale.alive = 1;
 	whale.health = 700;
 
+	grid_array[(int)whale.wPos.x][(int)whale.wPos.y] = WHALE;
+
 	// Set projectile starting position at whale position
 	setProjectilePos();
 	spawnProj = 1;

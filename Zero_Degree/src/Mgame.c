@@ -78,7 +78,7 @@ void DrawGrids(void)
 	//draws the map
 	for (int x = 0; x < GRID_WIDTH; x++)
 		for (int y = 0; y < GRID_HEIGHT; y++)
-			if(grid_array[x][y] == MAPAREA)
+			if(grid_array[x][y] == MAPAREA || grid_array[x][y] == SEAL)
 				CP_Image_Draw(ice_grid, (float)x * GRID_SIZE - grid_size, (float)y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);
 }
 

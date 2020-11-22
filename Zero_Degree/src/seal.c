@@ -64,6 +64,8 @@ void DrawEnemies(void)
 		CP_Image_Draw(seal[entityManager.NumSeal].sprites[0], 
 			(float)seal[entityManager.NumSeal].position.x * GRID_SIZE - grid_size, 
 			(float)seal[entityManager.NumSeal].position.y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);
+
+		grid_array[(int)seal[entityManager.NumSeal].position.x][(int)seal[entityManager.NumSeal].position.y] = SEAL;
 		entityManager.NumSeal++;
 	}
 }
@@ -105,6 +107,8 @@ void SealEnemiesUpdate(void)
 			DrawDeath(w);
 		}
 	}
+
+	//SealPatrolling();
 }
 
 void DrawDeath(int seal_id)
@@ -117,21 +121,19 @@ void DrawDeath(int seal_id)
 		triggerDeath = ElaspedTime;
 	}
 
-	//printf("time: %d, death: %d\n", (int)ElaspedTime, (int)triggerDeath);
 	if ((int)ElaspedTime == (int)triggerDeath)
 	{
-		//printf("seal[%d]\n", seal_id);
 		seal[seal_id].death = true;
 	}
 
 	if (seal[seal_id].death == true)
 	{
 		CP_Image_Draw(seal[seal_id].sprites[6], (float)seal[seal_id].position.x * GRID_SIZE - grid_size, (float)seal[seal_id].position.y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);
-		seal[seal_id].position.x = -1;
-		seal[seal_id].position.y = -1;
 	}
-
 }
+
+int tempX = 0;
+int tempY = 0;
 
 void MoveSeal(int id)
 {
@@ -143,34 +145,61 @@ void MoveSeal(int id)
 
 	if (distanceToPlayerX > 1 && distanceToPlayerX < 3 && distanceToPlayerY == 0)	// player to the left
 	{
-		// move to the left
-		seal[id].position.x -= 1;
-		seal[id].follow = true;
+		tempX = (int)seal[id].position.x - 1;
+		tempY = (int)seal[id].position.y;
+		if (grid_array[tempX][tempY] == MAPAREA)
+		{
+			SetSealGrid(id);
+			// move to the left
+			seal[id].position.x -= 1;
+			SetSealGrid(id);
+			//seal[id].follow = true;
+		}
 	}
 	else if (distanceToPlayerX < -1 && distanceToPlayerX > -3 && distanceToPlayerY == 0)	// player to the right
 	{
-		// move to the right
-		seal[id].position.x += 1;
-		seal[id].follow = true;
+		tempX = (int)seal[id].position.x + 1;
+		tempY = (int)seal[id].position.y;
+		if (grid_array[tempX][tempY] == MAPAREA)
+		{
+			SetSealGrid(id);
+			// move to the right
+			seal[id].position.x += 1;
+			SetSealGrid(id);
+			//seal[id].follow = true;
+		}
 	}
 
 	if (distanceToPlayerY > 1 && distanceToPlayerY < 3 && distanceToPlayerX == 0)	// player up
 	{
-		// move up
-		seal[id].position.y -= 1;
-		seal[id].follow = true;
+		tempX = (int)seal[id].position.x;
+		tempY = (int)seal[id].position.y - 1;
+		if (grid_array[tempX][tempY] == MAPAREA)
+		{
+			SetSealGrid(id);
+			// move up
+			seal[id].position.y -= 1;
+			SetSealGrid(id);
+			//seal[id].follow = true;
+		}
 	}
 	else if (distanceToPlayerY < -1 && distanceToPlayerY > -3 && distanceToPlayerX == 0)	// player down
 	{
-		// move down
-		seal[id].position.y += 1;
-		seal[id].follow = true;
+		tempX = (int)seal[id].position.x;
+		tempY = (int)seal[id].position.y + 1;
+		if (grid_array[tempX][tempY] == MAPAREA)
+		{
+			SetSealGrid(id);
+			// move down
+			seal[id].position.y += 1;
+			SetSealGrid(id);
+			//seal[id].follow = true;
+		}
 	}
-
-	if (distanceToPlayerY != 0 && distanceToPlayerX != 0)
-	{
-		seal[id].follow = false;
-	}
+	//if (distanceToPlayerY != 0 && distanceToPlayerX != 0)
+	//{
+	//	seal[id].follow = false;
+	//}
 
 	/*CP_Image_Draw(seal[id].sprites[0], (float)seal[id].position.x * GRID_SIZE - grid_size, (float)seal[id].position.y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);*/
 	//if (distanceToPlayerX == 0 || distanceToPlayerY == 0) 
@@ -182,6 +211,24 @@ void MoveSeal(int id)
 	//{
 	//	seal[id].follow = false;
 	//}
+}
+
+int gridX = 0;
+int gridY = 0;
+
+void SetSealGrid(int id)
+{
+	gridX = (int)seal[id].position.x;
+	gridY = (int)seal[id].position.y;
+
+	if (grid_array[gridX][gridY] == SEAL)
+	{
+		grid_array[gridX][gridY] = MAPAREA;
+	}
+	else if (grid_array[gridX][gridY] == MAPAREA && grid_array[gridX][gridY] != TRAP)
+	{
+		grid_array[gridX][gridY] = SEAL;
+	}
 }
 
 void AttackPlayer(int id)
@@ -280,8 +327,6 @@ void DisplaySealHP(int id)
 	CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
 	CP_Graphics_DrawRect(sealPositionX, sealPositionY, (float)(sealMaxHealth * 0.25), (GRID_SIZE / 5));
 	CP_Settings_Fill(CP_Color_Create(240, 34, 34, 255));
-	//float sealPositionY = seal[id].position.y;
-	//printf("%d, %d\n", (int)seal[id].position.x, (int)seal[id].position.y);
 	CP_Graphics_DrawRect(sealPositionX, sealPositionY, (float)(seal[id].health * 0.25), (GRID_SIZE / 5));
 }
 
@@ -300,15 +345,56 @@ void CheckSealHealth(int id)
 
 }
 
-//NOTES - TODO:
-//seal death
-// -> get player position // DONE
-// -> stop player from getting onto seal position
-// -> 
-//seal movement
-// -> stop seals from collasping onto the same spot
-//seal attack
-// -> display the attacking sprite only when the seal is hitting the player. // DONE
-//
-// seal health bar // DONE
-// seal patrolling
+float move = 0;
+int moveDelay = 2;
+int directionX = 1;
+int directionY = 1;
+bool direction = false;
+
+void SealPatrolling(void)
+{
+	if ((int)ElaspedTime == (int)move)
+	{
+		for (int id = 0; id < entityManager.NumSeal; id++)
+		{
+			if (seal[id].follow == false)
+			{
+				if (direction == true)
+				{
+					seal[id].position.y += directionY;
+					if (directionY == 1) // moved down
+					{
+						directionY = -1;
+					}
+					else if (directionY == -1) // moved up
+					{
+						directionY = 1;
+					}
+					direction = false;
+				}
+				else
+				{
+					seal[id].position.x += directionX;
+
+					if (directionX == 1) // moved down
+					{
+						directionX = -1;
+					}
+					else if (directionX == -1) // moved up
+					{
+						directionX = 1;
+					}
+					direction = true;
+				}
+			}
+			
+		}
+		
+	}
+
+	if (((int)ElaspedTime % (int)moveDelay) == 0)
+	{
+		move = ElaspedTime + moveDelay;
+		//direction = true;
+	}
+}

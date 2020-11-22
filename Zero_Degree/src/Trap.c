@@ -61,6 +61,8 @@ void DrawWaterTrap(void)
 			(float)water[entityManager.NumTrap].Wposition.x * GRID_SIZE - grid_size1,
 			(float)water[entityManager.NumTrap].Wposition.y * GRID_SIZE - grid_size1, GRID_SIZE,
 			GRID_SIZE, 255);
+
+		grid_array[(int)water[entityManager.NumTrap].Wposition.x][(int)water[entityManager.NumTrap].Wposition.y] = TRAP;
 		entityManager.NumTrap++;
 	}
 }
