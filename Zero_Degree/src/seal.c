@@ -8,6 +8,7 @@
 #include "Level1.h"
 #include "Level2.h"
 #include "Level3.h"
+#include "Level4.h"
 #include "Whale.h"
 #include "Trap.h"
 
@@ -299,6 +300,10 @@ void InitSealsObjects(void)
 	else if (currentLevel == 3)
 	{
 		totalEnemies = level3enemies.seals_count;
+	}
+	else if (currentLevel == 4)
+	{
+		totalEnemies = level4enemies.seals_count;
 	}
 
 	entityManager.NumSeal = 0;

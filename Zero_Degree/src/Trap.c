@@ -8,13 +8,17 @@
 #include "Level1.h"
 #include "Level2.h"
 #include "Level3.h"
+#include "Level4.h"
 #include "Whale.h"
 #include "Trap.h"
 
 
 int totalTraps = 0;
 float grid_size1 = GRID_SIZE / 2;
+Player penguin2;
 
+
+bool WaterTrap = false;
 
 
 void InitWaterObjects(void)
@@ -23,6 +27,20 @@ void InitWaterObjects(void)
 	{
 		totalTraps = level1enemies.trap_count;
 	}
+	else if (currentLevel == 2)
+	{
+		totalTraps = level2enemies.trap_count;
+	}
+	else if (currentLevel == 3)
+	{
+		totalTraps = level3enemies.trap_count;
+	}
+	else if (currentLevel == 4)
+	{
+		totalTraps = level4enemies.trap_count;
+	}
+
+
 
 	entityManager.NumTrap = 0;
 	for (int i = 0; i < totalTraps; i++)
@@ -67,6 +85,16 @@ void DrawWaterTrap(void)
 	}
 }
 
+void WaterTrapAttack(int id)
+{
+	if (penguin2.X == water[id].Wposition.x && penguin2.Y == water[id].Wposition.y)
+	{
+		penguin2.health = penguin2.health - water[id].attack;
+		printf("health: %d\n", penguin2.health);
+	}
+	PHurt(WaterTrap);
+}
+
 void DrawWaterTrapUpdate(void)
 {
 	for (int i = 0; i < entityManager.NumTrap; i++)
@@ -75,6 +103,12 @@ void DrawWaterTrapUpdate(void)
 			(float)water[i].Wposition.x * GRID_SIZE - grid_size1,
 			(float)water[i].Wposition.y * GRID_SIZE - grid_size1, GRID_SIZE,
 			GRID_SIZE, 255);
+
+		if (penguin2.alive == true)
+		{
+			WaterTrapAttack(i);
+		}
+		
 	}
 }
 
@@ -99,7 +133,9 @@ CP_Vector GetRandomWaterPosition(void)
 }
 
 
-/*TODO:
 
-2. attacking
+
+/*TODO:
+--> when the penguin walks on the water pocket, the health will 
+go down by 150
 */

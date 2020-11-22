@@ -11,6 +11,7 @@
 #include "Player.h"
 #include "seal.h"
 #include "Level3.h"
+#include "Level4.h"
 
 CP_Font font1, font2;
 struct button newlevel;
@@ -102,6 +103,10 @@ void nextlevel(void)
 		else if ((CP_Input_MouseClicked() && currentLevel == 2))
 		{
 			CP_Engine_SetNextGameState(lvl3_init, lvl3_update, lvl3_exit);
+		}
+		else if ((CP_Input_MouseClicked() && currentLevel == 3))
+		{
+			CP_Engine_SetNextGameState(lvl4_init, lvl4_update, lvl4_exit);
 		}
 
 	}
