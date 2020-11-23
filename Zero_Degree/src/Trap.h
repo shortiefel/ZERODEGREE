@@ -9,6 +9,13 @@ typedef struct WATERENTITY
 
 } waterentity;
 
+typedef struct WALL
+{
+	CP_Vector WallPos;
+	int id;
+	CP_Image Block;
+} Wallentity;
+
 waterentity water[MAXENTITY];	//seals
 entity_manager waterManager;
 

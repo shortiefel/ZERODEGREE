@@ -12,6 +12,7 @@
 #include "Whale.h"
 #include "Trap.h"
 
+
 //entity player;
 entity_manager entityManager;
 //Player penguin;

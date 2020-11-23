@@ -7,31 +7,32 @@
 #include "seal.h"
 #include "Whale.h"
 #include "Level1.h"
+#include "Level2.h"
+#include "Level3.h"
+#include "Level4.h"
 #include "GameOver.h"
 #include "Whale.h"
 #include "wingame.h"
 
+
+
 //Task:
-//Add HP bar word
+//Add Fish weapon
+//Modify Bow, add cooldown
+//Direction control
 //Add Weapon Movement
-//Add Weapon Damage (added)
-//Penguin Hp bar not functioning (fixed)
-//Penguin unable to kill whale.
 //Penguin collision
-//Remove arrow from screen (refer to whale.c file)
-//Arrow setting needs to be fixed (refer to whale.c file)
 //Penguin animation bugged again. (Hold Z and release Z)
-//CP_Image_Free to get rid of arrow
 
 
 
 //Declaring Variables
 int velocityX, velocityY;
 bool Hurt;
-bool spawnArrow;
+int spawnArrow = 0;
 int directionX, directionY;
 float time = 0;
-float speed = 0.1f;
+float speed = 0.2f;
 CP_Image Penguin, Arrow, Clear;
 Whale whale;
 entity_manager entityManager;
@@ -46,7 +47,7 @@ void Penguin_update(void)
 {
 	PlayerMovement();
 	MovePenguin();
-	PenguinAttack();
+	PenguinBow();
 	ArrowMove();
 	DrawArrow();
 }
@@ -99,7 +100,10 @@ void Init(void)
 
 	//Init Arrow Direction
 	penguin.arrow.DirX = 1;
+	penguin.arrow.DirY = 0;
 	spawnArrow = 0;
+	directionX = 0;
+	directionY = 0;
 	Hurt = false;
 
 	penguin.alive = true;
@@ -144,7 +148,7 @@ void PlayerMovement(void)
 		velocityY = 0;
 		penguin.arrow.DirX = -1;
 		penguin.arrow.DirY = 0;
-		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FRONT.png");
+		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/PENGUIN_LEFT.png");
 	}
 	//Penguin Move Right
 	else if (CP_Input_KeyDown(KEY_RIGHT))
@@ -153,7 +157,7 @@ void PlayerMovement(void)
 		velocityY = 0;
 		penguin.arrow.DirX = 1;
 		penguin.arrow.DirY = 0;
-		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FRONT.png");
+		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/PENGUIN_RIGHT.png");
 	}
 	else if (penguin.health > 0 && countdeath == entityManager.NumSeal)
 	{
@@ -227,7 +231,7 @@ void MovePenguin(void)
 }
 
 //---- ATTACK -----
-void PenguinAttack(void)
+void PenguinBow(void)
 {
 	//Penguin Attack
 	//Penguin Use Bow 
@@ -237,6 +241,8 @@ void PenguinAttack(void)
 			Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/BOWANDARROW.png");
 		else if (penguin.arrow.DirX == -1)
 			Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FLIPPEDBOWARROW.png");
+		else
+			Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/BOWANDARROW.png");
 	}
 	else if (CP_Input_KeyReleased(KEY_Z))
 	{
@@ -252,9 +258,18 @@ void PenguinAttack(void)
 		{
 			Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/HOLDBOW.png");
 		}
-		penguin.arrow.ArrowX = penguin.X;
-		penguin.arrow.ArrowY = penguin.Y;
-		spawnArrow = 1;
+		if (spawnArrow == 0)
+		{
+			penguin.arrow.ArrowX = penguin.X;
+			penguin.arrow.ArrowY = penguin.Y;
+			spawnArrow = 1;
+		}
+		else
+		{
+			penguin.arrow.ArrowX += directionX;
+			penguin.arrow.ArrowY += directionY;
+			spawnArrow = 1;
+		}
 	}
 	else
 	{
@@ -262,41 +277,38 @@ void PenguinAttack(void)
 	}
 }
 
-//Penguin Wins
-/*void PenguinWins(void)
-{
-	if (grid[PenguinX][PenguinY] == )
-}
-*/
-
-
 void ArrowMove(void)
 {
 	if (penguin.arrow.ArrowX < 21 && penguin.arrow.ArrowY < 11)
 	{
-		if (spawnArrow == 1)
+		if (penguin.arrow.ArrowX > -1 && penguin.arrow.ArrowY > -1)
 		{
-			directionX = penguin.arrow.DirX;
-			directionY = penguin.arrow.DirY;
-			spawnArrow = 0;
-		}
+			if (spawnArrow == 1)
+			{
+				directionX = penguin.arrow.DirX;
+				directionY = penguin.arrow.DirY;
+				spawnArrow = 2;
+			}
 
-		penguin.arrow.ArrowX += directionX;
-		penguin.arrow.ArrowY += directionY;
+			penguin.arrow.ArrowX += directionX;
+			penguin.arrow.ArrowY += directionY;
 
-		if (penguin.arrow.ArrowX == whale.wPos.x && penguin.arrow.ArrowY == whale.wPos.y)
-		{
-			ClearArrow();
-			whale.health -= 100;
-		}
-		for (int id = 0; id < entityManager.NumSeal; id++)
-		{
-			if (penguin.arrow.ArrowX == seal[id].position.x && penguin.arrow.ArrowY == seal[id].position.y)
+			if (penguin.arrow.ArrowX == whale.wPos.x && penguin.arrow.ArrowY == whale.wPos.y)
 			{
 				ClearArrow();
-				seal[id].health -= 100;
+				whale.health -= 100;
+			}
+			for (int id = 0; id < entityManager.NumSeal; id++)
+			{
+				if (penguin.arrow.ArrowX == seal[id].position.x && penguin.arrow.ArrowY == seal[id].position.y)
+				{
+					ClearArrow();
+					seal[id].health -= 100;
+				}
 			}
 		}
+		else
+			ClearArrow();
 	}
 	else
 		ClearArrow();
@@ -306,6 +318,7 @@ void ClearArrow(void)
 	//Arrow = CP_Image_Load("./Assets");
 	penguin.arrow.ArrowX = -1;
 	penguin.arrow.ArrowY = -1;
+	spawnArrow = 0;
 }
 
 void PHurt(bool a)

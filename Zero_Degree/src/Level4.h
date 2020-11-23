@@ -7,3 +7,4 @@ ENEMIESINLEVEL level4enemies;
 void lvl4_init(void);
 void lvl4_update(void);
 void lvl4_exit(void);
+void level4(void);
