@@ -31,5 +31,4 @@ void KillSeal(int id);
 void CheckSealHealth(int id);
 void DrawDeath(int seal_id);
 void DisplaySealHP(int id);
-void SealPatrolling(void);
 void SetSealGrid(int id);

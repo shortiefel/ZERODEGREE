@@ -29,9 +29,10 @@ void lvl2_init(void)
 
 	InitObjects();
 	//drawlevels();
+	//DrawWaterTrap();
 	Penguin_init();
-	DrawEnemies();
 	Whale_init();
+	DrawEnemies();
 	DrawPause();
 	level2();
 
