@@ -10,6 +10,7 @@
 #include "Whale.h"
 #include "Level1.h"
 #include "Level2.h"
+#include "Level3.h"
 #include "GameOver.h"
 #include "wingame.h"
 #include "Trap.h"
@@ -50,4 +51,22 @@ void lvl4_update(void)
 
 void lvl4_exit(void)
 {
+}
+
+void level4(void)
+{
+
+	footerlevels = CP_Font_Load("./Assets/Iceberg.ttf");
+	CP_Font_Set(footerlevels);
+
+	for (int x = 0; x < GRID_WIDTH; x++)
+		for (int y = 0; y < GRID_HEIGHT; y++)
+			if (grid_array[x][y] == FOOTER)
+			{
+				if (currentLevel == 2)
+				{
+					CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
+					CP_Font_DrawText("Level 4", 1600 - 300, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE));
+				}
+			}
 }

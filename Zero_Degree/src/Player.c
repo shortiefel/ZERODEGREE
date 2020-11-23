@@ -7,9 +7,14 @@
 #include "seal.h"
 #include "Whale.h"
 #include "Level1.h"
+#include "Level2.h"
+#include "Level3.h"
+#include "Level4.h"
 #include "GameOver.h"
 #include "Whale.h"
 #include "wingame.h"
+
+
 
 //Task:
 //Add HP bar word
@@ -98,7 +103,7 @@ void Init(void)
 	DrawHP();
 
 	//Init Arrow Direction
-	penguin.arrow.DirX = 1;
+	penguin.arrow.DirX = 1; 
 	spawnArrow = 0;
 	Hurt = false;
 

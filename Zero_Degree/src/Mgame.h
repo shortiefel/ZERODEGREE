@@ -13,7 +13,7 @@
 int PHealth;	// player health so that the other scripts can access it
 int WHealth;	// whale health;
 float ElaspedTime;
-CP_Font footerlevels;
+extern CP_Font footerlevels;
 
 typedef enum GRID_STATE
 {
