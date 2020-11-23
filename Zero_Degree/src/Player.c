@@ -103,7 +103,7 @@ void Init(void)
 	Hurt = false;
 
 	penguin.alive = true;
-	
+	countdeath = 0;
 
 }
 
