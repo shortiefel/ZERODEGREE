@@ -264,7 +264,7 @@ void PenguinBow(void)
 			penguin.arrow.ArrowY = penguin.Y;
 			spawnArrow = 1;
 		}
-		else
+		else if (spawnArrow == 1)
 		{
 			penguin.arrow.ArrowX += directionX;
 			penguin.arrow.ArrowY += directionY;
