@@ -30,7 +30,7 @@ void DrawHP(void);
 
 void PlayerMovement(void);
 void MovePenguin(void);
-void PenguinAttack(void);
+void PenguinBow(void);
 void DrawArrow(void);
 //Get all seal position seperately
 void PHurt(bool a);
