@@ -30,6 +30,7 @@ struct button Play;
 struct button Quit;
 struct button Credits;
 struct button How;
+CP_Image NewBG;
 
 //INIT
 void menu_init(void)
@@ -37,6 +38,7 @@ void menu_init(void)
 
 	currentLevel = 0;
 	CP_Settings_Background(CP_Color_Create(48, 77, 109, 255));
+	
 
 	//SETTINGS ------WINDOW SIZE, FONTS, IMAGES ------------------------------
 	CP_System_SetWindowTitle("ZERO DEGREE");
@@ -152,7 +154,10 @@ void buttons_struct(void)
 /*------FULL MENU BUTTONS------*/
 void full_menu(void)
 {
-	CP_Settings_Background(CP_Color_Create(48, 77, 109, 255));
+	//CP_Settings_Background(CP_Color_Create(48, 77, 109, 255));
+
+	
+
 	float mouseX = CP_Input_GetMouseX();
 	float mouseY = CP_Input_GetMouseY();
 	int time = (int)CP_System_GetSeconds();
@@ -169,8 +174,13 @@ void full_menu(void)
 	}
 	else
 	{
+		NewBG = CP_Image_Load("./Assets/MAIN_BG.png");
+		CP_Image_Draw(NewBG, WINDOW_WIDTH/2, WINDOW_HEIGHT/2 , WINDOW_WIDTH, WINDOW_HEIGHT, 255);
+
 		//HEADER
+		CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
 		CP_Font_DrawText("ZERO DEGREE", WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4);
+		CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
 
 		//BUTTONS
 		// --------------------------------------------PLAY-------------------------------------------------
