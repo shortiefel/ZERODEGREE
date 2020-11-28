@@ -67,6 +67,44 @@ void Whale_init(void)
 	whale.alive = 1;
 	whale.health = 700;
 
+<<<<<<< Updated upstream
+=======
+	grid_array[(int)whale.wPos.x][(int)whale.wPos.y] = WHALE;
+}
+
+// generate random spawn position for whale
+void randomWhaleSpawn(void) {
+	randomPosX = CP_Random_RangeInt(3, GRID_WIDTH - 3);
+	randomPosY = CP_Random_RangeInt(3, GRID_HEIGHT - 3);
+
+	if (grid_array[randomPosX][randomPosY] == SEAL || grid_array[randomPosX][randomPosY] == TRAP) {
+		randomPosX = CP_Random_RangeInt(3, GRID_WIDTH - 3);
+		randomPosY = CP_Random_RangeInt(3, GRID_HEIGHT - 3);
+	}
+	//else if (grid_array[randomPosX][randomPosY] == TRAP) {
+	//	whaleLevelPos(randomPosX, randomPosY);
+	//}
+	//for (int i = 0; i < totalTrapNum(); i++) {
+	//	if (water[i].Wposition.x == randomPosX && water[i].Wposition.y == randomPosY) {
+	//		whaleLevelPos(randomPosX, randomPosY);
+	//	}
+	//}
+
+	whaleLevelPos(randomPosX, randomPosY);
+	//printf("%f %f", randomPosX, randomPosY);
+}
+
+// whale level spawning
+//void whaleLevelInit(int whaleNum) {
+//	for (int i = 0;)
+//}
+
+// ---- WHALE_INIT, WHALE_UPDATE, WHALE_EXIT ----
+void Whale_init(void)
+{
+	randomWhaleSpawn();
+	//trapGrid = CP_Image_Load("./Assets/WATER.png");
+>>>>>>> Stashed changes
 	// Set projectile starting position at whale position
 	setProjectilePos();
 	spawnProj = 1;

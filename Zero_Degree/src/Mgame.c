@@ -12,6 +12,7 @@
 #include "Level2.h"
 
 CP_Image ice_grid;
+CP_Image trap_grid;
 struct button pause;
 
 void Mgame_init(void)
@@ -70,10 +71,22 @@ void DrawGrids(void)
 	CP_Settings_Background(CP_Color_Create(48, 77, 109, 255));
 
 	//draws the map
+<<<<<<< Updated upstream
 	for (int x = 0; x < GRID_WIDTH; x++)
 		for (int y = 0; y < GRID_HEIGHT; y++)
 			if(grid_array[x][y] == MAPAREA)
+=======
+	for (int x = 0; x < GRID_WIDTH; x++) {
+		for (int y = 0; y < GRID_HEIGHT; y++) {
+			if (grid_array[x][y] == MAPAREA || grid_array[x][y] == SEAL) {
+>>>>>>> Stashed changes
 				CP_Image_Draw(ice_grid, (float)x * GRID_SIZE - grid_size, (float)y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);
+			}
+			if (grid_array[x][y] == TRAP) {
+				CP_Image_Draw(trap_grid, (float)x * GRID_SIZE - grid_size, (float)y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);
+			}
+		}
+	}
 }
 
 //------PAUSE--------
@@ -129,6 +142,7 @@ void InitObjects(void)
 {
 	//float grid_size = GRID_SIZE / 2;
 	ice_grid = CP_Image_Load("./Assets/CUBE.png");
+	trap_grid = CP_Image_Load("./Assets/WATER.png");
 
 	// initialises the grids
 	for (int x = 0; x < GRID_WIDTH; x++)
