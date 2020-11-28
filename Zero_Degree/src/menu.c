@@ -52,6 +52,7 @@ void menu_init(void)
 
 	//FUNCTIONS
 	buttons_struct();
+	background_music();
 	
 }
 
@@ -69,15 +70,8 @@ void menu_exit(void)
 	
 }
 
-//void header(void)
-//{
-//	font1 = CP_Font_Load("./Assets/Iceberg.tff");
-//	CP_Font_Set(font1);
-//	CP_Settings_TextSize(150);
-//	CP_Font_DrawText("ZERO DEGREE", WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4);
-//}
 
-//onclicks
+/*-----BUTTON ON CLICKS-----*/
 void play_onclick(void)
 {
 	CP_Engine_SetNextGameState(Mgame_init, Mgame_update, Mgame_exit);
@@ -100,6 +94,7 @@ void quit_onclick(void)
 {
 	CP_Engine_Terminate();
 }
+
 
 void buttons_struct(void)
 {
@@ -175,6 +170,7 @@ void buttons_struct(void)
 
 }
 
+/*------FULL MENU BUTTONS------*/
 void full_menu(void)
 {
 	CP_Settings_Background(CP_Color_Create(48, 77, 109, 255));
@@ -302,3 +298,9 @@ void full_menu(void)
 	}
 }
 
+/*----MUSIC------*/
+void background_music(void)
+{
+	music = CP_Sound_Load("./Assets/MUSIC/Normal_BG.wav");
+	CP_Sound_PlayMusic(music);
+}

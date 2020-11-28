@@ -1,12 +1,16 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "cprocessing.h"
-#include "Whale.h"
+#include "GameOver.h"
+#include "Level1.h"
+#include "Level3.h"
+#include "Level4.h"
 #include "Mgame.h"
 #include "Player.h"
-#include "Credit.h"
-#include "Level1.h"
-#include "GameOver.h"
+#include "seal.h"
+#include "Trap.h"
+#include "Whale.h"
+
 
 // Normalise vector to ensure the speed will be consistent
 // change the whale position into vector
@@ -15,20 +19,21 @@
 // Add timer to spawn projectile
 // Fix issue where projectiles are tracking the player for a few milliseconds after spawning
 
-// Choose positions I want the whales to be at. Level 3 - 2 whales, Level 4 - 3 whales
+// work on a timer
 
 
 // ---- WHALE DECLARATION ----
 Whale whale;
 CP_Image whaleSprite;
 float whaleTime, whaleSpeed = 0.03f;
+int randomPosX, randomPosY;
 
 // ---- PROJECTILE DECLARATION ----
 int spawnProj, projSpawned;
 float spawnTimer = 5.0f;
 CP_Vector moveProj;
 int lastPosX, lastPosY;
-float projSpeed = 0.1f;
+float projSpeed = 0.08f;
 
 // ---- PENGUIN DECLARATION ----
 Player penguin;
@@ -39,7 +44,9 @@ float timePassed;
 float deathTimer = 4.0f;
 float deathTime = 0; int death = 0;
 
+CP_Image trapGrid;
 
+// draw whale health bar
 void whaleHPBar(void) {
 	CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
 	CP_Graphics_DrawRect((float)((whale.wPos.x * GRID_SIZE) - GRID_SIZE * 1.5), (float)((whale.wPos.y * GRID_SIZE) - GRID_SIZE * 1.2), 700.0f * 0.25f, (GRID_SIZE / 5));
@@ -49,6 +56,9 @@ void whaleHPBar(void) {
 
 // Load and draw image of whale
 void drawWhale(void) {
+	//trapGrid = CP_Image_Load("./Assets/WATER.png");
+	//CP_Image_Draw(trapGrid, (whale.wPos.x * GRID_SIZE) - GRID_SIZE / 2, (whale.wPos.y * GRID_SIZE) - GRID_SIZE / 2, GRID_SIZE, GRID_SIZE, 255);
+
 	if (penguin.X < whale.wPos.x) {
 		whaleSprite = CP_Image_Load("./Assets/CHARACTERS/WHALE/LEFT.png");
 	}
@@ -78,6 +88,7 @@ void drawProjectile(void) {
 	CP_Settings_Background(CP_Color_Create(48, 77, 109, 255));
 }
 
+// set timer to spawn projectile
 /*void projectileSpawn(void) {
 	if (ElaspedTime > 2) {
 		if (((int)ElaspedTime % (int)(spawnTimer-1) == 0) && spawnProj == 0) {
@@ -95,34 +106,62 @@ CP_Vector getWhalePos(void) {
 	return whale.wPos;
 }
 
+// draw whale death
 void whaleDeath(void) {
+	//CP_Image_Draw(trapGrid, (whale.wPos.x * GRID_SIZE) - GRID_SIZE / 2, (whale.wPos.y * GRID_SIZE) - GRID_SIZE / 2, GRID_SIZE, GRID_SIZE, 255);
+
 	if (penguin.X < whale.wPos.x) {
 		whaleSprite = CP_Image_Load("./Assets/CHARACTERS/WHALE/WHALE_DEATH_LEFT.png");
 	}
 	else if (penguin.X > whale.wPos.x) {
 		whaleSprite = CP_Image_Load("./Assets/CHARACTERS/WHALE/WHALE_DEATH_RIGHT.png");
 	}
+	grid_array[(int)whale.wPos.x][(int)whale.wPos.y] = TRAP;
 	CP_Image_Draw(whaleSprite, (float)((whale.wPos.x * GRID_SIZE) - GRID_SIZE / 2), (float)((whale.wPos.y * GRID_SIZE) - GRID_SIZE / 2), GRID_SIZE, GRID_SIZE*0.7f, 255);
 }
 
-void whaleLevelPos(void) {
-	whale.wPos.x = 13.0f;
-	whale.wPos.y = 8.0f;
+// set whale initital stats
+void whaleLevelPos(int whalePosX, int whalePosY) {
+	whale.wPos.x = (float)whalePosX;
+	whale.wPos.y = (float)whalePosY;
 	whale.alive = 1;
 	whale.health = 700;
-	grid_array[(int)whale.wPos.x][(int)whale.wPos.y] = HOLE;
+
+	grid_array[(int)whale.wPos.x][(int)whale.wPos.y] = WHALE;
 }
 
+// generate random spawn position for whale
+void randomWhaleSpawn(void) {
+	randomPosX = CP_Random_RangeInt(3, GRID_WIDTH - 3);
+	randomPosY = CP_Random_RangeInt(3, GRID_HEIGHT - 3);
 
+	if (grid_array[randomPosX][randomPosY] == SEAL || grid_array[randomPosX][randomPosY] == TRAP) {
+		randomPosX = CP_Random_RangeInt(3, GRID_WIDTH - 3);
+		randomPosY = CP_Random_RangeInt(3, GRID_HEIGHT - 3);
+	}
+	//else if (grid_array[randomPosX][randomPosY] == TRAP) {
+	//	whaleLevelPos(randomPosX, randomPosY);
+	//}
+	//for (int i = 0; i < totalTrapNum(); i++) {
+	//	if (water[i].Wposition.x == randomPosX && water[i].Wposition.y == randomPosY) {
+	//		whaleLevelPos(randomPosX, randomPosY);
+	//	}
+	//}
 
+	whaleLevelPos(randomPosX, randomPosY);
+	//printf("%f %f", randomPosX, randomPosY);
+}
+
+// whale level spawning
+//void whaleLevelInit(int whaleNum) {
+//	for (int i = 0;)
+//}
 
 // ---- WHALE_INIT, WHALE_UPDATE, WHALE_EXIT ----
 void Whale_init(void)
 {
-	whaleLevelPos();
-
-	grid_array[(int)whale.wPos.x][(int)whale.wPos.y] = WHALE;
-
+	randomWhaleSpawn();
+	//trapGrid = CP_Image_Load("./Assets/WATER.png");
 	// Set projectile starting position at whale position
 	setProjectilePos();
 	spawnProj = 1;
@@ -130,7 +169,8 @@ void Whale_init(void)
 
 void Whale_update(void)
 {
-	//grid_array[(int)whale.wPos.x][(int)whale.wPos.y] = HOLE;
+	//randomWhaleSpawn();
+	//CP_Image_Draw(trapGrid, (whale.wPos.x * GRID_SIZE) - GRID_SIZE / 2, (whale.wPos.y * GRID_SIZE) - GRID_SIZE / 2, GRID_SIZE, GRID_SIZE, 255);
 	whaleTime += CP_System_GetDt();
 	timePassed += CP_System_GetDt();
 
@@ -142,6 +182,7 @@ void Whale_update(void)
 		if (whale.alive == 1 && death == 0) {	
 			drawWhale();
 			drawProjectile();
+			printf("%f %f", whale.wPos.x, whale.wPos.y);
 
 			if (whale.health <= 0) {
 				whale.alive = 0;
@@ -195,13 +236,12 @@ void Whale_update(void)
 			{
 				death = 0;
 			}
-			if (death == 0) {
-				CP_Settings_Background(CP_Color_Create(48, 77, 109, 255));
-				whale.wPos.x = -1;
-				whale.wPos.y = -1;
-				whale.projectile.pPos.x = -1;
-				whale.projectile.pPos.y = -1;
-			}
+			/*if (death == 0) {
+				//whale.wPos.x = -1;
+				//whale.wPos.y = -1;
+				//whale.projectile.pPos.x = -1;
+				//whale.projectile.pPos.y = -1;
+			}*/
 		}
 	}
 }
