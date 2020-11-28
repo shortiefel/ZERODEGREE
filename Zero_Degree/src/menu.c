@@ -294,7 +294,6 @@ void full_menu(void)
 		CP_Settings_TextSize(40);
 		CP_Settings_Fill(Levels.colorFont);
 		CP_Font_DrawText(Levels.text, Levels.x, Levels.y);
-		
 	}
 }
 
