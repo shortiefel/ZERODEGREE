@@ -15,6 +15,7 @@
 #include "wingame.h"
 #include "Trap.h"
 #include "Level4.h"
+#include "Timer.h"
 
 
 
@@ -32,6 +33,7 @@ void lvl4_init(void)
 	Whale_init();
 	DrawPause();
 	level2();
+	//setLevelTimer(currentLevel);
 
 }
 void lvl4_update(void)
@@ -45,7 +47,8 @@ void lvl4_update(void)
 	MovePenguin();
 	SealEnemiesUpdate();
 	DrawWaterTrapUpdate();
-	//drawWhale();
+	Whale_update();
+	//displayTimer();
 }
 
 

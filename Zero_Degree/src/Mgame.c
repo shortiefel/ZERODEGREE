@@ -12,6 +12,7 @@
 #include "Level2.h"
 #include "Level3.h"
 #include "Level4.h"
+#include "Timer.h"
 
 CP_Image ice_grid;
 CP_Image trap_grid;
@@ -43,6 +44,10 @@ void Mgame_update(void)
 	else if (currentLevel == 2)
 	{
 		CP_Engine_SetNextGameState(lvl2_init, lvl2_update, NULL);
+	}
+	else if (currentLevel == 3)
+	{
+		CP_Engine_SetNextGameState(lvl3_init, lvl3_update, NULL);
 	}
 
 
@@ -84,7 +89,7 @@ void DrawGrids(void)
 			if (grid_array[x][y] == MAPAREA || grid_array[x][y] == SEAL) {	
 				CP_Image_Draw(ice_grid, (float)x * GRID_SIZE - grid_size, (float)y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);
 			}
-			if (grid_array[x][y] == TRAP) {
+			if (grid_array[x][y] == TRAP || grid_array[x][y] == WHALE) {
 				CP_Image_Draw(trap_grid, (float)x * GRID_SIZE - grid_size, (float)y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);
 			}
 		}
@@ -135,18 +140,18 @@ void DrawPause(void)
 				if (currentLevel == 1)
 				{
 					CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
-					CP_Font_DrawText("Level 1", 1600 - 300, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE));
+					CP_Font_DrawText("Level 1", 1600 - 330, ((GRID_HEIGHT - (float)1.45) * GRID_SIZE));
 				}
 				else if (currentLevel == 2)
 				{
 					CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
-					CP_Font_DrawText("Level 2", 1600 - 300, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE));
+					CP_Font_DrawText("Level 2", 1600 - 330, ((GRID_HEIGHT - (float)1.45) * GRID_SIZE));
 				}
 
 				else if (currentLevel == 3)
 				{
 					CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
-					CP_Font_DrawText("Level 3", 1600 - 300, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE));
+					CP_Font_DrawText("Level 3", 1600 - 330, ((GRID_HEIGHT - (float)1.45) * GRID_SIZE));
 				}
 
 				

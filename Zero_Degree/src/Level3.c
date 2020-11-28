@@ -19,6 +19,7 @@
 #include "GameOver.h"
 #include "wingame.h"
 #include "Trap.h"
+#include "Timer.h"
 
 
 
@@ -35,6 +36,7 @@ void lvl3_init(void)
 	DrawEnemies();
 	Whale_init();
 	DrawPause();
+	setLevelTimer(3);
 
 }
 void lvl3_update(void)
@@ -48,9 +50,10 @@ void lvl3_update(void)
 	MovePenguin();
 	SealEnemiesUpdate();
 	DrawWaterTrapUpdate();
-	drawWhale();
-	drawProjectile();
+	//drawWhale();
+	//drawProjectile();
 	Whale_update();
+	displayTimer();
 }
 
 

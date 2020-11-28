@@ -16,6 +16,7 @@
 #include "Whale.h"
 #include "Level1.h"
 #include "Level2.h"
+#include "Timer.h"
 #include "Trap.h"
 
 
@@ -36,6 +37,7 @@ void lvl1_init(void)
 	DrawWaterTrap();
 	//Whale_init();
 	DrawEnemies();
+	setLevelTimer(1);
 
 }
 void lvl1_update(void)
@@ -49,7 +51,7 @@ void lvl1_update(void)
 	PlayerMovement();
 	MovePenguin();
 	SealEnemiesUpdate();
-	
+	displayTimer();
 
 	//Whale_update();
 	

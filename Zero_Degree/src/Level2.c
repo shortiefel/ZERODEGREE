@@ -17,6 +17,7 @@
 #include "GameOver.h"
 #include "wingame.h"
 #include "Trap.h"
+#include "Timer.h"
 
 
 
@@ -24,7 +25,7 @@ void lvl2_init(void)
 {
 	currentLevel = 2;
 	level2enemies.seals_count = 12;
-	level1enemies.trap_count = 10;
+	level2enemies.trap_count = 10;
 	level2enemies.whale_count = 0;
 
 	InitObjects();
@@ -35,6 +36,7 @@ void lvl2_init(void)
 	DrawEnemies();
 	DrawPause();
 	level2();
+	setLevelTimer(2);
 
 }
 void lvl2_update(void)
@@ -48,6 +50,7 @@ void lvl2_update(void)
 	MovePenguin();
 	SealEnemiesUpdate();
 	DrawWaterTrapUpdate();
+	displayTimer();
 	//drawWhale();
 }
 

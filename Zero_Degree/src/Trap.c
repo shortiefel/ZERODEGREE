@@ -45,9 +45,9 @@ void InitWaterObjects(void)
 	entityManager.NumTrap = 0;
 	for (int i = 0; i < totalTraps; i++)
 	{
-		//water[i].waterTrap = CP_Image_Load("./Assets/WATER.png");
+		water[i].waterTrap = CP_Image_Load("./Assets/WATER.png");
 
-		water[i].attack = 50;
+		water[i].attack = 20;
 	}
 }
 
@@ -67,7 +67,7 @@ void DrawWaterTrap(void)
 		for (int i = 0; i < entityManager.NumTrap; i++)
 		{
 			if ((seal[i].position.x == newPos.x && seal[i].position.y == newPos.y)
-				|| (whale.wPos.x == newPos.x && whale.wPos.y == newPos.y)
+				|| (whale[i].wPos.x == newPos.x && whale[i].wPos.y == newPos.y)
 				|| (water[i].Wposition.x == newPos.x && water[i].Wposition.y == newPos.y))
 			{
 				newPos = GetRandomPosition();
@@ -75,10 +75,10 @@ void DrawWaterTrap(void)
 		}
 
 		water[entityManager.NumTrap].Wposition = newPos;
-		//CP_Image_Draw(water[entityManager.NumTrap].waterTrap,
-		//	(float)water[entityManager.NumTrap].Wposition.x * GRID_SIZE - grid_size1,
-		//	(float)water[entityManager.NumTrap].Wposition.y * GRID_SIZE - grid_size1, GRID_SIZE,
-		//	GRID_SIZE, 255);
+		CP_Image_Draw(water[entityManager.NumTrap].waterTrap,
+			(float)water[entityManager.NumTrap].Wposition.x * GRID_SIZE - grid_size1,
+			(float)water[entityManager.NumTrap].Wposition.y * GRID_SIZE - grid_size1, GRID_SIZE,
+			GRID_SIZE, 255);
 
 		grid_array[(int)water[entityManager.NumTrap].Wposition.x][(int)water[entityManager.NumTrap].Wposition.y] = TRAP;
 		entityManager.NumTrap++;
@@ -87,11 +87,16 @@ void DrawWaterTrap(void)
 
 void WaterTrapAttack(int id)
 {
-	if (penguin.X == water[id].Wposition.x && penguin.Y == water[id].Wposition.y)
+	/*if (penguin.X == water[id].Wposition.x && penguin.Y == water[id].Wposition.y)
 	{
 		penguin.health = penguin.health - water[id].attack;
 		//printf("health: %d\n", penguin.health);
+	}*/
+	if (grid_array[penguin.X][penguin.Y] == TRAP) {
+		penguin.health = penguin.health - water[0].attack;
 	}
+
+		//printf("health: %d\n", penguin.health);
 	PHurt(WaterTrap);
 }
 
@@ -99,10 +104,10 @@ void DrawWaterTrapUpdate(void)
 {
 	for (int i = 0; i < entityManager.NumTrap; i++)
 	{
-		//CP_Image_Draw(water[i].waterTrap,
-		//	(float)water[i].Wposition.x * GRID_SIZE - grid_size1,
-		//	(float)water[i].Wposition.y * GRID_SIZE - grid_size1, GRID_SIZE,
-		//	GRID_SIZE, 255);
+		CP_Image_Draw(water[i].waterTrap,
+			(float)water[i].Wposition.x * GRID_SIZE - grid_size1,
+			(float)water[i].Wposition.y * GRID_SIZE - grid_size1, GRID_SIZE,
+			GRID_SIZE, 255);
 
 		if (penguin.alive == true)
 		{
