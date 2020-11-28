@@ -26,6 +26,7 @@
 CP_Image whaleSprite;
 float whaleTime, whaleSpeed = 0.03f;
 int randomPosX, randomPosY;
+int wMaxHealth = 700;
 
 // ---- PROJECTILE DECLARATION ----
 int spawnProj, projSpawned;
@@ -157,9 +158,19 @@ void randomWhaleSpawn(void) {
 }
 
 // whale level spawning
-//void whaleLevelInit(int whaleNum) {
-//	for (int i = 0;)
-//}
+void whaleLevelInit(void) {
+	if (currentLevel == 3) {
+		entityManager.NumWhale = level3enemies.whale_count;
+	}
+	if (currentLevel == 4) {
+		entityManager.NumWhale = level4enemies.whale_count;
+	}
+	if (entityManager.NumWhale > 0) {
+		for (int i = 0; i < entityManager.NumWhale; i++) {
+			randomWhaleSpawn();
+		}
+	}
+}
 
 // ---- WHALE_INIT, WHALE_UPDATE, WHALE_EXIT ----
 void Whale_init(void)
@@ -171,6 +182,7 @@ void Whale_init(void)
 		entityManager.NumWhale = level4enemies.whale_count;
 	}
 	randomWhaleSpawn();
+	whaleLevelInit();
 	//trapGrid = CP_Image_Load("./Assets/WATER.png");
 
 	// Set projectile starting position at whale position
@@ -192,6 +204,16 @@ void Whale_update(void)
 		whaleTime -= whaleSpeed;
 
 		//projectileSpawn();
+		for (int i = 0; i < entityManager.NumWhale; i++) {
+			if (whale[i].alive == 1 && whale[i].death == 0) {
+				drawWhale(i);
+				drawProjectile(i);
+				printf("%f %f", whale[i].wPos.x, whale[i].wPos.y);
+
+				if (whale[i].health <= 0) {
+					whale[i].alive = 0;
+					whale[i].death = 1;
+				}
 
 		for (int count = 0; count < entityManager.NumWhale; count++) {
 			if (whale[count].alive == 1 && whale[count].death == 0) {
