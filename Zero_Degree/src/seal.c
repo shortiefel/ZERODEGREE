@@ -12,6 +12,7 @@
 #include "Whale.h"
 #include "Trap.h"
 
+
 //entity player;
 entity_manager entityManager;
 //Player penguin;
@@ -27,7 +28,7 @@ float distanceToPlayerY;
 bool attack = false;
 bool drawHitSprite = false;
 
-float hitDelay = 3;
+float hitDelay = 2;
 float nextHit = 0;
 float hitSprite = 0;
 
@@ -35,7 +36,6 @@ float deathDelay = 5;
 float triggerDeath = 0;
 
 int countdeath = 0;
-
 int sealMaxHealth = 0;
 
 void DrawEnemies(void)
@@ -53,11 +53,19 @@ void DrawEnemies(void)
 		for (int i = 0; i < entityManager.NumSeal; i++)
 		{
 			if ((seal[i].position.x == newPosition.x && seal[i].position.y == newPosition.y) 
-				|| (whale.wPos.x == newPosition.x && whale.wPos.y == newPosition.y) 
-				|| (water[i].Wposition.x == newPosition.x && water[i].Wposition.y == newPosition.y))
+				|| (whale.wPos.x == newPosition.x && whale.wPos.y == newPosition.y))
 			{
 				newPosition = GetRandomPosition();
 			}
+
+			for (int w = 0; w < entityManager.NumTrap; w++)
+			{
+				if ((water[w].Wposition.x == newPosition.x && water[w].Wposition.y == newPosition.y))
+				{
+					newPosition = GetRandomPosition();
+				}
+			}
+
 		}
 
 		seal[entityManager.NumSeal].position = newPosition;
@@ -108,9 +116,8 @@ void SealEnemiesUpdate(void)
 			DrawDeath(w);
 		}
 	}
-
-	//SealPatrolling();
 }
+
 
 void DrawDeath(int seal_id)
 {
@@ -129,7 +136,10 @@ void DrawDeath(int seal_id)
 
 	if (seal[seal_id].death == true)
 	{
-		CP_Image_Draw(seal[seal_id].sprites[6], (float)seal[seal_id].position.x * GRID_SIZE - grid_size, (float)seal[seal_id].position.y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);
+		grid_array[(int)seal[seal_id].position.x][(int)seal[seal_id].position.y] = MAPAREA;
+
+		seal[seal_id].position.y = -1;
+		seal[seal_id].position.x = -1;
 	}
 }
 
@@ -144,74 +154,51 @@ void MoveSeal(int id)
 	//printf("SealX[%d]:%d \n", i,(int)distanceToPlayerX);
 	//printf("SealY[%d]:%d \n", i, (int)distanceToPlayerY);
 
-	if (distanceToPlayerX > 1 && distanceToPlayerX < 3 && distanceToPlayerY == 0)	// player to the left
+	if (distanceToPlayerX > 1 && distanceToPlayerX < 4 && distanceToPlayerY == 0)	// player to the left
 	{
 		tempX = (int)seal[id].position.x - 1;
 		tempY = (int)seal[id].position.y;
 		if (grid_array[tempX][tempY] == MAPAREA)
 		{
 			SetSealGrid(id);
-			// move to the left
-			seal[id].position.x -= 1;
+			seal[id].position.x -= 1;	// move to the left
 			SetSealGrid(id);
-			//seal[id].follow = true;
 		}
 	}
-	else if (distanceToPlayerX < -1 && distanceToPlayerX > -3 && distanceToPlayerY == 0)	// player to the right
+	else if (distanceToPlayerX < -1 && distanceToPlayerX > -4 && distanceToPlayerY == 0)	// player to the right
 	{
 		tempX = (int)seal[id].position.x + 1;
 		tempY = (int)seal[id].position.y;
 		if (grid_array[tempX][tempY] == MAPAREA)
 		{
 			SetSealGrid(id);
-			// move to the right
-			seal[id].position.x += 1;
+			seal[id].position.x += 1;	// move to the right
 			SetSealGrid(id);
-			//seal[id].follow = true;
 		}
 	}
 
-	if (distanceToPlayerY > 1 && distanceToPlayerY < 3 && distanceToPlayerX == 0)	// player up
+	if (distanceToPlayerY > 1 && distanceToPlayerY < 4 && distanceToPlayerX == 0)	// player up
 	{
 		tempX = (int)seal[id].position.x;
 		tempY = (int)seal[id].position.y - 1;
 		if (grid_array[tempX][tempY] == MAPAREA)
 		{
 			SetSealGrid(id);
-			// move up
-			seal[id].position.y -= 1;
+			seal[id].position.y -= 1;	// move up
 			SetSealGrid(id);
-			//seal[id].follow = true;
 		}
 	}
-	else if (distanceToPlayerY < -1 && distanceToPlayerY > -3 && distanceToPlayerX == 0)	// player down
+	else if (distanceToPlayerY < -1 && distanceToPlayerY > -4 && distanceToPlayerX == 0)	// player down
 	{
 		tempX = (int)seal[id].position.x;
 		tempY = (int)seal[id].position.y + 1;
 		if (grid_array[tempX][tempY] == MAPAREA)
 		{
 			SetSealGrid(id);
-			// move down
-			seal[id].position.y += 1;
+			seal[id].position.y += 1;	// move down
 			SetSealGrid(id);
-			//seal[id].follow = true;
 		}
 	}
-	//if (distanceToPlayerY != 0 && distanceToPlayerX != 0)
-	//{
-	//	seal[id].follow = false;
-	//}
-
-	/*CP_Image_Draw(seal[id].sprites[0], (float)seal[id].position.x * GRID_SIZE - grid_size, (float)seal[id].position.y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);*/
-	//if (distanceToPlayerX == 0 || distanceToPlayerY == 0) 
-	//	//|| (distanceToPlayerY == 0 && distanceToPlayerX != 0))
-	//{
-	//	seal[id].follow = true;
-	//}
-	//else
-	//{
-	//	seal[id].follow = false;
-	//}
 }
 
 int gridX = 0;
@@ -348,58 +335,4 @@ void CheckSealHealth(int id)
 		KillSeal(id);
 	}
 
-}
-
-float move = 0;
-int moveDelay = 2;
-int directionX = 1;
-int directionY = 1;
-bool direction = false;
-
-void SealPatrolling(void)
-{
-	if ((int)ElaspedTime == (int)move)
-	{
-		for (int id = 0; id < entityManager.NumSeal; id++)
-		{
-			if (seal[id].follow == false)
-			{
-				if (direction == true)
-				{
-					seal[id].position.y += directionY;
-					if (directionY == 1) // moved down
-					{
-						directionY = -1;
-					}
-					else if (directionY == -1) // moved up
-					{
-						directionY = 1;
-					}
-					direction = false;
-				}
-				else
-				{
-					seal[id].position.x += directionX;
-
-					if (directionX == 1) // moved down
-					{
-						directionX = -1;
-					}
-					else if (directionX == -1) // moved up
-					{
-						directionX = 1;
-					}
-					direction = true;
-				}
-			}
-			
-		}
-		
-	}
-
-	if (((int)ElaspedTime % (int)moveDelay) == 0)
-	{
-		move = ElaspedTime + moveDelay;
-		//direction = true;
-	}
 }

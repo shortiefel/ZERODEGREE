@@ -10,8 +10,11 @@
 #include "Whale.h"
 #include "Level1.h"
 #include "Level2.h"
+#include "Level3.h"
+#include "Level4.h"
 #include "GameOver.h"
 #include <stdbool.h>
+
 
 struct button retry;
 struct button Quit3;

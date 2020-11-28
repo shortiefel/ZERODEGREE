@@ -47,7 +47,7 @@ void InitWaterObjects(void)
 	{
 		water[i].waterTrap = CP_Image_Load("./Assets/WATER.png");
 
-		water[i].attack = 150;
+		water[i].attack = 50;
 	}
 }
 
@@ -142,9 +142,3 @@ CP_Vector GetRandomWaterPosition(void)
 }
 
 
-
-
-/*TODO:
---> when the penguin walks on the water pocket, the health will 
-go down by 150
-*/

@@ -38,7 +38,6 @@ float projSpeed = 0.08f;
 // ---- PENGUIN DECLARATION ----
 Player penguin;
 CP_Vector penguinLastPos;
-int arrowX, arrowY;
 
 // ---- TIMER ----
 float timePassed;
