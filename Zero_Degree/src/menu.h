@@ -15,7 +15,7 @@ struct button
 	void(*onClick)(void);
 };
 
-int counter;
+int currentLevel;
 
 void menu_init(void);
 void menu_update(void);

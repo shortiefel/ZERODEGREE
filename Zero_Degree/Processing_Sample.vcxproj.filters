@@ -14,6 +14,9 @@
     <ClCompile Include="src\Level2.c" />
     <ClCompile Include="src\GameOver.c" />
     <ClCompile Include="src\wingame.c" />
+    <ClCompile Include="src\Level3.c" />
+    <ClCompile Include="src\Trap.c" />
+    <ClCompile Include="src\Level4.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Credit.h" />
@@ -28,5 +31,8 @@
     <ClInclude Include="src\Level2.h" />
     <ClInclude Include="src\GameOver.h" />
     <ClInclude Include="src\wingame.h" />
+    <ClInclude Include="src\Level3.h" />
+    <ClInclude Include="src\Trap.h" />
+    <ClInclude Include="src\Level4.h" />
   </ItemGroup>
 </Project>

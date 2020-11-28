@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <intrin.h>
-#include <cprocessing.h>
+#include "cprocessing.h"
 #include <stdbool.h>
 #include "menu.h"
 #include "Mgame.h"
@@ -10,10 +10,13 @@
 #include "Whale.h"
 #include "Level1.h"
 #include "Level2.h"
+#include "Level3.h"
+#include "Level4.h"
 
 CP_Image ice_grid;
 CP_Image trap_grid;
 struct button pause;
+CP_Font footerlevels;
 
 void Mgame_init(void)
 {
@@ -21,8 +24,9 @@ void Mgame_init(void)
 	CP_Settings_TextAlignment(CP_TEXT_ALIGN_H_CENTER, CP_TEXT_ALIGN_V_MIDDLE);
 	InitObjects();
 	Penguin_init();
-	DrawEnemies();
-	Whale_init();
+	//drawlevels();
+	/*DrawEnemies();
+	Whale_init();*/
 	
 
 	
@@ -35,6 +39,10 @@ void Mgame_update(void)
 	if (currentLevel == 1)
 	{
 		CP_Engine_SetNextGameState(lvl1_init, lvl1_update, NULL);
+	}
+	else if (currentLevel == 2)
+	{
+		CP_Engine_SetNextGameState(lvl2_init, lvl2_update, NULL);
 	}
 
 
@@ -71,15 +79,9 @@ void DrawGrids(void)
 	CP_Settings_Background(CP_Color_Create(48, 77, 109, 255));
 
 	//draws the map
-<<<<<<< Updated upstream
-	for (int x = 0; x < GRID_WIDTH; x++)
-		for (int y = 0; y < GRID_HEIGHT; y++)
-			if(grid_array[x][y] == MAPAREA)
-=======
 	for (int x = 0; x < GRID_WIDTH; x++) {
 		for (int y = 0; y < GRID_HEIGHT; y++) {
-			if (grid_array[x][y] == MAPAREA || grid_array[x][y] == SEAL) {
->>>>>>> Stashed changes
+			if (grid_array[x][y] == MAPAREA || grid_array[x][y] == SEAL) {	
 				CP_Image_Draw(ice_grid, (float)x * GRID_SIZE - grid_size, (float)y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);
 			}
 			if (grid_array[x][y] == TRAP) {
@@ -129,12 +131,30 @@ void DrawPause(void)
 				CP_Settings_TextSize(45);
 				CP_Font_DrawText("HP", 1600 - 1550, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE));
 
-				if (counter == 1)
+			
+				if (currentLevel == 1)
 				{
+					CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
 					CP_Font_DrawText("Level 1", 1600 - 300, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE));
 				}
+				else if (currentLevel == 2)
+				{
+					CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
+					CP_Font_DrawText("Level 2", 1600 - 300, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE));
+				}
+
+				else if (currentLevel == 3)
+				{
+					CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
+					CP_Font_DrawText("Level 3", 1600 - 300, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE));
+				}
+
+				
+
+				
 			}
 }
+
 
 
 //-----INIT Objects--------
@@ -180,5 +200,37 @@ void InitObjects(void)
 	pause = p2;
 
 }
+
+
+
+
+//void drawlevels(void)
+//{
+//
+//	footerlevels = cp_font_load("./assets/iceberg.ttf");
+//
+//	for (int x = 0; x < grid_width; x++)
+//		for (int y = 0; y < grid_height; y++)
+//			if (grid_array[x][y] == footer)
+//			{
+//				if (currentlevel == 1)
+//				{
+//					cp_settings_fill(cp_color_create(255, 255, 255, 255));
+//					cp_font_drawtext("level 1", 1600 - 300, ((grid_height - (float)1.3) * grid_size));
+//				}
+//				else if (currentlevel == 2)
+//				{
+//					
+//					cp_settings_fill(cp_color_create(255, 255, 255, 255));
+//					cp_font_drawtext("level 2", 1600 - 300, ((grid_height - (float)1.3) * grid_size));
+//				}
+//
+//				else if (currentlevel == 3)
+//				{
+//					cp_settings_fill(cp_color_create(255, 255, 255, 255));
+//					cp_font_drawtext("level 3", 1600 - 300, ((grid_height - (float)1.3) * grid_size));
+//				}
+//			}
+//}
 
 

@@ -8,11 +8,12 @@
 #define GRID_HEIGHT 12	// size of the height of the game map
 #define GRID_SIZE 80
 
-#define MAXENTITY 10
+#define MAXENTITY 30
 
 int PHealth;	// player health so that the other scripts can access it
 int WHealth;	// whale health;
 float ElaspedTime;
+extern CP_Font footerlevels;
 
 typedef enum GRID_STATE
 {
@@ -20,7 +21,10 @@ typedef enum GRID_STATE
 	HEADER,
 	FOOTER,
 	PLAYER,
-	SEAL
+	SEAL,
+	TRAP,
+	WHALE,
+	HOLE
 }GRID_MAP;
 
 GRID_MAP grid_array[GRID_WIDTH][GRID_HEIGHT];
@@ -29,12 +33,14 @@ typedef struct entity_manager
 {
 	int NumSeal;
 	int NumWhale;
+	int NumTrap;
 } entity_manager;
 
 typedef struct levelEnemies
 {
 	int seals_count;
 	int whale_count;
+	int trap_count;
 } ENEMIESINLEVEL;
 
 int currentLevel;
@@ -48,3 +54,5 @@ void InitObjects(void);
 
 void DrawEnemies(void);
 void DrawPause(void);
+//void drawlevels(void);
+

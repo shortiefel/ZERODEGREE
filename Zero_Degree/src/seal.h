@@ -12,13 +12,15 @@ typedef struct ENTITY
 
 	bool dead; 
 	bool death; 
-
+	bool follow;
 	//animation variables
 	CP_Image sprites[10];
 }	entity;
 
 entity seal[MAXENTITY];	//seals
 entity_manager entityManager;
+
+int countdeath;
 
 CP_Vector GetRandomPosition(void);
 void SealEnemiesUpdate(void);
@@ -27,8 +29,6 @@ void MoveSeal(int id);
 void AttackPlayer(int id);
 void KillSeal(int id);
 void CheckSealHealth(int id);
-void TakeDamage(void);
-
-void GetPlayerPosition(int x, int y);
-void GetArrowPosition(int x, int y);
 void DrawDeath(int seal_id);
+void DisplaySealHP(int id);
+void SetSealGrid(int id);
