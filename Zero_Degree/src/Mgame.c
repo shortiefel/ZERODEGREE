@@ -12,6 +12,7 @@
 #include "Level2.h"
 #include "Level3.h"
 #include "Level4.h"
+#include "LevelSelect.h"
 
 CP_Image ice_grid;
 struct button pause;
@@ -19,6 +20,15 @@ CP_Font footerlevels;
 
 void Mgame_init(void)
 {
+	// retrieve the level that the player has clicked on
+
+	currentLevel = RetrieveLevel();
+
+	if (currentLevel == 0)
+	{
+		currentLevel = 1;
+	}
+	
 	// initialize variables and CProcessing settings for this gamestate
 	CP_Settings_TextAlignment(CP_TEXT_ALIGN_H_CENTER, CP_TEXT_ALIGN_V_MIDDLE);
 	InitObjects();
@@ -33,8 +43,6 @@ void Mgame_init(void)
 
 void Mgame_update(void)
 {
-	currentLevel = 1; 
-	
 	if (currentLevel == 1)
 	{
 		CP_Engine_SetNextGameState(lvl1_init, lvl1_update, NULL);
@@ -43,6 +51,19 @@ void Mgame_update(void)
 	{
 		CP_Engine_SetNextGameState(lvl2_init, lvl2_update, NULL);
 	}
+	else if (currentLevel == 3)
+	{
+		CP_Engine_SetNextGameState(lvl3_init, lvl3_update, NULL);
+	}
+	else if (currentLevel == 4)
+	{
+		CP_Engine_SetNextGameState(lvl4_init, lvl4_update, NULL);
+	}
+	/*else if (currentLevel == 5)
+	{
+		CP_Engine_SetNextGameState(lvl5_init, lvl5_update, NULL);
+	}*/
+
 
 
 	//ElaspedTime += CP_System_GetDt();
@@ -66,9 +87,6 @@ void Mgame_exit(void)
 {
 	// shut down the gamestate and cleanup any dynamic memory
 }
-
-
-
 
 //------GRIDS--------
 void DrawGrids(void)

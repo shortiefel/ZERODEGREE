@@ -25,3 +25,7 @@ void header(void);
 void buttons_struct(void);
 void full_menu(void);
 
+void mouseButtons(float mouseX, float mouseY);
+void navigateButtons(void);
+void DrawButtons(void);
+

@@ -38,6 +38,7 @@ Whale whale;
 entity_manager entityManager;
 //CP_Vector Arrow;
 CP_Font font4;
+int fullHealth;
 
 void Penguin_init(void)
 {
@@ -67,8 +68,10 @@ void DrawPenguin(void)
 //----DRAW HP BAR-----
 void DrawHP(void)
 {
+	CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
+	CP_Graphics_DrawRect((GRID_SIZE / 2) * 2.5, (GRID_SIZE / 2) * 20.75, (float)(fullHealth * 0.25), (GRID_SIZE / 2));
+
 	CP_Settings_Fill(CP_Color_Create(240, 108, 155, 255));	
-	
 	CP_Graphics_DrawRect((GRID_SIZE/2) * 2.5, (GRID_SIZE/2) * 20.75, (float)(penguin.health * 0.25), (GRID_SIZE/2));
 }
 //----DRAW ARROW-----
@@ -108,7 +111,7 @@ void Init(void)
 
 	penguin.alive = true;
 	countdeath = 0;
-
+	fullHealth = penguin.health;
 }
 
 //----PLAYER CONTROLLER MOVMENT-----
