@@ -153,9 +153,9 @@ void randomWhaleSpawn(void) {
 }
 
 // whale level spawning
-void whaleLevelInit(int whaleNum) {
-	for (int i = 0;)
-}
+//void whaleLevelInit(int whaleNum) {
+//	for (int i = 0;)
+//}
 
 // ---- WHALE_INIT, WHALE_UPDATE, WHALE_EXIT ----
 void Whale_init(void)

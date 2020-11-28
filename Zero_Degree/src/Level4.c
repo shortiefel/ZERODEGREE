@@ -31,7 +31,7 @@ void lvl4_init(void)
 	DrawEnemies();
 	Whale_init();
 	DrawPause();
-	level2();
+	level4();
 
 }
 void lvl4_update(void)
@@ -63,7 +63,7 @@ void level4(void)
 		for (int y = 0; y < GRID_HEIGHT; y++)
 			if (grid_array[x][y] == FOOTER)
 			{
-				if (currentLevel == 2)
+				if (currentLevel == 4)
 				{
 					CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
 					CP_Font_DrawText("Level 4", 1600 - 300, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE));
