@@ -65,7 +65,6 @@ void Mgame_update(void)
 	}
 
 
-
 	//ElaspedTime += CP_System_GetDt();
 	// check input, update simulation, render etc.
 	//DrawGrids();
@@ -152,9 +151,9 @@ void DrawPause(void)
 				CP_Settings_TextSize(45);
 				CP_Font_DrawText("HP", 1600 - 1550, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE));
 
-				weapons = CP_Image_Load("./Assets/WEAPONS/ARROW_WEAPON.png");
+				weapons = CP_Image_Load("./Assets/WEAPON/ARROW_WEAPON.png");
 				CP_Font_DrawText("Weapons", 1600 - 980, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE));
-				CP_Image_Draw(weapons, 1600 - 950, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE), 20, 20, 255);
+				CP_Image_Draw(weapons, 1600 - 800, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE),75 , 70, 255);
 
 
 			
@@ -194,10 +193,6 @@ void InitObjects(void)
 	for (int x = 0; x < GRID_WIDTH; x++)
 		for (int y = 0; y < GRID_HEIGHT; y++)
 		{
-			/*if (y == 1)
-			{
-				grid_array[x][y] = HEADER;
-			}*/
 			if (y == GRID_HEIGHT - 1)
 			{
 				grid_array[x][y] = FOOTER;
