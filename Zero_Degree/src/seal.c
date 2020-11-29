@@ -41,8 +41,7 @@ void DrawEnemies(void)
 
 		for (int i = 0; i < entityManager.NumSeal; i++)
 		{
-			while ((seal[i].position.x == newPosition.x && seal[i].position.y == newPosition.y) 
-				|| (whale[i].wPos.x == newPosition.x && whale[i].wPos.y == newPosition.y))
+			while ((seal[i].position.x == newPosition.x && seal[i].position.y == newPosition.y))
 			{
 				newPosition = GetRandomPosition();
 			}
@@ -54,6 +53,15 @@ void DrawEnemies(void)
 					newPosition = GetRandomPosition();
 				}
 			}
+
+			for (int r = 0; r < entityManager.NumWhale; r++)
+			{
+				while ((whale[r].wPos.x == newPosition.x && whale[r].wPos.y == newPosition.y))
+				{
+					newPosition = GetRandomPosition();
+				}
+			}
+
 			for (int s = 0; s < entityManager.NumWall; s++)
 			{
 				while ((wall[s].WallPos.x == newPosition.x && wall[s].WallPos.y == newPosition.y))
@@ -61,6 +69,7 @@ void DrawEnemies(void)
 					newPosition = GetRandomPosition();
 				}
 			}
+
 		}
 
 		seal[entityManager.NumSeal].position = newPosition;
@@ -293,7 +302,7 @@ void InitSealsObjects(void)
 	{
 		totalEnemies = level4enemies.seals_count;
 	}
-	else if (currentLevel == 4)
+	else if (currentLevel == 5)
 	{
 		totalEnemies = level5enemies.seals_count;
 	}

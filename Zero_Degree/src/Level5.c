@@ -38,7 +38,7 @@ void lvl5_init(void)
 	DrawWall();
 	DrawEnemies();
 	DrawPause();
-	level4();
+	level5();
 
 }
 void lvl5_update(void)

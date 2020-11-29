@@ -25,7 +25,6 @@ CP_Image weapons;
 void Mgame_init(void)
 {
 	// retrieve the level that the player has clicked on
-
 	currentLevel = RetrieveLevel();
 
 	if (currentLevel == 0)
@@ -39,8 +38,6 @@ void Mgame_init(void)
 	Penguin_init();
 	//drawlevels();
 	//DrawEnemies();
-	
-
 	
 }
 
@@ -89,6 +86,7 @@ void Mgame_update(void)
 void Mgame_exit(void)
 {
 	// shut down the gamestate and cleanup any dynamic memory
+	ChangeLevel(); // Resets current level back to level 1
 }
 
 //------GRIDS--------
