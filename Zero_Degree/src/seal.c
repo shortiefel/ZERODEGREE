@@ -204,7 +204,7 @@ void SetSealGrid(int id)
 	{
 		grid_array[gridX][gridY] = MAPAREA;
 	}
-	else if (grid_array[gridX][gridY] == MAPAREA && grid_array[gridX][gridY] != TRAP)
+	else if (grid_array[gridX][gridY] == MAPAREA && grid_array[gridX][gridY] != TRAP && grid_array[gridX][gridY] != WALL)
 	{
 		grid_array[gridX][gridY] = SEAL;
 	}

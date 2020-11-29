@@ -32,6 +32,8 @@ void lvl3_init(void)
 	//drawlevels();
 	Penguin_init();
 	Whale_init();
+	DrawWaterTrap();
+	DrawWall();
 	DrawEnemies();
 	DrawPause();
 	level3();
@@ -43,14 +45,14 @@ void lvl3_update(void)
 	// check input, update simulation, render etc.
 	DrawGrids();
 	DrawPause();
+	DrawWaterTrapUpdate();
 	Penguin_update();
 	PlayerMovement();
 	MovePenguin();
-	SealEnemiesUpdate();
-	DrawWaterTrapUpdate();
 	drawWhale();
 	drawProjectile();
 	Whale_update();
+	SealEnemiesUpdate();
 }
 
 
