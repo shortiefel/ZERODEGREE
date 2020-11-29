@@ -42,7 +42,7 @@ void DrawEnemies(void)
 		for (int i = 0; i < entityManager.NumSeal; i++)
 		{
 			while ((seal[i].position.x == newPosition.x && seal[i].position.y == newPosition.y) 
-				|| (whale.wPos.x == newPosition.x && whale.wPos.y == newPosition.y))
+				|| (whale[i].wPos.x == newPosition.x && whale[i].wPos.y == newPosition.y))
 			{
 				newPosition = GetRandomPosition();
 			}

@@ -14,6 +14,7 @@
 #include "GameOver.h"
 #include "wingame.h"
 #include "Trap.h"
+#include "Timer.h"
 
 
 
@@ -33,8 +34,7 @@ void lvl2_init(void)
 	Whale_init();
 	DrawEnemies();
 	DrawPause();
-	level2();
-
+	setLevelTimer(currentLevel);
 }
 void lvl2_update(void)
 {
@@ -47,6 +47,8 @@ void lvl2_update(void)
 	PlayerMovement();
 	MovePenguin();
 	SealEnemiesUpdate();
+	level2();
+	displayTimer();
 	//drawWhale();
 }
 
@@ -66,8 +68,9 @@ void level2(void)
 			{
 				if (currentLevel == 2)
 				{
+					CP_Settings_TextSize(45);
 					CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
-					CP_Font_DrawText("Level 2", 1600 - 300, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE));
+					CP_Font_DrawText("Level 2", 1600 - 330, ((GRID_HEIGHT - (float)1.45) * GRID_SIZE));
 				}
 			}
 }
