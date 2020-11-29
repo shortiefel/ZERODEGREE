@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include <intrin.h>
-#include <cprocessing.h>
+#include "cprocessing.h"
 #include <stdbool.h>
 #include "menu.h"
 #include "Mgame.h"
@@ -17,6 +17,7 @@
 #include "GameOver.h"
 #include "wingame.h"
 #include "Trap.h"
+#include "Timer.h"
 
 
 
@@ -35,8 +36,11 @@ void lvl3_init(void)
 	DrawWaterTrap();
 	DrawWall();
 	Whale_init();
+	DrawWaterTrap();
+	DrawWall();
+	DrawEnemies();
 	DrawPause();
-	level3();
+	setLevelTimer(currentLevel);
 
 }
 void lvl3_update(void)
@@ -45,14 +49,16 @@ void lvl3_update(void)
 	// check input, update simulation, render etc.
 	DrawGrids();
 	DrawPause();
+	DrawWaterTrapUpdate();
 	Penguin_update();
 	PlayerMovement();
 	MovePenguin();
-	SealEnemiesUpdate();
-	DrawWaterTrapUpdate();
-	drawWhale();
-	drawProjectile();
+	//drawWhale();
+	//drawProjectile();
 	Whale_update();
+	SealEnemiesUpdate();
+	level3();
+	displayTimer();
 }
 
 
@@ -62,7 +68,6 @@ void lvl3_exit(void)
 
 void level3(void)
 {
-
 	footerlevels = CP_Font_Load("./Assets/Iceberg.ttf");
 	CP_Font_Set(footerlevels);
 
@@ -72,8 +77,9 @@ void level3(void)
 			{
 				if (currentLevel == 3)
 				{
+					CP_Settings_TextSize(45);
 					CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
-					CP_Font_DrawText("Level 3", 1600 - 300, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE));
+					CP_Font_DrawText("Level 3", 1600 - 330, ((GRID_HEIGHT - (float)1.45) * GRID_SIZE));
 				}
 			}
 }

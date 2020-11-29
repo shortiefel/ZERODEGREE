@@ -18,6 +18,7 @@
 #include "Level5.h"
 
 
+
 void lvl5_init(void)
 {
 	currentLevel = 5;
@@ -33,6 +34,9 @@ void lvl5_init(void)
 	DrawWaterTrap();
 	DrawWall();
 	Whale_init();
+	DrawWaterTrap();
+	DrawWall();
+	DrawEnemies();
 	DrawPause();
 	level4();
 
@@ -43,11 +47,12 @@ void lvl5_update(void)
 	// check input, update simulation, render etc.
 	DrawGrids();
 	DrawPause();
+	DrawWaterTrapUpdate();
 	Penguin_update();
 	PlayerMovement();
 	MovePenguin();
 	SealEnemiesUpdate();
-	DrawWaterTrapUpdate();
+	
 	//drawWhale();
 }
 
