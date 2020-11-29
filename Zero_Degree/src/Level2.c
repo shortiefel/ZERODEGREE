@@ -57,7 +57,6 @@ void lvl2_exit(void)
 
 void level2(void)
 {
-
 	footerlevels = CP_Font_Load("./Assets/Iceberg.ttf");
 	CP_Font_Set(footerlevels);
 

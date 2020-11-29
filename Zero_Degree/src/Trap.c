@@ -188,10 +188,17 @@ void DrawWall(void)
 
 		for (int i = 0; i < entityManager.NumWall; i++)
 		{
-			if ((seal[i].position.x == newPos.x && seal[i].position.y == newPos.y)
+			while ((seal[i].position.x == newPos.x && seal[i].position.y == newPos.y)
 				|| (whale.wPos.x == newPos.x && whale.wPos.y == newPos.y)
-				|| (water[i].Wposition.x == newPos.x && water[i].Wposition.y == newPos.y)
 				|| (wall[i].WallPos.x == newPos.x && wall[i].WallPos.y == newPos.y))
+			{
+				newPos = GetRandomPosition();
+			}
+		}
+
+		for (int w = 0; w < entityManager.NumTrap; w++)
+		{
+			while ((water[w].Wposition.x == newPos.x && water[w].Wposition.y == newPos.y))
 			{
 				newPos = GetRandomPosition();
 			}
