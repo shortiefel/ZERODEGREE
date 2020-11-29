@@ -62,9 +62,9 @@ void DrawEnemies(void)
 				}
 			}
 
-			for (int t = 0; t < entityManager.NumWall; t++)
+			for (int s = 0; s < entityManager.NumWall; s++)
 			{
-				while ((wall[t].WallPos.x == newPosition.x && wall[t].WallPos.y == newPosition.y))
+				while ((wall[s].WallPos.x == newPosition.x && wall[s].WallPos.y == newPosition.y))
 				{
 					newPosition = GetRandomPosition();
 				}

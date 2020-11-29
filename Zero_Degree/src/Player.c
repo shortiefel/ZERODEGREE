@@ -18,17 +18,6 @@
 #include "final_win.h"
 
 
-
-//Task:
-//Add Fish weapon
-//Modify Bow, add cooldown
-//Direction control
-//Add Weapon Movement
-//Penguin collision
-//Penguin animation bugged again. (Hold Z and release Z)
-
-
-
 //Declaring Variables
 int velocityX, velocityY;
 bool Hurt;

@@ -70,7 +70,7 @@ void DrawWaterTrap(void)
 	{
 		newPos = GetRandomWaterPosition();
 
-		for (int i = 0; i < entityManager.NumTrap; i++)
+		for (int i = 0; i < entityManager.NumSeal; i++)
 		{
 			if ((seal[i].position.x == newPos.x && seal[i].position.y == newPos.y)
 				|| (whale[i].wPos.x == newPos.x && whale[i].wPos.y == newPos.y)
@@ -159,6 +159,7 @@ CP_Vector GetRandomWaterPosition(void)
 //------WALL---------
 void InitWall(void)
 {
+	totalwall = 0;
 	if (currentLevel == 1)
 	{
 		totalwall = level1enemies.wall_count;
@@ -200,24 +201,24 @@ void DrawWall(void)
 	{
 		newPos = GetRandomWaterPosition();
 
-		for (int i = 0; i < entityManager.NumWall; i++)
+		for (int i = 0; i < entityManager.NumSeal; i++)
 		{
-			while ((seal[i].position.x == newPos.x && seal[i].position.y == newPos.y)
-				|| (whale[i].wPos.x == newPos.x && whale[i].wPos.y == newPos.y)
-				|| (wall[i].WallPos.x == newPos.x && wall[i].WallPos.y == newPos.y))
+			if ((seal[i].position.x == newPos.x && seal[i].position.y == newPos.y)
+				|| (whale[i].wPos.x == newPos.x && whale[i].wPos.y == newPos.y))
 			{
 				newPos = GetRandomPosition();
 			}
 		}
-
 		for (int w = 0; w < entityManager.NumTrap; w++)
 		{
-			while ((water[w].Wposition.x == newPos.x && water[w].Wposition.y == newPos.y))
-			{
+			if (water[w].Wposition.x == newPos.x && water[w].Wposition.y == newPos.y)
 				newPos = GetRandomPosition();
-			}
 		}
-
+		for (int s = 0; s < entityManager.NumTrap; s++)
+		{
+			if (wall[s].WallPos.x == newPos.x && wall[s].WallPos.y == newPos.y)
+				newPos = GetRandomPosition();
+		}
 		wall[entityManager.NumWall].WallPos = newPos;
 		CP_Image_Draw(wall[entityManager.NumWall].Block,
 			(float)wall[entityManager.NumWall].WallPos.x * GRID_SIZE - grid_size1,
