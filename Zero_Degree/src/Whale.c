@@ -3,8 +3,10 @@
 #include "cprocessing.h"
 #include "GameOver.h"
 #include "Level1.h"
+#include "Level2.h"
 #include "Level3.h"
 #include "Level4.h"
+#include "Level5.h"
 #include "Mgame.h"
 #include "Player.h"
 #include "seal.h"
@@ -45,6 +47,10 @@ float deathTimer = 4.0f;
 float deathTime = 0; int death = 0;
 
 CP_Image trapGrid;
+
+//----- DEATH COUNTER ---
+//whaledeathcounter = 0; <--- error 
+int totalEnemieswhales = 0;
 
 // draw whale health bar
 void whaleHPBar(void) {
@@ -160,6 +166,27 @@ void randomWhaleSpawn(void) {
 // ---- WHALE_INIT, WHALE_UPDATE, WHALE_EXIT ----
 void Whale_init(void)
 {
+	if (currentLevel == 1)
+	{
+		totalEnemieswhales = level1enemies.whale_count;
+	}
+	else if (currentLevel == 2)
+	{
+		totalEnemieswhales = level2enemies.whale_count;
+	}
+	else if (currentLevel == 3)
+	{
+		totalEnemieswhales = level3enemies.whale_count;
+	}
+	else if (currentLevel == 4)
+	{
+		totalEnemieswhales = level4enemies.whale_count;
+	}
+	else if (currentLevel == 5)
+	{
+		totalEnemieswhales = level5enemies.whale_count;
+	}
+
 	randomWhaleSpawn();
 	//trapGrid = CP_Image_Load("./Assets/WATER.png");
 	// Set projectile starting position at whale position

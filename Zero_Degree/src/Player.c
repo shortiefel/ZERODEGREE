@@ -15,6 +15,18 @@
 #include "Whale.h"
 #include "wingame.h"
 
+
+
+//Task:
+//Add Fish weapon
+//Modify Bow, add cooldown
+//Direction control
+//Add Weapon Movement
+//Penguin collision
+//Penguin animation bugged again. (Hold Z and release Z)
+
+
+
 //Declaring Variables
 int velocityX, velocityY;
 bool Hurt;
@@ -151,13 +163,19 @@ void PlayerMovement(void)
 		penguin.arrow.DirY = 0;
 		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/PENGUIN_RIGHT.png");
 	}
-	else if (penguin.health > 0 && countdeath == entityManager.NumSeal)
+	else if ((penguin.health > 0 && countdeath == entityManager.NumSeal) 
+		|| (penguin.health > 0 && countdeath == entityManager.NumSeal && whaledeathcounter == entityManager.NumWhale))
 	{
 		velocityX = 0;
 		velocityY = 0;
 		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/WIN.png");
 		CP_Engine_SetNextGameState(win_init, win_update, win_exit);
 	}
+	else if (currentLevel == 5 && penguin.health > 0 && countdeath == entityManager.NumSeal && countdeath == entityManager.NumWhale)
+	{
+
+	}
+
 	//Penguin Stay Still
 	else
 	{
