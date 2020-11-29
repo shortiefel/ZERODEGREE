@@ -18,12 +18,13 @@
 
 
 
+
 void lvl4_init(void)
 {
 	currentLevel = 4;
-	level4enemies.seals_count = 14;
-	level4enemies.trap_count = 10;
-	level4enemies.whale_count = 5;
+	level4enemies.seals_count = 10;
+	level4enemies.trap_count = 8;
+	level4enemies.whale_count = 4;
 
 	InitObjects();
 	//drawlevels();

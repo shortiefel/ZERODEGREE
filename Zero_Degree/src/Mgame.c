@@ -12,6 +12,7 @@
 #include "Level2.h"
 #include "Level3.h"
 #include "Level4.h"
+#include "Level5.h"
 #include "LevelSelect.h"
 
 CP_Image ice_grid;
