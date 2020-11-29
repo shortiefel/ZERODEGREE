@@ -87,11 +87,11 @@ void DrawWaterTrap(void)
 
 void WaterTrapAttack(int id)
 {
-	/*if (penguin.X == water[id].Wposition.x && penguin.Y == water[id].Wposition.y)
-	{
-		penguin.health = penguin.health - water[id].attack;
-		//printf("health: %d\n", penguin.health);
-	}*/
+	//if (penguin.X == water[id].Wposition.x && penguin.Y == water[id].Wposition.y)
+	//{
+	//	penguin.health = penguin.health - water[id].attack;
+	//	//printf("health: %d\n", penguin.health);
+	//}
 	if (grid_array[penguin.X][penguin.Y] == TRAP) {
 		penguin.health = penguin.health - water[0].attack;
 	}
@@ -145,5 +145,3 @@ CP_Vector GetRandomWaterPosition(void)
 
 	return randpos;
 }
-
-

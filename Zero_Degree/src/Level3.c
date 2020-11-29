@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include <intrin.h>
-#include <cprocessing.h>
+#include "cprocessing.h"
 #include <stdbool.h>
 #include "menu.h"
 #include "Mgame.h"
@@ -34,8 +34,7 @@ void lvl3_init(void)
 	DrawEnemies();
 	Whale_init();
 	DrawPause();
-	setLevelTimer(3);
-	level3();
+	setLevelTimer(currentLevel);
 
 }
 void lvl3_update(void)
@@ -52,6 +51,7 @@ void lvl3_update(void)
 	//drawWhale();
 	//drawProjectile();
 	Whale_update();
+	level3();
 	displayTimer();
 }
 
@@ -62,7 +62,6 @@ void lvl3_exit(void)
 
 void level3(void)
 {
-
 	footerlevels = CP_Font_Load("./Assets/Iceberg.ttf");
 	CP_Font_Set(footerlevels);
 
@@ -72,8 +71,9 @@ void level3(void)
 			{
 				if (currentLevel == 3)
 				{
+					CP_Settings_TextSize(45);
 					CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
-					CP_Font_DrawText("Level 3", 1600 - 300, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE));
+					CP_Font_DrawText("Level 3", 1600 - 330, ((GRID_HEIGHT - (float)1.45) * GRID_SIZE));
 				}
 			}
 }

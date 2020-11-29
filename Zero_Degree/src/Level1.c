@@ -31,19 +31,18 @@ void lvl1_init(void)
 
 
 	InitObjects();
-	level1();
 	//drawlevels();
 	Penguin_init();
 	DrawWaterTrap();
-	//Whale_init();
 	DrawEnemies();
-	setLevelTimer(1);
+	setLevelTimer(currentLevel);
 
 }
 void lvl1_update(void)
 {
 	ElaspedTime += CP_System_GetDt();
 	// check input, update simulation, render etc.
+	level1();
 	DrawGrids();
 	DrawPause();
 	DrawWaterTrapUpdate();
@@ -52,14 +51,11 @@ void lvl1_update(void)
 	MovePenguin();
 	SealEnemiesUpdate();
 	displayTimer();
-
-	//Whale_update();
 	
 }
 
 void lvl1_exit(void)
 {
-
 }
 
 void level1(void)
@@ -73,8 +69,9 @@ void level1(void)
 			{
 				if (currentLevel == 1)
 				{
+					CP_Settings_TextSize(45);
 					CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
-					CP_Font_DrawText("Level 1", 1600 - 300, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE));
+					CP_Font_DrawText("Level 1", 1600 - 330, ((GRID_HEIGHT - (float)1.45) * GRID_SIZE));
 				}
 			}
 }

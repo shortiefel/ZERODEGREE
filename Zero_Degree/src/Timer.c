@@ -18,16 +18,16 @@ float timePassed;
 
 void setLevelTimer(int levelnum) {
 	if (levelnum == 1) {
-		levelTimer = 30.0f;
+		levelTimer = 31.0f;
 	}
 	if (levelnum == 2) {
-		levelTimer = 50.0f;
+		levelTimer = 51.0f;
 	}
 	if (levelnum == 3) {
-		levelTimer = 60.0f;
+		levelTimer = 61.0f;
 	}
 	if (levelnum == 4) {
-		levelTimer = 70.0f;
+		levelTimer = 71.0f;
 	}
 	timePassed = levelTimer;
 }
@@ -45,9 +45,6 @@ void timerCountdown(void) {
 }
 
 void displayTimer(void) {
-	//footerlevels = CP_Font_Load("./Assets/Iceberg.ttf");
-	//CP_Font_Set(footerlevels);
-
 	timerCountdown();
 
 	char* timeString = malloc(50);
@@ -56,10 +53,11 @@ void displayTimer(void) {
 	for (int x = 0; x < GRID_WIDTH; x++) {
 		for (int y = 0; y < GRID_HEIGHT; y++) {
 			if (grid_array[x][y] == FOOTER) {
-				//CP_Font font2 = CP_Font_Load("./Assets/Antipasto-REG.ttf");
-				//CP_Font_Set(font2);
+				CP_Font timerFont = CP_Font_Load("./Assets/cafe brewery bold.ttf");
+				CP_Font_Set(timerFont);
+				CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
 				CP_Settings_TextSize(30);
-				CP_Font_DrawText(timeString, 1600 - 330, ((GRID_HEIGHT - 0.95f) * GRID_SIZE));
+				CP_Font_DrawText(timeString, 1600 - 330, ((GRID_HEIGHT - 1.05f) * GRID_SIZE));
 			}
 		}
 	}

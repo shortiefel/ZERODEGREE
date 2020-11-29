@@ -4,6 +4,7 @@
 #include "GameOver.h"
 #include "Level3.h"
 #include "Level4.h"
+#include "Level5.h"
 #include "Mgame.h"
 #include "Player.h"
 #include "seal.h"
@@ -33,14 +34,14 @@ int spawnProj, projSpawned;
 float spawnTimer = 5.0f;
 CP_Vector moveProj;
 int lastPosX, lastPosY;
-float projSpeed = 0.08f;
+float projSpeed = 0.02f;
 
 // ---- PENGUIN DECLARATION ----
 Player penguin;
 CP_Vector penguinLastPos;
 
 // ---- TIMER ----
-float timePassed;
+float deathTimePassed;
 float deathTimer = 4.0f;
 float deathTime = 0; int death = 0;
 
@@ -165,6 +166,9 @@ void whaleLevelInit(void) {
 	if (currentLevel == 4) {
 		entityManager.NumWhale = level4enemies.whale_count;
 	}
+	if (currentLevel == 5) {
+		entityManager.NumWhale = level5enemies.whale_count;
+	}
 	if (entityManager.NumWhale > 0) {
 		for (int i = 0; i < entityManager.NumWhale; i++) {
 			randomWhaleSpawn();
@@ -175,12 +179,6 @@ void whaleLevelInit(void) {
 // ---- WHALE_INIT, WHALE_UPDATE, WHALE_EXIT ----
 void Whale_init(void)
 {
-	if (currentLevel == 3) {
-		entityManager.NumWhale = level3enemies.whale_count;
-	}
-	if (currentLevel == 4) {
-		entityManager.NumWhale = level4enemies.whale_count;
-	}
 	randomWhaleSpawn();
 	whaleLevelInit();
 	//trapGrid = CP_Image_Load("./Assets/WATER.png");
@@ -198,23 +196,12 @@ void Whale_update(void)
 	//randomWhaleSpawn();
 	//CP_Image_Draw(trapGrid, (whale.wPos.x * GRID_SIZE) - GRID_SIZE / 2, (whale.wPos.y * GRID_SIZE) - GRID_SIZE / 2, GRID_SIZE, GRID_SIZE, 255);
 	whaleTime += CP_System_GetDt();
-	timePassed += CP_System_GetDt();
+	deathTimePassed += CP_System_GetDt();
 
 	if (whaleTime >= whaleSpeed) {
 		whaleTime -= whaleSpeed;
 
 		//projectileSpawn();
-		for (int i = 0; i < entityManager.NumWhale; i++) {
-			if (whale[i].alive == 1 && whale[i].death == 0) {
-				drawWhale(i);
-				drawProjectile(i);
-				printf("%f %f", whale[i].wPos.x, whale[i].wPos.y);
-
-				if (whale[i].health <= 0) {
-					whale[i].alive = 0;
-					whale[i].death = 1;
-				}
-
 		for (int count = 0; count < entityManager.NumWhale; count++) {
 			if (whale[count].alive == 1 && whale[count].death == 0) {
 				drawWhale(count);

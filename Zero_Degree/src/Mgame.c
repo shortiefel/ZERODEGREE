@@ -37,8 +37,7 @@ void Mgame_init(void)
 	InitObjects();
 	Penguin_init();
 	//drawlevels();
-	/*DrawEnemies();
-	Whale_init();*/
+	//DrawEnemies();
 	
 
 	
@@ -147,12 +146,15 @@ void DrawPause(void)
 				CP_Settings_Fill(pause.colorFont);
 				CP_Font_DrawText(pause.text, pause.x, pause.y);
 
+				footerlevels = CP_Font_Load("./Assets/Iceberg.ttf");
+				CP_Font_Set(footerlevels);
+
 				CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
 				CP_Settings_TextSize(45);
 				CP_Font_DrawText("HP", 1600 - 1550, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE));
 
 			
-				if (currentLevel == 1)
+				/*if (currentLevel == 1)
 				{
 					CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
 					CP_Font_DrawText("Level 1", 1600 - 330, ((GRID_HEIGHT - (float)1.45) * GRID_SIZE));
@@ -167,7 +169,7 @@ void DrawPause(void)
 				{
 					CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
 					CP_Font_DrawText("Level 3", 1600 - 330, ((GRID_HEIGHT - (float)1.45) * GRID_SIZE));
-				}
+				}*/
 
 				
 
@@ -201,7 +203,6 @@ void InitObjects(void)
 				grid_array[x][y] = MAPAREA;
 			}
 		}
-
 
 
 	//pause button
