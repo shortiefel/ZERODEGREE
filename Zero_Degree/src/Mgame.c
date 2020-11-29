@@ -154,9 +154,9 @@ void DrawPause(void)
 				CP_Settings_TextSize(45);
 				CP_Font_DrawText("HP", 1600 - 1550, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE));
 
-				weapons = CP_Image_Load("./Assets/WEAPONS/ARROW_WEAPON.png");
+				weapons = CP_Image_Load("./Assets/WEAPON/ARROW_WEAPON.png");
 				CP_Font_DrawText("Weapons", 1600 - 980, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE));
-				CP_Image_Draw(weapons, 1600 - 950, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE), 20, 20, 255);
+				CP_Image_Draw(weapons, 1600 - 800, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE),75 , 70, 255);
 
 
 			
