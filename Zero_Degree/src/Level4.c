@@ -25,6 +25,7 @@ void lvl4_init(void)
 	level4enemies.seals_count = 10;
 	level4enemies.trap_count = 8;
 	level4enemies.whale_count = 4;
+	level4enemies.wall_count = 10;
 
 	InitObjects();
 	//drawlevels();

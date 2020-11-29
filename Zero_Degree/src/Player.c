@@ -10,21 +10,10 @@
 #include "Level2.h"
 #include "Level3.h"
 #include "Level4.h"
+#include "Trap.h"
 #include "GameOver.h"
 #include "Whale.h"
 #include "wingame.h"
-
-
-
-//Task:
-//Add Fish weapon
-//Modify Bow, add cooldown
-//Direction control
-//Add Weapon Movement
-//Penguin collision
-//Penguin animation bugged again. (Hold Z and release Z)
-
-
 
 //Declaring Variables
 int velocityX, velocityY;
@@ -194,7 +183,9 @@ void MovePenguin(void)
 		tempGridX = penguin.X + velocityX;
 		tempGridY = penguin.Y + velocityY;
 
-		if (grid_array[tempGridX][tempGridY] != SEAL && grid_array[tempGridX][tempGridY] != WHALE)
+		if (grid_array[tempGridX][tempGridY] != SEAL 
+			&& grid_array[tempGridX][tempGridY] != WHALE 
+			&& grid_array[tempGridX][tempGridY] != WALL)
 		{
 			penguin.X += velocityX;
 			penguin.Y += velocityY;
@@ -307,6 +298,13 @@ void ArrowMove(void)
 				{
 					ClearArrow();
 					seal[id].health -= 100;
+				}
+			}
+			for (int id = 0; id < entityManager.NumWall; id++)
+			{
+				if (penguin.arrow.ArrowX == wall[id].WallPos.x && penguin.arrow.ArrowY == wall[id].WallPos.y)
+				{
+					ClearArrow();
 				}
 			}
 		}

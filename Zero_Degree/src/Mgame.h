@@ -23,6 +23,7 @@ typedef enum GRID_STATE
 	PLAYER,
 	SEAL,
 	TRAP,
+	WALL,
 	WHALE,
 	HOLE
 }GRID_MAP;
@@ -34,6 +35,7 @@ typedef struct entity_manager
 	int NumSeal;
 	int NumWhale;
 	int NumTrap;
+	int NumWall;
 } entity_manager;
 
 typedef struct levelEnemies
@@ -41,6 +43,7 @@ typedef struct levelEnemies
 	int seals_count;
 	int whale_count;
 	int trap_count;
+	int wall_count;
 } ENEMIESINLEVEL;
 
 int currentLevel;
