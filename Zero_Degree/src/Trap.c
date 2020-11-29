@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
-#include <cprocessing.h>
+#include "cprocessing.h"
 #include "menu.h"
 #include "Mgame.h"
 #include "Player.h"
@@ -53,7 +53,7 @@ void InitWaterObjects(void)
 	{
 		water[i].waterTrap = CP_Image_Load("./Assets/WATER.png");
 
-		water[i].attack = 50;
+		water[i].attack = 20;
 	}
 }
 
@@ -73,7 +73,7 @@ void DrawWaterTrap(void)
 		for (int i = 0; i < entityManager.NumTrap; i++)
 		{
 			if ((seal[i].position.x == newPos.x && seal[i].position.y == newPos.y)
-				|| (whale.wPos.x == newPos.x && whale.wPos.y == newPos.y)
+				|| (whale[i].wPos.x == newPos.x && whale[i].wPos.y == newPos.y)
 				|| (water[i].Wposition.x == newPos.x && water[i].Wposition.y == newPos.y))
 			{
 				newPos = GetRandomPosition();
@@ -93,11 +93,16 @@ void DrawWaterTrap(void)
 
 void WaterTrapAttack(int id)
 {
-	if (penguin.X == water[id].Wposition.x && penguin.Y == water[id].Wposition.y)
-	{
-		penguin.health = penguin.health - water[id].attack;
-		//printf("health: %d\n", penguin.health);
+	//if (penguin.X == water[id].Wposition.x && penguin.Y == water[id].Wposition.y)
+	//{
+	//	penguin.health = penguin.health - water[id].attack;
+	//	//printf("health: %d\n", penguin.health);
+	//}
+	if (grid_array[penguin.X][penguin.Y] == TRAP) {
+		penguin.health = penguin.health - water[0].attack;
 	}
+
+		//printf("health: %d\n", penguin.health);
 	PHurt(WaterTrap);
 }
 

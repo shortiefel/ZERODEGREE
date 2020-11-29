@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <intrin.h>
-#include <cprocessing.h>
+#include "cprocessing.h"
 #include <stdbool.h>
 #include "menu.h"
 #include "Mgame.h"
@@ -15,6 +15,7 @@
 #include "wingame.h"
 #include "Trap.h"
 #include "Level4.h"
+#include "Timer.h"
 
 
 
@@ -33,7 +34,7 @@ void lvl4_init(void)
 	DrawEnemies();
 	Whale_init();
 	DrawPause();
-	level4();
+	setLevelTimer(currentLevel);
 
 }
 void lvl4_update(void)
@@ -47,7 +48,9 @@ void lvl4_update(void)
 	MovePenguin();
 	SealEnemiesUpdate();
 	DrawWaterTrapUpdate();
-	//drawWhale();
+	Whale_update();
+	level4();
+	displayTimer();
 }
 
 
@@ -57,7 +60,6 @@ void lvl4_exit(void)
 
 void level4(void)
 {
-
 	footerlevels = CP_Font_Load("./Assets/Iceberg.ttf");
 	CP_Font_Set(footerlevels);
 
@@ -67,8 +69,9 @@ void level4(void)
 			{
 				if (currentLevel == 4)
 				{
+					CP_Settings_TextSize(45);
 					CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
-					CP_Font_DrawText("Level 4", 1600 - 300, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE));
+					CP_Font_DrawText("Level 4", 1600 - 330, ((GRID_HEIGHT - (float)1.45) * GRID_SIZE));
 				}
 			}
 }

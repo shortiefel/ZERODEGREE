@@ -36,7 +36,7 @@ int directionX, directionY;
 float time = 0;
 float speed = 0.2f;
 CP_Image Penguin, Arrow, Clear;
-Whale whale;
+//Whale whale;
 entity_manager entityManager;
 //CP_Vector Arrow;
 CP_Font font4;
@@ -306,10 +306,12 @@ void ArrowMove(void)
 			penguin.arrow.ArrowX += directionX;
 			penguin.arrow.ArrowY += directionY;
 
-			if (penguin.arrow.ArrowX == whale.wPos.x && penguin.arrow.ArrowY == whale.wPos.y)
-			{
-				ClearArrow();
-				whale.health -= 100;
+			for (int whaleid = 0; whaleid < entityManager.NumWhale; whaleid++) {
+				if (penguin.arrow.ArrowX == whale[whaleid].wPos.x && penguin.arrow.ArrowY == whale[whaleid].wPos.y)
+				{
+					ClearArrow();
+					whale[whaleid].health -= 100;
+				}
 			}
 			for (int id = 0; id < entityManager.NumSeal; id++)
 			{

@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <intrin.h>
-#include <cprocessing.h>
+#include "cprocessing.h"
 #include <stdbool.h>
 #include "menu.h"
 #include "Mgame.h"
@@ -12,10 +12,12 @@
 #include "Level2.h"
 #include "Level3.h"
 #include "Level4.h"
+#include "Timer.h"
 #include "Level5.h"
 #include "LevelSelect.h"
 
 CP_Image ice_grid;
+CP_Image trap_grid;
 struct button pause;
 CP_Font footerlevels;
 
@@ -35,8 +37,7 @@ void Mgame_init(void)
 	InitObjects();
 	Penguin_init();
 	//drawlevels();
-	/*DrawEnemies();
-	Whale_init();*/
+	//DrawEnemies();
 	
 
 	
@@ -97,10 +98,16 @@ void DrawGrids(void)
 	CP_Settings_Background(CP_Color_Create(48, 77, 109, 255));
 
 	//draws the map
-	for (int x = 0; x < GRID_WIDTH; x++)
-		for (int y = 0; y < GRID_HEIGHT; y++)
-			if(grid_array[x][y] == MAPAREA || grid_array[x][y] == SEAL)
+	for (int x = 0; x < GRID_WIDTH; x++) {
+		for (int y = 0; y < GRID_HEIGHT; y++) {
+			if (grid_array[x][y] == MAPAREA || grid_array[x][y] == SEAL) {	
 				CP_Image_Draw(ice_grid, (float)x * GRID_SIZE - grid_size, (float)y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);
+			}
+			if (grid_array[x][y] == TRAP || grid_array[x][y] == WHALE) {
+				CP_Image_Draw(trap_grid, (float)x * GRID_SIZE - grid_size, (float)y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);
+			}
+		}
+	}
 }
 
 //------PAUSE--------
@@ -139,27 +146,30 @@ void DrawPause(void)
 				CP_Settings_Fill(pause.colorFont);
 				CP_Font_DrawText(pause.text, pause.x, pause.y);
 
+				footerlevels = CP_Font_Load("./Assets/Iceberg.ttf");
+				CP_Font_Set(footerlevels);
+
 				CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
 				CP_Settings_TextSize(45);
 				CP_Font_DrawText("HP", 1600 - 1550, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE));
 
 			
-				if (currentLevel == 1)
+				/*if (currentLevel == 1)
 				{
 					CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
-					CP_Font_DrawText("Level 1", 1600 - 300, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE));
+					CP_Font_DrawText("Level 1", 1600 - 330, ((GRID_HEIGHT - (float)1.45) * GRID_SIZE));
 				}
 				else if (currentLevel == 2)
 				{
 					CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
-					CP_Font_DrawText("Level 2", 1600 - 300, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE));
+					CP_Font_DrawText("Level 2", 1600 - 330, ((GRID_HEIGHT - (float)1.45) * GRID_SIZE));
 				}
 
 				else if (currentLevel == 3)
 				{
 					CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
-					CP_Font_DrawText("Level 3", 1600 - 300, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE));
-				}
+					CP_Font_DrawText("Level 3", 1600 - 330, ((GRID_HEIGHT - (float)1.45) * GRID_SIZE));
+				}*/
 
 				
 
@@ -174,6 +184,7 @@ void InitObjects(void)
 {
 	//float grid_size = GRID_SIZE / 2;
 	ice_grid = CP_Image_Load("./Assets/CUBE.png");
+	trap_grid = CP_Image_Load("./Assets/WATER.png");
 
 	// initialises the grids
 	for (int x = 0; x < GRID_WIDTH; x++)
@@ -192,7 +203,6 @@ void InitObjects(void)
 				grid_array[x][y] = MAPAREA;
 			}
 		}
-
 
 
 	//pause button
