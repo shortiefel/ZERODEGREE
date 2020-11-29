@@ -50,8 +50,8 @@ void lvl3_update(void)
 	Penguin_update();
 	PlayerMovement();
 	MovePenguin();
-	drawWhale();
-	drawProjectile();
+	//drawWhale();
+	//drawProjectile();
 	Whale_update();
 	SealEnemiesUpdate();
 	level3();
