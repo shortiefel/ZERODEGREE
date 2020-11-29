@@ -10,6 +10,7 @@
 #include "Level2.h"
 #include "Level3.h"
 #include "Level4.h"
+#include "Level5.h"
 #include "Trap.h"
 #include "GameOver.h"
 #include "Whale.h"
