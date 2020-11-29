@@ -19,12 +19,13 @@
 
 
 
+
 void lvl4_init(void)
 {
 	currentLevel = 4;
-	level4enemies.seals_count = 14;
-	level4enemies.trap_count = 10;
-	level4enemies.whale_count = 5;
+	level4enemies.seals_count = 10;
+	level4enemies.trap_count = 8;
+	level4enemies.whale_count = 4;
 
 	InitObjects();
 	//drawlevels();
@@ -34,6 +35,7 @@ void lvl4_init(void)
 	DrawPause();
 	level2();
 	//setLevelTimer(currentLevel);
+	level4();
 
 }
 void lvl4_update(void)
@@ -66,7 +68,7 @@ void level4(void)
 		for (int y = 0; y < GRID_HEIGHT; y++)
 			if (grid_array[x][y] == FOOTER)
 			{
-				if (currentLevel == 2)
+				if (currentLevel == 4)
 				{
 					CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
 					CP_Font_DrawText("Level 4", 1600 - 300, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE));

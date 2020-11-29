@@ -198,6 +198,8 @@ xcopy "$(ProjectDir)Assets\*" "$(OutDir)Assets\" /s /r /y /q</Command>
     <ClCompile Include="src\Level2.c" />
     <ClCompile Include="src\Level3.c" />
     <ClCompile Include="src\Level4.c" />
+    <ClCompile Include="src\Level5.c" />
+    <ClCompile Include="src\LevelSelect.c" />
     <ClCompile Include="src\Mgame.c" />
     <ClCompile Include="src\menu.c" />
     <ClCompile Include="src\Pause.c" />
@@ -216,6 +218,8 @@ xcopy "$(ProjectDir)Assets\*" "$(OutDir)Assets\" /s /r /y /q</Command>
     <ClInclude Include="src\Level2.h" />
     <ClInclude Include="src\Level3.h" />
     <ClInclude Include="src\Level4.h" />
+    <ClInclude Include="src\Level5.h" />
+    <ClInclude Include="src\LevelSelect.h" />
     <ClInclude Include="src\Mgame.h" />
     <ClInclude Include="src\menu.h" />
     <ClInclude Include="src\Pause.h" />

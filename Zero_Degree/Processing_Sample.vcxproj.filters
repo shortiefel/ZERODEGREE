@@ -17,7 +17,8 @@
     <ClCompile Include="src\Level3.c" />
     <ClCompile Include="src\Trap.c" />
     <ClCompile Include="src\Level4.c" />
-    <ClCompile Include="src\Timer.c" />
+    <ClCompile Include="src\LevelSelect.c" />
+    <ClCompile Include="src\Level5.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Credit.h" />
@@ -35,6 +36,7 @@
     <ClInclude Include="src\Level3.h" />
     <ClInclude Include="src\Trap.h" />
     <ClInclude Include="src\Level4.h" />
-    <ClInclude Include="src\Timer.h" />
+    <ClInclude Include="src\LevelSelect.h" />
+    <ClInclude Include="src\Level5.h" />
   </ItemGroup>
 </Project>

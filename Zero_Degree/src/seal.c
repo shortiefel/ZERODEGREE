@@ -60,7 +60,7 @@ void DrawEnemies(void)
 
 			for (int w = 0; w < entityManager.NumTrap; w++)
 			{
-				if ((water[w].Wposition.x == newPosition.x && water[w].Wposition.y == newPosition.y))
+				while ((water[w].Wposition.x == newPosition.x && water[w].Wposition.y == newPosition.y))
 				{
 					newPosition = GetRandomPosition();
 				}

@@ -21,6 +21,7 @@
 #include "HowToPlay.h"
 #include "Credit.h"
 #include "Player.h"
+#include "LevelSelect.h"
 
 CP_Font font1;
 CP_Image digipenLogo;
@@ -30,13 +31,17 @@ struct button Play;
 struct button Quit;
 struct button Credits;
 struct button How;
+CP_Image NewBG;
+struct button Levels;
+
+bool firstTime = true;
 
 //INIT
 void menu_init(void)
 {
-
 	currentLevel = 0;
 	CP_Settings_Background(CP_Color_Create(48, 77, 109, 255));
+	
 
 	//SETTINGS ------WINDOW SIZE, FONTS, IMAGES ------------------------------
 	CP_System_SetWindowTitle("ZERO DEGREE");
@@ -49,7 +54,7 @@ void menu_init(void)
 
 	//FUNCTIONS
 	buttons_struct();
-	
+	background_music();
 	
 }
 
@@ -67,22 +72,18 @@ void menu_exit(void)
 	
 }
 
-//void header(void)
-//{
-//	font1 = CP_Font_Load("./Assets/Iceberg.tff");
-//	CP_Font_Set(font1);
-//	CP_Settings_TextSize(150);
-//	CP_Font_DrawText("ZERO DEGREE", WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4);
-//}
 
-
-//onclicks
+/*-----BUTTON ON CLICKS-----*/
 void play_onclick(void)
 {
 	CP_Engine_SetNextGameState(Mgame_init, Mgame_update, Mgame_exit);
-	
-	//cp_engine_setnextgamestate(penguin_init, penguin_update, penguin_exit);
 }
+
+void levels_onclick(void)
+{
+	CP_Engine_SetNextGameState(levelselect_init, levelselect_update, levelselect_exit);
+}
+
 void how_onclick(void)
 {
 	CP_Engine_SetNextGameState(How_init, How_update, How_exit);
@@ -96,13 +97,14 @@ void quit_onclick(void)
 	CP_Engine_Terminate();
 }
 
+
 void buttons_struct(void)
 {
 	struct button p =
 	{
 		.text = "play",
 		.x = (float)WINDOW_WIDTH / (float)2,
-		.y = (float)WINDOW_HEIGHT / (float)2.3,
+		.y = 400,
 		.width = 300,
 		.height = 80,
 		.colorFont = CP_Color_Create(255,255,255,255),
@@ -112,11 +114,25 @@ void buttons_struct(void)
 	};
 	Play = p;
 
+	struct button w =
+	{
+		.text = "levels",
+		.x = (float)WINDOW_WIDTH / (float)2,
+		.y = 500,
+		.width = 300,
+		.height = 80,
+		.colorFont = CP_Color_Create(255,255,255,255),
+		.colorHover = CP_Color_Create(0,0,0,255),
+		.onClick = &levels_onclick,
+		.colorDefault = CP_Color_Create(119 , 136, 153, 255),
+	};
+	Levels = w;
+
 	struct button h =
 	{
 		.text = "how to play",
 		.x = (float)WINDOW_WIDTH / (float)2,
-		.y = (float)WINDOW_HEIGHT / (float)1.85,
+		.y = 600,
 		.width = 300,
 		.height = 80,
 		.colorFont = CP_Color_Create(255,255,255,255),
@@ -130,7 +146,7 @@ void buttons_struct(void)
 	{
 		.text = "credits",
 		.x = (float)WINDOW_WIDTH / (float)2,
-		.y = (float)WINDOW_HEIGHT / (float)1.55,
+		.y = 700,
 		.width = 300,
 		.height = 80,
 		.colorFont = CP_Color_Create(255,255,255,255),
@@ -144,7 +160,7 @@ void buttons_struct(void)
 	{
 		.text = "quit",
 		.x = (float)WINDOW_WIDTH / (float)2,
-		.y = (float)WINDOW_HEIGHT / (float)1.32,
+		.y = 800,
 		.width = 300,
 		.height = 80,
 		.colorFont = CP_Color_Create(255,255,255,255),
@@ -153,11 +169,16 @@ void buttons_struct(void)
 		.colorDefault = CP_Color_Create(119 , 136, 153, 255),
 	};
 	Quit = q;
+
 }
 
+/*------FULL MENU BUTTONS------*/
 void full_menu(void)
 {
-	CP_Settings_Background(CP_Color_Create(48, 77, 109, 255));
+	//CP_Settings_Background(CP_Color_Create(48, 77, 109, 255));
+
+	
+
 	float mouseX = CP_Input_GetMouseX();
 	float mouseY = CP_Input_GetMouseY();
 	int time = (int)CP_System_GetSeconds();
@@ -174,11 +195,16 @@ void full_menu(void)
 	}
 	else
 	{
+		NewBG = CP_Image_Load("./Assets/MAIN_BG.png");
+		CP_Image_Draw(NewBG, WINDOW_WIDTH/2, WINDOW_HEIGHT/2 , WINDOW_WIDTH, WINDOW_HEIGHT, 255);
+
 		//HEADER
+		CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
 		CP_Font_DrawText("ZERO DEGREE", WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4);
+		CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
 
 		//BUTTONS
-		// --------------------------------------------PLAY-------------------------------------------------
+				// --------------------------------------------PLAY-------------------------------------------------
 		if (Play.x - Play.width / 2 < mouseX && mouseX < Play.x + Play.width / 2 && Play.y - Play.height / 2 < mouseY && mouseY < Play.y + Play.height / 2)
 		{
 			CP_Settings_Fill(Play.colorHover);
@@ -258,9 +284,32 @@ void full_menu(void)
 		CP_Settings_TextSize(40);
 		CP_Settings_Fill(Quit.colorFont);
 		CP_Font_DrawText(Quit.text, Quit.x, Quit.y);
+
+		// --------------------------------------------LEVELS-------------------------------------------------
+		if (Levels.x - Levels.width / 2 < mouseX && mouseX < Levels.x + Levels.width / 2 && Levels.y - Levels.height / 2 < mouseY && mouseY < Levels.y + Levels.height / 2)
+		{
+			CP_Settings_Fill(Quit.colorHover);
+			if (CP_Input_MouseClicked())
+			{
+				Levels.onClick();
+			}
+
+		}
+		else
+		{
+			CP_Settings_Fill(Levels.colorDefault);
+		}
+
+		CP_Graphics_DrawRect(Levels.x - Levels.width / (float)2, Levels.y - Levels.height / (float)2, Levels.width, Levels.height);
+		CP_Settings_TextSize(40);
+		CP_Settings_Fill(Levels.colorFont);
+		CP_Font_DrawText(Levels.text, Levels.x, Levels.y);
 	}
 }
 
-
-
-
+/*----MUSIC------*/
+void background_music(void)
+{
+	music = CP_Sound_Load("./Assets/MUSIC/Normal_BG.wav");
+	CP_Sound_PlayMusic(music);
+}

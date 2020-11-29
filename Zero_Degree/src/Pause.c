@@ -9,6 +9,7 @@
 
 struct button Back2;
 struct button Quit2;
+struct button returnMenu;
 CP_Font font1;
 
 void pause_init(void)
@@ -22,7 +23,6 @@ void pause_update(void)
 	draw_button();
 }
 
-
 void pause_exit(void)
 {
 	// shut down the gamestate and cleanup any dynamic memory
@@ -33,6 +33,11 @@ void backonclick(void)
 	CP_Engine_SetNextGameState(NULL, Mgame_update, Mgame_exit);
 }
 
+void returnonclick(void)
+{
+	CP_Engine_SetNextGameState(menu_init, menu_update, menu_exit);
+}
+
 void quitonclick(void)
 {
 	CP_Engine_Terminate();
@@ -41,9 +46,7 @@ void quitonclick(void)
 void DrawPopOut(void)
 {
 	CP_Settings_Fill(CP_Color_Create(96,162,163 ,255));
-	CP_Graphics_DrawRect(400, 200, 800, 450);
-
-
+	CP_Graphics_DrawRect(400, 200, 800, 500);
 
 	font1 = CP_Font_Load("./Assets/Iceberg.ttf");
 	CP_Font_Set(font1);
@@ -51,12 +54,7 @@ void DrawPopOut(void)
 	CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
 	CP_Font_DrawText("PAUSE", WINDOW_WIDTH / 2, WINDOW_HEIGHT / 3);
 
-
-
 }
-
-
-
 
 void back_struct(void)
 {
@@ -74,11 +72,25 @@ void back_struct(void)
 	};
 	Back2 = b2;
 
+	struct button r =
+	{
+		.text = "Return To Menu",
+		.x = (float)WINDOW_WIDTH / (float)2,
+		.y = (float)WINDOW_HEIGHT / (float)1.8,
+		.width = 400,
+		.height = 80,
+		.colorFont = CP_Color_Create(255,255,255,255),
+		.colorHover = CP_Color_Create(0,0,0,255),
+		.onClick = &returnonclick,
+		.colorDefault = CP_Color_Create(119 , 136, 153, 255),
+	};
+	returnMenu = r;
+
 	struct button q2 =
 	{
 		.text = "Quit",
 		.x = (float)WINDOW_WIDTH / (float)2,
-		.y = (float)WINDOW_HEIGHT / (float)1.8,
+		.y = (float)WINDOW_HEIGHT / (float)1.475,
 		.width = 300,
 		.height = 80,
 		.colorFont = CP_Color_Create(255,255,255,255),
@@ -87,7 +99,6 @@ void back_struct(void)
 		.colorDefault = CP_Color_Create(119 , 136, 153, 255),
 	};
 	Quit2 = q2;
-
 
 }
 
@@ -143,4 +154,23 @@ void draw_button(void)
 	CP_Settings_TextSize(40);
 	CP_Settings_Fill(Quit2.colorFont);
 	CP_Font_DrawText(Quit2.text, Quit2.x, Quit2.y);
+
+	if (returnMenu.x - returnMenu.width / 2 < mouseX && mouseX < returnMenu.x + returnMenu.width / 2 && returnMenu.y - returnMenu.height / 2 < mouseY && mouseY < returnMenu.y + returnMenu.height / 2)
+	{
+		CP_Settings_Fill(returnMenu.colorHover);
+		if (CP_Input_MouseClicked())
+		{
+			returnMenu.onClick();
+		}
+
+	}
+	else
+	{
+		CP_Settings_Fill(returnMenu.colorDefault);
+	}
+
+	CP_Graphics_DrawRect(returnMenu.x - returnMenu.width / (float)2, returnMenu.y - returnMenu.height / (float)2, returnMenu.width, returnMenu.height);
+	CP_Settings_TextSize(40);
+	CP_Settings_Fill(returnMenu.colorFont);
+	CP_Font_DrawText(returnMenu.text, returnMenu.x, returnMenu.y);
 }
