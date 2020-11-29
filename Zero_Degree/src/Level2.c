@@ -28,8 +28,8 @@ void lvl2_init(void)
 
 	InitObjects();
 	//drawlevels();
-	//DrawWaterTrap();
-	//DrawWall();
+	DrawWaterTrap();
+	DrawWall();
 	Penguin_init();
 	Whale_init();
 	DrawEnemies();
@@ -42,11 +42,11 @@ void lvl2_update(void)
 	// check input, update simulation, render etc.
 	DrawGrids();
 	DrawPause();
+	DrawWaterTrapUpdate();
 	Penguin_update();
 	PlayerMovement();
 	MovePenguin();
 	SealEnemiesUpdate();
-	DrawWaterTrapUpdate();
 	level2();
 	displayTimer();
 	//drawWhale();

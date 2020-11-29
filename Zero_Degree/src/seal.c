@@ -13,31 +13,18 @@
 #include "Whale.h"
 #include "Trap.h"
 
-
-//entity player;
 entity_manager entityManager;
-//Player penguin;
-float grid_size = GRID_SIZE / 2;
 
-int totalEnemies = 0;
-int sprite_to_draw[MAXENTITY] = {0};
-int index = 0;
+int totalEnemies = 0, index = 0,
+	countdeath = 0, sealMaxHealth = 0, 
+	sprite_to_draw[MAXENTITY] = {0};
 
-float distanceToPlayerX;
-float distanceToPlayerY;
+bool attack = false, drawHitSprite = false;
 
-bool attack = false;
-bool drawHitSprite = false;
-
-float hitDelay = 2;
-float nextHit = 0;
-float hitSprite = 0;
-
-float deathDelay = 5;
-float triggerDeath = 0;
-
-int countdeath = 0;
-int sealMaxHealth = 0;
+float hitDelay = 2, nextHit = 0, 
+	hitSprite = 0, deathDelay = 5, 
+	triggerDeath = 0, grid_size = GRID_SIZE / 2,
+	distanceToPlayerX, distanceToPlayerY;
 
 void DrawEnemies(void)
 {
@@ -47,13 +34,14 @@ void DrawEnemies(void)
 	newPosition.x = 1;
 	newPosition.y = 1;
 
+	// get all the seals positions & draw them on the grid
 	while (entityManager.NumSeal < totalEnemies)
 	{
 		newPosition = GetRandomPosition();
 
 		for (int i = 0; i < entityManager.NumSeal; i++)
 		{
-			if ((seal[i].position.x == newPosition.x && seal[i].position.y == newPosition.y) 
+			while ((seal[i].position.x == newPosition.x && seal[i].position.y == newPosition.y) 
 				|| (whale[i].wPos.x == newPosition.x && whale[i].wPos.y == newPosition.y))
 			{
 				newPosition = GetRandomPosition();
@@ -66,7 +54,6 @@ void DrawEnemies(void)
 					newPosition = GetRandomPosition();
 				}
 			}
-
 		}
 
 		seal[entityManager.NumSeal].position = newPosition;
@@ -80,6 +67,7 @@ void DrawEnemies(void)
 	}
 }
 
+// randomize positions for the seal
 CP_Vector GetRandomPosition(void)
 {
 	CP_Vector randomPosition;
@@ -89,7 +77,7 @@ CP_Vector GetRandomPosition(void)
 	randomXposition = CP_Random_RangeInt(2, GRID_WIDTH - 2);
 	randomYposition = CP_Random_RangeInt(2, GRID_HEIGHT - 3);
 
-	if (randomXposition == 1 && randomYposition == 1)
+	while (randomXposition == 1 && randomYposition == 1)
 	{
 		randomXposition = CP_Random_RangeInt(2, GRID_WIDTH - 2);
 		randomYposition = CP_Random_RangeInt(2, GRID_HEIGHT - 3);
@@ -119,7 +107,7 @@ void SealEnemiesUpdate(void)
 	}
 }
 
-
+// draw the dead seal sprite when the seals dies and remove them from the grid after 5 secs 
 void DrawDeath(int seal_id)
 {
 	if(seal[seal_id].dead == true && seal[seal_id].death == false)
@@ -147,6 +135,7 @@ void DrawDeath(int seal_id)
 int tempX = 0;
 int tempY = 0;
 
+// move the seals towards the player when they get close
 void MoveSeal(int id)
 {
 	distanceToPlayerX = seal[id].position.x - penguin.X;
@@ -205,6 +194,7 @@ void MoveSeal(int id)
 int gridX = 0;
 int gridY = 0;
 
+// changes the value of the grid to either seal or map for checking
 void SetSealGrid(int id)
 {
 	gridX = (int)seal[id].position.x;
@@ -214,12 +204,13 @@ void SetSealGrid(int id)
 	{
 		grid_array[gridX][gridY] = MAPAREA;
 	}
-	else if (grid_array[gridX][gridY] == MAPAREA && grid_array[gridX][gridY] != TRAP)
+	else if (grid_array[gridX][gridY] == MAPAREA && grid_array[gridX][gridY] != TRAP && grid_array[gridX][gridY] != WALL)
 	{
 		grid_array[gridX][gridY] = SEAL;
 	}
 }
 
+// attacks the player once every 2 secs when the player is right next to the seals
 void AttackPlayer(int id)
 {
 	//if the player is 1 block away, attack them
@@ -239,6 +230,7 @@ void AttackPlayer(int id)
 				CP_Image_Draw(seal[id].sprites[2], (float)seal[id].position.x * GRID_SIZE - grid_size, (float)seal[id].position.y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);
 			else 
 				CP_Image_Draw(seal[id].sprites[3], (float)seal[id].position.x * GRID_SIZE - grid_size, (float)seal[id].position.y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);
+			
 			// wait for a few seconds then set it to false
 			if ((int)ElaspedTime == (int)hitSprite)
 			{
@@ -275,6 +267,7 @@ void AttackPlayer(int id)
 	PHurt(attack);
 }
 
+// initialisation of necessary variables
 void InitSealsObjects(void)
 {
 	if (currentLevel == 1)
@@ -317,6 +310,7 @@ void InitSealsObjects(void)
 	sealMaxHealth = seal[0].health;
 }
 
+// displays the health bar of each seal
 void DisplaySealHP(int id)
 {
 	float sealPositionX = ((seal[id].position.x * GRID_SIZE) - (GRID_SIZE + GRID_SIZE / 3));
@@ -327,17 +321,18 @@ void DisplaySealHP(int id)
 	CP_Graphics_DrawRect(sealPositionX, sealPositionY, (float)(seal[id].health * 0.25), (GRID_SIZE / 5));
 }
 
+// kills the seal
 void KillSeal(int seal_id)
 {	
 	seal[seal_id].dead = true;
 	countdeath++;
 }
 
+// checks seal's health and calls the function to kil them if their health is 0 
 void CheckSealHealth(int id)
 {
 	if (seal[id].health <= 0)
 	{
 		KillSeal(id);
 	}
-
 }
