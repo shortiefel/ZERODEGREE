@@ -20,6 +20,7 @@ CP_Image ice_grid;
 CP_Image trap_grid;
 struct button pause;
 CP_Font footerlevels;
+CP_Image weapons; 
 
 void Mgame_init(void)
 {
@@ -152,6 +153,11 @@ void DrawPause(void)
 				CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
 				CP_Settings_TextSize(45);
 				CP_Font_DrawText("HP", 1600 - 1550, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE));
+
+				weapons = CP_Image_Load("./Assets/WEAPONS/ARROW_WEAPON.png");
+				CP_Font_DrawText("Weapons", 1600 - 980, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE));
+				CP_Image_Draw(weapons, 1600 - 950, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE), 20, 20, 255);
+
 
 			
 				/*if (currentLevel == 1)
