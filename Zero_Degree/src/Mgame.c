@@ -60,10 +60,10 @@ void Mgame_update(void)
 	{
 		CP_Engine_SetNextGameState(lvl4_init, lvl4_update, NULL);
 	}
-	/*else if (currentLevel == 5)
+	else if (currentLevel == 5)
 	{
 		CP_Engine_SetNextGameState(lvl5_init, lvl5_update, NULL);
-	}*/
+	}
 
 
 

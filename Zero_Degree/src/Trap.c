@@ -9,6 +9,7 @@
 #include "Level2.h"
 #include "Level3.h"
 #include "Level4.h"
+#include "Level5.h"
 #include "Whale.h"
 #include "Trap.h"
 
@@ -39,6 +40,10 @@ void InitWaterObjects(void)
 	else if (currentLevel == 4)
 	{
 		totalTraps = level4enemies.trap_count;
+	}
+	else if (currentLevel == 5)
+	{
+		totalTraps = level5enemies.trap_count;
 	}
 
 
@@ -166,11 +171,15 @@ void InitWall(void)
 	{
 		totalwall = level4enemies.wall_count;
 	}
+	else if (currentLevel == 5)
+	{
+		totalwall = level5enemies.wall_count;
+	}
 
 	entityManager.NumWall = 0;
 	for (int i = 0; i < totalwall; i++)
 	{
-		 wall[i].Block= CP_Image_Load("./Assets/CHARACTERS/CRAB/FRONT.png");
+		 wall[i].Block= CP_Image_Load("./Assets/ROCKWALL.png");
 	}
 }
 

@@ -1,4 +1,5 @@
 #pragma once
+#include <stdbool.h>
 
 typedef struct Projectile
 {
@@ -15,6 +16,8 @@ typedef struct Whale
 } Whale;
 
 Whale whale;
+
+int whaledeathcounter;
 
 void Whale_init(void);
 void Whale_update(void);
