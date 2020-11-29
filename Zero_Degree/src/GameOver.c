@@ -13,6 +13,7 @@
 #include "Level3.h"
 #include "Level4.h"
 #include "GameOver.h"
+#include "Timer.h"
 #include <stdbool.h>
 
 
