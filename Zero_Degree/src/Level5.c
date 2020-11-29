@@ -24,11 +24,14 @@ void lvl5_init(void)
 	level4enemies.seals_count = 12;
 	level4enemies.trap_count = 9;
 	level4enemies.whale_count = 5;
+	level4enemies.wall_count = 9;
 
 	InitObjects();
 	//drawlevels();
 	Penguin_init();
 	DrawEnemies();
+	DrawWaterTrap();
+	DrawWall();
 	Whale_init();
 	DrawPause();
 	level4();

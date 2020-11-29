@@ -149,6 +149,7 @@ CP_Vector GetRandomWaterPosition(void)
 //------WALL---------
 void InitWall(void)
 {
+	totalwall = 0;
 	if (currentLevel == 1)
 	{
 		totalwall = level1enemies.wall_count;
