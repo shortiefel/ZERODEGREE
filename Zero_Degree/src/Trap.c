@@ -204,7 +204,7 @@ void DrawWall(void)
 		for (int i = 0; i < entityManager.NumSeal; i++)
 		{
 			if ((seal[i].position.x == newPos.x && seal[i].position.y == newPos.y)
-				|| (whale.wPos.x == newPos.x && whale.wPos.y == newPos.y))
+				|| (whale[i].wPos.x == newPos.x && whale[i].wPos.y == newPos.y))
 			{
 				newPos = GetRandomPosition();
 			}
