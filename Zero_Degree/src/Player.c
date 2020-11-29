@@ -15,6 +15,7 @@
 #include "GameOver.h"
 #include "Whale.h"
 #include "wingame.h"
+#include "final_win.h"
 
 
 
@@ -174,7 +175,10 @@ void PlayerMovement(void)
 	}
 	else if (currentLevel == 5 && penguin.health > 0 && countdeath == entityManager.NumSeal && countdeath == entityManager.NumWhale)
 	{
-
+		velocityX = 0;
+		velocityY = 0;
+		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/WIN.png");
+		CP_Engine_SetNextGameState(finalwin_init, finalwin_update, finalwin_exit);
 	}
 
 	//Penguin Stay Still
