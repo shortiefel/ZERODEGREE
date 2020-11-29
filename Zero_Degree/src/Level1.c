@@ -27,6 +27,7 @@ void lvl1_init(void)
 	level1enemies.seals_count = 7;
 	level1enemies.trap_count = 6;
 	level1enemies.whale_count = 0;
+	level1enemies.wall_count = 3;
 
 
 	InitObjects();
@@ -34,6 +35,7 @@ void lvl1_init(void)
 	//drawlevels();
 	Penguin_init();
 	DrawWaterTrap();
+	DrawWall();
 	//Whale_init();
 	DrawEnemies();
 

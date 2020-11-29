@@ -14,6 +14,7 @@
 
 
 int totalTraps = 0;
+int totalwall = 0;
 float grid_size1 = GRID_SIZE / 2;
 //Player penguin2;
 
@@ -103,6 +104,10 @@ void DrawWaterTrapUpdate(void)
 			(float)water[i].Wposition.x * GRID_SIZE - grid_size1,
 			(float)water[i].Wposition.y * GRID_SIZE - grid_size1, GRID_SIZE,
 			GRID_SIZE, 255);
+		CP_Image_Draw(wall[i].Block,
+			(float)wall[i].WallPos.x * GRID_SIZE - grid_size1,
+			(float)wall[i].WallPos.y * GRID_SIZE - grid_size1, GRID_SIZE,
+			GRID_SIZE, 255);
 
 		if (penguin.alive == true)
 		{
@@ -141,4 +146,64 @@ CP_Vector GetRandomWaterPosition(void)
 	return randpos;
 }
 
+//------WALL---------
+void InitWall(void)
+{
+	if (currentLevel == 1)
+	{
+		totalwall = level1enemies.wall_count;
+	}
+	else if (currentLevel == 2)
+	{
+		totalwall = level2enemies.wall_count;
+	}
+	else if (currentLevel == 3)
+	{
+		totalwall = level3enemies.wall_count;
+	}
+	else if (currentLevel == 4)
+	{
+		totalwall = level4enemies.wall_count;
+	}
 
+	entityManager.NumWall = 0;
+	for (int i = 0; i < totalwall; i++)
+	{
+		 wall[i].Block= CP_Image_Load("./Assets/CHARACTERS/CRAB/FRONT.png");
+	}
+}
+
+void DrawWall(void)
+{
+	InitWall();
+
+	CP_Vector newPos;
+
+	newPos.x = 1;
+	newPos.y = 1;
+
+	while (entityManager.NumWall < totalwall)
+	{
+		newPos = GetRandomWaterPosition();
+
+		for (int i = 0; i < entityManager.NumWall; i++)
+		{
+			if ((seal[i].position.x == newPos.x && seal[i].position.y == newPos.y)
+				|| (whale.wPos.x == newPos.x && whale.wPos.y == newPos.y)
+				|| (water[i].Wposition.x == newPos.x && water[i].Wposition.y == newPos.y)
+				|| (wall[i].WallPos.x == newPos.x && wall[i].WallPos.y == newPos.y))
+			{
+				newPos = GetRandomPosition();
+			}
+		}
+
+		wall[entityManager.NumWall].WallPos = newPos;
+		CP_Image_Draw(wall[entityManager.NumWall].Block,
+			(float)wall[entityManager.NumWall].WallPos.x * GRID_SIZE - grid_size1,
+			(float)wall[entityManager.NumWall].WallPos.y * GRID_SIZE - grid_size1, GRID_SIZE,
+			GRID_SIZE, 255);
+
+		grid_array[(int)wall[entityManager.NumWall].WallPos.x][(int)wall[entityManager.NumWall].WallPos.y] = WALL;
+		entityManager.NumWall++;
+	}
+}

@@ -1,6 +1,3 @@
-
-
-
 #include <stdio.h>
 #include <intrin.h>
 #include <cprocessing.h>
@@ -17,16 +14,16 @@
 #include "GameOver.h"
 #include "wingame.h"
 #include "Trap.h"
+#include "Level4.h"
+#include "Level5.h"
 
 
-
-void lvl3_init(void)
+void lvl5_init(void)
 {
-	currentLevel = 3;
-	level3enemies.seals_count = 6;
-	level3enemies.whale_count = 3;
-	level3enemies.trap_count = 7;
-	level3enemies.wall_count = 7;
+	currentLevel = 5;
+	level4enemies.seals_count = 12;
+	level4enemies.trap_count = 9;
+	level4enemies.whale_count = 5;
 
 	InitObjects();
 	//drawlevels();
@@ -34,10 +31,10 @@ void lvl3_init(void)
 	DrawEnemies();
 	Whale_init();
 	DrawPause();
-	level3();
+	level4();
 
 }
-void lvl3_update(void)
+void lvl5_update(void)
 {
 	ElaspedTime += CP_System_GetDt();
 	// check input, update simulation, render etc.
@@ -48,17 +45,15 @@ void lvl3_update(void)
 	MovePenguin();
 	SealEnemiesUpdate();
 	DrawWaterTrapUpdate();
-	drawWhale();
-	drawProjectile();
-	Whale_update();
+	//drawWhale();
 }
 
 
-void lvl3_exit(void)
+void lvl5_exit(void)
 {
 }
 
-void level3(void)
+void level5(void)
 {
 
 	footerlevels = CP_Font_Load("./Assets/Iceberg.ttf");
@@ -68,10 +63,10 @@ void level3(void)
 		for (int y = 0; y < GRID_HEIGHT; y++)
 			if (grid_array[x][y] == FOOTER)
 			{
-				if (currentLevel == 3)
+				if (currentLevel == 4)
 				{
 					CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
-					CP_Font_DrawText("Level 3", 1600 - 300, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE));
+					CP_Font_DrawText("Level 5", 1600 - 300, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE));
 				}
 			}
 }

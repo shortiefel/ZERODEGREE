@@ -10,6 +10,7 @@
 #include "Level2.h"
 #include "Level3.h"
 #include "Level4.h"
+#include "Trap.h"
 #include "GameOver.h"
 #include "Whale.h"
 #include "wingame.h"
@@ -162,13 +163,19 @@ void PlayerMovement(void)
 		penguin.arrow.DirY = 0;
 		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/PENGUIN_RIGHT.png");
 	}
-	else if (penguin.health > 0 && countdeath == entityManager.NumSeal)
+	else if ((penguin.health > 0 && countdeath == entityManager.NumSeal) 
+		|| (penguin.health > 0 && countdeath == entityManager.NumSeal && whaledeathcounter == entityManager.NumWhale))
 	{
 		velocityX = 0;
 		velocityY = 0;
 		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/WIN.png");
 		CP_Engine_SetNextGameState(win_init, win_update, win_exit);
 	}
+	else if (currentLevel == 5 && penguin.health > 0 && countdeath == entityManager.NumSeal && countdeath == entityManager.NumWhale)
+	{
+
+	}
+
 	//Penguin Stay Still
 	else
 	{
@@ -194,7 +201,9 @@ void MovePenguin(void)
 		tempGridX = penguin.X + velocityX;
 		tempGridY = penguin.Y + velocityY;
 
-		if (grid_array[tempGridX][tempGridY] != SEAL && grid_array[tempGridX][tempGridY] != WHALE)
+		if (grid_array[tempGridX][tempGridY] != SEAL 
+			&& grid_array[tempGridX][tempGridY] != WHALE 
+			&& grid_array[tempGridX][tempGridY] != WALL)
 		{
 			penguin.X += velocityX;
 			penguin.Y += velocityY;
@@ -307,6 +316,13 @@ void ArrowMove(void)
 				{
 					ClearArrow();
 					seal[id].health -= 100;
+				}
+			}
+			for (int id = 0; id < entityManager.NumWall; id++)
+			{
+				if (penguin.arrow.ArrowX == wall[id].WallPos.x && penguin.arrow.ArrowY == wall[id].WallPos.y)
+				{
+					ClearArrow();
 				}
 			}
 		}
