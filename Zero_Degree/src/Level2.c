@@ -24,12 +24,14 @@ void lvl2_init(void)
 {
 	currentLevel = 2;
 	level2enemies.seals_count = 12;
-	level1enemies.trap_count = 10;
+	level2enemies.trap_count = 10;
 	level2enemies.whale_count = 0;
+	level2enemies.wall_count = 5;
 
 	InitObjects();
 	//drawlevels();
 	//DrawWaterTrap();
+	//DrawWall();
 	Penguin_init();
 	Whale_init();
 	DrawEnemies();
