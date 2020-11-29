@@ -96,6 +96,12 @@ int RetrieveLevel(void)
 	return selectedLevel;
 }
 
+void ChangeLevel(void)
+{
+	selectedLevel = 0;
+}
+
+
 void InitButtons(void)
 {
 	for (int i = 0; i < 6; i++)

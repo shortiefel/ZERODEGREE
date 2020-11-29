@@ -26,4 +26,4 @@ int RetrieveLevel(void);
 
 void playlevel_onclick(void);
 void menu_onclick(void);
-
+void ChangeLevel(void);
