@@ -108,15 +108,18 @@ void WaterTrapAttack(int id)
 
 void DrawWaterTrapUpdate(void)
 {
+	for (int s = 0; s < entityManager.NumWall; s++)
+	{
+		CP_Image_Draw(wall[s].Block,
+		(float)wall[s].WallPos.x * GRID_SIZE - grid_size1,
+		(float)wall[s].WallPos.y * GRID_SIZE - grid_size1, GRID_SIZE,
+		GRID_SIZE, 255);
+	}
 	for (int i = 0; i < entityManager.NumTrap; i++)
 	{
 		CP_Image_Draw(water[i].waterTrap,
 			(float)water[i].Wposition.x * GRID_SIZE - grid_size1,
 			(float)water[i].Wposition.y * GRID_SIZE - grid_size1, GRID_SIZE,
-			GRID_SIZE, 255);
-		CP_Image_Draw(wall[i].Block,
-			(float)wall[i].WallPos.x * GRID_SIZE - grid_size1,
-			(float)wall[i].WallPos.y * GRID_SIZE - grid_size1, GRID_SIZE,
 			GRID_SIZE, 255);
 
 		if (penguin.alive == true)
