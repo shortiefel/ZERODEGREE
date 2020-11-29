@@ -30,6 +30,9 @@ void lvl5_init(void)
 	InitObjects();
 	//drawlevels();
 	Penguin_init();
+	DrawEnemies();
+	DrawWaterTrap();
+	DrawWall();
 	Whale_init();
 	DrawWaterTrap();
 	DrawWall();
