@@ -60,6 +60,7 @@ void Penguin_init(void)
 
 	penguin.alive = true;
 	countdeath = 0;
+	whaledeathcounter = 0;
 	fullHealth = penguin.health;
 }
 void Penguin_update(void)
@@ -188,7 +189,7 @@ void PlayerMovement(void)
 		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/WIN.png");
 		CP_Engine_SetNextGameState(win_init, win_update, win_exit);
 	}
-	else if (currentLevel == 5 && penguin.health > 0 && countdeath == entityManager.NumSeal && countdeath == entityManager.NumWhale)
+	else if (currentLevel == 5 && penguin.health > 0 && countdeath >= entityManager.NumSeal && countdeath >= entityManager.NumWhale)
 	{
 		velocityX = 0;
 		velocityY = 0;
