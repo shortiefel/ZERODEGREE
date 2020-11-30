@@ -28,10 +28,11 @@
 // random holes on map - Done
 // number of traps are wrong - Done
 // whale spawning on walls - Done?
-// whale sprite not rendering correctly, dead whale show up 1 sec after death
+// whale sprite not rendering correctly, dead whale show up 1 sec after death 
 // whale tile not reset, arrows can't go through - Done
-// seal spawning on whale
+// seal spawning on whale - Done?
 // update splash screen
+// timer flashing??
 
 
 // ---- WHALE DECLARATION ----
@@ -56,8 +57,6 @@ CP_Vector penguinLastPos;
 float deathTimePassed;
 float deathTimer = 4.0f;
 float deathTime = 0; int death = 0;
-
-CP_Image trapGrid;
 
 //----- DEATH COUNTER ---
 int whaledeathcounter = 0;
@@ -258,7 +257,6 @@ void Whale_update(void)
 				if (whale[count].health <= 0) {
 					whale[count].alive = 0;
 					whale[count].death = 1;
-					//whaleDeath(count);
 				}
 
 				if (whale[count].projectile.pPos.x < GRID_WIDTH && whale[count].projectile.pPos.y < GRID_HEIGHT) {
