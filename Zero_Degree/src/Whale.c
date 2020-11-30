@@ -27,10 +27,11 @@
 
 // random holes on map - Done
 // number of traps are wrong - Done
-// whale spawning on walls 
+// whale spawning on walls - Done?
 // whale sprite not rendering correctly, dead whale show up 1 sec after death
 // whale tile not reset, arrows can't go through - Done
 // seal spawning on whale
+// update splash screen
 
 
 // ---- WHALE DECLARATION ----
@@ -160,20 +161,30 @@ void randomWhaleSpawn(void) {
 		randomPosX = CP_Random_RangeInt(3, GRID_WIDTH - 3);
 		randomPosY = CP_Random_RangeInt(3, GRID_HEIGHT - 3);
 
-		//if (grid_array[randomPosX][randomPosY] == SEAL || grid_array[randomPosX][randomPosY] == TRAP || grid_array[randomPosX][randomPosY] == WALL) {
+		if (grid_array[randomPosX][randomPosY] == SEAL || grid_array[randomPosX][randomPosY] == TRAP || grid_array[randomPosX][randomPosY] == WALL || grid_array[randomPosX][randomPosY] == WHALE) {
 
-		if (((int)seal[count].position.x == randomPosX && (int)seal[count].position.y == randomPosY)
-			|| ((int)whale[count].wPos.x == randomPosX && (int)whale[count].wPos.y == randomPosY)
-			|| ((int)water[count].Wposition.x == randomPosX && (int)water[count].Wposition.y == randomPosY)
-			|| ((int)wall[count].WallPos.x == randomPosX && (int)wall[count].WallPos.y == randomPosY))
-		{
+		//if (((int)seal[count].position.x == randomPosX && (int)seal[count].position.y == randomPosY)
+		//	|| ((int)whale[count].wPos.x == randomPosX && (int)whale[count].wPos.y == randomPosY)
+		//	|| ((int)water[count].Wposition.x == randomPosX && (int)water[count].Wposition.y == randomPosY)
+		//	|| ((int)wall[count].WallPos.x == randomPosX && (int)wall[count].WallPos.y == randomPosY))
+		//{
 			randomPosX = CP_Random_RangeInt(3, GRID_WIDTH - 3);
 			randomPosY = CP_Random_RangeInt(3, GRID_HEIGHT - 3);
 		}
 
-		//else if (grid_array[randomPosX][randomPosY] == TRAP) {
-		//	whaleLevelPos(randomPosX, randomPosY);
-		//}
+		if (grid_array[randomPosX][randomPosY] == SEAL) {
+			randomPosX = CP_Random_RangeInt(3, GRID_WIDTH - 3);
+			randomPosY = CP_Random_RangeInt(3, GRID_HEIGHT - 3);
+		}
+		if (grid_array[randomPosX][randomPosY] == TRAP) {
+			randomPosX = CP_Random_RangeInt(3, GRID_WIDTH - 3);
+			randomPosY = CP_Random_RangeInt(3, GRID_HEIGHT - 3);
+		}
+		if (grid_array[randomPosX][randomPosY] == WALL) {
+			randomPosX = CP_Random_RangeInt(3, GRID_WIDTH - 3);
+			randomPosY = CP_Random_RangeInt(3, GRID_HEIGHT - 3);
+		}
+
 		//for (int i = 0; i < totalTrapNum(); i++) {
 		//	if (water[i].Wposition.x == randomPosX && water[i].Wposition.y == randomPosY) {
 		//		whaleLevelPos(randomPosX, randomPosY);
@@ -189,7 +200,7 @@ void randomWhaleSpawn(void) {
 // whale level spawning
 void whaleLevelInit(void) 
 {
-	if (entityManager.NumWhale > 0) {
+	if (totalEnemieswhales > 0) {
 		randomWhaleSpawn();
 	}
 }

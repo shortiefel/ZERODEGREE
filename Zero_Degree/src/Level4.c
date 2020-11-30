@@ -32,6 +32,7 @@ void lvl4_init(void)
 	//drawlevels();
 	Penguin_init();
 	DrawWaterTrap();
+	DrawEnemies();
 	DrawWall();
 	Whale_init();
 	DrawPause();
