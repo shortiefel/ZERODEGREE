@@ -49,7 +49,6 @@ void lvl4_update(void)
 	Penguin_update();
 	PlayerMovement();
 	MovePenguin();
-	//drawWhale();
 	Whale_update();
 	SealEnemiesUpdate();
 	level4();
