@@ -41,12 +41,33 @@ void DrawEnemies(void)
 
 		for (int i = 0; i < entityManager.NumSeal; i++)
 		{
-			if ((seal[i].position.x == newPosition.x && seal[i].position.y == newPosition.y)
-				|| (whale[i].wPos.x == newPosition.x && whale[i].wPos.y == newPosition.y)
-				|| (water[i].Wposition.x == newPosition.x && water[i].Wposition.y == newPosition.y)
-				|| (wall[i].WallPos.x == newPosition.x && wall[i].WallPos.y == newPosition.y))
+			while ((seal[i].position.x == newPosition.x && seal[i].position.y == newPosition.y))
 			{
 				newPosition = GetRandomPosition();
+			}
+
+			for (int x = 0; x < entityManager.NumWhale; x++)
+			{
+				while (whale[x].wPos.x == newPosition.x && whale[x].wPos.y == newPosition.y)
+				{
+					newPosition = GetRandomPosition();
+				}
+			}
+
+			for (int s = 0; s < entityManager.NumTrap; s++)
+			{
+				while (water[s].Wposition.x == newPosition.x && water[s].Wposition.y == newPosition.y)
+				{
+					newPosition = GetRandomPosition();
+				}
+			}
+
+			for (int w = 0; w < entityManager.NumWall; w++)
+			{
+				while (wall[w].WallPos.x == newPosition.x && wall[w].WallPos.y == newPosition.y)
+				{
+					newPosition = GetRandomPosition();
+				}
 			}
 		}
 		for (int w = 0; w < entityManager.NumTrap; w++)
