@@ -103,6 +103,7 @@ void Init(void)
 
 	penguin.alive = true;
 	countdeath = 0;
+	whaledeathcounter = 0;
 	fullHealth = penguin.health;
 }
 
@@ -154,8 +155,7 @@ void PlayerMovement(void)
 		penguin.arrow.DirY = 0;
 		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/PENGUIN_RIGHT.png");
 	}
-	else if ((penguin.health > 0 && countdeath == entityManager.NumSeal) 
-		|| (penguin.health > 0 && countdeath == entityManager.NumSeal && whaledeathcounter == entityManager.NumWhale))
+	else if ((penguin.health > 0 && countdeath >= entityManager.NumSeal && whaledeathcounter >= entityManager.NumWhale))
 	{
 		velocityX = 0;
 		velocityY = 0;
@@ -219,16 +219,6 @@ void MovePenguin(void)
 		{
 			penguin.Y = 10;
 		}
-		/*if (Hurt == true)
-		{
-			Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/STUN.png");
-		}
-		else
-		{
-			Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FRONT.png");
-		}
-		Hurt = false;*/
-		
 	}
 
 	DrawPenguin();
