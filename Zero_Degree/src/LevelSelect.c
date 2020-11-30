@@ -7,7 +7,6 @@
 
 CP_Font font;
 selectbutton levelsbutton[6];
-selectimg levelimages[5];
 
 CP_Color colorDefault, colorHover, colorFont;
 CP_Image LevelBG;
@@ -17,7 +16,6 @@ int yInc = 100, buttonPadding = 200, selectedLevel = 0;
 
 void levelselect_init(void)
 {
-	//CP_Settings_Background(CP_Color_Create(48, 77, 109, 255));
 	LevelBG = CP_Image_Load("./Assets/NORMAL_BG.png");
 	CP_Image_Draw(LevelBG, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, WINDOW_WIDTH, WINDOW_HEIGHT, 255);
 
@@ -50,7 +48,6 @@ void levelselect_exit(void)
 
 void DrawButtons(void)
 {
-	//CP_Settings_Background(CP_Color_Create(48, 77, 109, 255));
 	CP_Image_Draw(LevelBG, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, WINDOW_WIDTH, WINDOW_HEIGHT, 255);
 	float mouseX = CP_Input_GetMouseX();
 	float mouseY = CP_Input_GetMouseY();
@@ -76,7 +73,6 @@ void DrawButtons(void)
 					playlevel_onclick();
 				}
 			}
-			//CP_Image_Draw(levelimages[i].levelIMG, 500, 500, 300, 200, 255);
 		}
 		else
 		{
@@ -106,9 +102,6 @@ void InitButtons(void)
 {
 	for (int i = 0; i < 6; i++)
 	{
-		//levelimages[i].width = 300;
-		//levelimages[i].height = 200;
-
 		if (i == 5)
 		{
 			levelsbutton[i].level = 0;
@@ -128,9 +121,6 @@ void InitButtons(void)
 	levelsbutton[3].name = "Level 4";
 	levelsbutton[4].name = "Level 5";
 	levelsbutton[5].name = "Return";
-	//levelimages[0].levelIMG = CP_Image_Load("./Assets/LEVELSELECT/temp.png");
-	//levelimages[1].levelIMG = CP_Image_Load("./Assets/LEVELSELECT/temp1.png");
-	//levelimages[2].levelIMG = CP_Image_Load("./Assets/LEVELSELECT/temp2.png");
 }
 
 void playlevel_onclick(void)

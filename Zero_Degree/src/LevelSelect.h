@@ -9,13 +9,6 @@ typedef struct levelselectbutton
 	float y;
 }	selectbutton;
 
-typedef struct levelselectimg
-{
-	CP_Image levelIMG;
-	float width;
-	float height;
-} selectimg;
-
 void levelselect_init(void);
 void levelselect_update(void);
 void levelselect_exit(void);

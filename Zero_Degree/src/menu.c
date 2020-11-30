@@ -179,10 +179,6 @@ void buttons_struct(void)
 /*------FULL MENU BUTTONS------*/
 void full_menu(void)
 {
-	//CP_Settings_Background(CP_Color_Create(48, 77, 109, 255));
-
-	
-
 	float mouseX = CP_Input_GetMouseX();
 	float mouseY = CP_Input_GetMouseY();
 	int time = (int)CP_System_GetSeconds();
