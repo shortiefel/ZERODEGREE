@@ -155,6 +155,7 @@ void whaleLevelPos(int whalePosX, int whalePosY, int whaleid) {
 // generate random spawn position for whale
 void randomWhaleSpawn(void) {
 	for (int count = 0; count < entityManager.NumWhale; count++) {
+		
 		randomPosX = CP_Random_RangeInt(3, GRID_WIDTH - 3);
 		randomPosY = CP_Random_RangeInt(3, GRID_HEIGHT - 3);
 
@@ -178,20 +179,10 @@ void randomWhaleSpawn(void) {
 }
 
 // whale level spawning
-void whaleLevelInit(void) {
-	if (currentLevel == 3) {
-		entityManager.NumWhale = level3enemies.whale_count;
-	}
-	if (currentLevel == 4) {
-		entityManager.NumWhale = level4enemies.whale_count;
-	}
-	if (currentLevel == 5) {
-		entityManager.NumWhale = level5enemies.whale_count;
-	}
+void whaleLevelInit(void) 
+{
 	if (entityManager.NumWhale > 0) {
-		for (int i = 0; i < entityManager.NumWhale; i++) {
-			randomWhaleSpawn();
-		}
+		randomWhaleSpawn();
 	}
 }
 
@@ -220,6 +211,7 @@ void Whale_init(void)
 		totalEnemieswhales = level5enemies.whale_count;
 	}
 
+	entityManager.NumWhale = totalEnemieswhales;
 	//randomWhaleSpawn();
 	whaleLevelInit();
 	//trapGrid = CP_Image_Load("./Assets/WATER.png");

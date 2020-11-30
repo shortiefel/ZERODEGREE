@@ -32,11 +32,11 @@ void lvl3_init(void)
 	InitObjects();
 	//drawlevels();
 	Penguin_init();
-	DrawEnemies();
 	DrawWaterTrap();
 	DrawWall();
 	DrawPause();
 	Whale_init();
+	DrawEnemies();
 	setLevelTimer(currentLevel);
 
 }

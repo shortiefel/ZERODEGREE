@@ -32,9 +32,35 @@ entity_manager entityManager;
 CP_Font font4;
 int fullHealth;
 
+//----INITIALZATION OF VARIABLE AND DRAWINGS-----
 void Penguin_init(void)
 {
-	Init();
+	//Set Penguin starting location
+	penguin.X = 1;
+	penguin.Y = 1;
+
+	//Set Velocity
+	velocityX = 0;
+	velocityY = 0;
+	//Drawing of Penguin
+	Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FRONT.png");
+	DrawPenguin();
+
+	//Penguin Health
+	penguin.health = 1500;
+	DrawHP();
+
+	//Init Arrow Direction
+	penguin.arrow.DirX = 1;
+	penguin.arrow.DirY = 0;
+	spawnArrow = 0;
+	directionX = 0;
+	directionY = 0;
+	Hurt = false;
+
+	penguin.alive = true;
+	countdeath = 0;
+	fullHealth = penguin.health;
 }
 void Penguin_update(void)
 {

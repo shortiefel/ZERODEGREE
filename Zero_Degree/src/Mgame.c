@@ -65,7 +65,6 @@ void Mgame_update(void)
 	}
 
 
-
 	//ElaspedTime += CP_System_GetDt();
 	// check input, update simulation, render etc.
 	//DrawGrids();
@@ -194,10 +193,6 @@ void InitObjects(void)
 	for (int x = 0; x < GRID_WIDTH; x++)
 		for (int y = 0; y < GRID_HEIGHT; y++)
 		{
-			/*if (y == 1)
-			{
-				grid_array[x][y] = HEADER;
-			}*/
 			if (y == GRID_HEIGHT - 1)
 			{
 				grid_array[x][y] = FOOTER;

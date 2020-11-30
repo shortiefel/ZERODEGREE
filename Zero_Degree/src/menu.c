@@ -34,7 +34,7 @@ struct button How;
 CP_Image NewBG;
 struct button Levels;
 
-bool firstTime = true;
+bool firstTime = true, musicPlay = false;
 
 //INIT
 void menu_init(void)
@@ -54,8 +54,12 @@ void menu_init(void)
 
 	//FUNCTIONS
 	buttons_struct();
-	background_music();
-	
+
+	if (!musicPlay)
+	{
+		background_music();
+		musicPlay = true;
+	}
 }
 
 
