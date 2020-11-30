@@ -49,7 +49,6 @@ void lvl2_update(void)
 	SealEnemiesUpdate();
 	level2();
 	displayTimer();
-	//drawWhale();
 }
 
 
