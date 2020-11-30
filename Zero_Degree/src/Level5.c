@@ -16,6 +16,7 @@
 #include "Trap.h"
 #include "Level4.h"
 #include "Level5.h"
+#include "Timer.h"
 
 
 
@@ -36,8 +37,7 @@ void lvl5_init(void)
 	Whale_init();
 	DrawEnemies();
 	DrawPause();
-	level5();
-
+	setLevelTimer(currentLevel);
 }
 void lvl5_update(void)
 {
@@ -50,8 +50,9 @@ void lvl5_update(void)
 	MovePenguin();
 	DrawWaterTrapUpdate();
 	SealEnemiesUpdate();
-	
-	//drawWhale();
+	level5();
+	Whale_update();
+	displayTimer();
 }
 
 
@@ -69,10 +70,10 @@ void level5(void)
 		for (int y = 0; y < GRID_HEIGHT; y++)
 			if (grid_array[x][y] == FOOTER)
 			{
-				if (currentLevel == 4)
+				if (currentLevel == 5)
 				{
 					CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
-					CP_Font_DrawText("Level 5", 1600 - 300, ((GRID_HEIGHT - (float)1.3) * GRID_SIZE));
+					CP_Font_DrawText("Level 5", 1600 - 330, ((GRID_HEIGHT - (float)1.45) * GRID_SIZE));
 				}
 			}
 }

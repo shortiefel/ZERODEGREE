@@ -73,8 +73,9 @@ void DrawWaterTrap(void)
 		for (int i = 0; i < entityManager.NumSeal; i++)
 		{
 			if ((seal[i].position.x == newPos.x && seal[i].position.y == newPos.y)
-				|| (whale[i].wPos.x == newPos.x && whale[i].wPos.y == newPos.y)
-				|| (water[i].Wposition.x == newPos.x && water[i].Wposition.y == newPos.y))
+			|| (whale[i].wPos.x == newPos.x && whale[i].wPos.y == newPos.y)
+			|| (water[i].Wposition.x == newPos.x && water[i].Wposition.y == newPos.y)
+			|| (wall[i].WallPos.x == newPos.x && wall[i].WallPos.y == newPos.y))
 			{
 				newPos = GetRandomPosition();
 			}
@@ -187,7 +188,9 @@ void InitWall(void)
 	entityManager.NumWall = 0;
 	for (int i = 0; i < totalwall; i++)
 	{
-		 wall[i].Block= CP_Image_Load("./Assets/ROCKWALL.png");
+		wall[i].WallPos.x = -1;
+		wall[i].WallPos.y = -1;
+		wall[i].Block= CP_Image_Load("./Assets/ROCKWALL.png");
 	}
 }
 
@@ -207,17 +210,19 @@ void DrawWall(void)
 		for (int i = 0; i < entityManager.NumSeal; i++)
 		{
 			if ((seal[i].position.x == newPos.x && seal[i].position.y == newPos.y)
-				|| (whale[i].wPos.x == newPos.x && whale[i].wPos.y == newPos.y))
+				|| (whale[i].wPos.x == newPos.x && whale[i].wPos.y == newPos.y)
+				|| (water[i].Wposition.x == newPos.x && water[i].Wposition.y == newPos.y)
+				|| (wall[i].WallPos.x == newPos.x && wall[i].WallPos.y == newPos.y))
 			{
 				newPos = GetRandomPosition();
 			}
 		}
-		for (int w = 0; w < entityManager.NumTrap; w++)
+		for (int w = 0; w < entityManager.NumWall; w++)
 		{
 			if (water[w].Wposition.x == newPos.x && water[w].Wposition.y == newPos.y)
 				newPos = GetRandomPosition();
 		}
-		for (int s = 0; s < entityManager.NumTrap; s++)
+		for (int s = 0; s < entityManager.NumWall; s++)
 		{
 			if (wall[s].WallPos.x == newPos.x && wall[s].WallPos.y == newPos.y)
 				newPos = GetRandomPosition();
