@@ -35,9 +35,6 @@ void lvl5_init(void)
 	DrawWaterTrap();
 	DrawWall();
 	Whale_init();
-	DrawWaterTrap();
-	DrawWall();
-	DrawEnemies();
 	DrawPause();
 	setLevelTimer(currentLevel);
 }
