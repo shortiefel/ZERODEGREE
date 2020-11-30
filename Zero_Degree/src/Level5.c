@@ -48,9 +48,9 @@ void lvl5_update(void)
 	PlayerMovement();
 	MovePenguin();
 	DrawWaterTrapUpdate();
+	Whale_update();
 	SealEnemiesUpdate();
 	level5();
-	Whale_update();
 	displayTimer();
 }
 
