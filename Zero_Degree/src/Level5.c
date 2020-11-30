@@ -35,9 +35,6 @@ void lvl5_init(void)
 	DrawWaterTrap();
 	DrawWall();
 	Whale_init();
-	DrawWaterTrap();
-	DrawWall();
-	DrawEnemies();
 	DrawPause();
 	setLevelTimer(currentLevel);
 }
@@ -51,9 +48,9 @@ void lvl5_update(void)
 	Penguin_update();
 	PlayerMovement();
 	MovePenguin();
+	Whale_update();
 	SealEnemiesUpdate();
 	level5();
-	Whale_update();
 	displayTimer();
 }
 
