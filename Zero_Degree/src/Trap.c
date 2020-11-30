@@ -53,7 +53,7 @@ void InitWaterObjects(void)
 	{
 		water[i].waterTrap = CP_Image_Load("./Assets/WATER.png");
 
-		water[i].attack = 20;
+		water[i].attack = 10;
 	}
 }
 
@@ -217,7 +217,7 @@ void DrawWall(void)
 				newPos = GetRandomPosition();
 			}
 		}
-		for (int w = 0; w < entityManager.NumWall; w++)
+		for (int w = 0; w < entityManager.NumTrap; w++)
 		{
 			if (water[w].Wposition.x == newPos.x && water[w].Wposition.y == newPos.y)
 				newPos = GetRandomPosition();
