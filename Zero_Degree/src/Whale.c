@@ -14,14 +14,22 @@
 #include "Whale.h"
 
 
-// Normalise vector to ensure the speed will be consistent
+// Normalise vector to ensure the speed will be consistent - Done
 // change the whale position into vector
 
-// Do tests on CP_Vector_Normalise
+// Do tests on CP_Vector_Normalise - Done
 // Add timer to spawn projectile
 // Fix issue where projectiles are tracking the player for a few milliseconds after spawning
 
-// work on a timer
+// whale projectile going to direction of player when one goes off screen - Done
+
+// work on a timer - Done
+
+// random holes on map
+// number of traps are wrong
+// whale spawning on walls 
+// whale sprite not rendering correctly, dead whale show up 1 sec after death
+// whale tile not reset, arrows can't go through - Done
 
 
 // ---- WHALE DECLARATION ----
@@ -34,9 +42,9 @@ int wMaxHealth = 700;
 // ---- PROJECTILE DECLARATION ----
 int spawnProj, projSpawned;
 float spawnTimer = 5.0f;
-CP_Vector moveProj;
-int lastPosX, lastPosY;
-float projSpeed = 0.02f;
+//CP_Vector moveProj;
+//int lastPosX, lastPosY;
+float projSpeed = 0.07f;
 
 // ---- PENGUIN DECLARATION ----
 Player penguin;
@@ -136,6 +144,12 @@ void whaleLevelPos(int whalePosX, int whalePosY, int whaleid) {
 	whale[whaleid].health = 700;
 
 	grid_array[(int)whale[whaleid].wPos.x][(int)whale[whaleid].wPos.y] = WHALE;
+
+	// Set projectile starting position at whale position
+	for (int count = 0; count < entityManager.NumWhale; count++) {
+		setProjectilePos(count);
+		whale[count].projectile.spawnProj = 1;
+	}
 }
 
 // generate random spawn position for whale
@@ -144,7 +158,7 @@ void randomWhaleSpawn(void) {
 		randomPosX = CP_Random_RangeInt(3, GRID_WIDTH - 3);
 		randomPosY = CP_Random_RangeInt(3, GRID_HEIGHT - 3);
 
-		if (grid_array[randomPosX][randomPosY] == SEAL || grid_array[randomPosX][randomPosY] == TRAP) {
+		if (grid_array[randomPosX][randomPosY] == SEAL || grid_array[randomPosX][randomPosY] == TRAP || grid_array[randomPosX][randomPosY] == WALL) {
 			randomPosX = CP_Random_RangeInt(3, GRID_WIDTH - 3);
 			randomPosY = CP_Random_RangeInt(3, GRID_HEIGHT - 3);
 		}
@@ -156,7 +170,6 @@ void randomWhaleSpawn(void) {
 		//		whaleLevelPos(randomPosX, randomPosY);
 		//	}
 		//}
-
 
 		whaleLevelPos(randomPosX, randomPosY, count);
 	}
@@ -182,6 +195,7 @@ void whaleLevelInit(void) {
 	}
 }
 
+
 // ---- WHALE_INIT, WHALE_UPDATE, WHALE_EXIT ----
 void Whale_init(void)
 {
@@ -206,15 +220,9 @@ void Whale_init(void)
 		totalEnemieswhales = level5enemies.whale_count;
 	}
 
-	randomWhaleSpawn();
+	//randomWhaleSpawn();
 	whaleLevelInit();
 	//trapGrid = CP_Image_Load("./Assets/WATER.png");
-
-	// Set projectile starting position at whale position
-	for (int count = 0; count < entityManager.NumWhale; count++) {
-		setProjectilePos(count);
-		whale[count].projectile.spawnProj = 1;
-	}
 	
 }
 
@@ -229,6 +237,7 @@ void Whale_update(void)
 		whaleTime -= whaleSpeed;
 
 		//projectileSpawn();
+		//for (int count = 0; count < entityManager.NumWhale; count++) {
 		for (int count = 0; count < entityManager.NumWhale; count++) {
 			if (whale[count].alive == 1 && whale[count].death == 0) {
 				drawWhale(count);
@@ -238,24 +247,25 @@ void Whale_update(void)
 				if (whale[count].health <= 0) {
 					whale[count].alive = 0;
 					whale[count].death = 1;
+					//whaleDeath(count);
 				}
 
 				if (whale[count].projectile.pPos.x < GRID_WIDTH && whale[count].projectile.pPos.y < GRID_HEIGHT) {
 					if (whale[count].projectile.spawnProj == 1) {
-						lastPosX = penguin.X;
-						lastPosY = penguin.Y;
+						whale[count].lastPosX = penguin.X;
+						whale[count].lastPosY = penguin.Y;
 
-						moveProj.x = findDistance((float)lastPosX, whale[count].wPos.x);
-						moveProj.y = findDistance((float)lastPosY, whale[count].wPos.y);
+						whale[count].moveProj.x = findDistance((float)whale[count].lastPosX, whale[count].wPos.x);
+						whale[count].moveProj.y = findDistance((float)whale[count].lastPosY, whale[count].wPos.y);
 
-						moveProj = CP_Vector_Normalize(moveProj);
+						whale[count].moveProj = CP_Vector_Normalize(whale[count].moveProj);
 
 						whale[count].projectile.spawnProj = 0;
 					}
 
-					whale[count].projectile.pPos.x += moveProj.x * projSpeed;
-					whale[count].projectile.pPos.y += moveProj.y * projSpeed;
-					penguinLastPos = CP_Vector_Set((float)penguin.X, (float)penguin.Y);
+					whale[count].projectile.pPos.x += whale[count].moveProj.x * projSpeed;
+					whale[count].projectile.pPos.y += whale[count].moveProj.y * projSpeed;
+					whale[count].penguinLastPos = CP_Vector_Set((float)penguin.X, (float)penguin.Y);
 
 					//printf("%f\n", (CP_Vector_Distance(penguinLastPos, whale[count].projectile.pPos)));
 
@@ -263,7 +273,7 @@ void Whale_update(void)
 						setProjectilePos();
 						penguin.health -= 200;
 					}*/
-					if ((CP_Vector_Distance(penguinLastPos, whale[count].projectile.pPos)) <= 0.5f) {
+					if ((CP_Vector_Distance(whale[count].penguinLastPos, whale[count].projectile.pPos)) <= 0.5f) {
 						setProjectilePos(count);
 						penguin.health -= 200;
 					}
@@ -281,18 +291,18 @@ void Whale_update(void)
 				}
 				if (((int)ElaspedTime % (int)deathTimer) == 0)
 				{
-					deathTime = ElaspedTime;
+					whale[count].deathTime = ElaspedTime;
 				}
-				if (ElaspedTime == deathTime)
+				if (ElaspedTime == whale[count].deathTime)
 				{
 					whale[count].death = 0;
 				}
-				/*if (death == 0) {
-					//whale.wPos.x = -1;
-					//whale.wPos.y = -1;
-					//whale.projectile.pPos.x = -1;
-					//whale.projectile.pPos.y = -1;
-				}*/
+				if (whale[count].death == 0) {
+					whale[count].wPos.x = -1;
+					whale[count].wPos.y = -1;
+					whale[count].projectile.pPos.x = -1;
+					whale[count].projectile.pPos.y = -1;
+				}
 			}
 		}
 	}

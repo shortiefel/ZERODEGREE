@@ -212,12 +212,12 @@ void DrawWall(void)
 				newPos = GetRandomPosition();
 			}
 		}
-		for (int w = 0; w < entityManager.NumTrap; w++)
+		for (int w = 0; w < entityManager.NumWall; w++)
 		{
 			if (water[w].Wposition.x == newPos.x && water[w].Wposition.y == newPos.y)
 				newPos = GetRandomPosition();
 		}
-		for (int s = 0; s < entityManager.NumTrap; s++)
+		for (int s = 0; s < entityManager.NumWall; s++)
 		{
 			if (wall[s].WallPos.x == newPos.x && wall[s].WallPos.y == newPos.y)
 				newPos = GetRandomPosition();
