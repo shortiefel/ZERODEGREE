@@ -49,7 +49,21 @@ void DrawEnemies(void)
 				newPosition = GetRandomPosition();
 			}
 		}
-
+		for (int w = 0; w < entityManager.NumTrap; w++)
+		{
+			if (water[w].Wposition.x == newPosition.x && water[w].Wposition.y == newPosition.y)
+				newPosition = GetRandomPosition();
+		}
+		for (int s = 0; s < entityManager.NumWall; s++)
+		{
+			if (wall[s].WallPos.x == newPosition.x && wall[s].WallPos.y == newPosition.y)
+				newPosition = GetRandomPosition();
+		}
+		for (int c = 0; c < entityManager.NumWhale; c++)
+		{
+			if (whale[c].wPos.x == newPosition.x && whale[c].wPos.y == newPosition.y)
+				newPosition = GetRandomPosition();
+		}
 		seal[entityManager.NumSeal].position = newPosition;
 
 		CP_Image_Draw(seal[entityManager.NumSeal].sprites[0], 
