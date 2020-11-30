@@ -78,7 +78,7 @@ void button_newlevel(void)
 {
 	struct button n =
 	{
-		.text = "Next level",
+		.text = "Moving On",
 		.x = (float)WINDOW_WIDTH / (float)2,
 		.y = (float)WINDOW_HEIGHT / (float)1.5,
 		.width = 250,
