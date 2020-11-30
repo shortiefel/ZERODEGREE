@@ -126,6 +126,18 @@ void draw_button(void)
 			{
 				CP_Engine_SetNextGameStateForced(NULL, lvl2_update, lvl2_exit);
 			}
+			else if (currentLevel == 3)
+			{
+				CP_Engine_SetNextGameStateForced(NULL, lvl3_update, lvl3_exit);
+			}
+			else if (currentLevel == 4)
+			{
+				CP_Engine_SetNextGameStateForced(NULL, lvl4_update, lvl4_exit);
+			}
+			else if (currentLevel == 5)
+			{
+				CP_Engine_SetNextGameStateForced(NULL, lvl5_update, lvl5_exit);
+			}
 		}
 
 	}

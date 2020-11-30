@@ -69,8 +69,6 @@ void DrawEnemies(void)
 					newPosition = GetRandomPosition();
 				}
 			}
-
-
 		}
 
 		seal[entityManager.NumSeal].position = newPosition;
