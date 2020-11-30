@@ -24,7 +24,7 @@ bool Hurt;
 int spawnArrow = 0;
 int directionX, directionY;
 float time = 0;
-float speed = 0.33f;
+float speed = 0.2f;
 CP_Image Penguin, Arrow, Clear;
 //Whale whale;
 entity_manager entityManager;
