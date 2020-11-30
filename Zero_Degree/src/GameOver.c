@@ -12,6 +12,7 @@
 #include "Level2.h"
 #include "Level3.h"
 #include "Level4.h"
+#include "Level5.h"
 #include "GameOver.h"
 #include "Timer.h"
 #include <stdbool.h>
@@ -110,7 +111,26 @@ void draw_button2(void)
 
 		if (CP_Input_MouseClicked())
 		{
-			retry.onClick();
+			if (currentLevel == 1)
+			{
+				CP_Engine_SetNextGameStateForced(lvl1_init, lvl1_update, lvl1_exit);
+			}
+			else if (currentLevel == 2)
+			{
+				CP_Engine_SetNextGameStateForced(lvl2_init, lvl2_update, lvl2_exit);
+			}
+			else if (currentLevel == 3)
+			{
+				CP_Engine_SetNextGameStateForced(lvl3_init, lvl3_update, lvl3_exit);
+			}
+			else if (currentLevel == 4)
+			{
+				CP_Engine_SetNextGameStateForced(lvl4_init, lvl4_update, lvl4_exit);
+			}
+			else if (currentLevel == 5)
+			{
+				CP_Engine_SetNextGameStateForced(lvl5_init, lvl5_update, lvl5_exit);
+			}
 		}
 
 	}

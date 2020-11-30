@@ -44,10 +44,10 @@ void lvl5_update(void)
 	// check input, update simulation, render etc.
 	DrawGrids();
 	DrawPause();
+	DrawWaterTrapUpdate();
 	Penguin_update();
 	PlayerMovement();
 	MovePenguin();
-	DrawWaterTrapUpdate();
 	Whale_update();
 	SealEnemiesUpdate();
 	level5();
