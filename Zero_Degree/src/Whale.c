@@ -59,7 +59,7 @@ float deathTime = 0; int death = 0;
 CP_Image trapGrid;
 
 //----- DEATH COUNTER ---
-//whaledeathcounter = 0; <--- error 
+int whaledeathcounter = 0;
 int totalEnemieswhales = 0;
 
 // draw whale health bar
@@ -298,6 +298,7 @@ void Whale_update(void)
 					whale[count].death = 0;
 				}
 				if (whale[count].death == 0) {
+					whaledeathcounter++;
 					whale[count].wPos.x = -1;
 					whale[count].wPos.y = -1;
 					whale[count].projectile.pPos.x = -1;

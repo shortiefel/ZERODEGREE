@@ -101,6 +101,37 @@ void DrawArrow(void)
 		Arrow = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FLIPARROW.png");
 	CP_Image_Draw(Arrow, (float)penguin.arrow.ArrowX * GRID_SIZE - (GRID_SIZE / 2), (float)penguin.arrow.ArrowY * GRID_SIZE - (GRID_SIZE / 2), GRID_SIZE/2, GRID_SIZE/2, 255);
 }
+//----INITIALZATION OF VARIABLE AND DRAWINGS-----
+void Init(void) 
+{
+	//Set Penguin starting location
+	penguin.X = 1;
+	penguin.Y = 1;
+
+	//Set Velocity
+	velocityX = 0;
+	velocityY = 0;
+	//Drawing of Penguin
+	Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FRONT.png");
+	DrawPenguin();
+
+	//Penguin Health
+	penguin.health = 1500;
+	DrawHP();
+
+	//Init Arrow Direction
+	penguin.arrow.DirX = 1;
+	penguin.arrow.DirY = 0;
+	spawnArrow = 0;
+	directionX = 0;
+	directionY = 0;
+	Hurt = false;
+
+	penguin.alive = true;
+	countdeath = 0;
+	whaledeathcounter = 0;
+	fullHealth = penguin.health;
+}
 
 //----PLAYER CONTROLLER MOVMENT-----
 void PlayerMovement(void)
@@ -150,8 +181,7 @@ void PlayerMovement(void)
 		penguin.arrow.DirY = 0;
 		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/PENGUIN_RIGHT.png");
 	}
-	else if ((penguin.health > 0 && countdeath == entityManager.NumSeal) 
-		|| (penguin.health > 0 && countdeath == entityManager.NumSeal && whaledeathcounter == entityManager.NumWhale))
+	else if ((penguin.health > 0 && countdeath >= entityManager.NumSeal && whaledeathcounter >= entityManager.NumWhale))
 	{
 		velocityX = 0;
 		velocityY = 0;
@@ -215,16 +245,6 @@ void MovePenguin(void)
 		{
 			penguin.Y = 10;
 		}
-		/*if (Hurt == true)
-		{
-			Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/STUN.png");
-		}
-		else
-		{
-			Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FRONT.png");
-		}
-		Hurt = false;*/
-		
 	}
 
 	DrawPenguin();
