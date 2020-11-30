@@ -13,8 +13,13 @@ typedef struct Whale
 	bool hurt;
 	int health;
 	int death;
+	float deathTime;
 	CP_Vector wPos;
 	struct Projectile projectile;
+	CP_Vector penguinLastPos;
+	int lastPosX;
+	int lastPosY;
+	CP_Vector moveProj;
 } Whale;
 
 Whale whale[MAXENTITY];

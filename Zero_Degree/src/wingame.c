@@ -13,6 +13,7 @@
 #include "Level3.h"
 #include "Level4.h"
 #include "Level5.h"
+#include "final_win.h"
 
 CP_Font font1, font2;
 struct button newlevel;
@@ -56,7 +57,11 @@ void message(void)
 	font2 = CP_Font_Load("./Assets/Antipasto-REG.ttf");
 	CP_Font_Set(font2);
 	CP_Settings_TextSize(45);
-	CP_Font_DrawText("Your health will be restored fully.", WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+	if (currentLevel < 5) 
+	{
+		CP_Font_DrawText("Your health will be restored fully.", WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+	}
+	
 
 	
 }
@@ -113,7 +118,10 @@ void nextlevel(void)
 		{
 			CP_Engine_SetNextGameState(lvl5_init, lvl5_update, lvl5_exit);
 		}
-
+		else if ((CP_Input_MouseClicked() && currentLevel == 5))
+		{
+			CP_Engine_SetNextGameState(finalwin_init, finalwin_update, finalwin_exit);
+		}
 	}
 	else
 	{

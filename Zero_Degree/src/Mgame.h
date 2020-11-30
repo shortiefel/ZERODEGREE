@@ -24,8 +24,7 @@ typedef enum GRID_STATE
 	SEAL,
 	TRAP,
 	WALL,
-	WHALE,
-	HOLE
+	WHALE
 }GRID_MAP;
 
 GRID_MAP grid_array[GRID_WIDTH][GRID_HEIGHT];

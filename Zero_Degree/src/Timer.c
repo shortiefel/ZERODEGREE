@@ -29,6 +29,9 @@ void setLevelTimer(int levelnum) {
 	if (levelnum == 4) {
 		levelTimer = 71.0f;
 	}
+	if (levelnum == 5) {
+		levelTimer = 81.0f;
+	}
 	timePassed = levelTimer;
 }
 
