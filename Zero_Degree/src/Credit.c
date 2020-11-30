@@ -9,24 +9,30 @@ CP_Font snowcaps;
 CP_Font font2;
 CP_Image Credit;
 struct button Back2;
+CP_Image CreditBG;
 
 
 //char credit[100];
 
 void credit_init(void)
 {
-	CP_Settings_Background(CP_Color_Create(48, 77, 109, 255));
+	//CP_Settings_Background(CP_Color_Create(48, 77, 109, 255));
 	//Credit = CP_Image_Load("./Assets/WORDS/CREDITS.png");
+	CreditBG = CP_Image_Load("./Assets/NORMAL_BG.png");
+	CP_Image_Draw(CreditBG, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, WINDOW_WIDTH, WINDOW_HEIGHT, 255);
 	snowcaps = CP_Font_Load("./Assets/Iceberg.ttf");
+	
 	button_back_struct2();
 	CP_Font_Set(snowcaps);
 	CP_Settings_TextSize(150);
+	CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
 	CP_Font_DrawText("CREDITS", WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4);
 
 }
 void credit_update(void)
 {
-	CP_Settings_Background(CP_Color_Create(48, 77, 109, 255));
+	CP_Image_Draw(CreditBG, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, WINDOW_WIDTH, WINDOW_HEIGHT, 255);
+	//CP_Settings_Background(CP_Color_Create(48, 77, 109, 255));
 	//CP_Image_Draw(Credit, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4, 800, 200, 255);
 	creditwords();
 	names();
@@ -42,6 +48,7 @@ void creditwords(void)
 {
 	CP_Settings_TextSize(150);
 	CP_Font_Set(snowcaps);
+	CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
 	CP_Font_DrawText("CREDITS", WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4);
 	back2();
 
@@ -49,7 +56,8 @@ void creditwords(void)
 
 void names(void)
 {
-	font2 = CP_Font_Load("./Assets/Antipasto-REG.ttf");
+	CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
+	font2 = CP_Font_Load("./Assets/Antipasto-Pro-ExtraBold-trial.ttf");
 	CP_Font_Set(font2);
 	CP_Settings_TextSize(50);
 	CP_Font_DrawText("Teo Boon See Margaret", WINDOW_WIDTH / 2, WINDOW_HEIGHT /2);
