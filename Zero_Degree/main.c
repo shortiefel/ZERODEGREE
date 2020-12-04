@@ -1,21 +1,18 @@
-//---------------------------------------------------------
-// file:	main.c
-// author:	Felicia
-// email:	weilingfelicia.tan@digipen.edue
-//
-// team name: Midnight
-// game name: Zero Degree
-// team mates: Yap Jing Yee, Tan Wei Ling Felicia, Woon Ting Ting,  Margaret
-//
-// brief:	Main entry for game project
-// 
-//			
-//
-// documentation link:
-// https://inside.digipen.edu/main/GSDP:GAM100/CProcessing
-//
-// Copyright © 2020 DigiPen, All rights reserved.
-//---------------------------------------------------------
+/*************************************************************************
+@filename            main.c
+@Team Member: 
+					 1. Margaret Teo Boon See , Teo.b@digipen.edu (RTIS)
+				     2. Woon Ting Ting, woon.t@digipen.edu (RTIS)
+					 3. Tan Wei Ling Felicia, weilingfelicia.tan@digipen.edu (IMGD)
+				     4. Yap Jing Yee, jingyee.yap@digipen.edu (IMGD)  
+@course			     CSD1400
+@Class-Section Year: Section C - Michaelangelo - Year 2020
+
+
+Brief Description:
+First point of entry
+Done By: Felicia 
+******************************************************/
 
 #include <stdio.h>
 #include <stdbool.h>

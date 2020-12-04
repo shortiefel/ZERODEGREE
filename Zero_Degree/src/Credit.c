@@ -1,3 +1,20 @@
+/*************************************************************************
+@filename            Credit.c
+@Team Member:
+					 1. Margaret Teo Boon See , Teo.b@digipen.edu (RTIS)
+					 2. Woon Ting Ting, woon.t@digipen.edu (RTIS)
+					 3. Tan Wei Ling Felicia, weilingfelicia.tan@digipen.edu (IMGD)
+					 4. Yap Jing Yee, jingyee.yap@digipen.edu (IMGD)
+@course			     CSD1400
+@Class-Section Year: Section C - Michaelangelo - Year 2020
+
+
+Brief Description:
+Credit Screen
+Done By: Felicia
+******************************************************/
+#include <stdio.h>
+
 #include <stdio.h>
 #include <cprocessing.h>
 #include "menu.h"
@@ -12,12 +29,9 @@ struct button Back2;
 CP_Image CreditBG;
 
 
-//char credit[100];
-
 void credit_init(void)
 {
-	//CP_Settings_Background(CP_Color_Create(48, 77, 109, 255));
-	//Credit = CP_Image_Load("./Assets/WORDS/CREDITS.png");
+
 	CreditBG = CP_Image_Load("./Assets/NORMAL_BG.png");
 	CP_Image_Draw(CreditBG, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, WINDOW_WIDTH, WINDOW_HEIGHT, 255);
 	snowcaps = CP_Font_Load("./Assets/Iceberg.ttf");
@@ -32,8 +46,6 @@ void credit_init(void)
 void credit_update(void)
 {
 	CP_Image_Draw(CreditBG, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, WINDOW_WIDTH, WINDOW_HEIGHT, 255);
-	//CP_Settings_Background(CP_Color_Create(48, 77, 109, 255));
-	//CP_Image_Draw(Credit, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4, 800, 200, 255);
 	creditwords();
 	names();
 }
@@ -59,11 +71,17 @@ void names(void)
 	CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
 	font2 = CP_Font_Load("./Assets/Antipasto-Pro-ExtraBold-trial.ttf");
 	CP_Font_Set(font2);
-	CP_Settings_TextSize(50);
-	CP_Font_DrawText("Teo Boon See Margaret", WINDOW_WIDTH / 2, WINDOW_HEIGHT /2);
-	CP_Font_DrawText("Woon Ting Ting ", WINDOW_WIDTH / 2, WINDOW_HEIGHT / (float)2.3);
-	CP_Font_DrawText("Tan Wei Ling Felicia ", WINDOW_WIDTH / 2, WINDOW_HEIGHT / (float)1.7);
-	CP_Font_DrawText("Yap Jing Yee ", WINDOW_WIDTH / 2, WINDOW_HEIGHT / (float)1.5);
+	CP_Settings_TextSize(25);
+	CP_Font_DrawText("Teo Boon See Margaret", WINDOW_WIDTH / 2, WINDOW_HEIGHT / (float)2.4);
+	CP_Font_DrawText("Woon Ting Ting ", WINDOW_WIDTH / 2, WINDOW_HEIGHT / (float)2.2);
+	CP_Font_DrawText("Tan Wei Ling Felicia ", WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+	CP_Font_DrawText("Yap Jing Yee ", WINDOW_WIDTH / 2, WINDOW_HEIGHT / (float)1.85);
+	CP_Font_DrawText("Special Thanks:", WINDOW_WIDTH / 2, WINDOW_HEIGHT / (float)1.7);
+	CP_Font_DrawText("Jarell Ow Yong (Music)", WINDOW_WIDTH / 2, WINDOW_HEIGHT / (float)1.6);
+	CP_Font_DrawText("Instructors: ", WINDOW_WIDTH / 2, WINDOW_HEIGHT / (float)1.5);
+	CP_Font_DrawText("Ding Xiang & Raymond Teo", WINDOW_WIDTH / 2, WINDOW_HEIGHT / (float)1.4);
+
+
 }
 
 void back_onclick2(void)

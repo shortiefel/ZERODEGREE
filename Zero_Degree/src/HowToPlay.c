@@ -1,3 +1,20 @@
+/*************************************************************************
+@filename            HowToPlay.c
+@Team Member:
+					 1. Margaret Teo Boon See , Teo.b@digipen.edu (RTIS)
+					 2. Woon Ting Ting, woon.t@digipen.edu (RTIS)
+					 3. Tan Wei Ling Felicia, weilingfelicia.tan@digipen.edu (IMGD)
+					 4. Yap Jing Yee, jingyee.yap@digipen.edu (IMGD)
+@course			     CSD1400
+@Class-Section Year: Section C - Michaelangelo - Year 2020
+
+
+Brief Description:
+Instructions for players
+Done By: Felicia
+******************************************************/
+
+
 #include <stdio.h>
 #include <cprocessing.h>
 #include "menu.h"
@@ -13,12 +30,11 @@ CP_Image HowToPlayBG;
 
 void How_init(void)
 {
-	//CP_Settings_Background(CP_Color_Create(48, 77, 109, 255));
+
 	HowToPlayBG = CP_Image_Load("./Assets/NORMAL_BG.png");
 	CP_Image_Draw(HowToPlayBG, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, WINDOW_WIDTH, WINDOW_HEIGHT, 255);
 	button_back_struct();
-	
-	
+
 }
 
 void How_update(void)
@@ -72,7 +88,6 @@ void back(void)
 {
 	float mouseX = CP_Input_GetMouseX();
 	float mouseY = CP_Input_GetMouseY();
-	//CP_Settings_Background(CP_Color_Create(48, 77, 109, 255));
 	CP_Image_Draw(HowToPlayBG, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, WINDOW_WIDTH, WINDOW_HEIGHT, 255);
 	CP_Image_Draw(how, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 1920, 1080, 255);
 

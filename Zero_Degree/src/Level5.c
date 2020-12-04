@@ -1,3 +1,19 @@
+/*************************************************************************
+@filename            Level5.c
+@Team Member:
+					 1. Margaret Teo Boon See , Teo.b@digipen.edu (RTIS)
+					 2. Woon Ting Ting, woon.t@digipen.edu (RTIS)
+					 3. Tan Wei Ling Felicia, weilingfelicia.tan@digipen.edu (IMGD)
+					 4. Yap Jing Yee, jingyee.yap@digipen.edu (IMGD)
+@course			     CSD1400
+@Class-Section Year: Section C - Michaelangelo - Year 2020
+
+
+Brief Description:
+Level 5 Design
+Done By: Felicia
+******************************************************/
+
 #include <stdio.h>
 #include <intrin.h>
 #include <cprocessing.h>
@@ -23,7 +39,7 @@
 void lvl5_init(void)
 {
 	currentLevel = 5;
-	level5enemies.seals_count = 12;
+	level5enemies.seals_count = 11;
 	level5enemies.trap_count = 9;
 	level5enemies.whale_count = 5;
 	level5enemies.wall_count = 6;

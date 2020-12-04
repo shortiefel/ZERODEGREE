@@ -1,18 +1,18 @@
-﻿//---------------------------------------------------------
-// file:	MainMenu.c
-// author:	Tan Wei Ling Felicia
-// email:	weilingfelicia.tan@digipen.edu
-// GroupName: Midnight
-// TeamMates: Jing Yee, Ting Ting, Margaret, Felicia
-//
-// brief:	
-//
-// documentation link:
-// https://inside.digipen.edu/main/GSDP:GAM100/CProcessing
-//
-// Copyright 2020 DigiPen, All rights reserved.
-//---------------------------------------------------------
+﻿/*************************************************************************
+@filename            menu.c
+@Team Member:
+					 1. Margaret Teo Boon See , Teo.b@digipen.edu (RTIS)
+					 2. Woon Ting Ting, woon.t@digipen.edu (RTIS)
+					 3. Tan Wei Ling Felicia, weilingfelicia.tan@digipen.edu (IMGD)
+					 4. Yap Jing Yee, jingyee.yap@digipen.edu (IMGD)
+@course			     CSD1400
+@Class-Section Year: Section C - Michaelangelo - Year 2020
 
+
+Brief Description:
+Main page and Menu. This is where the music starts,
+Done By: Felicia
+******************************************************/
 #include <stdio.h>
 #include <cprocessing.h>
 #include <stdbool.h>
@@ -33,21 +33,22 @@ struct button Credits;
 struct button How;
 CP_Image NewBG;
 struct button Levels;
+CP_Image BGMAIN;
 
 bool firstTime = true, musicPlay = false;
 
-//INIT
 void menu_init(void)
 {
 	currentLevel = 0;
-	CP_Settings_Background(CP_Color_Create(48, 77, 109, 255));
+	BGMAIN = CP_Image_Load("./Assets/NORMAL_BG.png");
+	CP_Image_Draw(BGMAIN, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, WINDOW_WIDTH, WINDOW_HEIGHT, 255);
 	
 
 	//SETTINGS ------WINDOW SIZE, FONTS, IMAGES ------------------------------
 	CP_System_SetWindowTitle("ZERO DEGREE");
 	font1 = CP_Font_Load("./Assets/Iceberg.ttf");
 	CP_Font_Set(font1);
-	digipenLogo = CP_Image_Load("./Assets/Digipen_WHITE.png");
+	digipenLogo = CP_Image_Load("./Assets/Digipen_BLACK.png");
 
 	//ALIGNMENTS -------TEXT---------
 	CP_Settings_TextAlignment(CP_TEXT_ALIGN_H_CENTER, CP_TEXT_ALIGN_V_MIDDLE);
@@ -101,7 +102,7 @@ void quit_onclick(void)
 	CP_Engine_Terminate();
 }
 
-
+/*BUTTONS*/
 void buttons_struct(void)
 {
 	struct button p =

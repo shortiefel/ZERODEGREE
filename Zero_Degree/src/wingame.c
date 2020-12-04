@@ -1,3 +1,20 @@
+/*************************************************************************
+@filename            wingame.c
+@Team Member:
+					 1. Margaret Teo Boon See , Teo.b@digipen.edu (RTIS)
+					 2. Woon Ting Ting, woon.t@digipen.edu (RTIS)
+					 3. Tan Wei Ling Felicia, weilingfelicia.tan@digipen.edu (IMGD)
+					 4. Yap Jing Yee, jingyee.yap@digipen.edu (IMGD)
+@course			     CSD1400
+@Class-Section Year: Section C - Michaelangelo - Year 2020
+
+
+Brief Description:
+Default win game screen. (this will only appear for when moving from level 1 to 4
+Done By: Felicia
+******************************************************/
+
+
 #include <stdio.h>
 #include <cprocessing.h>
 #include <intrin.h>
@@ -86,7 +103,6 @@ void button_newlevel(void)
 		.colorFont = CP_Color_Create(255,255,255,255),
 		.colorHover = CP_Color_Create(0,0,0,255),
 		.colorDefault = CP_Color_Create(119 , 136, 153, 255),
-		//.onClick = &lvl2_onclick
 		
 	};
 	newlevel= n;
@@ -101,7 +117,6 @@ void nextlevel(void)
 	if (newlevel.x - newlevel.width / 2 < mouseX && mouseX < newlevel.x + newlevel.width / 2 && newlevel.y - newlevel.height / 2 < mouseY && mouseY < newlevel.y + newlevel.height / 2)
 	{
 		CP_Settings_Fill(newlevel.colorHover);
-		//printf("currentLevel: %d\n", currentLevel);
 		if (CP_Input_MouseClicked() && currentLevel == 1)
 		{
 			CP_Engine_SetNextGameState(lvl2_init, lvl2_update, lvl2_exit);

@@ -1,4 +1,18 @@
+/*************************************************************************
+@filename            Level2.c
+@Team Member:
+					 1. Margaret Teo Boon See , Teo.b@digipen.edu (RTIS)
+					 2. Woon Ting Ting, woon.t@digipen.edu (RTIS)
+					 3. Tan Wei Ling Felicia, weilingfelicia.tan@digipen.edu (IMGD)
+					 4. Yap Jing Yee, jingyee.yap@digipen.edu (IMGD)
+@course			     CSD1400
+@Class-Section Year: Section C - Michaelangelo - Year 2020
 
+
+Brief Description:
+Level 2 Design
+Done By: Felicia
+******************************************************/
 #include <stdio.h>
 #include <intrin.h>
 #include <cprocessing.h>
@@ -21,13 +35,12 @@
 void lvl2_init(void)
 {
 	currentLevel = 2;
-	level2enemies.seals_count = 12;
+	level2enemies.seals_count = 0;
 	level2enemies.trap_count = 10;
-	level2enemies.whale_count = 0;
-	level2enemies.wall_count = 5;
+	level2enemies.whale_count = 4;
+	level2enemies.wall_count = 6;
 
 	InitObjects();
-	//drawlevels();
 	DrawWaterTrap();
 	DrawWall();
 	Penguin_init();
@@ -46,6 +59,7 @@ void lvl2_update(void)
 	Penguin_update();
 	PlayerMovement();
 	MovePenguin();
+	Whale_update();
 	SealEnemiesUpdate();
 	level2();
 	displayTimer();
