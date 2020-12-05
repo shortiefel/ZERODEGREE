@@ -44,7 +44,7 @@ void lvl2_init(void)
 	DrawWaterTrap();
 	DrawWall();
 	Penguin_init();
-	Whale_init();
+	Whale_Init();
 	DrawEnemies();
 	DrawPause();
 	setLevelTimer(currentLevel);
@@ -59,7 +59,7 @@ void lvl2_update(void)
 	Penguin_update();
 	PlayerMovement();
 	MovePenguin();
-	Whale_update();
+	Whale_Update();
 	SealEnemiesUpdate();
 	level2();
 	displayTimer();
