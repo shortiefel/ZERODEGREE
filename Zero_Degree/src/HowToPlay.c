@@ -46,7 +46,7 @@ void How_update(void)
 
 void How_exit(void)
 {
-	
+	CP_Image_Free(&HowToPlayBG);
 }
 
 void back_onclick(void)

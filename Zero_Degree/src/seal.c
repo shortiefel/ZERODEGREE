@@ -10,6 +10,8 @@
 
 
 Brief Description:
+Contains the functionalities of the seal enemy
+-> attacking, taking damage, movement, death
 
 Done By: Jing Yee
 ******************************************************/

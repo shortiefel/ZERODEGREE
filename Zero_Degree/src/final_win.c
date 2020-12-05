@@ -58,7 +58,7 @@ void finalwin_update(void)
 }
 void finalwin_exit(void)
 {
-
+	CP_Image_Free(&FinalScreen);
 }
 
 void return3onclick(void)

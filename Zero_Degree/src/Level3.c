@@ -73,6 +73,7 @@ void lvl3_update(void)
 
 void lvl3_exit(void)
 {
+	FreeGameImages(level3enemies.seals_count, level3enemies.wall_count, level3enemies.trap_count);
 }
 
 void level3(void)

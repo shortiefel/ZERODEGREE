@@ -33,12 +33,9 @@ Done By: Felicia
 #include "Timer.h"
 #include <stdbool.h>
 
-
 struct button retry;
 struct button Quit3;
 CP_Font font1;
-
-
 
 void gameover_init(void)
 {
@@ -63,8 +60,6 @@ void DrawGameOver(void)
 	CP_Settings_Fill(CP_Color_Create(48, 75, 109, 255));
 	CP_Graphics_DrawRect(400, 200, 780, 400);
 
-
-
 	font1 = CP_Font_Load("./Assets/Iceberg.ttf");
 	CP_Font_Set(font1);
 	CP_Settings_TextSize(100);
@@ -79,6 +74,7 @@ void againonclick(void)
 
 void quit2onclick(void)
 {
+	FreeMusic();
 	CP_Engine_Terminate();
 }
 

@@ -10,7 +10,7 @@
 
 
 Brief Description:
- 
+Renders the level selection screen
 
 Done By: Jing Yee
 ******************************************************/
@@ -26,7 +26,6 @@ CP_Font font;
 selectbutton levelsbutton[6];
 
 CP_Color colorDefault, colorHover, colorFont;
-CP_Image LevelBG;
 
 float width, height;
 int yInc = 100, buttonPadding = 200, selectedLevel = 0;
@@ -60,7 +59,7 @@ void levelselect_update(void)
 
 void levelselect_exit(void)
 {
-
+	FreeBGImage();
 }
 
 void DrawButtons(void)
@@ -148,4 +147,9 @@ void playlevel_onclick(void)
 void menu_onclick(void)
 {
 	CP_Engine_SetNextGameState(menu_init, menu_update, menu_exit);
+}
+
+void FreeBGImage(void)
+{
+	CP_Image_Free(&LevelBG);
 }

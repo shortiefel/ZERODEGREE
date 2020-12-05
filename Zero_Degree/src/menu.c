@@ -24,16 +24,11 @@ Done By: Felicia
 #include "LevelSelect.h"
 
 CP_Font font1;
-CP_Image digipenLogo;
-CP_Image Main;
-CP_Image pMain;
 struct button Play;
 struct button Quit;
 struct button Credits;
 struct button How;
-CP_Image NewBG;
 struct button Levels;
-CP_Image BGMAIN;
 
 bool firstTime = true, musicPlay = false;
 
@@ -74,7 +69,7 @@ void menu_update(void)
 
 void menu_exit(void)
 {
-	
+	FreeMenuImages();
 }
 
 
@@ -99,6 +94,7 @@ void credit_onclick(void)
 }
 void quit_onclick(void)
 {
+	FreeMusic();
 	CP_Engine_Terminate();
 }
 
@@ -313,4 +309,9 @@ void background_music(void)
 {
 	music = CP_Sound_Load("./Assets/MUSIC/Normal_BG.wav");
 	CP_Sound_PlayMusic(music);
+}
+
+void FreeMusic(void)
+{
+	CP_Sound_Free(music);
 }

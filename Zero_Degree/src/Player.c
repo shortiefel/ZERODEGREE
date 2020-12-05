@@ -41,7 +41,6 @@ int spawnArrow = 0;
 int directionX, directionY;
 float time = 0;
 float speed = 0.2f;
-CP_Image Penguin, Arrow, Clear;
 //Whale whale;
 entity_manager entityManager;
 //CP_Vector Arrow;
@@ -200,6 +199,7 @@ void PlayerMovement(void)
 	}
 	else if ((penguin.health > 0 && countdeath >= entityManager.NumSeal && whaledeathcounter >= entityManager.NumWhale))
 	{
+		//printf("%d %d %d %d\n", countdeath, entityManager.NumSeal, whaledeathcounter, entityManager.NumWhale);
 		velocityX = 0;
 		velocityY = 0;
 		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/WIN.png");

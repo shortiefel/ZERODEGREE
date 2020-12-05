@@ -11,7 +11,7 @@
 
 Brief Description:
 Pause Screen, a popout will appear when player click on pause
-Done By: Felicia
+Done By: Felicia and Jing Yee
 ******************************************************/
 
 #include <stdio.h>
@@ -59,6 +59,7 @@ void returnonclick(void)
 
 void quitonclick(void)
 {
+	FreeMusic();
 	CP_Engine_Terminate();
 }
 

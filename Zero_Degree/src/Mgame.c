@@ -1,3 +1,19 @@
+/*************************************************************************
+@filename            Mgame.c
+@Team Member:
+					 1. Margaret Teo Boon See , Teo.b@digipen.edu (RTIS)
+					 2. Woon Ting Ting, woon.t@digipen.edu (RTIS)
+					 3. Tan Wei Ling Felicia, weilingfelicia.tan@digipen.edu (IMGD)
+					 4. Yap Jing Yee, jingyee.yap@digipen.edu (IMGD)
+@course			     CSD1400
+@Class-Section Year: Section C - Michaelangelo - Year 2020
+
+
+Brief Description:
+Initialisation of the game's grid, includes functions that renders the footer in game and frees images used 
+Done By: Felicia and Jing Yee
+******************************************************/
+
 #include <stdio.h>
 #include <intrin.h>
 #include "cprocessing.h"
@@ -13,6 +29,7 @@
 #include "Level3.h"
 #include "Level4.h"
 #include "Timer.h"
+#include "Trap.h"
 #include "Level5.h"
 #include "LevelSelect.h"
 
@@ -20,7 +37,6 @@ CP_Image ice_grid;
 CP_Image trap_grid;
 struct button pause;
 CP_Font footerlevels;
-CP_Image weapons; 
 
 
 void Mgame_init(void)
@@ -75,7 +91,7 @@ void Mgame_exit(void)
 //------GRIDS--------
 void DrawGrids(void)
 {
-	float grid_size = GRID_SIZE / 2;
+	float grid_size = (float)(GRID_SIZE / 2);
 
 	CP_Settings_Background(CP_Color_Create(48, 77, 109, 255));
 
@@ -183,3 +199,45 @@ void InitObjects(void)
 
 }
 
+
+void FreeGameImages(int sealNum, int wallNum, int trapNum)
+{
+	// free images used in seal.c
+	for (int i = 0; i < sealNum; i++)
+	{
+		CP_Image_Free(&(seal[i].sprites[0]));
+		CP_Image_Free(&(seal[i].sprites[1]));
+		CP_Image_Free(&(seal[i].sprites[2]));
+		CP_Image_Free(&(seal[i].sprites[3]));
+		CP_Image_Free(&(seal[i].sprites[4]));
+	}
+
+	// free images used in Player.c
+	CP_Image_Free(&Penguin);
+	CP_Image_Free(&Arrow);
+
+	// free images used in Whale.c
+	CP_Image_Free(&whaleSprite);
+
+	CP_Image_Free(&weapons);
+
+	// free images used in Trap.c
+	for (int w = 0; w < wallNum; w++)
+	{
+		CP_Image_Free(&(wall[w].Block));
+	}
+
+	for (int q = 0; q < trapNum; q++)
+	{
+		CP_Image_Free(&(water[q].waterTrap));
+	}
+}
+
+void FreeMenuImages(void)
+{
+	CP_Image_Free(&digipenLogo);
+	CP_Image_Free(&Main);
+	CP_Image_Free(&pMain);
+	CP_Image_Free(&NewBG);
+	CP_Image_Free(&BGMAIN);
+}

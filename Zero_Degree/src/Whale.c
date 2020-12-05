@@ -53,7 +53,6 @@ Done By: Ting Ting
 
 // ---- WHALE DECLARATION ----
 //Whale whale;
-CP_Image whaleSprite;
 float whaleTime, whaleSpeed = 0.03f;
 int randomPosX, randomPosY;
 int wMaxHealth = 700;
@@ -73,6 +72,7 @@ CP_Vector penguinLastPos;
 float deathTimePassed;
 float deathTimer = 4.0f;
 float deathTime = 0; int death = 0;
+bool callOnce = true;
 
 //----- DEATH COUNTER ---
 int whaledeathcounter = 0;
@@ -313,6 +313,7 @@ void Whale_update(void)
 			else {
 				if (whale[count].alive == 0 && whale[count].death == 1) {
 					whaleDeath(count);
+					callOnce = true;
 				}
 				if (((int)ElaspedTime % (int)deathTimer) == 0)
 				{
@@ -323,11 +324,15 @@ void Whale_update(void)
 					whale[count].death = 0;
 				}
 				if (whale[count].death == 0) {
-					whaledeathcounter++;
-					whale[count].wPos.x = -1;
-					whale[count].wPos.y = -1;
-					whale[count].projectile.pPos.x = -1;
-					whale[count].projectile.pPos.y = -1;
+					if (callOnce)
+					{
+						whaledeathcounter++;
+						whale[count].wPos.x = -1;
+						whale[count].wPos.y = -1;
+						whale[count].projectile.pPos.x = -1;
+						whale[count].projectile.pPos.y = -1;
+						callOnce = false;
+					}
 				}
 			}
 		}

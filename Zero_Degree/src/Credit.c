@@ -24,9 +24,8 @@ Done By: Felicia
 
 CP_Font snowcaps;
 CP_Font font2;
-CP_Image Credit;
-struct button Back2;
 CP_Image CreditBG;
+struct button Back2;
 
 
 void credit_init(void)
@@ -54,6 +53,7 @@ void credit_update(void)
 void credit_exit(void)
 {
 	// shut down the gamestate and cleanup any dynamic memory
+	CP_Image_Free(&CreditBG);
 }
 
 void creditwords(void)
