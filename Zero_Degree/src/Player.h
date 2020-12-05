@@ -42,12 +42,10 @@ void Init(void);
 
 void DrawPenguin(void);
 void DrawHP(void);
-
 void PlayerMovement(void);
 void MovePenguin(void);
 void PenguinBow(void);
 void DrawArrow(void);
-//Get all seal position seperately
 void PHurt(bool a);
 void ArrowMove(void);
 void ClearArrow(void);

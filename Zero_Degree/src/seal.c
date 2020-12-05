@@ -30,7 +30,7 @@ Done By: Jing Yee
 #include "Level5.h"
 #include "Whale.h"
 #include "Trap.h"
-
+//Declaring Variables
 entity_manager entityManager;
 
 int totalEnemies = 0, index = 0,

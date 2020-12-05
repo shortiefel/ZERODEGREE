@@ -41,9 +41,7 @@ int spawnArrow = 0;
 int directionX, directionY;
 float time = 0;
 float speed = 0.2f;
-//Whale whale;
 entity_manager entityManager;
-//CP_Vector Arrow;
 CP_Font font4;
 int fullHealth;
 
@@ -134,19 +132,20 @@ void Init(void)
 	//Penguin Health
 	penguin.health = 1500;
 	DrawHP();
-
+	fullHealth = penguin.health;
+	Hurt = false;
+	penguin.alive = true;
 	//Init Arrow Direction
 	penguin.arrow.DirX = 1;
 	penguin.arrow.DirY = 0;
 	spawnArrow = 0;
+	//Init Penguin Direction
 	directionX = 0;
 	directionY = 0;
-	Hurt = false;
-
-	penguin.alive = true;
+	//Init death counter
 	countdeath = 0;
 	whaledeathcounter = 0;
-	fullHealth = penguin.health;
+	
 }
 
 //----PLAYER CONTROLLER MOVMENT-----
@@ -197,6 +196,7 @@ void PlayerMovement(void)
 		penguin.arrow.DirY = 0;
 		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/PENGUIN_RIGHT.png");
 	}
+	//Penguin Win Current Level
 	else if ((penguin.health > 0 && countdeath >= entityManager.NumSeal && whaledeathcounter >= entityManager.NumWhale))
 	{
 		//printf("%d %d %d %d\n", countdeath, entityManager.NumSeal, whaledeathcounter, entityManager.NumWhale);
@@ -205,6 +205,7 @@ void PlayerMovement(void)
 		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/WIN.png");
 		CP_Engine_SetNextGameState(win_init, win_update, win_exit);
 	}
+	//All Level Cleared
 	else if (currentLevel == 5 && penguin.health > 0 && countdeath >= entityManager.NumSeal && countdeath >= entityManager.NumWhale)
 	{
 		velocityX = 0;
@@ -212,7 +213,6 @@ void PlayerMovement(void)
 		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/WIN.png");
 		CP_Engine_SetNextGameState(finalwin_init, finalwin_update, finalwin_exit);
 	}
-
 	//Penguin Stay Still
 	else
 	{
@@ -220,7 +220,6 @@ void PlayerMovement(void)
 		velocityY = 0;
 	}
 }
-
 int tempGridX = 0;
 int tempGridY = 0;
 
@@ -234,10 +233,9 @@ void MovePenguin(void)
 		time -= speed;
 		
 		//Move the penguin
-
 		tempGridX = penguin.X + velocityX;
 		tempGridY = penguin.Y + velocityY;
-
+		//Prevent Penguin from walking into enemy or wall.
 		if (grid_array[tempGridX][tempGridY] != SEAL 
 			&& grid_array[tempGridX][tempGridY] != WHALE 
 			&& grid_array[tempGridX][tempGridY] != WALL)
@@ -245,7 +243,7 @@ void MovePenguin(void)
 			penguin.X += velocityX;
 			penguin.Y += velocityY;
 		}
-
+		//Prevent Penguin from walking out of map
 		if (penguin.X < 1 )
 		{
 			penguin.X = 1;
@@ -254,6 +252,7 @@ void MovePenguin(void)
 		{
 			penguin.X = 20;
 		}
+		//Prevent Penguin from walking into footer or out of map
 		if (penguin.Y < 1)
 		{
 			penguin.Y = 1;
@@ -263,10 +262,8 @@ void MovePenguin(void)
 			penguin.Y = 10;
 		}
 	}
-
 	DrawPenguin();
 	DrawHP();
-
 }
 
 //---- ATTACK -----
@@ -297,6 +294,8 @@ void PenguinBow(void)
 		{
 			Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/HOLDBOW.png");
 		}
+		//Only allow 1 arrow on the map at all times
+		//This is also to prevent arrow from changing direction halfway.
 		if (spawnArrow == 0)
 		{
 			penguin.arrow.ArrowX = penguin.X;
@@ -310,6 +309,7 @@ void PenguinBow(void)
 			spawnArrow = 1;
 		}
 	}
+	//Stationary Post
 	else
 	{
 		Penguin = CP_Image_Load("./Assets/CHARACTERS/PENGUIN/FRONT.png");
@@ -317,21 +317,22 @@ void PenguinBow(void)
 }
 
 void ArrowMove(void)
-{
+{	//Ensure arrow in inside the map
 	if (penguin.arrow.ArrowX < 21 && penguin.arrow.ArrowY < 11)
 	{
 		if (penguin.arrow.ArrowX > -1 && penguin.arrow.ArrowY > -1)
-		{
+		{	//If Player press Z to shoot.
 			if (spawnArrow == 1)
-			{
+			{	//Save the direction the penguin is facing first.
+				//This is to prevent arrow direction from changing when the penguin moves.
 				directionX = penguin.arrow.DirX;
 				directionY = penguin.arrow.DirY;
 				spawnArrow = 2;
 			}
-
+			//Arrow moves by 1 grid according to where the penguin faced.
 			penguin.arrow.ArrowX += directionX;
 			penguin.arrow.ArrowY += directionY;
-
+			//Check if arrow hit whale
 			for (int whaleid = 0; whaleid < entityManager.NumWhale; whaleid++) {
 				if (penguin.arrow.ArrowX == whale[whaleid].wPos.x && penguin.arrow.ArrowY == whale[whaleid].wPos.y)
 				{
@@ -339,6 +340,7 @@ void ArrowMove(void)
 					whale[whaleid].health -= 100;
 				}
 			}
+			//Check if arrow hit seal
 			for (int id = 0; id < entityManager.NumSeal; id++)
 			{
 				if (penguin.arrow.ArrowX == seal[id].position.x && penguin.arrow.ArrowY == seal[id].position.y)
@@ -347,6 +349,7 @@ void ArrowMove(void)
 					seal[id].health -= 100;
 				}
 			}
+			//Check if arrow hit wall
 			for (int id = 0; id < entityManager.NumWall; id++)
 			{
 				if (penguin.arrow.ArrowX == wall[id].WallPos.x && penguin.arrow.ArrowY == wall[id].WallPos.y)
@@ -355,17 +358,20 @@ void ArrowMove(void)
 				}
 			}
 		}
+		//If arrow moves to a grid outside of Map, it will be cleared
 		else
 			ClearArrow();
 	}
+	//If arrow moves to a grid on the footer or outside the map, it will be cleared.
 	else
 		ClearArrow();
 }
 void ClearArrow(void)
 {
-	//Arrow = CP_Image_Load("./Assets");
+	//Ensure arrow is outside of player view.
 	penguin.arrow.ArrowX = -1;
 	penguin.arrow.ArrowY = -1;
+	//Set back to 0 so that it can be spawn again.
 	spawnArrow = 0;
 }
 
