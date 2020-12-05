@@ -29,18 +29,16 @@ Done By: Felicia and Margaret
 #include "Whale.h"
 #include "Trap.h"
 
-
+//Declaring Variables
 int totalTraps = 0;
 int totalwall = 0;
 float grid_size1 = GRID_SIZE / 2;
-//Player penguin2;
-
 float atkDelay = 2, nxtAtk = 0, atkPlayer = 0;
 bool WaterTrap = false;
 
 
 void InitWaterObjects(void)
-{
+{	//Check for amount of trap required per level
 	if (currentLevel == 1)
 	{
 		totalTraps = level1enemies.trap_count;
@@ -62,9 +60,8 @@ void InitWaterObjects(void)
 		totalTraps = level5enemies.trap_count;
 	}
 
-
-
 	entityManager.NumTrap = 0;
+	//Set image to all trap
 	for (int i = 0; i < totalTraps; i++)
 	{
 		water[i].waterTrap = CP_Image_Load("./Assets/WATER.png");
@@ -78,16 +75,15 @@ void DrawWaterTrap(void)
 	InitWaterObjects();
 
 	CP_Vector newPos;
-
 	newPos.x = 1;
 	newPos.y = 1;
-
+	//Ensure that there is correct amount of traps made
 	while (entityManager.NumTrap < totalTraps)
 	{
 		newPos = GetRandomWaterPosition();
-
+		
 		for (int i = 0; i < entityManager.NumSeal; i++)
-		{
+		{	//Ensure that trap does not spawn on top of other things
 			if ((seal[i].position.x == newPos.x && seal[i].position.y == newPos.y)
 			|| (whale[i].wPos.x == newPos.x && whale[i].wPos.y == newPos.y)
 			|| (water[i].Wposition.x == newPos.x && water[i].Wposition.y == newPos.y)
@@ -96,13 +92,14 @@ void DrawWaterTrap(void)
 				newPos = GetRandomPosition();
 			}
 		}
-
+		//Set the trap position
 		water[entityManager.NumTrap].Wposition = newPos;
+		//Draw all traps according to the random spawn position
 		CP_Image_Draw(water[entityManager.NumTrap].waterTrap,
 			(float)water[entityManager.NumTrap].Wposition.x * GRID_SIZE - grid_size1,
 			(float)water[entityManager.NumTrap].Wposition.y * GRID_SIZE - grid_size1, GRID_SIZE,
 			GRID_SIZE, 255);
-
+		//Update the grid to TRAP
 		grid_array[(int)water[entityManager.NumTrap].Wposition.x][(int)water[entityManager.NumTrap].Wposition.y] = TRAP;
 		entityManager.NumTrap++;
 	}
@@ -110,21 +107,15 @@ void DrawWaterTrap(void)
 
 void WaterTrapAttack(int id)
 {
-	//if (penguin.X == water[id].Wposition.x && penguin.Y == water[id].Wposition.y)
-	//{
-	//	penguin.health = penguin.health - water[id].attack;
-	//	//printf("health: %d\n", penguin.health);
-	//}
+	//If penguin step on trap, HP will drop
 	if (grid_array[penguin.X][penguin.Y] == TRAP) {
 		penguin.health = penguin.health - water[0].attack;
 	}
-
-		//printf("health: %d\n", penguin.health);
 	PHurt(WaterTrap);
 }
 
-void DrawWaterTrapUpdate(void)
-{
+void DrawTrapUpdate(void)
+{	//Ensure that wall image remain there throughout the game.
 	for (int s = 0; s < entityManager.NumWall; s++)
 	{
 		CP_Image_Draw(wall[s].Block,
@@ -132,18 +123,19 @@ void DrawWaterTrapUpdate(void)
 		(float)wall[s].WallPos.y * GRID_SIZE - grid_size1, GRID_SIZE,
 		GRID_SIZE, 255);
 	}
+	//Ensure that watertrap image remain there throughout the game.
 	for (int i = 0; i < entityManager.NumTrap; i++)
 	{
 		CP_Image_Draw(water[i].waterTrap,
 			(float)water[i].Wposition.x * GRID_SIZE - grid_size1,
 			(float)water[i].Wposition.y * GRID_SIZE - grid_size1, GRID_SIZE,
 			GRID_SIZE, 255);
-
+		//Check if penguin has any HP left.
 		if (penguin.alive == true)
 		{
 			WaterTrapAttack(i);
 		}
-
+		//Continuous damaged done to penguin
 		if (((int)ElaspedTime % (int)atkDelay) == 0)
 		{
 			nxtAtk = ElaspedTime + atkDelay;
@@ -180,6 +172,7 @@ CP_Vector GetRandomWaterPosition(void)
 void InitWall(void)
 {
 	totalwall = 0;
+	//Check for amount of trap required per level
 	if (currentLevel == 1)
 	{
 		totalwall = level1enemies.wall_count;
@@ -202,6 +195,7 @@ void InitWall(void)
 	}
 
 	entityManager.NumWall = 0;
+	//Set image to all wall
 	for (int i = 0; i < totalwall; i++)
 	{
 		wall[i].WallPos.x = -1;
@@ -215,16 +209,15 @@ void DrawWall(void)
 	InitWall();
 
 	CP_Vector newPos;
-
 	newPos.x = 1;
 	newPos.y = 1;
-
+	//Ensure that there is correct amount of walls made
 	while (entityManager.NumWall < totalwall)
 	{
 		newPos = GetRandomWaterPosition();
 
 		for (int i = 0; i < entityManager.NumSeal; i++)
-		{
+		{	//Ensure that walls does not spawn on top of other things
 			if ((seal[i].position.x == newPos.x && seal[i].position.y == newPos.y)
 				|| (whale[i].wPos.x == newPos.x && whale[i].wPos.y == newPos.y)
 				|| (water[i].Wposition.x == newPos.x && water[i].Wposition.y == newPos.y)
@@ -243,12 +236,14 @@ void DrawWall(void)
 			if (wall[s].WallPos.x == newPos.x && wall[s].WallPos.y == newPos.y)
 				newPos = GetRandomPosition();
 		}
+		//Set the wall position
 		wall[entityManager.NumWall].WallPos = newPos;
+		//Draw all traps according to the random spawn position
 		CP_Image_Draw(wall[entityManager.NumWall].Block,
 			(float)wall[entityManager.NumWall].WallPos.x * GRID_SIZE - grid_size1,
 			(float)wall[entityManager.NumWall].WallPos.y * GRID_SIZE - grid_size1, GRID_SIZE,
 			GRID_SIZE, 255);
-
+		//Update the grid to WALL
 		grid_array[(int)wall[entityManager.NumWall].WallPos.x][(int)wall[entityManager.NumWall].WallPos.y] = WALL;
 		entityManager.NumWall++;
 	}

@@ -61,7 +61,7 @@ void lvl4_update(void)
 	// check input, update simulation, render etc.
 	DrawGrids();
 	DrawPause();
-	DrawWaterTrapUpdate();
+	DrawTrapUpdate();
 	Penguin_update();
 	PlayerMovement();
 	MovePenguin();

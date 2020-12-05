@@ -39,7 +39,7 @@ entity_manager wallManager;
 CP_Vector GetRandomWaterPosition(void);
 void InitWaterObjects(void);
 void DrawWaterTrap(void);
-void DrawWaterTrapUpdate(void);
+void DrawTrapUpdate(void);
 void WaterTrapAttack(int id);
 
 //Wall

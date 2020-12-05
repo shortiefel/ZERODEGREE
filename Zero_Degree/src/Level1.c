@@ -58,7 +58,7 @@ void lvl1_update(void)
 	level1();
 	DrawGrids();
 	DrawPause();
-	DrawWaterTrapUpdate();
+	DrawTrapUpdate();
 	Penguin_update();
 	PlayerMovement();
 	MovePenguin();
