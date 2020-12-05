@@ -18,21 +18,20 @@ header file of Whale.h and declares all variables and functions needed
 typedef struct Projectile
 {
 	CP_Vector pPos;
-	int spawnProj;
+	bool spawnProj;
 } Projectile;
 
 typedef struct Whale
 {
-	int alive;
+	bool alive;
+	bool death;
 	bool hurt;
 	int health;
-	int death;
 	float deathTime;
 	CP_Vector wPos;
 	struct Projectile projectile;
 	CP_Vector penguinLastPos;
-	int lastPosX;
-	int lastPosY;
+	CP_Vector penguinCurrentPos;
 	CP_Vector moveProj;
 } Whale;
 
@@ -41,11 +40,5 @@ CP_Image whaleSprite;
 
 int whaledeathcounter;
 
-void Whale_init(void);
-void Whale_update(void);
-void Whale_exit(void);
-
-//CP_Vector getWhalePos(void);
-void drawWhale(int whaleid);
-void drawProjectile(int whaleid);
-void setProjectilePos(int whaleid);
+void Whale_Init(void);
+void Whale_Update(void);
