@@ -47,7 +47,7 @@ void lvl2_init(void)
 	Whale_Init();
 	DrawEnemies();
 	DrawPause();
-	setLevelTimer(currentLevel);
+	InitTimer();
 }
 void lvl2_update(void)
 {
@@ -62,7 +62,7 @@ void lvl2_update(void)
 	Whale_Update();
 	SealEnemiesUpdate();
 	level2();
-	displayTimer();
+	DrawTimer();
 }
 
 

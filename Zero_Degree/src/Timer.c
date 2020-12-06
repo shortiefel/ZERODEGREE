@@ -9,8 +9,8 @@
 @Class-Section Year: Section C - Michaelangelo - Year 2020
 
 
-Brief Description:
-
+Brief Description: 
+Timer implemented for the game
 Done By: Ting Ting
 ******************************************************/
 
@@ -29,46 +29,63 @@ Done By: Ting Ting
 #include "Trap.h"
 #include "Whale.h"
 
+
+// ----------------------------------------------------------------------------------------- //
+// variable declaration //
+// ----------------------------------------------------------------------------------------- //
+
 float levelTimer;
 float timePassed;
 
-void setLevelTimer(int levelnum) {
-	if (levelnum == 1) {
-		levelTimer = 31.0f;
+// ----------------------------------------------------------------------------------------- //
+// timer function declaration //
+// ----------------------------------------------------------------------------------------- //
+
+void InitTimer() {
+	// check and set the level timer
+	if (currentLevel == 1) {
+		levelTimer = 30.0f;
 	}
-	if (levelnum == 2) {
-		levelTimer = 51.0f;
+	if (currentLevel == 2) {
+		levelTimer = 30.0f;
 	}
-	if (levelnum == 3) {
-		levelTimer = 61.0f;
+	if (currentLevel == 3) {
+		levelTimer = 50.0f;
 	}
-	if (levelnum == 4) {
-		levelTimer = 71.0f;
+	if (currentLevel == 4) {
+		levelTimer = 60.0f;
 	}
-	if (levelnum == 5) {
-		levelTimer = 81.0f;
+	if (currentLevel == 5) {
+		levelTimer = 70.0f;
 	}
+
 	timePassed = levelTimer;
 }
 
-void resetTimer(void) {
+void ResetTimer(void) {
 	timePassed = 0;
 }
 
-void timerCountdown(void) {
+void TimerCountdown(void) {
+	// countdown timer
 	timePassed -= CP_System_GetDt();
+
+	// when timer runs out
 	if (timePassed <= 0) {
 		CP_Engine_SetNextGameState(gameover_init, gameover_update, gameover_exit);
-		resetTimer();
+		// reset timer
+		ResetTimer();
 	}
 }
 
-void displayTimer(void) {
-	timerCountdown();
+void DrawTimer(void) {
+	TimerCountdown();
 
-	char* timeString = malloc(50);
+	// convert timer to string
+	char timeString[50];
 	sprintf_s(timeString, 50, "Time Left: %ds", (int)timePassed);
 
+	// draw timer
 	for (int x = 0; x < GRID_WIDTH; x++) {
 		for (int y = 0; y < GRID_HEIGHT; y++) {
 			if (grid_array[x][y] == FOOTER) {

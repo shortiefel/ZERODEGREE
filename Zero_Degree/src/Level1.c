@@ -48,7 +48,7 @@ void lvl1_init(void)
 	DrawWaterTrap();
 	DrawWall();
 	DrawEnemies();
-	setLevelTimer(currentLevel);
+	InitTimer();
 
 }
 void lvl1_update(void)
@@ -63,7 +63,7 @@ void lvl1_update(void)
 	PlayerMovement();
 	MovePenguin();
 	SealEnemiesUpdate();
-	displayTimer();
+	DrawTimer();
 	
 }
 

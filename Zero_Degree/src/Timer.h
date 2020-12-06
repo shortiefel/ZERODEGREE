@@ -15,9 +15,7 @@ header file of Timer.h and declares all variables and functions needed
 #pragma once
 #include "Mgame.h"
 
-ENEMIESINLEVEL level1enemies;
-
-void setLevelTimer(int levelnum);
-void timerCountdown(void);
-void displayTimer(void);
-void resetTimer(void);
+void InitTimer(void);
+void TimerCountdown(void);
+void DrawTimer(void);
+void ResetTimer(void);

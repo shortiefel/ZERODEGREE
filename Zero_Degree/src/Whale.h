@@ -27,8 +27,8 @@ typedef struct Whale
 	bool death;
 	bool hurt;
 	int health;
-	float deathTime;
 	CP_Vector wPos;
+	float deathTime;
 	struct Projectile projectile;
 	CP_Vector penguinLastPos;
 	CP_Vector penguinCurrentPos;
