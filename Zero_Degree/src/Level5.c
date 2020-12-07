@@ -13,7 +13,6 @@ Brief Description:
 Level 5 Design
 Done By: Felicia
 ******************************************************/
-
 #include <stdio.h>
 #include <intrin.h>
 #include <cprocessing.h>
@@ -34,18 +33,15 @@ Done By: Felicia
 #include "Level5.h"
 #include "Timer.h"
 
-
-
 void lvl5_init(void)
-{
+{	//Initialized number of object in map
 	currentLevel = 5;
 	level5enemies.seals_count = 11;
 	level5enemies.trap_count = 9;
 	level5enemies.whale_count = 5;
 	level5enemies.wall_count = 6;
-
+	//Run all initialization from other files.
 	InitObjects();
-	//drawlevels();
 	Penguin_init();
 	DrawWaterTrap();
 	DrawWall();
@@ -75,7 +71,7 @@ void lvl5_exit(void)
 {
 	FreeGameImages(level5enemies.seals_count, level5enemies.wall_count, level5enemies.trap_count);
 }
-
+//Level design
 void level5(void)
 {
 
@@ -84,6 +80,7 @@ void level5(void)
 
 	for (int x = 0; x < GRID_WIDTH; x++)
 		for (int y = 0; y < GRID_HEIGHT; y++)
+			//Footer design
 			if (grid_array[x][y] == FOOTER)
 			{
 				if (currentLevel == 5)

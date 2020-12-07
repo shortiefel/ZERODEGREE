@@ -30,11 +30,9 @@ CP_Image HowToPlayBG;
 
 void How_init(void)
 {
-
 	HowToPlayBG = CP_Image_Load("./Assets/NORMAL_BG.png");
 	CP_Image_Draw(HowToPlayBG, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, WINDOW_WIDTH, WINDOW_HEIGHT, 255);
 	button_back_struct();
-
 }
 
 void How_update(void)
@@ -53,8 +51,7 @@ void back_onclick(void)
 {
 	CP_Engine_SetNextGameState(menu_init, menu_update, menu_exit);
 }
-
-
+//Header design
 void header1(void)
 {
 	font2 = CP_Font_Load("./Assets/Iceberg.ttf");
@@ -62,11 +59,8 @@ void header1(void)
 	CP_Settings_TextSize(120);
 	CP_Font_DrawText("How To", WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4);
 	CP_Font_DrawText("Play", WINDOW_WIDTH / 2, WINDOW_HEIGHT / (float)2.8);
-
 }
-
-
-
+//Button Design
 void button_back_struct(void)
 {
 	struct button b =
@@ -83,7 +77,7 @@ void button_back_struct(void)
 	};
 	Back = b;
 }
-
+//Check for player input
 void back(void)
 {
 	float mouseX = CP_Input_GetMouseX();
@@ -92,7 +86,7 @@ void back(void)
 	CP_Image_Draw(how, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 1920, 1080, 255);
 
 	header1();
-
+	
 	if (Back.x - Back.width / 2 < mouseX && mouseX < Back.x + Back.width / 2 && Back.y - Back.height / 2 < mouseY && mouseY < Back.y + Back.height / 2)
 	{
 		CP_Settings_Fill(Back.colorHover);
@@ -113,7 +107,7 @@ void back(void)
 	CP_Font_DrawText(Back.text, Back.x, Back.y);
 
 }
-
+//Design of instruction page
 void instructions(void)
 {
 	font2 = CP_Font_Load("./Assets/Antipasto-Pro-ExtraBold-trial.ttf");
@@ -125,5 +119,4 @@ void instructions(void)
 	CP_Font_DrawText("Use arrow keys to move.", WINDOW_WIDTH / 2, WINDOW_HEIGHT / (float)1.7);
 	CP_Font_DrawText("Press Z to activate your weapon", WINDOW_WIDTH / 2, WINDOW_HEIGHT / (float)1.5);
 	CP_Font_DrawText("and to release it by releasing button Z.", WINDOW_WIDTH / 2, WINDOW_HEIGHT / (float)1.4);
-
 }

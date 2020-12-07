@@ -54,7 +54,7 @@ void gameover_exit(void)
 {
 	// shut down the gamestate and cleanup any dynamic memory
 }
-
+//Draw GameOver Screen
 void DrawGameOver(void)
 {
 	CP_Settings_Fill(CP_Color_Create(48, 75, 109, 255));
@@ -66,18 +66,18 @@ void DrawGameOver(void)
 	CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
 	CP_Font_DrawText("GAME OVER", WINDOW_WIDTH / 2, WINDOW_HEIGHT / 3);
 }
-
+//Button to play again
 void againonclick(void)
 {
 	CP_Engine_SetNextGameState(Mgame_init, Mgame_update, Mgame_exit);
 }
-
+//Buton to quit
 void quit2onclick(void)
 {
 	FreeMusic();
 	CP_Engine_SetNextGameState(menu_init, menu_update, menu_exit);
 }
-
+//Button Design
 void button3_struct(void)
 {
 	struct button b2 =
@@ -107,22 +107,20 @@ void button3_struct(void)
 		.colorDefault = CP_Color_Create(119 , 136, 153, 255),
 	};
 	Quit3 = q2;
-
-
 }
-
+//Check for player input
 void draw_button2(void)
 {
 
 	float mouseX = CP_Input_GetMouseX();
 	float mouseY = CP_Input_GetMouseY();
-
+	//Check if player click on Play again.
 	if (retry.x - retry.width / 2 < mouseX && mouseX < retry.x + retry.width / 2 && retry.y - retry.height / 2 < mouseY && mouseY < retry.y + retry.height / 2)
 	{
 		CP_Settings_Fill(retry.colorHover);
 
 		if (CP_Input_MouseClicked())
-		{
+		{	//Check current level to move properly to the next
 			if (currentLevel == 1)
 			{
 				CP_Engine_SetNextGameStateForced(lvl1_init, lvl1_update, lvl1_exit);
@@ -155,7 +153,7 @@ void draw_button2(void)
 	CP_Settings_TextSize(40);
 	CP_Settings_Fill(retry.colorFont);
 	CP_Font_DrawText(retry.text, retry.x, retry.y);
-
+	//Check if player click on quit
 	if (Quit3.x - Quit3.width / 2 < mouseX && mouseX < Quit3.x + Quit3.width / 2 && Quit3.y - Quit3.height / 2 < mouseY && mouseY < Quit3.y + Quit3.height / 2)
 	{
 		CP_Settings_Fill(Quit3.colorHover);

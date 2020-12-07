@@ -67,7 +67,7 @@ void creditwords(void)
 	back2();
 
 }
-
+//Display all names
 void names(void)
 {
 	CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
@@ -88,18 +88,17 @@ void names(void)
 void copyright(void) {
 	//cfont = CP_Font_GetDefault();
 	//CP_Font_Set(cfont);
-	//CP_Font_DrawText("All content © 2020 DigiPen Institute of Technology Singapore, all rights reserved.", WINDOW_WIDTH / 2, WINDOW_HEIGHT / 8.0f);
+	//CP_Font_DrawText("All content ï¿½ 2020 DigiPen Institute of Technology Singapore, all rights reserved.", WINDOW_WIDTH / 2, WINDOW_HEIGHT / 8.0f);
 	CP_Image copyright = CP_Image_Load("./Assets/COPYRIGHT.png");
 	//CP_Image_Draw(whaleSprite, (float)((whale[whaleID].wPos.x * GRID_SIZE) - GRID_SIZE / 2), (float)((whale[whaleID].wPos.y * GRID_SIZE) - GRID_SIZE / 2), GRID_SIZE, GRID_SIZE * 0.7f, 255);
 	CP_Image_Draw(copyright, (float)(WINDOW_WIDTH / 2), (float)(WINDOW_HEIGHT / 9.0f), WINDOW_WIDTH / 2, GRID_HEIGHT * 6, 255);
 }
-
-
+//To go back to main menu
 void back_onclick2(void)
 {
 	CP_Engine_SetNextGameState(menu_init, menu_update, menu_exit);
 }
-
+//Button Design
 void button_back_struct2(void)
 {
 	struct button b =
@@ -116,7 +115,7 @@ void button_back_struct2(void)
 	};
 	Back2 = b;
 }
-
+//Check for player input
 void back2(void)
 {
 	float mouseX = CP_Input_GetMouseX();

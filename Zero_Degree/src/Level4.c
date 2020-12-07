@@ -13,7 +13,6 @@ Brief Description:
 Level 4 Design
 Done By: Felicia
 ******************************************************/
-
 #include <stdio.h>
 #include <intrin.h>
 #include "cprocessing.h"
@@ -33,19 +32,15 @@ Done By: Felicia
 #include "Level4.h"
 #include "Timer.h"
 
-
-
-
 void lvl4_init(void)
-{
+{	//Initialized number of object in map
 	currentLevel = 4;
 	level4enemies.seals_count = 10;
 	level4enemies.trap_count = 8;
 	level4enemies.whale_count = 4;
 	level4enemies.wall_count = 10;
-
+	//Run all initialization from other files.
 	InitObjects();
-	//drawlevels();
 	Penguin_init();
 	DrawWaterTrap();
 	DrawEnemies();
@@ -71,12 +66,11 @@ void lvl4_update(void)
 	DrawTimer();
 }
 
-
 void lvl4_exit(void)
 {
 	FreeGameImages(level4enemies.seals_count, level4enemies.wall_count, level4enemies.trap_count);
 }
-
+//Level design
 void level4(void)
 {
 	footerlevels = CP_Font_Load("./Assets/Iceberg.ttf");
@@ -84,6 +78,7 @@ void level4(void)
 
 	for (int x = 0; x < GRID_WIDTH; x++)
 		for (int y = 0; y < GRID_HEIGHT; y++)
+			//Footer design
 			if (grid_array[x][y] == FOOTER)
 			{
 				if (currentLevel == 4)

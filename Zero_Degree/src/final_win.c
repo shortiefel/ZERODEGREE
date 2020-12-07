@@ -56,6 +56,7 @@ void finalwin_update(void)
 	CP_Font_DrawText("YOU SAVED ME!", WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4);
 	finaldrawbtn();
 }
+//To go to Final screen
 void finalwin_exit(void)
 {
 	CP_Image_Free(&FinalScreen);
@@ -66,7 +67,7 @@ void return3onclick(void)
 	CP_Engine_SetNextGameState(menu_init, menu_update, menu_exit);
 }
 
-
+//Button Design
 void final_buttonstruct(void)
 {
 	CP_Font_Set(finalfont);
@@ -85,7 +86,7 @@ void final_buttonstruct(void)
 	returnFinal = r1;
 
 }
-
+//Check for player input
 void finaldrawbtn(void)
 {
 	float mouseX = CP_Input_GetMouseX();
