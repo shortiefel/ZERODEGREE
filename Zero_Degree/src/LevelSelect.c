@@ -53,6 +53,14 @@ void levelselect_init(void)
 
 void levelselect_update(void)
 {
+	// renders the background image
+	CP_Image_Draw(LevelBG, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, WINDOW_WIDTH, WINDOW_HEIGHT, 255);
+
+	// renders the title
+	CP_Settings_TextSize(150);
+	CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
+	CP_Font_DrawText("LEVEL SELECT", WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4);
+
 	DrawButtons();
 }
 
@@ -62,14 +70,11 @@ void levelselect_exit(void)
 	FreeBGImage();
 }
 
+// draws all the buttons in the level selection screen
 void DrawButtons(void)
 {
-	CP_Image_Draw(LevelBG, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, WINDOW_WIDTH, WINDOW_HEIGHT, 255);
 	float mouseX = CP_Input_GetMouseX();
 	float mouseY = CP_Input_GetMouseY();
-	CP_Settings_TextSize(150);
-	CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
-	CP_Font_DrawText("LEVEL SELECT", WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4);
 
 	for (int i = 0; i < 6; i++)
 	{

@@ -30,12 +30,13 @@ Done By: Jing Yee
 #include "Level5.h"
 #include "Whale.h"
 #include "Trap.h"
+
+
 //Declaring Variables
 entity_manager entityManager;
 
 int totalEnemies = 0, index = 0,
-	countdeath = 0, sealMaxHealth = 0, 
-	sprite_to_draw[MAXENTITY] = {0};
+	countdeath = 0, sealMaxHealth = 0;
 
 bool attack = false, drawHitSprite = false;
 
@@ -43,6 +44,8 @@ float hitDelay = 2, nextHit = 0,
 	hitSprite = 0, deathDelay = 5, 
 	triggerDeath = 0, grid_size = GRID_SIZE / 2,
 	distanceToPlayerX, distanceToPlayerY;
+
+int gridX = 0, gridY = 0;
 
 void DrawEnemies(void)
 {
@@ -188,9 +191,6 @@ void MoveSeal(int id)
 	distanceToPlayerX = seal[id].position.x - penguin.X;
 	distanceToPlayerY = seal[id].position.y - penguin.Y;
 
-	//printf("SealX[%d]:%d \n", i,(int)distanceToPlayerX);
-	//printf("SealY[%d]:%d \n", i, (int)distanceToPlayerY);
-
 	if (distanceToPlayerX > 1 && distanceToPlayerX < 4 && distanceToPlayerY == 0)	// player to the left
 	{
 		tempX = (int)seal[id].position.x - 1;
@@ -237,9 +237,6 @@ void MoveSeal(int id)
 		}
 	}
 }
-
-int gridX = 0;
-int gridY = 0;
 
 // changes the value of the grid to either seal or map for checking
 void SetSealGrid(int id)
