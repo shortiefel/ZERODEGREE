@@ -22,9 +22,9 @@ Done By: Jing Yee
 #include "Mgame.h"
 #include "menu.h"
 
+// Declaring variables 
 CP_Font font;
 selectbutton levelsbutton[6];
-
 CP_Color colorDefault, colorHover, colorFont;
 
 float width, height;
@@ -108,16 +108,17 @@ void DrawButtons(void)
 
 }
 
+// retrieves the level selected by the player
 int RetrieveLevel(void)
 {
 	return selectedLevel;
 }
 
+// sets the level back to its initial state, which is level 1
 void ChangeLevel(void)
 {
 	selectedLevel = 0;
 }
-
 
 void InitButtons(void)
 {

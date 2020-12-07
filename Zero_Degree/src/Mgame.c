@@ -33,11 +33,9 @@ Done By: Felicia and Jing Yee
 #include "Level5.h"
 #include "LevelSelect.h"
 
-CP_Image ice_grid;
-CP_Image trap_grid;
+CP_Image ice_grid, trap_grid;
 struct button pause;
 CP_Font footerlevels;
-
 
 void Mgame_init(void)
 {
@@ -52,7 +50,6 @@ void Mgame_init(void)
 	CP_Settings_TextAlignment(CP_TEXT_ALIGN_H_CENTER, CP_TEXT_ALIGN_V_MIDDLE);
 	InitObjects();
 	Penguin_init();
-	
 }
 
 void Mgame_update(void)
@@ -77,8 +74,6 @@ void Mgame_update(void)
 	{
 		CP_Engine_SetNextGameState(lvl5_init, lvl5_update, NULL);
 	}
-
-
 }
 
 
@@ -116,7 +111,6 @@ void pause_onclick(void)
 
 void DrawPause(void)
 {
-
 	float mouseX = CP_Input_GetMouseX();
 	float mouseY = CP_Input_GetMouseY();
 	//float grid_size = GRID_SIZE / 2;

@@ -36,7 +36,8 @@ Done By: Jing Yee
 entity_manager entityManager;
 
 int totalEnemies = 0, index = 0,
-	countdeath = 0, sealMaxHealth = 0;
+	countdeath = 0, sealMaxHealth = 0,
+	tempX = 0, tempY = 0;
 
 bool attack = false, drawHitSprite = false;
 
@@ -182,9 +183,6 @@ void DrawDeath(int seal_id)
 	}
 }
 
-int tempX = 0;
-int tempY = 0;
-
 // move the seals towards the player when they get close
 void MoveSeal(int id)
 {
@@ -265,7 +263,6 @@ void AttackPlayer(int id)
 		{
 			drawHitSprite = true;
 			penguin.health = penguin.health - seal[id].attack;
-			//printf("health: %d\n", penguin.health);
 		}
 
 		if (drawHitSprite == true)
@@ -289,7 +286,6 @@ void AttackPlayer(int id)
 			}
 			else {
 				CP_Image_Draw(seal[id].sprites[0], (float)seal[id].position.x * GRID_SIZE - grid_size, (float)seal[id].position.y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);
-
 			}
 		}
 
