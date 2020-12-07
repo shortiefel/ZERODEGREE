@@ -30,16 +30,14 @@ Done By: Felicia
 #include "Trap.h"
 #include "Timer.h"
 
-
-
 void lvl2_init(void)
-{
+{	//Initialized number of object in map
 	currentLevel = 2;
 	level2enemies.seals_count = 0;
 	level2enemies.trap_count = 10;
 	level2enemies.whale_count = 4;
 	level2enemies.wall_count = 6;
-
+	//Run all initialization from other files.
 	InitObjects();
 	DrawWaterTrap();
 	DrawWall();
@@ -70,7 +68,7 @@ void lvl2_exit(void)
 {
 	FreeGameImages(level2enemies.seals_count, level2enemies.wall_count, level2enemies.trap_count);
 }
-
+//Level design
 void level2(void)
 {
 	footerlevels = CP_Font_Load("./Assets/Iceberg.ttf");
@@ -78,6 +76,7 @@ void level2(void)
 
 	for (int x = 0; x < GRID_WIDTH; x++)
 		for (int y = 0; y < GRID_HEIGHT; y++)
+			//Footer design
 			if (grid_array[x][y] == FOOTER)
 			{
 				if (currentLevel == 2)

@@ -13,8 +13,6 @@ Brief Description:
 Level 3 Design
 Done By: Felicia
 ******************************************************/
-
-
 #include <stdio.h>
 #include <intrin.h>
 #include <cprocessing.h>
@@ -33,18 +31,15 @@ Done By: Felicia
 #include "Trap.h"
 #include "Timer.h"
 
-
-
 void lvl3_init(void)
-{
+{	//Initialized number of object in map
 	currentLevel = 3;
 	level3enemies.seals_count = 6;
 	level3enemies.whale_count = 3;
 	level3enemies.trap_count = 7;
 	level3enemies.wall_count = 7;
-
+	//Run all initialization from other files.
 	InitObjects();
-	//drawlevels();
 	Penguin_init();
 	DrawWaterTrap();
 	DrawWall();
@@ -52,7 +47,6 @@ void lvl3_init(void)
 	Whale_Init();
 	DrawEnemies();
 	InitTimer();
-
 }
 void lvl3_update(void)
 {
@@ -70,12 +64,11 @@ void lvl3_update(void)
 	DrawTimer();
 }
 
-
 void lvl3_exit(void)
 {
 	FreeGameImages(level3enemies.seals_count, level3enemies.wall_count, level3enemies.trap_count);
 }
-
+//Level design
 void level3(void)
 {
 	footerlevels = CP_Font_Load("./Assets/Iceberg.ttf");
@@ -83,6 +76,7 @@ void level3(void)
 
 	for (int x = 0; x < GRID_WIDTH; x++)
 		for (int y = 0; y < GRID_HEIGHT; y++)
+			//Footer design
 			if (grid_array[x][y] == FOOTER)
 			{
 				if (currentLevel == 3)

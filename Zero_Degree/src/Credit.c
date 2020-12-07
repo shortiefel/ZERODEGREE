@@ -65,7 +65,7 @@ void creditwords(void)
 	back2();
 
 }
-
+//Display all names
 void names(void)
 {
 	CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
@@ -83,12 +83,12 @@ void names(void)
 
 
 }
-
+//To go back to main menu
 void back_onclick2(void)
 {
 	CP_Engine_SetNextGameState(menu_init, menu_update, menu_exit);
 }
-
+//Button Design
 void button_back_struct2(void)
 {
 	struct button b =
@@ -105,7 +105,7 @@ void button_back_struct2(void)
 	};
 	Back2 = b;
 }
-
+//Check for player input
 void back2(void)
 {
 	float mouseX = CP_Input_GetMouseX();

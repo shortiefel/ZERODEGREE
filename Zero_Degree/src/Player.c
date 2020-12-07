@@ -13,7 +13,6 @@ Brief Description:
 
 Done By: Margaret
 ******************************************************/
-
 #include <stdio.h>
 #include <cprocessing.h>
 #include <stdbool.h>
@@ -32,7 +31,6 @@ Done By: Margaret
 #include "Whale.h"
 #include "wingame.h"
 #include "final_win.h"
-
 
 //Declaring Variables
 int velocityX, velocityY;

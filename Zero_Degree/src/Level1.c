@@ -14,7 +14,6 @@ Level 1 Design
 Done By: Felicia
 ******************************************************/
 
-
 #include <stdio.h>
 #include <intrin.h>
 #include <stdbool.h>
@@ -31,25 +30,20 @@ Done By: Felicia
 #include "Timer.h"
 #include "Trap.h"
 
-
-
-
 void lvl1_init(void)
-{
+{	//Initialized number of object in map
 	currentLevel = 1;
 	level1enemies.seals_count = 7;
 	level1enemies.trap_count = 6;
 	level1enemies.whale_count = 0;
 	level1enemies.wall_count = 3;
-
-
+	//Run all initialization from other files.
 	InitObjects();
 	Penguin_init();
 	DrawWaterTrap();
 	DrawWall();
 	DrawEnemies();
 	InitTimer();
-
 }
 void lvl1_update(void)
 {
@@ -71,7 +65,7 @@ void lvl1_exit(void)
 {
 	FreeGameImages(level1enemies.seals_count, level1enemies.wall_count, level1enemies.trap_count);
 }
-
+//Level design
 void level1(void)
 {
 	footerlevels = CP_Font_Load("./Assets/Iceberg.ttf");
@@ -79,6 +73,7 @@ void level1(void)
 
 	for (int x = 0; x < GRID_WIDTH; x++)
 		for (int y = 0; y < GRID_HEIGHT; y++)
+			//Footer design
 			if (grid_array[x][y] == FOOTER)
 			{
 				if (currentLevel == 1)
