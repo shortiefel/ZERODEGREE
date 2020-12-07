@@ -24,6 +24,7 @@ Done By: Felicia
 
 CP_Font snowcaps;
 CP_Font font2;
+CP_Font cfont;
 CP_Image CreditBG;
 struct button Back2;
 
@@ -45,6 +46,7 @@ void credit_init(void)
 void credit_update(void)
 {
 	CP_Image_Draw(CreditBG, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, WINDOW_WIDTH, WINDOW_HEIGHT, 255);
+	copyright();
 	creditwords();
 	names();
 }
@@ -81,7 +83,15 @@ void names(void)
 	CP_Font_DrawText("Instructors: ", WINDOW_WIDTH / 2, WINDOW_HEIGHT / (float)1.5);
 	CP_Font_DrawText("Ding Xiang & Raymond Teo", WINDOW_WIDTH / 2, WINDOW_HEIGHT / (float)1.4);
 
+}
 
+void copyright(void) {
+	//cfont = CP_Font_GetDefault();
+	//CP_Font_Set(cfont);
+	//CP_Font_DrawText("All content � 2020 DigiPen Institute of Technology Singapore, all rights reserved.", WINDOW_WIDTH / 2, WINDOW_HEIGHT / 8.0f);
+	CP_Image copyright = CP_Image_Load("./Assets/COPYRIGHT.png");
+	//CP_Image_Draw(whaleSprite, (float)((whale[whaleID].wPos.x * GRID_SIZE) - GRID_SIZE / 2), (float)((whale[whaleID].wPos.y * GRID_SIZE) - GRID_SIZE / 2), GRID_SIZE, GRID_SIZE * 0.7f, 255);
+	CP_Image_Draw(copyright, (float)(WINDOW_WIDTH / 2), (float)(WINDOW_HEIGHT / 9.0f), WINDOW_WIDTH / 2, GRID_HEIGHT * 6, 255);
 }
 //To go back to main menu
 void back_onclick2(void)

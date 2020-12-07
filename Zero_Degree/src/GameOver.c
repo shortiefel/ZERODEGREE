@@ -75,7 +75,7 @@ void againonclick(void)
 void quit2onclick(void)
 {
 	FreeMusic();
-	CP_Engine_Terminate();
+	CP_Engine_SetNextGameState(menu_init, menu_update, menu_exit);
 }
 //Button Design
 void button3_struct(void)
