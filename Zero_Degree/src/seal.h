@@ -15,7 +15,6 @@ header file of seal.h and declares all variables and functions needed
 #pragma once
 #include <stdbool.h>
 
-
 typedef struct ENTITY
 {
 	int id;
@@ -27,7 +26,7 @@ typedef struct ENTITY
 	CP_Image sprites[10];
 }	entity;
 
-entity seal[MAXENTITY];	//seals
+entity seal[MAXENTITY];	//seals array
 entity_manager entityManager;
 
 int countdeath;

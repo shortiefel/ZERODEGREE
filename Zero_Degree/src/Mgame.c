@@ -113,7 +113,6 @@ void DrawPause(void)
 {
 	float mouseX = CP_Input_GetMouseX();
 	float mouseY = CP_Input_GetMouseY();
-	//float grid_size = GRID_SIZE / 2;
 
 	for (int x = 0; x < GRID_WIDTH; x++)
 		for (int y = 0; y < GRID_HEIGHT; y++)
@@ -157,7 +156,6 @@ void DrawPause(void)
 //-----INIT Objects--------
 void InitObjects(void)
 {
-	//float grid_size = GRID_SIZE / 2;
 	ice_grid = CP_Image_Load("./Assets/CUBE.png");
 	trap_grid = CP_Image_Load("./Assets/WATER.png");
 

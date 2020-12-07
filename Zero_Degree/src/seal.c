@@ -176,8 +176,10 @@ void DrawDeath(int seal_id)
 
 	if (seal[seal_id].death == true)
 	{
+		// resets the grid
 		grid_array[(int)seal[seal_id].position.x][(int)seal[seal_id].position.y] = MAPAREA;
 
+		// moves the seals out of the grid
 		seal[seal_id].position.y = -1;
 		seal[seal_id].position.x = -1;
 	}
@@ -349,6 +351,7 @@ void InitSealsObjects(void)
 		seal[i].dead = false;
 		seal[i].death = false;
 	}
+	// gets the max health all the seals will have
 	sealMaxHealth = seal[0].health;
 }
 

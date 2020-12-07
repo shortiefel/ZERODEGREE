@@ -51,6 +51,7 @@ void menu_init(void)
 	//FUNCTIONS
 	buttons_struct();
 
+	// plays the music once at the start of the game
 	if (!musicPlay)
 	{
 		background_music();
@@ -61,9 +62,7 @@ void menu_init(void)
 
 void menu_update(void)
 {
-	//header();
 	full_menu();
-	
 }
 
 

@@ -78,9 +78,6 @@ void message(void)
 	{
 		CP_Font_DrawText("Your health will be restored fully.", WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 	}
-	
-
-	
 }
 
 

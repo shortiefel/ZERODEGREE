@@ -35,7 +35,6 @@ Done By: Felicia
 #include "Pause.h"
 
 CP_Image FinalScreen;
-//struct button QuitFinal;
 struct button returnFinal;
 CP_Font finalfont;
 
@@ -112,6 +111,5 @@ void finaldrawbtn(void)
 	CP_Settings_TextSize(40);
 	CP_Settings_Fill(returnFinal.colorFont);
 	CP_Font_DrawText(returnFinal.text, returnFinal.x, returnFinal.y);
-
 
 }
