@@ -31,22 +31,20 @@ Done By: Jing Yee
 #include "Whale.h"
 #include "Trap.h"
 
-
 //Declaring Variables
 entity_manager entityManager;
 
-int totalEnemies = 0, index = 0,
+int totalEnemies = 0,
 	countdeath = 0, sealMaxHealth = 0,
-	tempX = 0, tempY = 0;
+	tempX = 0, tempY = 0, // used in MoveSeal()
+	gridX = 0, gridY = 0; // used in SetSealGrid()
 
 bool attack = false, drawHitSprite = false;
 
-float hitDelay = 2, nextHit = 0, 
-	hitSprite = 0, deathDelay = 5, 
-	triggerDeath = 0, grid_size = GRID_SIZE / 2,
-	distanceToPlayerX, distanceToPlayerY;
-
-int gridX = 0, gridY = 0;
+float hitDelay = 2, nextHit = 0, hitSprite = 0, // used in AttackPlayer()
+	deathDelay = 5, triggerDeath = 0, // used in DrawDeath()
+	grid_size = GRID_SIZE / 2, // used to draw images in the game
+	distanceToPlayerX, distanceToPlayerY; // used in MoveSeal()
 
 void DrawEnemies(void)
 {
@@ -61,6 +59,7 @@ void DrawEnemies(void)
 	{
 		newPosition = GetRandomPosition();
 
+		// retrieve new positions if the new seal position is the same as the other gameobjects
 		for (int i = 0; i < entityManager.NumSeal; i++)
 		{
 			while ((seal[i].position.x == newPosition.x && seal[i].position.y == newPosition.y))
@@ -113,12 +112,13 @@ void DrawEnemies(void)
 			(float)seal[entityManager.NumSeal].position.x * GRID_SIZE - grid_size, 
 			(float)seal[entityManager.NumSeal].position.y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);
 
+		// set the new seal position on the grid to be of SEAL
 		grid_array[(int)seal[entityManager.NumSeal].position.x][(int)seal[entityManager.NumSeal].position.y] = SEAL;
 		entityManager.NumSeal++;
 	}
 }
 
-// randomize positions for the seal
+// randomize positions for the seals
 CP_Vector GetRandomPosition(void)
 {
 	CP_Vector randomPosition;
@@ -189,7 +189,8 @@ void MoveSeal(int id)
 	distanceToPlayerX = seal[id].position.x - penguin.X;
 	distanceToPlayerY = seal[id].position.y - penguin.Y;
 
-	if (distanceToPlayerX > 1 && distanceToPlayerX < 4 && distanceToPlayerY == 0)	// player to the left
+	// if the player is to the left
+	if (distanceToPlayerX > 1 && distanceToPlayerX < 4 && distanceToPlayerY == 0)	
 	{
 		tempX = (int)seal[id].position.x - 1;
 		tempY = (int)seal[id].position.y;
@@ -200,7 +201,8 @@ void MoveSeal(int id)
 			SetSealGrid(id);
 		}
 	}
-	else if (distanceToPlayerX < -1 && distanceToPlayerX > -4 && distanceToPlayerY == 0)	// player to the right
+	// if the player is to the right
+	else if (distanceToPlayerX < -1 && distanceToPlayerX > -4 && distanceToPlayerY == 0)
 	{
 		tempX = (int)seal[id].position.x + 1;
 		tempY = (int)seal[id].position.y;
@@ -211,8 +213,8 @@ void MoveSeal(int id)
 			SetSealGrid(id);
 		}
 	}
-
-	if (distanceToPlayerY > 1 && distanceToPlayerY < 4 && distanceToPlayerX == 0)	// player up
+	// if the player above the seal
+	if (distanceToPlayerY > 1 && distanceToPlayerY < 4 && distanceToPlayerX == 0)
 	{
 		tempX = (int)seal[id].position.x;
 		tempY = (int)seal[id].position.y - 1;
@@ -223,7 +225,8 @@ void MoveSeal(int id)
 			SetSealGrid(id);
 		}
 	}
-	else if (distanceToPlayerY < -1 && distanceToPlayerY > -4 && distanceToPlayerX == 0)	// player down
+	// if the player below the seal
+	else if (distanceToPlayerY < -1 && distanceToPlayerY > -4 && distanceToPlayerX == 0)
 	{
 		tempX = (int)seal[id].position.x;
 		tempY = (int)seal[id].position.y + 1;
@@ -258,13 +261,14 @@ void AttackPlayer(int id)
 	//if the player is 1 block away, attack them
 	if ((distanceToPlayerX == 1 || distanceToPlayerY == 1 || distanceToPlayerX == -1  ||distanceToPlayerY == -1) && (distanceToPlayerX == 0 || distanceToPlayerY == 0))
 	{
-		seal[id].follow = true;
+		// attacks the player once every few seconds
 		if ((int)ElaspedTime == (int)nextHit)
 		{
 			drawHitSprite = true;
 			penguin.health = penguin.health - seal[id].attack;
 		}
 
+		// draws the appropriate sprite for the seals
 		if (drawHitSprite == true)
 		{
 			if (distanceToPlayerX == -1)
@@ -302,7 +306,6 @@ void AttackPlayer(int id)
 	else 
 	{
 		CP_Image_Draw(seal[id].sprites[0], (float)seal[id].position.x * GRID_SIZE - grid_size, (float)seal[id].position.y * GRID_SIZE - grid_size, GRID_SIZE, GRID_SIZE, 255);
-		seal[id].follow = false;
 	}
 	PHurt(attack);
 }
@@ -345,7 +348,6 @@ void InitSealsObjects(void)
 		seal[i].attack = 200;
 		seal[i].dead = false;
 		seal[i].death = false;
-		seal[i].follow = false;
 	}
 	sealMaxHealth = seal[0].health;
 }

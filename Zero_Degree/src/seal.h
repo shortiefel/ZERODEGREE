@@ -21,13 +21,9 @@ typedef struct ENTITY
 	int id;
 	int health;
 	CP_Vector position;
-	//int speedX, speedY;
 	int attack;
-
 	bool dead; 
 	bool death; 
-	bool follow;
-	//animation variables
 	CP_Image sprites[10];
 }	entity;
 
