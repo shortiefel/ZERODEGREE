@@ -14,8 +14,8 @@ Main page and Menu. This is where the music starts,
 Done By: Felicia
 ******************************************************/
 #include <stdio.h>
-#include <cprocessing.h>
 #include <stdbool.h>
+#include "cprocessing.h"
 #include "menu.h"
 #include "Mgame.h"
 #include "HowToPlay.h"
