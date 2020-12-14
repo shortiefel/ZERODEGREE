@@ -19,8 +19,14 @@ void credit_update(void);
 void credit_exit(void);
 
 void creditwords(void);
-void names(void);
 void copyright(void);
 void back_onclick2(void);
-void button_back_struct2(void);
+void button_struct(void);
 void back2(void);
+
+void Slide1(void);
+void Slide2(void);
+void Slide3(void);
+void Slide4(void);
+void Slide5(void);
+void next(void);
